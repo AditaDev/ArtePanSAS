@@ -4,9 +4,7 @@ USE artepansas;
 --
 -- Base de datos: `artepansas`
 --
-
 -- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `almuerzo`
 --
@@ -58,7 +56,7 @@ CREATE TABLE `dominio` (
 --
 
 INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
-(1, 'Hola'),
+(1, 'Forma de pago'),
 (2, 'Bye');
 
 -- --------------------------------------------------------
@@ -95,15 +93,17 @@ CREATE TABLE `factura` (
   `fffac` datetime NOT NULL,
   `idemp` bigint(11) DEFAULT NULL,
   `estfac` int(2) DEFAULT NULL,
+  `fefac` datetime NOT NULL,
+  `fvfac` datetime NOT NULL,
   `idper` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `factura` (`idfac`, `nofac`, `fifac`,`fffac`, `confac`, `idemp`, `estfac`, `idper`) VALUES
-(1, '123456', '2024-05-01', '2024-06-01',  '2000 kl de sodio', 1, 1, 1),
-(2, '987564', '2024-05-02', '2024-06-02',  '2000 kl de potacsio', 2, 1, 2),
-(3, '785163', '2024-05-03', '2024-06-03',  '2000 kl de aguacate', 3, 1, 3),
-(4, '954631', '2024-05-04', '2024-06-04',  '2000 kl de plata', 4, 1, 4),
-(5, '845210', '2024-05-05', '2024-06-05',  '2000 kl de azucar', 4, 1, 3);
+INSERT INTO `factura` (`idfac`, `nofac`, `fifac`,`fffac`, `confac`, `idemp`, `estfac`, `fefac`, `fvfac`, `idper`) VALUES
+(1, '123456', '2024-05-01', '2024-06-01',  '2000 kl de sodio', 1, 1, '2024-08-01', '2024-09-01', 1),
+(2, '987564', '2024-05-02', '2024-06-02',  '2000 kl de potacsio', 2, 1, '2024-08-01', '2024-09-01', 2),
+(3, '785163', '2024-05-03', '2024-06-03',  '2000 kl de aguacate', 3, 1, '2024-08-01', '2024-09-01', 3),
+(4, '954631', '2024-05-04', '2024-06-04',  '2000 kl de plata', 4, 1, '2024-08-01', '2024-09-01', 4),
+(5, '845210', '2024-05-05', '2024-06-05',  '2000 kl de azucar', 4, 1, '2024-08-01', '2024-09-01', 3);
 -- --------------------------------------------------------
 
 --
@@ -292,13 +292,19 @@ CREATE TABLE `valor` (
 --
 
 INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
-(1, 'Sopa', 1, 1, 1),
-(2, 'Plato fuerte', 1, 2, 1),
-(3, 'Bebida', 1, 3, 1),
-(21, 'CC', 2, 4, 1),
-(22, 'TI', 2, 5, 1),
-(23, 'CE', 2, 6, 1),
-(24, 'Pasaporte', 2, 7, 1);
+(1, '2 Días', 1, 101, 1),
+(2, '3 Días', 1, 102, 1),
+(3, '5 Días', 1, 103, 1),
+(4, '8 Días', 1, 104, 1),
+(5, '10 Días', 1, 105, 1),
+(6, '15 Días', 1, 106, 1),
+(7, '20 Días', 1, 107, 1),
+(8, '28 Días', 1, 108, 1),
+(9, '30 Días', 1, 109, 1),
+(10, '45 Días', 1, 110, 1),
+(11, '60 Días', 1, 111, 1),
+(12, '70 Días', 1, 112, 1),
+(13, 'Contado-Crédito', 1, 110, 1);
 
 --
 -- Índices para tablas volcadas

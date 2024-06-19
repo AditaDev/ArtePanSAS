@@ -10,6 +10,9 @@
         private $estfac;
         private $idemp;
         private $idper;
+        private $fefac;
+        private $fvfac;
+
         //------------GET-----------
         public function getIdfac(){
             return $this->idfac;
@@ -35,6 +38,13 @@
         public function getIdper(){
             return $this->idper;
         }
+        public function getFefac(){
+            return $this->fefac;
+        }
+        public function getFvfac(){
+            return $this->fvfac;
+        }
+
         //------------SET-----------
         public function setIdfac($idfac){
             $this->idfac=$idfac;
@@ -60,10 +70,16 @@
         public function setIdper($idper){
             $this->idper=$idper;
         }
+        public function setFefac($fefac){
+            $this->fefac=$fefac;
+        }
+        public function setFvfac($fvfac){
+            $this->fvfac=$fvfac;
+        }
 
       
         function getAll(){
-            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.idper, e.razsoem, e.nitemp FROM factura AS f INNER JOIN empresa AS e ON f.idemp=e.idemp";
+            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.idper, f.fefac, f.fvfac, e.razsoem, e.nitemp FROM factura AS f INNER JOIN empresa AS e ON f.idemp=e.idemp";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -84,7 +100,7 @@
         // }
 
         function getOne(){
-            $sql = "SELECT idfac, nofac, confac, fifac, estfac, idemp, idper FROM factura WHERE idfac=:idfac";
+            $sql = "SELECT idfac, nofac, confac, fifac, estfac, idemp, idper, fefac, fvfac FROM factura WHERE idfac=:idfac";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -97,7 +113,7 @@
 
         function save(){
             try {
-                $sql = "INSERT INTO factura (nofac, confac, fifac, estfac, idemp, idper) VALUES (:nofac, :confac, :fifac, :estfac, :idemp, :idper)";
+                $sql = "INSERT INTO factura (nofac, confac, fifac, estfac, idemp, idper, fefac, fvfac) VALUES (:nofac, :confac, :fifac, :estfac, :idemp, :idper, :fefac, :fvfac)";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -112,7 +128,11 @@
                 $idemp = $this->getIdemp();
                 $result->bindParam(":idemp", $idemp);
                 $idper = $this->getIdper();
-                $result->bindParam(":idper", $idper);           
+                $result->bindParam(":idper", $idper);
+                $fefac = $this->getFefac();
+                $result->bindParam(":fefac", $fefac);
+                $fvfac = $this->getFvfac();
+                $result->bindParam(":fvfac", $fvfac);           
                 $result->execute();
             } catch (Exception $e) {
                 ManejoError($e);
@@ -145,10 +165,10 @@
                 $result->bindParam(":nofac", $nofac);
                 $confac = $this->getConfac();
                 $result->bindParam(":confac", $confac);
-                $fifac = $this->getFifac();
-                $result->bindParam(":fifac", $fifac);
-                $fffac = $this->getFffac();
-                $result->bindParam(":fffac", $fffac);
+                $fefac = $this->getFefac();
+                $result->bindParam(":fefac", $fefac);
+                $fvfac = $this->getFvfac();
+                $result->bindParam(":fvfac", $fvfac);
                 $estfac = $this->getEstfac();
                 $result->bindParam(":estfac", $estfac);
                 $idemp = $this->getIdemp();

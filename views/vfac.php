@@ -15,10 +15,6 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <input class="form-control" type="text" id="confac" name="confac" value="<?php if ($datOne) echo $datOne[0]['confac']; ?>" required>
         </div>
         <div class="form-group col-md-4">
-            <label for="fifac"><strong>Fecha registro:</strong></label>
-            <input class="form-control" type="date" id="fifac" name="fifac" max=<?php echo $hoy;?> min=<?php echo $hoy;?>  value="<?php if ($datOne) echo $datOne[0]['fifac']; ?>"  required>
-        </div>
-        <div class="form-group col-md-4">
             <label for=""><strong>Empresa:</strong></label>
             <select id="idempresa" name="idemp" class="form-control form-select" required>
                 <option value="0"></option>
@@ -30,6 +26,14 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 <?php }
                 } ?>
             </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="fefac"><strong>Fecha emisión:</strong></label>
+            <input class="form-control" type="date" id="fefac" name="fefac" value="<?php if ($datOne) echo $datOne[0]['fefac']; ?>"  required>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="fvfac"><strong>Fecha de vencimiento:</strong></label>
+            <input class="form-control" type="date" id="fvfac" name="fifac" value="<?php if ($datOne) echo $datOne[0]['fvfac']; ?>"  required>
         </div>
         <div class="form-group col-md-4">
             <label for="arcimg"><strong>Pdf:</strong></label>
