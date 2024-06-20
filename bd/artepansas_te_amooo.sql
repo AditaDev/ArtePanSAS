@@ -95,6 +95,7 @@ CREATE TABLE `factura` (
   `estfac` int(2) DEFAULT NULL,
   `fefac` datetime NOT NULL,
   `fvfac` datetime NOT NULL,
+  `forpag` varchar(100) NOT NULL,
   `idper` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

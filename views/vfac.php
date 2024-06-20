@@ -36,13 +36,24 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <input class="form-control" type="date" id="fvfac" name="fifac" value="<?php if ($datOne) echo $datOne[0]['fvfac']; ?>"  required>
         </div>
         <div class="form-group col-md-4">
+                <label for="forpag"><strong>Forma de pago:</strong></label>
+                <select name="forpag" id="forpag" class="form-control form-select" required>
+                    <?php foreach ($dattpe as $dte) { ?>
+                        <option value="<?= $dte['idval']; ?>" <?php if ($datOne && $dte['idval'] == $datOne[0]['forpag']) echo " selected "; ?>>
+                            <?= $dte['nomval']; ?>
+                        </option>
+                    <?php } ?>
+                </select>
+        </div>
+        <div class="form-group col-md-6">
             <label for="arcimg"><strong>Pdf:</strong></label>
             <input class="form-control" type="file" id="arcpdf" name="arcpdf" <?php if(!$datOne) echo "required";?>>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label for="arcimg"><strong>Soporte:</strong></label>
             <input class="form-control" type="file" id="arcpdf" name="arcpdf" <?php if(!$datOne) echo "required";?>>
         </div>
+        
 
         <div class="form-group col-md-12" id="boxbtn">
             <br><br>
@@ -50,6 +61,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <input type="hidden" name="ope" value="save">
             <input type="hidden" name="idfac" value="<?php if ($datOne) echo $datOne[0]['idfac']; ?>">
         </div>
+    </div>
     </div>
 </form>
 
@@ -60,7 +72,8 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <th>No.</th>
             <th>Datos factura</th>
             <th></th>
-            <th></th>          
+            <th>Estado</th>      
+            
             
         </tr>
     </thead>
@@ -71,27 +84,36 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <td>
                     <strong> <?=($dta['nofac']) . " - " . $dta['confac']; ?></strong><br>
                         <small>
-                            <strong>Fecha registro: </strong><?= $dta['fifac']; ?><br>
                             <strong>Empresa: </strong> <?= $dta['razsoem']; ?><br>
+                            <strong>Persona: </strong> <?= $dta['nomper']; ?><br>
+                            <strong>Fecha emisión: </strong><?= $dta['fefac']; ?><br>
+                            <strong>Fecha registro: </strong><?= $dta['fifac']; ?><br>
+                            <strong>Fecha de vencimiento: </strong><?= $dta['fvfac']; ?><br>
+                            
                             <!-- <strong><?= $dta['']; ?></strong> -->
                         
                         
                         </small>
                     </td>
+                    
                     <td tyle="text-align: half;">
-                        <i class="fa fa-solid fa-circle-check fa-2x act"></i>
-                        <a href="#" title="Ver detalles" data-bs-toggle="modal" data-bs-target="#mfac<?= $dta['idfac']; ?>" title="Revisar">
-                            <i class="fa fa-solid fa-file-circle-check fa-2x iconi"></i>
-                        </a>
+                    <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idfac']; ?>" title="Detalles"></i>
+                    <?php
+                        $mfac->setIdfac($dta['idfac']);
+                        // $prgs = $mequ->getOnePxE();
+                        modalDet("mcbinf", $dta['idfac'], $dta['razsoem'].' '.$dta['nofac'].' - '.$dta['confac'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['idper'], $dta['forpag'], $dta['nofac'], $dta['nofac'], $dta['nofac']);
+                        ?>
                     </td>
                     <td tyle="text-align: right;">
-                        <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
+                   | -->
+                    <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi"  title="Editar"></i>
                         </a>
                         <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=eli" onclick="return eliminar('<?= $dta['idfac']; ?>');">
                             <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
                         </a>
                     </td>
+                  
                     
                     
                     
@@ -104,7 +126,8 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <th>No.</th>
             <th>Datos factura</th>
             <th></th>
-            <th></th>
+            <th>Estado</th> 
+        
           
         </tr>
     </tfoot>

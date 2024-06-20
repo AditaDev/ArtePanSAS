@@ -12,6 +12,7 @@
         private $idper;
         private $fefac;
         private $fvfac;
+        private $forpag;
 
         //------------GET-----------
         public function getIdfac(){
@@ -43,6 +44,9 @@
         }
         public function getFvfac(){
             return $this->fvfac;
+        }
+        public function getForpag(){
+            return $this->forpag;
         }
 
         //------------SET-----------
@@ -76,10 +80,13 @@
         public function setFvfac($fvfac){
             $this->fvfac=$fvfac;
         }
+        public function setForpag($forpag){
+            $this->forpag=$forpag;
+        }
 
       
         function getAll(){
-            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.idper, f.fefac, f.fvfac, e.razsoem, e.nitemp FROM factura AS f INNER JOIN empresa AS e ON f.idemp=e.idemp";
+            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.forpag, f.idper, f.fefac, f.fvfac, f.forpag, e.razsoem, e.nitemp, r.nomper FROM factura AS f INNER JOIN empresa AS e ON f.idemp=e.idemp INNER JOIN persona AS r ON f.idper=r.idper";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -100,7 +107,7 @@
         // }
 
         function getOne(){
-            $sql = "SELECT idfac, nofac, confac, fifac, estfac, idemp, idper, fefac, fvfac FROM factura WHERE idfac=:idfac";
+            $sql = "SELECT idfac, nofac, confac, fifac, estfac, idemp, idper, fefac, fvfac, forpag FROM factura WHERE idfac=:idfac";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -113,7 +120,7 @@
 
         function save(){
             try {
-                $sql = "INSERT INTO factura (nofac, confac, fifac, estfac, idemp, idper, fefac, fvfac) VALUES (:nofac, :confac, :fifac, :estfac, :idemp, :idper, :fefac, :fvfac)";
+                $sql = "INSERT INTO factura (nofac, confac, fifac, estfac, idemp, idper, fefac, fvfac, forpag) VALUES (:nofac, :confac, :fifac, :estfac, :idemp, :idper, :fefac, :fvfac, :forpag)";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -132,7 +139,9 @@
                 $fefac = $this->getFefac();
                 $result->bindParam(":fefac", $fefac);
                 $fvfac = $this->getFvfac();
-                $result->bindParam(":fvfac", $fvfac);           
+                $result->bindParam(":fvfac", $fvfac); 
+                $forpag = $this->getForpag();
+                $result->bindParam(":forpag", $forpag);                 
                 $result->execute();
             } catch (Exception $e) {
                 ManejoError($e);
@@ -157,7 +166,7 @@
 
         function edit(){
             try {
-                $sql = "UPDATE factura  SET nofac=:nofac, confac=:confac, fifac=:fifac, estfac=:estfac, idemp=:idemp, WHERE idfac=:idfac";
+                $sql = "UPDATE factura  SET nofac=:nofac, confac=:confac, estfac=:estfac, idemp=:idemp, fefac=:fefac, fvfac=:fvfac, forpag=:forpag WHERE idfac=:idfac";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -173,6 +182,8 @@
                 $result->bindParam(":estfac", $estfac);
                 $idemp = $this->getIdemp();
                 $result->bindParam(":idemp", $idemp);
+                $forpag = $this->getForpag();
+                $result->bindParam(":forpag", $forpag);
                 $result->execute();
             } catch (Exception $e) {
                 ManejoError($e);
@@ -193,6 +204,17 @@
             }
         }
         
+        //------------Traer valores-----------
+        function getAllForpag($iddom){
+            $sql = "SELECT idval, nomval FROM valor WHERE iddom=:iddom";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->bindParam(":iddom", $iddom);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+        }
         
 
         // function getEqxEp($idequ){
@@ -291,17 +313,6 @@
         //     }
         // }
 
-        // //------------Traer valores-----------
-        // function getAllTpEq($iddom){
-        //     $sql = "SELECT idval, nomval FROM valor WHERE iddom=:iddom";
-        //     $modelo = new conexion();
-        //     $conexion = $modelo->get_conexion();
-        //     $result = $conexion->prepare($sql);
-        //     $result->bindParam(":iddom", $iddom);
-        //     $result->execute();
-        //     $res = $result->fetchall(PDO::FETCH_ASSOC);
-        //     return $res;
-        // }
 
         // function getAllTpCt($iddom){
         //     $sql = "SELECT idval, nomval FROM valor WHERE iddom=:iddom";

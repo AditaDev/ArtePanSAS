@@ -33,46 +33,6 @@ function ManejoError($e)
 	}
 }
 
-function modalAxP($nm, $id, $tit, $mt, $pg, $dms)
-{
-	$txt = '';
-	$txt .= '<div class="modal fade" id="' . $nm . $id . '" tabindex="-1" aria-labelledby="" aria-hidden="true">';
-		$txt .= '<div class="modal-dialog">';
-			$txt .= '<div class="modal-content">';
-				$txt .= '<div class="modal-header">';
-					$txt .= '<h1 class="modal-title fs-5" id="" style="color: #000;font-weight: bold !important;"><strong>Páginas - ' . $tit . '</strong></h1>';
-					$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
-				$txt .= '</div>';
-				$txt .= '<form action="home.php?pg=' . $pg . '" method="POST">';
-					$txt .= '<div class="modal-body">';
-						$txt .= '<input type="hidden" value="' . $id . '" name="idpef">';
-						$txt .= '<div class="row">';
-							if ($mt) { foreach ($mt as $tm) {
-									$txt .= '<div class="form-group col-md-6" style="text-align: left !important;">';
-										$pos = strpos($dms, $tm['idpag']);
-										$txt .= '<input type="checkbox" name="chk[]" value="' . $tm['idpag'] . '"';
-										if ($pos > -1) $txt .= " checked ";
-										$txt .= '> ';
-										$txt .= $tm['nompag'] . " ";
-										$txt .= '<i class="' . $tm['icono'] . '" style="color: #000;"></i>';
-									$txt .= '</div>';
-							}}
-						$txt .= '</div>';
-					$txt .= '</div>';
-					$txt .= '<div class="modal-footer">';
-						$txt .= '<input type="hidden" value="savepxp" name="ope">';
-						$txt .= '<input type="submit" class="btn btn-primary btnmd" value="Guardar">';
-						$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
-					$txt .= '</div>';
-				$txt .= '</form>';
-			$txt .= '</div>';
-		$txt .= '</div>';
-	$txt .= '</div>';
-	echo $txt;
-}
-
-
-
 //------------Modal vpef, pagxpef-----------
 function modalChk($nm, $id, $tit, $mt, $pg, $dms)
 {
@@ -190,50 +150,42 @@ function modalCmb($nm, $id, $tit, $idmod, $pg, $dms)
 
 
 //------------Modal vequ, info equipos-----------
-// function modalDet($nm, $id, $titulo, $capgb, $ram, $procs, $fecultman, $fecproman, $tipcon, $contrato, $valrcont, $prgs)
-// {
-// 	$txt = '';
-// 	$txt .= '<div class="modal fade" id="' . $nm . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
-// 		$txt .= '<div class="modal-dialog">';
-// 			$txt .= '<div class="modal-content">';
-// 				$txt .= '<div class="modal-header">';
-// 					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$titulo.'</strong></h1>';
-// 					$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
-// 				$txt .= '</div>';
-// 				$txt .= '<div class="modal-body" style="margin: 0px 25px;">';
-// 				$txt .= '<div class="row"';
-// 					$txt .= '<div">';
-// 						$txt .= '<table>';
-// 							if($prgs){ foreach($prgs AS $pr){
-// 								$txt .= '<tr><td><strong>'.$pr['nomdom'].': </strong></td><td class="infpc">'.$pr['nomval'].' '.$pr['verprg'].'</td></tr>';
-// 							}}
-// 							$txt .= '<tr><td><strong>Procesador: </strong></td><td class="infpc">'.$procs.'</td></tr>';
-// 							$txt .= '<tr><td><strong>RAM: </strong></td><td class="infpc">'.$ram.' GB</td></tr>';
-// 							$txt .= '<tr><td><strong>Almacenamiento: </strong></td><td class="infpc">';
-// 							if($capgb>1000){
-// 								$frmt = $capgb/1000;
-// 								$txt .= number_format($frmt,1,".",",").' TB</td></tr>';
-// 							}
-// 							else $txt .= $capgb.' GB</td></tr>';
-// 							$txt .= '<tr><td><strong>Último mantenimiento: </strong></td><td class="infpc">'.$fecultman.'</td></tr>';
-// 							$txt .= '<tr><td><strong>Próximo mantenimiento: </strong></td><td class="infpc">'.$fecproman.'</td></tr>';
-// 							if ($tipcon && $tipcon==11){
-// 								if ($contrato) $txt .= '<tr><td><strong>Contrato: </strong></td><td class="infpc">'.$contrato.' GB</td></tr>';
-// 								if ($valrcont) $txt .= '<tr><td><strong>Valor contrato: </strong></td><td class="infpc">$'.$valrcont.'</td></tr>';
-// 							}
-// 						$txt .= '</table>';
-// 					$txt .= '</div>';
-// 				$txt .= '</div>';
-// 				$txt .= '<div class="modal-footer">';
-// 					$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
-// 				$txt .= '</div>';
-// 			$txt .= '</div>';
-// 		$txt .= '</div>';
-// 	$txt .= '</div>';
-// 	echo $txt;
-// }
+function modalDet($nm, $id, $titulo, $nofac, $confac, $fifac, $fefac, $fvfac, $forpag, $razsoem, $nomper)
+{
+	$txt = '';
+	$txt .= '<div class="modal fade" id="' . $nm . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+		$txt .= '<div class="modal-dialog">';
+			$txt .= '<div class="modal-content">';
+				$txt .= '<div class="modal-header">';
+					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$titulo.'</strong></h1>';
+					$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
+				$txt .= '</div>';
+				$txt .= '<div class="modal-body" style="margin: 0px 25px;">';
+				$txt .= '<div class="row"';
+					$txt .= '<div">';
+						$txt .= '<table>';
+							$txt .= '<tr><td><strong>Número de factura: </strong></td><td class="inffac">'.$nofac.'</td></tr>';
+							$txt .= '<tr><td><strong>Concepto: </strong></td><td class="inffac">'.$confac.'</td></tr>';
+							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$fefac.'</td></tr>';
+							$txt .= '<tr><td><strong>Fecha de registro: </strong></td><td class="inffac">'.$fifac.'</td></tr>';
+							$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$fvfac.'</td></tr>';
+							$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$forpag.'</td></tr>';
+							$txt .= '<tr><td><strong>Persona que registro: </strong></td><td class="inffac">'.$nomper.'</td></tr>';
+							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$razsoem.'</td></tr>';
+							
+						$txt .= '</table>';
+					$txt .= '</div>';
+				$txt .= '</div>';
+				$txt .= '<div class="modal-footer">';
+					$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
+				$txt .= '</div>';
+			$txt .= '</div>';
+		$txt .= '</div>';
+	$txt .= '</div>';
+	echo $txt;
+}
 
-//------------Modal vequ, prgxequi-----------
+// ------------Modal vequ, prgxequi-----------
 // function modalPxE($nm, $id, $tit, $dom, $pg, $dms, $dga)
 // {
 // 	$mequ = new Mequ();
@@ -289,7 +241,7 @@ function modalCmb($nm, $id, $tit, $idmod, $pg, $dms)
 // 	echo $txt;
 // }
 
-//------------Modal vper, tajxper-----------
+// ------------Modal vper, tajxper-----------
 // function modalTj($nm, $id, $perent, $pg)
 // {
 // 	$mper = new Mper();

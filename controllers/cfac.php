@@ -18,6 +18,7 @@
 
     $datOne = NULL;
     $datALL = NULL;
+    $dattpe = $mfac->getAllForpag(1);
 
     $mfac->setIdfac($idfac);
 
