@@ -118,60 +118,29 @@ function modalCmb($nm, $id, $tit, $idmod, $pg, $dms)
 	echo $txt;
 }
 
+//-----------------Modal pedido-------------------
 
-//----------------Modal Pedido------------------
-//  function modalAxP($txt, $pg)
-// 	{
-
-// 		$txt .= '<div class="modal fade" id="#modalAxP" tabindex="-1" role="dialog" aria-labelledby="#modalAxP" aria-hidden="true">';
-// 		$txt .= '<form action="home.php?pg=' . $pg . '" method="POST">';
-// 		  $txt .= '<div class="modal-content">';
-// 			$txt .= '<div class="modal-header">';
-// 			  $txt .= '<h5 class="modal-title" id="e#modalAxP">Modal title</h5>';
-// 			  $txt .= '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-// 				$txt .= '<span aria-hidden="true">&times;</span>';
-// 			  $txt .= '</button>';
-// 			$txt .= '</div>';
-// 			$txt .= '<div class="modal-body">';
-// 			$txt .= '...';
-// 			$txt .= '</div>';
-// 			$txt .= '<div class="modal-footer">';
-// 			  $txt .= '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
-// 			  $txt .= '<button type="button" class="btn btn-primary">Save changes</button>';
-// 			$txt .= '</div>';
-// 		  $txt .= '</div>';
-// 		$txt .= '</div>';
-// 	  $txt .= '</div>';
-
-
-
-// 	}
-
-
-
-//------------Modal vequ, info equipos-----------
-function modalDet($nm, $id, $titulo, $nofac, $confac, $fifac, $fefac, $fvfac, $forpag, $razsoem, $nomper)
+//------------Modal vfac, info facturas-----------
+function modalDet($nofac, $confac, $fifac, $fefac, $fvfac, $formapago, $razsoem, $nomper, $idfac)
 {
 	$txt = '';
-	$txt .= '<div class="modal fade" id="' . $nm . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+	$txt .= '<div class="modal fade" id="' . $nofac . $confac . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
 		$txt .= '<div class="modal-dialog">';
 			$txt .= '<div class="modal-content">';
 				$txt .= '<div class="modal-header">';
-					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$titulo.'</strong></h1>';
+					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$fifac.'</strong></h1>';
 					$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
 				$txt .= '</div>';
 				$txt .= '<div class="modal-body" style="margin: 0px 25px;">';
 				$txt .= '<div class="row"';
 					$txt .= '<div">';
 						$txt .= '<table>';
-							$txt .= '<tr><td><strong>Número de factura: </strong></td><td class="inffac">'.$nofac.'</td></tr>';
-							$txt .= '<tr><td><strong>Concepto: </strong></td><td class="inffac">'.$confac.'</td></tr>';
-							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$fefac.'</td></tr>';
-							$txt .= '<tr><td><strong>Fecha de registro: </strong></td><td class="inffac">'.$fifac.'</td></tr>';
+							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$fefac.'</td></tr>';							
 							$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$fvfac.'</td></tr>';
-							$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$forpag.'</td></tr>';
+							$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$formapago.'</td></tr>';
 							$txt .= '<tr><td><strong>Persona que registro: </strong></td><td class="inffac">'.$nomper.'</td></tr>';
 							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$razsoem.'</td></tr>';
+							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$idfac.'</td></tr>';
 							
 						$txt .= '</table>';
 					$txt .= '</div>';

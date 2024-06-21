@@ -93,18 +93,18 @@ class Mper
         return $res;
     }
 
-    // function getOne()
-    // {
-    //     $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.pasper, p.actper, pf.idpef FROM persona AS p INNER JOIN perxpef AS pf ON p.idper=pf.idper WHERE p.idper=pf.idper;
-    //     $modelo = new conexion();
-    //     $conexion = $modelo->get_conexion();
-    //     $result = $conexion->prepare($sql);
-    //     $idper = $this->getIdper();
-    //     $result->bindParam(":idper", $idper);
-    //     $result->execute();
-    //     $res = $result->fetchall(PDO::FETCH_ASSOC);
-    //     // return $res;
-    // }
+    function getOne()
+    {
+        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.pasper, p.actper, pf.idpef FROM persona AS p INNER JOIN perxpef AS pf ON p.idper=pf.idper WHERE p.idper=pf.idper";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $idper = $this->getIdper();
+        $result->bindParam(":idper", $idper);
+        $result->execute();
+        $res = $result->fetchall(PDO::FETCH_ASSOC);
+        return $res;
+    }
 
     function save()
     {

@@ -100,12 +100,12 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idfac']; ?>" title="Detalles"></i>
                     <?php
                         $mfac->setIdfac($dta['idfac']);
-                        // $prgs = $mequ->getOnePxE();
-                        modalDet("mcbinf", $dta['idfac'], $dta['razsoem'].' '.$dta['nofac'].' - '.$dta['confac'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['idper'], $dta['forpag'], $dta['nofac'], $dta['nofac'], $dta['nofac']);
+                        $formapago = $mfac->getAllForpag($idfac);
+                        modalDet("mcbinf", $dta['idfac'], $dta['razsoem'].' '.$dta['nofac'].' - '.$dta['confac'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['idper'], $dta['idper'], $formapago);
                         ?>
                     </td>
                     <td tyle="text-align: right;">
-                   | -->
+                   
                     <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi"  title="Editar"></i>
                         </a>

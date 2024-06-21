@@ -17,10 +17,6 @@
     $datOne = $mped->getOne();
     $datAll = $mped->getAll();
     
-
-    $datOne = $mped->getOne();
-    $datAll = $mped->getAll();
-    
 // if ($opera == "save") {
 //     // Verificar si el usuario ya ha votado antes de guardar el voto
 //     $getOne = $mped->getOne();

@@ -3,28 +3,8 @@
 require_once('controllers/cped.php');
 ?>
 
-<!-- 
-<form name="pedido" action="home.php?pg=<?= $pg; ?>" method="POST">
-    <div class="tarj" style="display: block; text-align: center;" class="row">
-         <?php if ($datAll) { foreach ($datAll as $dta) { ?>
-        <div class="col">
-            <div class="tarj">
-            <strong>Fecha: </strong><?= $dta['fecalm']; ?><br>
-            <strong>Plato principal: </strong><?= $dta['ppalm']; ?><br>
-            <strong>Sopa: </strong><?= $dta['spalm']; ?><br>
-            <strong>Jugo: </strong><?= $dta['jgalm']; ?><br>
-
-            </div>
-            <?php }} ?>
-        </div>
-        <div style="width: 100%;text-align: center" id="boxbtn";>
-            <input type="hidden" name="opera" value="save">
-            <br>
-            <input type="submit" value="  PEDIR  " class="btn btn-primary" style="width:50%;">
-        </div>
-        </div>
-         
-</form> -->
+<?php if ($datAll) { foreach ($datAll as $dta)  {?>
+    <?php }}?>
 <style>
 
 .tarjeta{
@@ -54,7 +34,6 @@ require_once('controllers/cped.php');
     color: white;
 }
 
-<<<<<<< HEAD
     </style>
         <div class="tarjeta" style= "text-align: center;">
         <div class="titulo">Almuerzo del día</div>
@@ -73,17 +52,13 @@ require_once('controllers/cped.php');
         </div>
     </div>
     <div class="pie">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        PEDIR
-        </button>
-    </div>
+            <button type="button"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcb<?= $dta['idper']; ?>" title="Pedir">  PEDIR  </button>
+              
+          
     </div>
   </div>
 </div>
 
 
 
-<?php
-
-       
-
+<?php 
