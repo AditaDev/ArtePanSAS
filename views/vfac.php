@@ -33,7 +33,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         </div>
         <div class="form-group col-md-4">
             <label for="fvfac"><strong>Fecha de vencimiento:</strong></label>
-            <input class="form-control" type="date" id="fvfac" name="fifac" value="<?php if ($datOne) echo $datOne[0]['fvfac']; ?>"  required>
+            <input class="form-control" type="date" id="fvfac" name="fvfac" value="<?php if ($datOne) echo $datOne[0]['fvfac']; ?>"  required>
         </div>
         <div class="form-group col-md-4">
                 <label for="forpag"><strong>Forma de pago:</strong></label>
@@ -45,16 +45,25 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <?php } ?>
                 </select>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
+                <label for="tipfac"><strong>Tipo:</strong></label>
+                <select name="tipfac" id="tipfac" class="form-control form-select" required>
+                    <?php foreach ($dattip as $dte) { ?>
+                        <option value="<?= $dte['idval']; ?>" <?php if ($datOne && $dte['idval'] == $datOne[0]['tipfac']) echo " selected "; ?>>
+                            <?= $dte['nomval']; ?>
+                        </option>
+                    <?php } ?>
+                </select>
+        </div>
+        <div class="form-group col-md-4">
             <label for="arcimg"><strong>Pdf:</strong></label>
             <input class="form-control" type="file" id="arcpdf" name="arcpdf" <?php if(!$datOne) echo "required";?>>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label for="arcimg"><strong>Soporte:</strong></label>
             <input class="form-control" type="file" id="arcpdf" name="arcpdf" <?php if(!$datOne) echo "required";?>>
         </div>
         
-
         <div class="form-group col-md-12" id="boxbtn">
             <br><br>
             <input class="btn btn-primary" type="submit" value="Registrar">
@@ -71,8 +80,8 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         <tr>
             <th>No.</th>
             <th>Datos factura</th>
-            <th></th>
-            <th>Estado</th>      
+            <th>Estado</th>
+            <th></th>      
             
             
         </tr>
@@ -97,13 +106,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     </td>
                     
                     <td tyle="text-align: half;">
-                    <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idfac']; ?>" title="Detalles"></i>
-                    <?php
-                        $mfac->setIdfac($dta['idfac']);
-                        $formapago = $mfac->getAllForpag($idfac);
-                        modalDet("mcbinf", $dta['idfac'], $dta['razsoem'].' '.$dta['nofac'].' - '.$dta['confac'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['idper'], $dta['idper'], $formapago);
-                        ?>
-                    </td>
+                    
                     <td tyle="text-align: right;">
                    
                     <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
@@ -125,10 +128,18 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         <tr>
             <th>No.</th>
             <th>Datos factura</th>
-            <th></th>
-            <th>Estado</th> 
+            <th>Estado</th>
+            <th></th> 
         
           
         </tr>
     </tfoot>
 </table>
+
+<!-- <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idfac']; ?>" title="Detalles"></i>
+<?php
+                        $mfac->setIdfac($dta['idfac']);
+                        $formapago = $mfac->getAllDom($idfac);
+                        modalDet("mcbinf", $dta['idfac'], $dta['razsoem'].' '.$dta['nofac'].' - '.$dta['confac'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['idper'], $dta['idper'], $formapago);
+                        ?>
+                    </td> -->

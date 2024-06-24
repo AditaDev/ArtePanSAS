@@ -13,12 +13,16 @@
     $estfac = isset($_POST['estfac']) ? $_POST['estfac']:NULL;
     $idemp = isset($_POST['idemp']) ? $_POST['idemp']:NULL;
     $idper = isset($_POST['idper']) ? $_POST['idper']:NULL;
+    $fefac = isset($_POST['fefac']) ? $_POST['fefac']:NULL;
+    $fvfac = isset($_POST['fvfac']) ? $_POST['fvfac']:NULL;
+    $tipfac = isset($_POST['tipfac']) ? $_POST['tipfac']:NULL;
     
     $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
 
     $datOne = NULL;
     $datALL = NULL;
-    $dattpe = $mfac->getAllForpag(1);
+    $dattpe = $mfac->getAllDom(1);
+    $dattip = $mfac->getAllDom(2);
 
     $mfac->setIdfac($idfac);
 
@@ -31,6 +35,9 @@
         $mfac->setEstfac($estfac);
         $mfac->setIdemp($idemp);
         $mfac->setIdper($idper);
+        $mfac->setFefac($fefac);
+        $mfac->setFvfac($fvfac);
+        $mfac->setTipfac($tipfac);
        
    
         // if($pg==52) $mequ->setPagequ(52);
@@ -42,16 +49,14 @@
     // if($ope=="act" && $idfac && $act){
     //     $mequ->setActequ($actequ);
         $mfac->editAct();
-    
 
     if($ope=="edi" && $idfac) $datOne = $mfac->getOne();
     if($ope=="eli" && $idfac) $mfac->del();
 
- 
-
     $datEmp = $mfac->getAll();
-    //------------Traer valores-----------
     $datAll = $mfac->getAll();
+
+
     // $dattpe = $mfac->getAllTpEq(2);
     // $dattpc = $mfac->getAllTpCt(4);
 

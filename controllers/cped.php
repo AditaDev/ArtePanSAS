@@ -1,4 +1,4 @@
-<!-- 
+
 <?php
 
     require_once ('models/mped.php');
@@ -54,4 +54,4 @@
 // else $jorn=1;
 // $dat=$mped->getAll($jorn);
 
-// ?> -->
+// ?> 

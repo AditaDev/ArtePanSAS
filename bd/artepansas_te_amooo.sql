@@ -57,7 +57,7 @@ CREATE TABLE `dominio` (
 
 INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (1, 'Forma de pago'),
-(2, 'Bye');
+(2, 'Tipo de factura');
 
 -- --------------------------------------------------------
 
@@ -96,15 +96,16 @@ CREATE TABLE `factura` (
   `fefac` datetime NOT NULL,
   `fvfac` datetime NOT NULL,
   `forpag` varchar(100) NOT NULL,
+  `tipfac` varchar(100) NOT NULL,
   `idper` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `factura` (`idfac`, `nofac`, `fifac`,`fffac`, `confac`, `idemp`, `estfac`, `fefac`, `fvfac`, `idper`) VALUES
-(1, '123456', '2024-05-01', '2024-06-01',  '2000 kl de sodio', 1, 1, '2024-08-01', '2024-09-01', 1),
-(2, '987564', '2024-05-02', '2024-06-02',  '2000 kl de potacsio', 2, 1, '2024-08-01', '2024-09-01', 2),
-(3, '785163', '2024-05-03', '2024-06-03',  '2000 kl de aguacate', 3, 1, '2024-08-01', '2024-09-01', 3),
-(4, '954631', '2024-05-04', '2024-06-04',  '2000 kl de plata', 4, 1, '2024-08-01', '2024-09-01', 4),
-(5, '845210', '2024-05-05', '2024-06-05',  '2000 kl de azucar', 4, 1, '2024-08-01', '2024-09-01', 3);
+INSERT INTO `factura` (`idfac`, `nofac`, `fifac`,`fffac`, `confac`, `idemp`, `estfac`, `fefac`, `fvfac`, `tipfac`, `idper`, `forpag`) VALUES
+(1, '123456', '2024-05-01', '2024-06-01',  '2000 kl de sodio', 1, 1, '2024-08-01', '2024-09-01','Dotación', 1, '2 Días'),
+(2, '987564', '2024-05-02', '2024-06-02',  '2000 kl de potacsio', 2, 1, '2024-08-01', '2024-09-01','Papelería', 2, '8 Días'),
+(3, '785163', '2024-05-03', '2024-06-03',  '2000 kl de aguacate', 3, 1, '2024-08-01', '2024-09-01','Importación', 3, '10 Días'),
+(4, '954631', '2024-05-04', '2024-06-04',  '2000 kl de plata', 4, 1, '2024-08-01', '2024-09-01','Mercado', 4, '20 Días'),
+(5, '845210', '2024-05-05', '2024-06-05',  '2000 kl de azucar', 4, 1, '2024-08-01', '2024-09-01','Servicios', 3, '60 Días');
 -- --------------------------------------------------------
 
 --
@@ -126,7 +127,8 @@ CREATE TABLE `modulo` (
 INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`, `idpag`) VALUES
 (1, 'Facturas', 'img/mod_facturas.png', 1, 60),
 (2, 'Configuración', 'img/mod_configuracion.png', 1, 101),
-(3, 'Almuerzos', 'img/mod_almuerzos.png', 1, 61);
+(3, 'Almuerzos', 'img/mod_almuerzos.png', 1, 61),
+(4, 'Novedades', 'img/mod_configuracion.png', 1, 110);
 
 -- --------------------------------------------------------
 
@@ -153,6 +155,7 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (60, 'fa fa-solid fa-file-invoice-dollar', 'Facturas', 'views/vfac.php', 12, 'home.php', 1, 1),
 (61, 'fa-solid fa-bacon', 'Almuerzos', 'views/valm.php', 13, 'home.php', 1, 3),
 (62, 'fa fa-solid fa-file-invoice-dollar', 'Pedidos', 'views/vped.php', 14, 'home.php', 1, 3),
+(63, 'fa fa-solid fa-duotone fa-wallet', 'Facturas por revisar', 'views/vfacpr.php', 15, 'home.php', 1, 1),
 (101, 'fa fa-solid fa-cubes', 'Módulos', 'views/vmod.php', 1, 'home.php', 1, 2),
 (102, 'fa fa-regular fa-file', 'Paginas', 'views/vpag.php', 2, 'home.php', 1, 2),
 (103, 'fa fa-solid fa-user', 'PagxPef', 'views/vpgxf.php', 3, 'home.php', 2, 2),
@@ -161,7 +164,8 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (106, 'fa fa-solid fa-user', 'Personas', 'views/vper.php', 6, 'home.php', 1, 2),
 (107, 'fa fa-solid fa-boxes-stacked', 'Dominio', 'views/vdom.php', 7, 'home.php', 1, 2),
 (108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 2),
-(109, 'fa fa-solid fa-building', 'Empresas', 'views/vemp.php', 11, 'home.php', 1, 1);
+(109, 'fa fa-solid fa-building', 'Empresas', 'views/vemp.php', 11, 'home.php', 1, 1),
+(110, 'fa fa-solid fa-solid fa-lightbulb', 'Novedades', 'views/vnov.php', 16, 'home.php', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -193,7 +197,9 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (62, 1),
 (61, 1),
 (62, 6),
-(108, 1);
+(108, 1),
+(63, 1),
+(63,2);
 
 -- --------------------------------------------------------
 
@@ -214,8 +220,8 @@ CREATE TABLE `perfil` (
 
 INSERT INTO `perfil` (`idpef`, `nompef`, `idmod`, `idpag`) VALUES
 (1, 'SuperAdmin', 2, 101),
-(2, 'Control interno', 1, 60),
-(3, 'Gerencia', 1, 60),
+(2, 'Control interno', 1, 63),
+(3, 'Gerencia', 1, 63),
 (4, 'Contabilidad', 1, 60),
 (5, 'Colaborador', 3, 62),
 (6, 'Servicios generales', 3, 61);
@@ -243,12 +249,12 @@ CREATE TABLE `persona` (
 
 INSERT INTO `persona` (`idper`, `nomper`, `pasper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`) VALUES
 (1, 'Ada', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'ada@artepan.com', '3215646857', 'Rodriguez', '1071328321', 1),
-(2, 'Nico', '305244cc2d9afd44b7ffc6bd96b605151739a5absGlaqs2%', 'nico@artepan.com', '3215456998', 'Rodriguez', '1072749321', 1),
+(2, 'Nico', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'nico@artepan.com', '3215456998', 'Rodriguez', '1072749321', 1),
 (3, 'Amy', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'amy@artepan.com', '3021845120', 'Gavilan', '1004985502', 1),
 (4, 'Andrea', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'ada2@artepan.com', '3112132208', 'Casas', '1076655342', 1),
 (5, 'Luisa', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'nico2@artepan.com', '3215495204', 'Jiménez', '1078944563', 1),
-(6, 'Lucas', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'amy2@artepan.com', '3223548793', 'Mora', '1077954332', 1);
-
+(6, 'Lucas', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'amy2@artepan.com', '3223548793', 'Mora', '1077954332', 1),
+(7, 'Prueba', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'prueba@artepan.com', '322894463', 'Prueba', '1077954332', 1);
 -- --------------------------------------------------------
 
 --
@@ -272,8 +278,8 @@ INSERT INTO `perxpef` (`idper`, `idpef`) VALUES
 (5, 5),
 (6, 6),
 (1, 4),
-(1, 6);
-
+(1, 6),
+(1, 3);
 -- --------------------------------------------------------
 
 --
@@ -305,7 +311,18 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (10, '45 Días', 1, 110, 1),
 (11, '60 Días', 1, 111, 1),
 (12, '70 Días', 1, 112, 1),
-(13, 'Contado-Crédito', 1, 110, 1);
+(13, 'Contado-Crédito', 1, 113, 1),
+(14, 'Materia prima', 2, 114, 1),
+(15, 'Insumo', 2, 115, 1),
+(16, 'Transporte', 2, 116, 1),
+(17, 'Cartón', 2, 117, 1),
+(18, 'Cuenta de cobro', 2, 118, 1),
+(19, 'Servicio', 2, 119, 1),
+(20, 'Exportación', 2, 120, 1),
+(21, 'Mantenimiento', 2, 121, 1),
+(22, 'Dotación', 2, 122, 1),
+(23, 'Papelería', 2, 123, 1),
+(24, 'Mercado', 2, 124, 1);
 
 --
 -- Índices para tablas volcadas

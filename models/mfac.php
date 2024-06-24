@@ -12,6 +12,7 @@
         private $idper;
         private $fefac;
         private $fvfac;
+        private $tipfac;
         private $forpag;
 
         //------------GET-----------
@@ -48,6 +49,9 @@
         public function getForpag(){
             return $this->forpag;
         }
+        public function getTipfac(){
+            return $this->tipfac;
+        }
 
         //------------SET-----------
         public function setIdfac($idfac){
@@ -83,10 +87,13 @@
         public function setForpag($forpag){
             $this->forpag=$forpag;
         }
+        public function setTipfac($tipfac){
+            $this->tipfac=$tipfac;
+        }
 
       
         function getAll(){
-            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.forpag, f.idper, f.fefac, f.fvfac, f.forpag, e.razsoem, e.nitemp, r.nomper FROM factura AS f INNER JOIN empresa AS e ON f.idemp=e.idemp INNER JOIN persona AS r ON f.idper=r.idper";
+            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.forpag, f.idper, f.fefac, f.fvfac, f.forpag, f.tipfac, e.razsoem, e.nitemp, r.nomper FROM factura AS f INNER JOIN empresa AS e ON f.idemp=e.idemp INNER JOIN persona AS r ON f.idper=r.idper";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -107,7 +114,7 @@
         // }
 
         function getOne(){
-            $sql = "SELECT idfac, nofac, confac, fifac, estfac, idemp, idper, fefac, fvfac, forpag FROM factura WHERE idfac=:idfac";
+            $sql = "SELECT idfac, nofac, confac, fifac, estfac, idemp, idper, fefac, fvfac, forpag, tipfac FROM factura WHERE idfac=:idfac";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -120,7 +127,7 @@
 
         function save(){
             try {
-                $sql = "INSERT INTO factura (nofac, confac, fifac, estfac, idemp, idper, fefac, fvfac, forpag) VALUES (:nofac, :confac, :fifac, :estfac, :idemp, :idper, :fefac, :fvfac, :forpag)";
+                $sql = "INSERT INTO factura (nofac, confac, fifac, estfac, idemp, idper, fefac, fvfac, forpag, tipfac) VALUES (:nofac, :confac, :fifac, :estfac, :idemp, :idper, :fefac, :fvfac, :forpag, :tipfac)";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -141,7 +148,9 @@
                 $fvfac = $this->getFvfac();
                 $result->bindParam(":fvfac", $fvfac); 
                 $forpag = $this->getForpag();
-                $result->bindParam(":forpag", $forpag);                 
+                $result->bindParam(":forpag", $forpag);   
+                $tipfac = $this->getTipfac();
+                $result->bindParam(":tipfac", $tipfac);                
                 $result->execute();
             } catch (Exception $e) {
                 ManejoError($e);
@@ -166,7 +175,7 @@
 
         function edit(){
             try {
-                $sql = "UPDATE factura  SET nofac=:nofac, confac=:confac, estfac=:estfac, idemp=:idemp, fefac=:fefac, fvfac=:fvfac, forpag=:forpag WHERE idfac=:idfac";
+                $sql = "UPDATE factura  SET nofac=:nofac, confac=:confac, estfac=:estfac, idemp=:idemp, fefac=:fefac, fvfac=:fvfac, forpag=:forpag, tipfac=:tipfac WHERE idfac=:idfac";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -205,7 +214,7 @@
         }
         
         //------------Traer valores-----------
-        function getAllForpag($iddom){
+        function getAllDom($iddom){
             $sql = "SELECT idval, nomval FROM valor WHERE iddom=:iddom";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
