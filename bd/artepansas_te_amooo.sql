@@ -92,7 +92,7 @@ CREATE TABLE `factura` (
   `confac` varchar(100) NOT NULL,
   `fffac` datetime NOT NULL,
   `idemp` bigint(11) DEFAULT NULL,
-  `estfac` int(2) DEFAULT NULL,
+  `estfac` int(4) DEFAULT NULL,
   `fefac` datetime NOT NULL,
   `fvfac` datetime NOT NULL,
   `forpag` varchar(100) NOT NULL,
@@ -102,10 +102,10 @@ CREATE TABLE `factura` (
 
 INSERT INTO `factura` (`idfac`, `nofac`, `fifac`,`fffac`, `confac`, `idemp`, `estfac`, `fefac`, `fvfac`, `tipfac`, `idper`, `forpag`) VALUES
 (1, '123456', '2024-05-01', '2024-06-01',  '2000 kl de sodio', 1, 1, '2024-08-01', '2024-09-01','Dotación', 1, '2 Días'),
-(2, '987564', '2024-05-02', '2024-06-02',  '2000 kl de potacsio', 2, 1, '2024-08-01', '2024-09-01','Papelería', 2, '8 Días'),
-(3, '785163', '2024-05-03', '2024-06-03',  '2000 kl de aguacate', 3, 1, '2024-08-01', '2024-09-01','Importación', 3, '10 Días'),
-(4, '954631', '2024-05-04', '2024-06-04',  '2000 kl de plata', 4, 1, '2024-08-01', '2024-09-01','Mercado', 4, '20 Días'),
-(5, '845210', '2024-05-05', '2024-06-05',  '2000 kl de azucar', 4, 1, '2024-08-01', '2024-09-01','Servicios', 3, '60 Días');
+(2, '987564', '2024-05-02', '2024-06-02',  '2000 kl de potacsio', 2, 2, '2024-08-01', '2024-09-01','Papelería', 2, '8 Días'),
+(3, '785163', '2024-05-03', '2024-06-03',  '2000 kl de aguacate', 3, 3, '2024-08-01', '2024-09-01','Importación', 3, '10 Días'),
+(4, '954631', '2024-05-04', '2024-06-04',  '2000 kl de plata', 4, 4, '2024-08-01', '2024-09-01','Mercado', 4, '20 Días'),
+(5, '845210', '2024-05-05', '2024-06-05',  '2000 kl de azucar', 4, 2, '2024-08-01', '2024-09-01','Servicios', 3, '60 Días');
 -- --------------------------------------------------------
 
 --

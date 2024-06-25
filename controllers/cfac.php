@@ -38,17 +38,9 @@
         $mfac->setFefac($fefac);
         $mfac->setFvfac($fvfac);
         $mfac->setTipfac($tipfac);
-       
-   
-        // if($pg==52) $mequ->setPagequ(52);
-        // if($pg==54) $mequ->setPagequ(54);
         if(!$idfac) $mfac->save();
         else $mfac->edit();
     }
-
-    // if($ope=="act" && $idfac && $act){
-    //     $mequ->setActequ($actequ);
-        $mfac->editAct();
 
     if($ope=="edi" && $idfac) $datOne = $mfac->getOne();
     if($ope=="eli" && $idfac) $mfac->del();
@@ -56,10 +48,21 @@
     $datEmp = $mfac->getAll();
     $datAll = $mfac->getAll();
 
+    if ($ope == 'prevision' && $idfac && $estfac && $estfac == 2) {
+        $mfac->setIdfac($idfac);
+        $mfac->setEstfac($estfac);
+        $mfac->editEst();
+    }
 
-    // $dattpe = $mfac->getAllTpEq(2);
-    // $dattpc = $mfac->getAllTpCt(4);
-
-    // $dom = $mequ->getAllDom(6,7);
-
+    if ($ope == 'revisada' && $idfac && $estfac && $estfac == 3) {
+        $mfac->setIdfac($idfac);
+        $mfac->setEstfac($estfac);
+        $mfac->editEst();
+    }
+    
+    if ($ope == "entregada" && $idfac && $estfac && $estfac == 4){
+        $mfac->setIdfac($idfac);
+        $mfac->setEstfac($estfac);
+        $mfac->editEst();
+    }
 ?>

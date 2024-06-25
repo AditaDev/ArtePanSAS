@@ -193,6 +193,8 @@
                 $result->bindParam(":idemp", $idemp);
                 $forpag = $this->getForpag();
                 $result->bindParam(":forpag", $forpag);
+                $tipfac = $this->getTipfac();
+                $result->bindParam(":tipfac", $tipfac);
                 $result->execute();
             } catch (Exception $e) {
                 ManejoError($e);
@@ -225,6 +227,22 @@
             return $res;
         }
         
+        function editEst()
+    {
+        try {
+            $sql = "UPDATE factura SET estfac=:estfac WHERE idfac=:idfac";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $estfac = $this->getEstfac();
+            $result->bindParam(":estfac", $estfac);
+            $idfac = $this->getIdfac();
+            $result->bindParam(":idfac", $idfac);
+            $result->execute();
+        } catch (Exception $e) {
+            ManejoError($e);
+        }
+    }
 
         // function getEqxEp($idequ){
         //     $res = null;

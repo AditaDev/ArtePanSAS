@@ -106,10 +106,19 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     </td>
                     
                     <td tyle="text-align: half;">
-                    
-                    <td tyle="text-align: right;">
-                   
-                    <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
+                        <?php if ($dta["estfac"] == 1) { ?>
+                            <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="Sin Revisar"></i>
+                        <?php } elseif ($dta["estfac"] == 2) { ?>
+                            <i class="fa fa-solid fa-circle-check fa-2x iconi prv" title="Primera Revisión"></i>
+                        <?php } elseif ($dta["estfac"] == 3) { ?>
+                            <i class="fa fa-solid fa-circle-check fa-2x act" title="Revisada"></i>
+                        <?php } elseif ($dta["estfac"] == 4) { ?>
+                            <i class="fa fa-solid fa-circle-check fa-2x chulo" title="Entregada"></i>
+                        <?php } ?>
+                    </td>
+
+                    <td tyle="text-align: left;">
+                        <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi"  title="Editar"></i>
                         </a>
                         <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=eli" onclick="return eliminar('<?= $dta['idfac']; ?>');">

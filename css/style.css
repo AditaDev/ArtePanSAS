@@ -41,7 +41,42 @@ label {
   cursor: pointer;
 
 }
+.act {
+  color: #008000;
+}
 
+.act:hover {
+  text-shadow: 0px 0px 2px #008000;
+  cursor: pointer;
+
+}
+
+.desact {
+  color: #b22222;
+}
+
+.desact:hover {
+  text-shadow: 0px 0px 2px #b22222;
+  cursor: pointer;
+
+}
+.prv {
+  color: #ffc107;
+}
+
+.prv:hover {
+  text-shadow: 0px 0px 2px #ffc107;
+  cursor: pointer;
+}
+
+.chulo {
+  color: #00bbfa;
+}
+
+.chulo:hover {
+  text-shadow: 0px 0px 2px #00bbfa;
+  cursor: pointer;
+}
 .fa {
   padding: 5px;
 }
@@ -511,9 +546,9 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} 
 
-.i i {
+ .i i {
   transition: .3s;
 }
 
@@ -563,7 +598,7 @@ a {
 
 .input-div.focus>.i>i {
   color: rgb(0, 0, 0);
-}
+} 
 
 .input-div>div>input {
   position: absolute;
@@ -592,7 +627,7 @@ a {
 
 a:hover {
   color: rgb(118, 118, 118);
-}
+} 
 
 /*-----------Boton---------*/
 #boxbtn {
@@ -609,7 +644,7 @@ a:hover {
   border-radius: 15px;
   outline: none;
   border: none;
-  background-color: #393b3d;
+  background-color: #073663;
   font-size: 18px;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
