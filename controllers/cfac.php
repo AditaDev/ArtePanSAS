@@ -66,3 +66,7 @@
         $mfac->editEst();
     }
 ?>
+if($ope=='act' && $idmod && $actmod){
+        $mmod->setActmod($actmod);
+        $mmod->editAct();
+    }
