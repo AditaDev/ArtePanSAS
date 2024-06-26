@@ -3,8 +3,6 @@
 require_once('controllers/cped.php');
 ?>
 
-<?php if ($datAll) { foreach ($datAll as $dta)  {?>
-    <?php }}?>
 <style>
 
 .tarjeta{
@@ -35,6 +33,10 @@ require_once('controllers/cped.php');
 }
 
     </style>
+
+<?php if ($datAll) { foreach ($datAll as $dta)  {?>
+    
+
         <div class="tarjeta" style= "text-align: center;">
         <div class="titulo">Almuerzo del día</div>
     <div class="cuerpo">
@@ -53,12 +55,8 @@ require_once('controllers/cped.php');
     </div>
     <div class="pie">
             <button type="button"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcb<?= $dta['idper']; ?>" title="Pedir">  PEDIR  </button>
-              
-          
-    </div>
-  </div>
 </div>
 
 
 
-<?php 
+<?php }}?>

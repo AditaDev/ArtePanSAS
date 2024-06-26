@@ -171,7 +171,7 @@ class Mper
             $result->bindParam(":actper", $actper);
             if ($this->getPasper()) {
                 $pasper = $this->getPasper();
-                $pasper = sha1(md5($pasper)) . "sGlaqs2%";
+                $pasper = sha1(md5($pasper));
                 $result->bindParam(":pasper", $pasper);
             }
             $result->execute();

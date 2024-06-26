@@ -70,7 +70,7 @@
             $this->fffac=$fffac;
         }
         public function setEstfac($estfac){
-            $this->fffac=$estfac;
+            $this->estfac=$estfac;
         }
         public function setIdemp($idemp){
             $this->idemp=$idemp;
@@ -126,7 +126,7 @@
         }
 
         function save(){
-            try {
+            // try {
                 $sql = "INSERT INTO factura (nofac, confac, fifac, estfac, idemp, idper, fefac, fvfac, forpag, tipfac) VALUES (:nofac, :confac, :fifac, :estfac, :idemp, :idper, :fefac, :fvfac, :forpag, :tipfac)";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
@@ -141,7 +141,7 @@
                 $result->bindParam(":estfac", $estfac);
                 $idemp = $this->getIdemp();
                 $result->bindParam(":idemp", $idemp);
-                $idper = $this->getIdper();
+                $idper = $_SESSION['idper'];
                 $result->bindParam(":idper", $idper);
                 $fefac = $this->getFefac();
                 $result->bindParam(":fefac", $fefac);
@@ -152,9 +152,9 @@
                 $tipfac = $this->getTipfac();
                 $result->bindParam(":tipfac", $tipfac);                
                 $result->execute();
-            } catch (Exception $e) {
-                ManejoError($e);
-            }
+            // } catch (Exception $e) {
+            //     ManejoError($e);
+            // }
         }
 
         function editAct(){

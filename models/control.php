@@ -30,7 +30,7 @@ function validar($usu,$pas){
 
 function valdat($usu,$pas){
 	$res = NULL;
-	$pas = sha1(md5($pas))."sGlaqs2%";	
+	$pas = sha1(md5($pas));	
 	$sql = "SELECT idper, nomper, apeper, ndper, emaper, actper FROM persona WHERE (emaper=:user OR ndper=:user) AND pasper=:pasper AND actper=1";
 	$modelo = new conexion();
 	$conexion = $modelo->get_conexion();

@@ -57,11 +57,11 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         </div>
         <div class="form-group col-md-4">
             <label for="arcimg"><strong>Pdf:</strong></label>
-            <input class="form-control" type="file" id="arcpdf" name="arcpdf" <?php if(!$datOne) echo "required";?>>
+            <input class="form-control" type="file" id="arcpdf" name="arcpdf">
         </div>
         <div class="form-group col-md-4">
             <label for="arcimg"><strong>Soporte:</strong></label>
-            <input class="form-control" type="file" id="arcpdf" name="arcpdf" <?php if(!$datOne) echo "required";?>>
+            <input class="form-control" type="file" id="arcpdf" name="arcpdf">
         </div>
         
         <div class="form-group col-md-12" id="boxbtn">
@@ -81,9 +81,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <th>No.</th>
             <th>Datos factura</th>
             <th>Estado</th>
-            <th></th>      
-            
-            
+            <th></th>                  
         </tr>
     </thead>
     <tbody>
@@ -105,7 +103,9 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         </small>
                     </td>
                     
-                    <td tyle="text-align: half;">
+                    <td style="text-align: half;">
+                        
+                        
                         <?php if ($dta["estfac"] == 1) { ?>
                             <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="Sin Revisar"></i>
                         <?php } elseif ($dta["estfac"] == 2) { ?>
@@ -130,7 +130,6 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     
                     
             </tr>
-            <tr></tr>
         <?php }} ?>
     </tbody>
     <tfoot>

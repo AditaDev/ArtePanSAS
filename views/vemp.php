@@ -62,9 +62,6 @@ include('controllers/cemp.php');
                         <a href="home.php?pg=<?= $pg; ?>&idemp=<?= $dta['idemp']; ?>&ope=edi" title="Editar">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
                         </a>
-                        
-                           
-                            
                         <a href="home.php?pg=<?= $pg; ?>&idemp=<?= $dta['idemp']; ?>&ope=eli" onclick="return eliminar ('<?= $dta['idemp']; ?>');" title="Eliminar">
                             <i class="fa fa-solid fa-trash-can fa-2x iconi"></i>
                         </a>

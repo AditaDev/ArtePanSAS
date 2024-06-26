@@ -7,14 +7,15 @@
     //------------Factura-----------
     $idfac = isset($_REQUEST['idfac']) ? $_REQUEST['idfac']:NULL;
     $nofac = isset($_POST['nofac']) ? $_POST['nofac']:NULL;
-    $fifac = isset($_POST['fifac']) ? $_POST['fifac']:NULL;
+    $fifac = date("Y-m-d H:i:s");
     $confac = isset($_POST['confac']) ? $_POST['confac']:NULL;
     $fffac = isset($_POST['fffac']) ? $_POST['fffac']:NULL;
-    $estfac = isset($_POST['estfac']) ? $_POST['estfac']:NULL;
+    $estfac = isset($_POST['estfac']) ? $_POST['estfac']:1;
     $idemp = isset($_POST['idemp']) ? $_POST['idemp']:NULL;
     $idper = isset($_POST['idper']) ? $_POST['idper']:NULL;
     $fefac = isset($_POST['fefac']) ? $_POST['fefac']:NULL;
     $fvfac = isset($_POST['fvfac']) ? $_POST['fvfac']:NULL;
+    $forpag = isset($_POST['forpag']) ? $_POST['forpag']:NULL;
     $tipfac = isset($_POST['tipfac']) ? $_POST['tipfac']:NULL;
     
     $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
@@ -26,6 +27,7 @@
 
     $mfac->setIdfac($idfac);
 
+    var_dump($estfac);
     //------------Factura-----------
     if($ope=="save"){
         $mfac->setNofac($nofac);
@@ -38,6 +40,7 @@
         $mfac->setFefac($fefac);
         $mfac->setFvfac($fvfac);
         $mfac->setTipfac($tipfac);
+        $mfac->setForpag($forpag);
         if(!$idfac) $mfac->save();
         else $mfac->edit();
     }
@@ -66,7 +69,7 @@
         $mfac->editEst();
     }
 ?>
-if($ope=='act' && $idmod && $actmod){
+<!-- if($ope=='act' && $idmod && $actmod){
         $mmod->setActmod($actmod);
         $mmod->editAct();
-    }
+    } -->
