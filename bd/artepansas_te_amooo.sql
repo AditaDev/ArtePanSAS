@@ -93,8 +93,8 @@ CREATE TABLE `factura` (
   `fffac` datetime NOT NULL,
   `idemp` bigint(11) DEFAULT NULL,
   `estfac` int(4) DEFAULT NULL,
-  `fefac` datetime NOT NULL,
-  `fvfac` datetime NOT NULL,
+  `fefac` date NOT NULL,
+  `fvfac` date NOT NULL,
   `forpag` varchar(100) NOT NULL,
   `tipfac` varchar(100) NOT NULL,
   `idper` bigint(11) NOT NULL

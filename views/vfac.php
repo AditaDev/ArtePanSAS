@@ -92,9 +92,9 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <strong> <?=($dta['nofac']) . " - " . $dta['confac']; ?></strong><br>
                         <small>
                             <strong>Empresa: </strong> <?= $dta['razsoem']; ?><br>
-                            <strong>Persona: </strong> <?= $dta['nomper']; ?><br>
-                            <strong>Fecha emisión: </strong><?= $dta['fefac']; ?><br>
-                            <strong>Fecha registro: </strong><?= $dta['fifac']; ?><br>
+                            <!-- <strong>Persona: </strong> <?= $dta['nomper']; ?><br> -->
+                            <!-- <strong>Fecha emisión: </strong><?= $dta['fefac']; ?><br>
+                            <strong>Fecha registro: </strong><?= $dta['fifac']; ?><br> -->
                             <strong>Fecha de vencimiento: </strong><?= $dta['fvfac']; ?><br>
                             
                             <!-- <strong><?= $dta['']; ?></strong> -->
@@ -103,9 +103,13 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         </small>
                     </td>
                     
-                    <td style="text-align: half;">
-                        
-                        
+                    <td tyle="text-align: half;">
+                         <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idfac']; ?>" title="Detalles"></i>
+                        <?php
+                            $mfac->setIdfac($dta['idfac']);
+                            // $forpag = $mfac-> getAllDom($forpag);
+                            modalDet("mcbinf", $dta['idfac'], $dta['razsoem'].' '.$dta['nofac'].' - '.$dta['confac'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['idper'], $dta['forpag'], $dta['nomper'] );
+                        ?>
                         <?php if ($dta["estfac"] == 1) { ?>
                             <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="Sin Revisar"></i>
                         <?php } elseif ($dta["estfac"] == 2) { ?>
@@ -117,7 +121,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         <?php } ?>
                     </td>
 
-                    <td tyle="text-align: left;">
+                    <td tyle="text-align: right;">
                         <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi"  title="Editar"></i>
                         </a>

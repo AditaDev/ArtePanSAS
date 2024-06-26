@@ -121,7 +121,7 @@ function modalCmb($nm, $id, $tit, $idmod, $pg, $dms)
 //-----------------Modal pedido-------------------
 
 //------------Modal vfac, info facturas-----------
-function modalDet($nofac, $confac, $fifac, $fefac, $fvfac, $formapago, $razsoem, $nomper, $idfac)
+function modalDet($nofac, $confac, $fifac, $fefac, $fvfac, $forpag, $razsoem, $nomper, $idfac)
 {
 	$txt = '';
 	$txt .= '<div class="modal fade" id="' . $nofac . $confac . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
@@ -135,11 +135,17 @@ function modalDet($nofac, $confac, $fifac, $fefac, $fvfac, $formapago, $razsoem,
 				$txt .= '<div class="row"';
 					$txt .= '<div">';
 						$txt .= '<table>';
+						if($forpag){ foreach($forpag AS $fp){
+							$txt .= '<tr><td><strong>'.$fp['nomdom'].': </strong></td><td class="infpc">'.$fp['nomval'].' '.$fp['verforpag'].'</td></tr>';
+						}}
+						// if($razsoem){ foreach($razsoem AS $rz){
+						// 	$txt .= '<tr><td><strong>'.$rz['nomdom'].': </strong></td><td class="infpc">'.$rz['nomval'].' '.$rz['nombrempresa'].'</td></tr>';
+						// }}
 							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$fefac.'</td></tr>';							
 							$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$fvfac.'</td></tr>';
-							$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$formapago.'</td></tr>';
+							// $txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$forpag.'</td></tr>';
 							$txt .= '<tr><td><strong>Persona que registro: </strong></td><td class="inffac">'.$nomper.'</td></tr>';
-							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$razsoem.'</td></tr>';
+							// $txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$razsoem.'</td></tr>';
 							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$idfac.'</td></tr>';
 							
 						$txt .= '</table>';
@@ -301,3 +307,15 @@ function arrstrprg($dt)
 	}
 	return $txt;
 }
+
+function arremp($dt)
+{
+	$txt = "";
+	if ($dt) {
+		foreach ($dt as $d) {
+			$txt .= $d['idemp'] . ",";
+		}
+	}
+	return $txt;
+}
+
