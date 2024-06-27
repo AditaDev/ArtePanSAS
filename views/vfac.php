@@ -108,7 +108,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         <?php
                             $mfac->setIdfac($dta['idfac']);
                             // $forpag = $mfac-> getAllDom($forpag);
-                            modalDet("mcbinf", $dta['idfac'], $dta['razsoem'].' '.$dta['nofac'].' - '.$dta['confac'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['idper'], $dta['forpag'], $dta['nomper'] );
+                            modalDet("mcbinf", $dta['idfac'], $dta['razsoem'], $dta['nofac'], $dta['confac'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['forpag'], $dta['nomper'] );
                         ?>
                         <?php if ($dta["estfac"] == 1) { ?>
                             <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="Sin Revisar"></i>
