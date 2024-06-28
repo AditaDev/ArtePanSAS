@@ -11,7 +11,7 @@ function titulo($ico, $tit, $mos, $pg)
 			$txt .= ' ' . $tit;
 			$txt .= '<hr class="hrtitu">';
 		$txt .= '</div>';
-		if ($mos == 1 && $pg!=62) {
+		if ($mos == 1 && $pg!=62 and $pg!=63) {
 			$txt .= '<div class="titaju" style="float: right;">';
 				$txt .= '<i class="fa-solid fa-circle-plus" id="mas" onclick="ocul(' . $mos . ',1);"></i>';
 				$txt .= '<i class="fa-solid fa-circle-minus" id="menos" onclick="ocul(' . $mos . ');"></i>';
@@ -119,39 +119,31 @@ function modalCmb($nm, $id, $tit, $idmod, $pg, $dms)
 }
 
 //-----------------Modal pedido-------------------
-//entonces hago otra variable?,si
-// entonce sporque ahi ewn el titu tiene la empresa si se supone que le pongo la fecha
-// $nofac="mcbinf"
-// $confac=$dta['idfac']
-// $fifac=$dta['razsoem']
-// $fefac=$dta['nofac']
-// $fvfac=$dta['confac']
-// $forpag=$dta['fefac']
-// $razsoem=$dta['fifac']
-// $nomper=$dta['fvfac']
-// $idfac=$dta['forpag']
-// $dta['nomper'] 
+
+ 
+
 //------------Modal vfac, info facturas-----------
-function modalDet($nofac, $confac, $fifac, $fefac, $fvfac, $forpag, $razsoem, $nomper, $idfac){
+function modalDet($nom, $id, $titulo, $razsoem, $fefac, $fifac, $fvfac, $forpag, $nomper){
 	$txt = '';
-	$txt .= '<div class="modal fade" id="' . $nofac . $confac . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+	$txt .= '<div class="modal fade" id="' . $nom . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
 		$txt .= '<div class="modal-dialog">';
 			$txt .= '<div class="modal-content">';
 				$txt .= '<div class="modal-header">';
-					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$fifac.'</strong></h1>';
+					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$titulo.'</strong></h1>';
 					$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
 				$txt .= '</div>';
 				$txt .= '<div class="modal-body" style="margin: 0px 25px;">';
 				$txt .= '<div class="row"';
 					$txt .= '<div">';
 						$txt .= '<table>';
-							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$fvfac.'</td></tr>';							
-							$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$fefac.'</td></tr>';
+							$txt .= '<tr><td><strong>Empresa: </strong></td><td class="inffac">'.$razsoem.'</td></tr>';	
+							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$fefac.'</td></tr>';				
+							$txt .= '<tr><td><strong>Fecha de registro: </strong></td><td class="inffac">'.$fifac.'</td></tr>';
+							$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$fvfac.'</td></tr>';
 							$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$forpag.'</td></tr>';
 							$txt .= '<tr><td><strong>Persona que registro: </strong></td><td class="inffac">'.$nomper.'</td></tr>';
-							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$razsoem.'</td></tr>';
-							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$idfac.'</td></tr>';
-							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$nofac.'</td></tr>';
+							
+							
 						$txt .= '</table>';
 					$txt .= '</div>';
 				$txt .= '</div>';

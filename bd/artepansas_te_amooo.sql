@@ -14,7 +14,7 @@ CREATE TABLE `almuerzo` (
   `ppalm` varchar(100) DEFAULT NULL,
   `spalm` varchar(100) DEFAULT NULL,
   `jgalm` varchar(100) DEFAULT NULL,
-  `fecalm` datetime DEFAULT NULL
+  `fecalm` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -39,6 +39,22 @@ INSERT INTO `pedido` (`idalm`, `idper`) VALUES
 (4, '4'),
 (5, '5'),
 (6, '6');
+
+
+CREATE TABLE `producto` (
+    `idpro` bigint(11) NOT NULL,
+    `nompro` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `producto` (`idpro`, `nompro`) VALUES
+(1, 'Lentejas'),
+(2, 'Pasta'),
+(3, 'Arroz'),
+(4, '4'),
+(5, '5'),
+(6, '6');
+
+
 
 -- --------------------------------------------------------
 

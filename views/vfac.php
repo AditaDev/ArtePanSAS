@@ -92,23 +92,15 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <strong> <?=($dta['nofac']) . " - " . $dta['confac']; ?></strong><br>
                         <small>
                             <strong>Empresa: </strong> <?= $dta['razsoem']; ?><br>
-                            <!-- <strong>Persona: </strong> <?= $dta['nomper']; ?><br> -->
-                            <!-- <strong>Fecha emisión: </strong><?= $dta['fefac']; ?><br>
-                            <strong>Fecha registro: </strong><?= $dta['fifac']; ?><br> -->
-                            <strong>Fecha de vencimiento: </strong><?= $dta['fvfac']; ?><br>
-                            
-                            <!-- <strong><?= $dta['']; ?></strong> -->
-                        
-                        
+                            <strong>Fecha de vencimiento: </strong><?= $dta['fvfac']; ?><br>                      
                         </small>
                     </td>
                     
                     <td tyle="text-align: half;">
                          <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idfac']; ?>" title="Detalles"></i>
                         <?php
-                            $mfac->setIdfac($dta['idfac']);
-                            // $forpag = $mfac-> getAllDom($forpag);
-                            modalDet("mcbinf", $dta['idfac'], $dta['razsoem'], $dta['nofac'], $dta['confac'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['forpag'], $dta['nomper'] );
+                            $mfac->setIdfac($dta['idfac']);                           
+                            modalDet("mcbinf", $dta['idfac'], $dta['nofac']."-".$dta['confac'], $dta['razsoem'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['forpag'], $dta['nomper']);
                         ?>
                         <?php if ($dta["estfac"] == 1) { ?>
                             <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="Sin Revisar"></i>
@@ -148,10 +140,3 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     </tfoot>
 </table>
 
-<!-- <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idfac']; ?>" title="Detalles"></i>
-<?php
-                        $mfac->setIdfac($dta['idfac']);
-                        $formapago = $mfac->getAllDom($idfac);
-                        modalDet("mcbinf", $dta['idfac'], $dta['razsoem'].' '.$dta['nofac'].' - '.$dta['confac'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['idper'], $dta['idper'], $formapago);
-                        ?>
-                    </td> -->

@@ -27,7 +27,6 @@
 
     $mfac->setIdfac($idfac);
 
-    var_dump($estfac);
     //------------Factura-----------
     if($ope=="save"){
         $mfac->setNofac($nofac);
