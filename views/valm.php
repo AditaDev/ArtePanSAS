@@ -1,25 +1,54 @@
 <?php
  require_once ('controllers/calm.php'); ?>
+ 
+   
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">  
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">  
 
+<!-- <body>  
+  
+<div class="container">  
+    <strong>Seleccione los productos:</strong>  
+    <select id="multiple-checkboxes" multiple="multiple">  
+        <option value="php">PHP</option>  
+        <option value="javascript">JavaScript</option>  
+        <option value="java">Java</option>  
+        <option value="sql">SQL</option>  
+        <option value="jquery">Jquery</option>  
+        <option value=".net">.Net</option>  
+    </select>  
+</div>  
+  
+<script type="text/javascript">  
+    $(document).ready(function() {  
+        $('#multiple-checkboxes').multiselect();  
+    });  
+</script>  
+  
+</body>   -->
 
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
     <div class="row">
-        <div class="form-group col-md-6">
-            <label for="ppalm"><strong>Plato principal:</strong></label>
-            <input type="text" name="" id="ppalm" class="form-control" value="<?php if ($datOne) echo $datOne[0]['ppalm']; ?>" <?php if ($datOne) echo $datOne[0]['ppalm']; ?> onkeypress="return solonum(event);" required>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="spalm"><strong>Sopa:</strong></label>
-            <input class="form-control" type="text" id="spalm" name="spalm" value="<?php if ($datOne) echo $datOne[0]['spalm']; ?>" required>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="jgalm"><strong>Jugo:</strong></label>
-            <input type="text" name="" id="jgalm" class="form-control" value="<?php if ($datOne) echo $datOne[0]['jgalm']; ?>" <?php if ($datOne) echo $datOne[0]['jgalm']; ?> onkeypress="return solonum(event);" required>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="fecalm"><strong>Fecha:</strong></label>
-            <input class="form-control" type="date" id="spalm" name="fecalm" value="<?php if ($datOne) echo $datOne[0]['fecalm']; ?>" required>
-        </div>
+        <div class="form-group col-md-6 container">  
+            <strong>Seleccione los productos:</strong>  
+            <select id="multiple-checkboxes" multiple="multiple">  
+                <option value="php">hola</option>  
+                <option value="javascript">te</option>  
+                <option value="java">amo</option>  
+                <option value="sql">mucho</option>  
+                <option value="jquery">bay</option>  
+                <option value=".net">.Net</option>  
+            </select>  
+        </div>  
+            <script type="text/javascript">  
+                    $(document).ready(function() {  
+                    $('#multiple-checkboxes').multiselect();  
+                    });  
+            </script>
+
     </div>
     <div class="form-group col-md-12" id="boxbtn">
         <br><br>

@@ -11,20 +11,17 @@ USE artepansas;
 
 CREATE TABLE `almuerzo` (
   `idalm` bigint(11) NOT NULL,
-  `ppalm` varchar(100) DEFAULT NULL,
-  `spalm` varchar(100) DEFAULT NULL,
-  `jgalm` varchar(100) DEFAULT NULL,
   `fecalm` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
-INSERT INTO `almuerzo` (`idalm`, `ppalm`, `spalm`, `jgalm`, `fecalm`) VALUES
-(1, 'Arroz con pollo', 'Arroz', 'Mora', '2024-07-01'),
-(2, 'Arroz con camarones', 'Pasta', 'Mora', '2024-07-01'),
-(3, 'Arroz y lentejas', 'Mute', 'Mora', '2024-07-01'),
-(4, 'Arroz, pollo y ensalada', 'Crema de pollo', 'Mora', '2024-07-01'),
-(5, 'Arroz y pasta', 'Arroz', 'Verduras', '2024-07-01'),
-(6, 'Arroz y carne', 'Arroz', 'Avena', '2024-07-01');
+INSERT INTO `almuerzo` (`idalm`, `fecalm`) VALUES
+(1, '2024-07-01'),
+(2, '2024-07-01'),
+(3, '2024-07-01'),
+(4, '2024-07-01'),
+(5, '2024-07-01'),
+(6, '2024-07-01');
 
 
 CREATE TABLE `pedido` (
@@ -50,10 +47,24 @@ INSERT INTO `producto` (`idpro`, `nompro`) VALUES
 (1, 'Lentejas'),
 (2, 'Pasta'),
 (3, 'Arroz'),
-(4, '4'),
-(5, '5'),
-(6, '6');
+(4, 'Pollo frito'),
+(5, 'Carne sudada'),
+(6, 'Pepinos');
 
+
+CREATE TABLE `proxalm` (
+    `idpro` bigint(11) NOT NULL,
+    `idalm` bigint(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `proxalm` ( `idpro`, `idalm`) VALUES
+(1, 1),
+(2, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6);
 
 
 -- --------------------------------------------------------
@@ -172,6 +183,7 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (61, 'fa-solid fa-bacon', 'Almuerzos', 'views/valm.php', 13, 'home.php', 1, 3),
 (62, 'fa fa-solid fa-file-invoice-dollar', 'Pedidos', 'views/vped.php', 14, 'home.php', 1, 3),
 (63, 'fa fa-solid fa-duotone fa-wallet', 'Facturas por revisar', 'views/vfacpr.php', 15, 'home.php', 1, 1),
+(64, 'fa fa-solid fa-cookie-bite', 'Producto', 'views/vpro.php', 17, 'home.php', 1, 3),
 (101, 'fa fa-solid fa-cubes', 'Módulos', 'views/vmod.php', 1, 'home.php', 1, 2),
 (102, 'fa fa-regular fa-file', 'Paginas', 'views/vpag.php', 2, 'home.php', 1, 2),
 (103, 'fa fa-solid fa-user', 'PagxPef', 'views/vpgxf.php', 3, 'home.php', 2, 2),
@@ -182,6 +194,7 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 2),
 (109, 'fa fa-solid fa-building', 'Empresas', 'views/vemp.php', 11, 'home.php', 1, 1),
 (110, 'fa fa-solid fa-solid fa-lightbulb', 'Novedades', 'views/vnov.php', 16, 'home.php', 1, 4);
+
 
 -- --------------------------------------------------------
 
@@ -215,7 +228,9 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (62, 6),
 (108, 1),
 (63, 1),
-(63,2);
+(64, 1),
+(64, 6),
+(63, 2);
 
 -- --------------------------------------------------------
 
@@ -264,13 +279,13 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`idper`, `nomper`, `pasper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`) VALUES
-(1, 'Ada', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'ada@artepan.com', '3215646857', 'Rodriguez', '1071328321', 1),
-(2, 'Nico', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'nico@artepan.com', '3215456998', 'Rodriguez', '1072749321', 1),
-(3, 'Amy', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'amy@artepan.com', '3021845120', 'Gavilan', '1004985502', 1),
-(4, 'Andrea', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'ada2@artepan.com', '3112132208', 'Casas', '1076655342', 1),
-(5, 'Luisa', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'nico2@artepan.com', '3215495204', 'Jiménez', '1078944563', 1),
-(6, 'Lucas', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'amy2@artepan.com', '3223548793', 'Mora', '1077954332', 1),
-(7, 'Prueba', 'b37276a94dfc2d512045932d36c8df69b8c2c729sGlaqs2%', 'prueba@artepan.com', '322894463', 'Prueba', '1077954332', 1);
+(1, 'Ada', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada@artepan.com', '3215646857', 'Rodriguez', '1071328321', 1),
+(2, 'Nico', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico@artepan.com', '3215456998', 'Rodriguez', '1072749321', 1),
+(3, 'Amy', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy@artepan.com', '3021845120', 'Gavilan', '1004985502', 1),
+(4, 'Andrea', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada2@artepan.com', '3112132208', 'Casas', '1076655342', 1),
+(5, 'Luisa', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico2@artepan.com', '3215495204', 'Jiménez', '1078944563', 1),
+(6, 'Lucas', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy2@artepan.com', '3223548793', 'Mora', '1077954332', 1),
+(7, 'Prueba', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba@artepan.com', '322894463', 'Prueba', '1077954332', 1);
 -- --------------------------------------------------------
 
 --
@@ -352,6 +367,10 @@ ALTER TABLE `pedido`
 ALTER TABLE `almuerzo`
   ADD PRIMARY KEY (`idalm`);
 
+
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`idpro`);
+
 --
 -- Indices de la tabla `dominio`
 --
@@ -375,6 +394,10 @@ ALTER TABLE `factura`
 --
 -- Indices de la tabla `modulo`
 --
+ALTER TABLE `proxalm`
+  ADD KEY `idpro` (`idpro`),
+  ADD KEY `idalm` (`idalm`);
+
 ALTER TABLE `modulo`
   ADD PRIMARY KEY (`idmod`);
 
@@ -460,6 +483,10 @@ ALTER TABLE `persona`
 ALTER TABLE `valor`
   MODIFY `idval` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
+
+ALTER TABLE `producto`
+  MODIFY `idpro` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -507,3 +534,8 @@ ALTER TABLE `perxpef`
 --
 ALTER TABLE `valor`
   ADD CONSTRAINT `valor_ibfk_1` FOREIGN KEY (`iddom`) REFERENCES `dominio` (`iddom`);
+
+
+ALTER TABLE `proxalm`
+  ADD CONSTRAINT `proxalm_ibfk_1` FOREIGN KEY (`idpro`) REFERENCES `producto` (`idpro`),
+  ADD CONSTRAINT `proxalm_ibfk_2` FOREIGN KEY (`idalm`) REFERENCES `almuerzo` (`idalm`);
