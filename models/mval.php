@@ -79,6 +79,7 @@
                 ManejoError($e);
             }
         }
+    
         function editAct(){
             try{
                 $sql = "UPDATE valor SET actval=:actval WHERE idval=:idval";

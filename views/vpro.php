@@ -9,6 +9,29 @@ require_once('controllers/cpro.php');
             <input class="form-control" type="text" id="nompro" name="nompro" value="<?php if ($datOne)
                 echo $datOne[0]['nompro']; ?>" required>
         </div>
+        <div class="form-group col-md-6">
+            <label for="iddom" class="titulo"><strong>Dominio:</strong></label>
+            <select name="iddom" id="iddom" class="form form-select">
+                <?php if ($datDom) {
+                    foreach ($datDom as $ddo) { ?>
+                        <option value="<?= $ddo['iddom']; ?>" <?php if ($datOne && $ddo['iddom'] == $datOne[0]['iddom']) echo "selected"; ?>>
+                            <?= $ddo['iddom']." - ". $ddo['nomdom']; ?>
+                        </option>
+                <?php }
+                } ?>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="actval"><strong>Activo:</strong></label>
+            <select name="actval" id="actval" class="form-control form-select">
+                <option value="1" <?php if ($datOne && $datOne[0]['actval'] == 1) echo " selected "; ?>>Si</option>
+                <option value="2" <?php if ($datOne && $datOne[0]['actval'] == 2) echo " selected "; ?>>No</option>
+            </select>
+        </div>
+
+
+
+
         <div class="form-group col-md-12" id="boxbtn">
             <br>
             <input class="btn btn-primary" type="submit" value="Registrar" id="btns">

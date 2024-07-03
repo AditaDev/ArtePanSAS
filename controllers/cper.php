@@ -31,7 +31,7 @@
             $mper->savePxFAut($per[0]['idper'],$idpef);
         }
         else{
-            $mper->edit();
+            $mper->save();
             if($idper == $_SESSION["idper"]){
                 $_SESSION['nomper'] = $nomper;
                 $_SESSION['apeper'] = $apeper;
@@ -47,7 +47,7 @@
     }
 
     if($ope=="eli"&& $idper) $mper->del();
-    // if($ope=="edi"&& $idper) $datOne=$mper->getOne();
+    if($ope=="edi"&& $idper) $datOne=$mper->edit();
 
     //------------Perfil-----------
     if($ope=="savepxf"){
@@ -59,8 +59,6 @@
             }
         }}
     }
-
-    $datOne = NULL;
      //------------Traer valores-----------
     $datAll = $mper->getAll();
     $idmod = $mper->getAllMod();

@@ -89,7 +89,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <tr>
                     <td tyle="text-align: left;"><?= $dta['idfac']; ?></td>
                     <td>
-                    <strong> <?=($dta['nofac']) . " - " . $dta['confac']; ?></strong><br>
+                    <strong> <?=($dta['nofac']) .  " - "  . $dta['confac']; ?></strong><br>
                         <small>
                             <strong>Empresa: </strong> <?= $dta['razsoem']; ?><br>
                             <strong>Fecha de vencimiento: </strong><?= $dta['fvfac']; ?><br>                      

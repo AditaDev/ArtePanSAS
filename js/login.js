@@ -7,7 +7,7 @@ $('#loginForm').on('submit', function (e) {
   let username = $('#username').val()
   let password = $('#password').val()
 
-  if (username === 'jay' && password === '123456') {
+  if (username === 'jay' && password === '12349') {
     window.location.href = '/public/proveedor.html'
   } else {
     Swal.fire({

@@ -40,16 +40,17 @@ INSERT INTO `pedido` (`idalm`, `idper`) VALUES
 
 CREATE TABLE `producto` (
     `idpro` bigint(11) NOT NULL,
-    `nompro` varchar(100) NOT NULL
+    `nompro` varchar(100) NOT NULL,
+    `iddom` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `producto` (`idpro`, `nompro`) VALUES
-(1, 'Lentejas'),
-(2, 'Pasta'),
-(3, 'Arroz'),
-(4, 'Pollo frito'),
-(5, 'Carne sudada'),
-(6, 'Pepinos');
+INSERT INTO `producto` (`idpro`, `nompro`, `iddom` ) VALUES
+(1, 'Lentejas', 3),
+(2, 'Pasta', 3),
+(3, 'Arroz', 3),
+(4, 'Pollo frito', 3),
+(5, 'Carne sudada', 3),
+(6, 'Pepinos', 3);
 
 
 CREATE TABLE `proxalm` (
@@ -539,3 +540,6 @@ ALTER TABLE `valor`
 ALTER TABLE `proxalm`
   ADD CONSTRAINT `proxalm_ibfk_1` FOREIGN KEY (`idpro`) REFERENCES `producto` (`idpro`),
   ADD CONSTRAINT `proxalm_ibfk_2` FOREIGN KEY (`idalm`) REFERENCES `almuerzo` (`idalm`);
+
+ALTER TABLE `producto`
+  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`iddom`) REFERENCES `dominio` (`iddom`);

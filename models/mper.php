@@ -175,7 +175,7 @@ class Mper
                 $result->bindParam(":pasper", $pasper);
             }
             $result->execute();
-        } catch (Exception $e) {
+        }catch (Exception $e) {
             ManejoError($e);
         }
     }
