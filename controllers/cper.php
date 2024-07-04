@@ -8,6 +8,7 @@
     $nomper = isset($_POST['nomper']) ? $_POST['nomper']:NULL;
     $apeper = isset($_POST['apeper']) ? $_POST['apeper']:NULL;
     $ndper = isset($_POST['ndper']) ? $_POST['ndper']:NULL;
+    $area = isset($_POST['area']) ? $_POST['area']:NULL;
     $emaper = isset($_POST['emaper']) ? strtolower($_POST['emaper']):NULL;
     $actper = isset($_REQUEST['actper']) ? $_REQUEST['actper']:1;
 
@@ -15,7 +16,7 @@
     
     //------------Perfil-----------
     $idpef = isset($_POST['idpef']) ? $_POST['idpef']:3;
-
+    $datOne = NULL;
 
     //------------Persona-----------
     if($ope=="save"){
@@ -23,6 +24,7 @@
         $mper->setApeper($apeper);
         $mper->setEmaper($emaper);
         $mper->setNdper($ndper);
+        $mper->setArea($area);
         $mper->setActper($actper);
         $mper->setPasper($pasper);
         if(!$idper) {

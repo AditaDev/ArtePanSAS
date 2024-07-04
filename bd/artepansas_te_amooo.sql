@@ -8,20 +8,35 @@ USE artepansas;
 --
 -- Estructura de tabla para la tabla `almuerzo`
 --
-
-CREATE TABLE `almuerzo` (
-  `idalm` bigint(11) NOT NULL,
-  `fecalm` date DEFAULT NULL
+CREATE TABLE `novedad` (
+  `idnov` bigint(11) NOT NULL,
+  `fecreg` date DEFAULT NULL,
+  `fecinov` date DEFAULT NULL,
+  `fecfnov` date DEFAULT NULL,
+  `fecrev` date DEFAULT NULL,
+  `tipnov` varchar(100) NOT NULL,
+  `obsnov` varchar(100) NOT NULL,
+  `estnov` varchar(100) NOT NULL,
+  `area` varchar(100) NOT NULL,
+  `idper` bigint(11) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
-INSERT INTO `almuerzo` (`idalm`, `fecalm`) VALUES
-(1, '2024-07-01'),
-(2, '2024-07-01'),
-(3, '2024-07-01'),
-(4, '2024-07-01'),
-(5, '2024-07-01'),
-(6, '2024-07-01');
+
+CREATE TABLE `almuerzo` (
+  `idalm` bigint(11) NOT NULL,
+  `fecalm` date DEFAULT NULL,
+  `idval` bigint(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `almuerzo` (`idalm`, `fecalm`, `idval`) VALUES
+(1, '2024-07-01', 29),
+(2, '2024-07-01', 28),
+(3, '2024-07-01', 27),
+(4, '2024-07-01', 28),
+(5, '2024-07-01', 26),
+(6, '2024-07-01', 27);
 
 
 CREATE TABLE `pedido` (
@@ -85,7 +100,15 @@ CREATE TABLE `dominio` (
 
 INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (1, 'Forma de pago'),
-(2, 'Tipo de factura');
+(2, 'Tipo de factura'),
+(3, 'Plato fuerte'),
+(4, 'Sopa'),
+(5, 'Jugo'),
+(6, 'Ensalada'),
+(7, 'Postre'),
+(8, 'Tipo de Novedad');
+
+
 
 -- --------------------------------------------------------
 
@@ -344,17 +367,22 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (11, '60 Días', 1, 111, 1),
 (12, '70 Días', 1, 112, 1),
 (13, 'Contado-Crédito', 1, 113, 1),
-(14, 'Materia prima', 2, 114, 1),
-(15, 'Insumo', 2, 115, 1),
-(16, 'Transporte', 2, 116, 1),
-(17, 'Cartón', 2, 117, 1),
-(18, 'Cuenta de cobro', 2, 118, 1),
-(19, 'Servicio', 2, 119, 1),
-(20, 'Exportación', 2, 120, 1),
-(21, 'Mantenimiento', 2, 121, 1),
-(22, 'Dotación', 2, 122, 1),
-(23, 'Papelería', 2, 123, 1),
-(24, 'Mercado', 2, 124, 1);
+(14, 'Materia prima', 2, 201, 1),
+(15, 'Insumo', 2, 202, 1),
+(16, 'Transporte', 2, 203, 1),
+(17, 'Cartón', 2, 204, 1),
+(18, 'Cuenta de cobro', 2, 205, 1),
+(19, 'Servicio', 2, 206, 1),
+(20, 'Exportación', 2, 207, 1),
+(21, 'Mantenimiento', 2, 208, 1),
+(22, 'Dotación', 2, 209, 1),
+(23, 'Papelería', 2, 210, 1),
+(24, 'Mercado', 2, 210, 1),
+(25, 'Plato fuerte', 3, 301, 1),
+(26, 'Sopa', 3, 302, 1),
+(27, 'Jugo', 3, 303, 1),
+(28, 'Ensalada', 3, 304, 1),
+(29, 'Postre', 3, 305, 1);
 
 --
 -- Índices para tablas volcadas
@@ -366,11 +394,13 @@ ALTER TABLE `pedido`
 -- Indices de la tabla `almuerzo`
 --
 ALTER TABLE `almuerzo`
-  ADD PRIMARY KEY (`idalm`);
+  ADD PRIMARY KEY (`idalm`),
+  ADD KEY `fk_almxval` (`idval`) USING BTREE;
 
 
 ALTER TABLE `producto`
-  ADD PRIMARY KEY (`idpro`);
+  ADD PRIMARY KEY (`idpro`),
+  ADD KEY `fk_proxval` (`idval`) USING BTREE;
 
 --
 -- Indices de la tabla `dominio`
@@ -543,3 +573,6 @@ ALTER TABLE `proxalm`
 
 ALTER TABLE `producto`
   ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`iddom`) REFERENCES `dominio` (`iddom`);
+
+ALTER TABLE `almuerzo`
+  ADD CONSTRAINT `almuerzo_ibfk_1` FOREIGN KEY (`idval`) REFERENCES `valor` (`idval`);

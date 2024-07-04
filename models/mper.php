@@ -6,6 +6,7 @@ class Mper
     private $nomper;
     private $apeper;
     private $ndper;
+    private $area;
     private $emaper;
     private $pasper;
     private $actper;
@@ -29,6 +30,10 @@ class Mper
     public function getNdper()
     {
         return $this->ndper;
+    }
+    public function getArea()
+    {
+        return $this->area;
     }
     public function getEmaper()
     {
@@ -64,6 +69,10 @@ class Mper
     {
         $this->ndper = $ndper;
     }
+    public function setArea($area)
+    {
+        $this->area = $area;
+    }
     public function setEmaper($emaper)
     {
         $this->emaper = $emaper;
@@ -84,7 +93,7 @@ class Mper
     //------------Persona-----------
     function getAll()
     {
-        $sql = "SELECT idper, nomper, apeper, ndper, emaper, pasper, actper FROM persona WHERE idper";
+        $sql = "SELECT idper, nomper, apeper, ndper, area, emaper, pasper, actper FROM persona WHERE idper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -95,7 +104,7 @@ class Mper
 
     function getOne()
     {
-        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.pasper, p.actper, pf.idpef FROM persona AS p INNER JOIN perxpef AS pf ON p.idper=pf.idper WHERE p.idper=pf.idper";
+        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.area p.emaper, p.pasper, p.actper, pf.idpef FROM persona AS p INNER JOIN perxpef AS pf ON p.idper=pf.idper WHERE p.idper=pf.idper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -109,7 +118,7 @@ class Mper
     function save()
     {
         try {
-            $sql = "INSERT INTO persona(nomper, apeper, ndper, emaper, actper";
+            $sql = "INSERT INTO persona(nomper, apeper, ndper, area, emaper, actper";
             if ($this->getPasper()) $sql .= ", pasper";
             $sql .= ") VALUES (:nomper, :apeper, :ndper, :emaper, :actper";
             if ($this->getPasper()) $sql .= ", :pasper";
@@ -121,10 +130,14 @@ class Mper
             $result->bindParam(":nomper", $nomper);
             $apeper = $this->getApeper();
             $result->bindParam(":apeper", $apeper);
+            $ndper = $this->getNdper();
             $result->bindParam(":ndper", $ndper);
             $emaper = $this->getEmaper();
             $result->bindParam(":emaper", $emaper);
+            $actper = $this->getActper();
             $result->bindParam(":actper", $actper);
+            $area = $this->getArea();
+            $result->bindParam(":area", $area);
             if ($this->getPasper()) {
                 $pasper = $this->getPasper();
                 $pasper = sha1(md5($pasper)) . "Xg5%";
@@ -151,7 +164,7 @@ class Mper
 
     function edit(){
         try{
-            $sql = "UPDATE persona SET nomper=:nomper, apeper=:apeper, ndper=:ndper, emaper=:emaper, actper=:actper";
+            $sql = "UPDATE persona SET nomper=:nomper, apeper=:apeper, ndper=:ndper, area=:area, emaper=:emaper, actper=:actper";
             if ($this->getPasper()) $sql .= ", pasper=:pasper";
             $sql .= " WHERE idper=:idper";
             $modelo = new conexion();
@@ -165,6 +178,8 @@ class Mper
             $result->bindParam(":apeper", $apeper);
             $ndper = $this->getNdper();
             $result->bindParam(":ndper", $ndper);
+            $area = $this->getArea();
+            $result->bindParam(":area", $area);
             $emaper = $this->getEmaper();
             $result->bindParam(":emaper", $emaper);
             $actper = $this->getActper();
@@ -194,7 +209,7 @@ class Mper
             ManejoError($e);
         }
     }
-
+ 
     function getPFxP($idper){
         $res = null;
         $modelo = new conexion();

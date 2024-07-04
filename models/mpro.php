@@ -27,7 +27,7 @@ class Mpro
 
 
     function getAll(){
-        $sql = "SELECT idpro, nompro, iddom FROM producto";
+        $sql = "SELECT p.idpro, p.nompro, p.iddom, d.nomdom FROM producto AS p LEFT JOIN dominio AS d ON p.iddom=d.iddom";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -48,7 +48,7 @@ class Mpro
     }
 
     function save(){
-        try {
+        // try {
             $sql = "INSERT INTO producto (nompro, iddom) VALUES (:nompro, :iddom)";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
@@ -58,9 +58,9 @@ class Mpro
             $iddom = $this->getIddom();
             $result->bindParam(":iddom", $iddom);
             $result->execute();
-        } catch (Exception $e) {
-            ManejoError($e);
-        }
+        // } catch (Exception $e) {
+        //     ManejoError($e);
+        // }
     }
 
     function edit(){
@@ -72,6 +72,8 @@ class Mpro
         $result->bindParam(":idpro", $idpro);
         $nompro = $this->getNompro();
         $result->bindParam(":nompro", $nompro);
+        $iddom = $this->getIddom();
+        $result->bindParam(":iddom", $iddom);
         $result->execute();
     }
 

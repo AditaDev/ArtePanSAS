@@ -21,17 +21,6 @@ require_once('controllers/cpro.php');
                 } ?>
             </select>
         </div>
-        <div class="form-group col-md-6">
-            <label for="actval"><strong>Activo:</strong></label>
-            <select name="actval" id="actval" class="form-control form-select">
-                <option value="1" <?php if ($datOne && $datOne[0]['actval'] == 1) echo " selected "; ?>>Si</option>
-                <option value="2" <?php if ($datOne && $datOne[0]['actval'] == 2) echo " selected "; ?>>No</option>
-            </select>
-        </div>
-
-
-
-
         <div class="form-group col-md-12" id="boxbtn">
             <br>
             <input class="btn btn-primary" type="submit" value="Registrar" id="btns">
@@ -53,7 +42,8 @@ require_once('controllers/cpro.php');
             foreach ($datAll as $dta) { ?>
                 <tr>
                     <td>
-                        <?= $dta['idpro']; ?> - <?= $dta['nompro']; ?>
+                    <strong> <?= $dta['nompro']; ?></strong><br>
+                    <strong>Dominio: </strong><?= $dta['nomdom']; ?><br>
                     </td>
                     <td style="text-align: right;">
                         <a href="home.php?pg=<?= $pg; ?>&idpro=<?= $dta['idpro']; ?>&ope=edi">

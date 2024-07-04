@@ -1,25 +1,29 @@
 <?php
    
+
 class Malm
 {
     private $idalm;
+    private $iddom;
     private $fecalm;
 
 //-------------------------------GET---------------------------//
     public function getIdalm(){
         return $this->idalm;
     }
-
+    public function getIddom(){
+        return $this->iddom;
+    }
     public function getFecalm(){
         return $this->fecalm;
     }
- 
-
-//-------------------------------FIN-GET---------------------------//
 
 //-------------------------------SET---------------------------//
     public function setIdalm($idalm){
         $this->idalm = $idalm;
+    }
+    public function setIddom($iddom){
+        $this->iddom = $iddom;
     }
     public function setFecalm($fecalm){
         $this->fecalm = $fecalm;
@@ -27,22 +31,22 @@ class Malm
   
 
     function getAll(){
-        try{
-            $sql = "SELECT idalm, fecalm FROM almuerzo";
+        // try{
+            $sql = "SELECT idalm, fecalm, iddom FROM almuerzo";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
             $result->execute();
             $res = $result->fetchall(PDO::FETCH_ASSOC);
-        }catch(Exception $e){
-            ManejoError($e);
-        }
+        // }catch(Exception $e){
+        //     ManejoError($e);
+        // }
         return $res;
     }
     function getOne(){
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "SELECT idalm, fecalm FROM almuerzo WHERE idalm=:idalm";
+        $sql = "SELECT idalm, fecalm, iddom FROM almuerzo WHERE idalm=:idalm";
         $result = $conexion->prepare($sql);
         $idalm = $this->getIdalm();
         $result->bindParam(":idalm", $idalm);
@@ -53,7 +57,8 @@ class Malm
 
     function save(){
         try {
-            $sql = "INSERT INTO almuerzo (idalm, fecalm) VALUES (:idalm, :fecalm)";
+            // SELECT a.idalm, a.fecalm, d.iddom, d.nomdom FROM almuerzo AS a INNER JOIN dominio;
+            $sql = "INSERT INTO almuerzo (idalm, fecalm, iddom) VALUES (:idalm, :fecalm)";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);

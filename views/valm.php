@@ -1,5 +1,6 @@
 <?php
  require_once ('controllers/calm.php'); ?>
+
  		
     <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
         <div class="row">
@@ -10,7 +11,7 @@
                     id="multiSelectDropdown"
                     data-bs-toggle="dropdown" 
                     aria-expanded="false"> 
-                Select 
+                Seleccionar 
             </button> 
             <ul class="dropdown-menu" 
                 aria-labelledby="multiSelectDropdown"> 
@@ -21,41 +22,17 @@
                         Java 
                     </label> 
                 </li> 
-                <li> 
-                  <label> 
-                    <input type="checkbox" 
-                           value="C++"> 
-                        C++ 
-                    </label> 
-                </li> 
-                <li> 
-                  <label> 
-                    <input type="checkbox" 
-                           value="Python"> 
-                        Python 
-                    </label> 
-                </li> 
-                <li> 
-                  <label> 
-                    <input type="checkbox" 
-                           value="Python"> 
-                        Python 
-                    </label> 
-                </li> 
-                <li> 
-                  <label> 
-                    <input type="checkbox" 
-                           value="Python"> 
-                        Python 
-                    </label> 
-                </li> 
-                <li> 
-                  <label> 
-                    <input type="checkbox" 
-                           value="Python"> 
-                        Python 
-                    </label> 
-                </li> 
+                <li>
+                    <label>
+                    <?php if ($datAll) {
+                    foreach ($datAll as $ddo) { ?>
+                        <option value="<?= $ddo['iddom']; ?>" <?php if ($datOne && $ddo['iddom'] == $datOne[0]['iddom']) echo "selected"; ?>>
+                            <?= $ddo['iddom']; ?>
+                        </option>
+                <?php }
+                } ?>
+                    </label>
+                </li>
             </ul> 
         </div> 
     </div> 
