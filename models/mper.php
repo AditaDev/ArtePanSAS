@@ -98,7 +98,7 @@ class Mper
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
         $result->execute();
-        $res = $result->fetchall(PDO::FETCH_ASSOC);
+        $res = $result->fetchall(PDO::FETCH_ASSOC);                                    
         return $res;
     }
 

@@ -18,7 +18,7 @@ CREATE TABLE `novedad` (
   `obsnov` varchar(100) NOT NULL,
   `estnov` varchar(100) NOT NULL,
   `area` varchar(100) NOT NULL,
-  `idper` bigint(11) NOT NULL,
+  `idper` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -59,13 +59,13 @@ CREATE TABLE `producto` (
     `iddom` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `producto` (`idpro`, `nompro`, `iddom` ) VALUES
-(1, 'Lentejas', 3),
-(2, 'Pasta', 3),
-(3, 'Arroz', 3),
-(4, 'Pollo frito', 3),
-(5, 'Carne sudada', 3),
-(6, 'Pepinos', 3);
+INSERT INTO `producto` (`idpro`, `nompro`, `idval` ) VALUES
+(1, 'Lentejas', 26),
+(2, 'Pasta', 27),
+(3, 'Arroz', 28),
+(4, 'Pollo frito', 29),
+(5, 'Carne sudada', 30),
+(6, 'Pepinos', 31);
 
 
 CREATE TABLE `proxalm` (
@@ -101,13 +101,9 @@ CREATE TABLE `dominio` (
 INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (1, 'Forma de pago'),
 (2, 'Tipo de factura'),
-(3, 'Plato fuerte'),
-(4, 'Sopa'),
-(5, 'Jugo'),
-(6, 'Ensalada'),
-(7, 'Postre'),
-(8, 'Tipo de Novedad');
-
+(3, 'Tipo de plato'),
+(4, 'Tipo de Novedad'),
+(5, 'Area');
 
 
 -- --------------------------------------------------------
@@ -254,6 +250,7 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (63, 1),
 (64, 1),
 (64, 6),
+(110, 7),
 (63, 2);
 
 -- --------------------------------------------------------
@@ -279,7 +276,8 @@ INSERT INTO `perfil` (`idpef`, `nompef`, `idmod`, `idpag`) VALUES
 (3, 'Gerencia', 1, 63),
 (4, 'Contabilidad', 1, 60),
 (5, 'Colaborador', 3, 62),
-(6, 'Servicios generales', 3, 61);
+(6, 'Servicios generales', 3, 61),
+(7, 'Talento humano', 4, 110);
 
 -- --------------------------------------------------------
 
@@ -295,21 +293,22 @@ CREATE TABLE `persona` (
   `telper` varchar(10) DEFAULT NULL,
   `apeper` varchar(50) NOT NULL,
   `ndper` varchar(12) NOT NULL,
-  `actper` tinyint(1) DEFAULT 1
+  `actper` tinyint(1) DEFAULT 1,
+  `area` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `persona`
 --
 
-INSERT INTO `persona` (`idper`, `nomper`, `pasper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`) VALUES
-(1, 'Ada', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada@artepan.com', '3215646857', 'Rodriguez', '1071328321', 1),
-(2, 'Nico', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico@artepan.com', '3215456998', 'Rodriguez', '1072749321', 1),
-(3, 'Amy', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy@artepan.com', '3021845120', 'Gavilan', '1004985502', 1),
-(4, 'Andrea', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada2@artepan.com', '3112132208', 'Casas', '1076655342', 1),
-(5, 'Luisa', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico2@artepan.com', '3215495204', 'Jiménez', '1078944563', 1),
-(6, 'Lucas', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy2@artepan.com', '3223548793', 'Mora', '1077954332', 1),
-(7, 'Prueba', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba@artepan.com', '322894463', 'Prueba', '1077954332', 1);
+INSERT INTO `persona` (`idper`, `nomper`, `pasper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`, `area` ) VALUES
+(1, 'Ada', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada@artepan.com', '3215646857', 'Rodriguez', '1071328321', 1, 'Contabilidad'),
+(2, 'Nico', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico@artepan.com', '3215456998', 'Rodriguez', '1072749321', 1, 'Logistica'),
+(3, 'Amy', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy@artepan.com', '3021845120', 'Gavilan', '1004985502', 1, 'Tesoreria'),
+(4, 'Andrea', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada2@artepan.com', '3112132208', 'Casas', '1076655342', 1, 'Cartera'),
+(5, 'Luisa', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico2@artepan.com', '3215495204', 'Jiménez', '1078944563', 1, 'Facturación'),
+(6, 'Lucas', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy2@artepan.com', '3223548793', 'Mora', '1077954332', 1, 'Ventas'),
+(7, 'Prueba', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba@artepan.com', '322894463', 'Prueba', '1077954332', 1, 'Cartera');
 -- --------------------------------------------------------
 
 --
@@ -334,7 +333,9 @@ INSERT INTO `perxpef` (`idper`, `idpef`) VALUES
 (6, 6),
 (1, 4),
 (1, 6),
-(1, 3);
+(1, 3),
+(1, 7);
+
 -- --------------------------------------------------------
 
 --
@@ -382,7 +383,22 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (26, 'Sopa', 3, 302, 1),
 (27, 'Jugo', 3, 303, 1),
 (28, 'Ensalada', 3, 304, 1),
-(29, 'Postre', 3, 305, 1);
+(29, 'Postre', 3, 305, 1),
+(30, '', 4, 401, 1),
+(31, '', 4, 402, 1),
+(32, '', 4, 403, 1),
+(33, '', 4, 404, 1),
+(34, '', 4, 405, 1),
+(35, '', 4, 406, 1),
+(36, '', 4, 407, 1),
+(37, '', 4, 408, 1),
+(38, '', 4, 409, 1),
+(39, '', 4, 409, 1),
+(40, '', 4, 410, 1),
+(41, '', 4, 411, 1),
+(42, '', 4, 412, 1),
+(43, '', 4, 413, 1),
+(44, '', 4, 414, 1),
 
 --
 -- Índices para tablas volcadas
@@ -572,7 +588,7 @@ ALTER TABLE `proxalm`
   ADD CONSTRAINT `proxalm_ibfk_2` FOREIGN KEY (`idalm`) REFERENCES `almuerzo` (`idalm`);
 
 ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`iddom`) REFERENCES `dominio` (`iddom`);
+  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idval`) REFERENCES `valor` (`idval`);
 
 ALTER TABLE `almuerzo`
   ADD CONSTRAINT `almuerzo_ibfk_1` FOREIGN KEY (`idval`) REFERENCES `valor` (`idval`);
