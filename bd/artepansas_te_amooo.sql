@@ -17,9 +17,16 @@ CREATE TABLE `novedad` (
   `tipnov` varchar(100) NOT NULL,
   `obsnov` varchar(100) NOT NULL,
   `estnov` varchar(100) NOT NULL,
-  `area` varchar(100) NOT NULL,
   `idper` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `novedad` (`idnov`, `fecreg`, `fecinov`, `fecfnov`, `fecrev`, `tipnov`, `obsnov`, `estnov`, `idper`) VALUES
+(1, '2024-07-01','2024-08-01','2024-09-01','2024-07-01', 'Incapacidad Arl', 'Se cancela todo', 1, 1),
+(2, '2024-07-01','2024-08-01','2024-09-01','2024-07-01', 'Permiso no remunerado' , 'Se cancela todo', 1, 2),
+(3, '2024-07-01','2024-08-01','2024-09-01','2024-07-01', 'Licencia', 'Se cancela todo', 1, 3),
+(4, '2024-07-01','2024-08-01','2024-09-01','2024-07-01', 'Retiro', 'Se cancela todo', 1, 4),
+(5, '2024-07-01','2024-08-01','2024-09-01','2024-07-01', 'Ingreso', 'Se cancela todo', 1, 5),
+(6, '2024-07-01','2024-08-01','2024-09-01','2024-07-01', 'Cesantias', 'Se cancela todo', 1, 6);
 
 
 
@@ -56,7 +63,7 @@ INSERT INTO `pedido` (`idalm`, `idper`) VALUES
 CREATE TABLE `producto` (
     `idpro` bigint(11) NOT NULL,
     `nompro` varchar(100) NOT NULL,
-    `iddom` bigint(11) NOT NULL
+    `idval` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `producto` (`idpro`, `nompro`, `idval` ) VALUES
@@ -384,25 +391,29 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (27, 'Jugo', 3, 303, 1),
 (28, 'Ensalada', 3, 304, 1),
 (29, 'Postre', 3, 305, 1),
-(30, '', 4, 401, 1),
-(31, '', 4, 402, 1),
-(32, '', 4, 403, 1),
-(33, '', 4, 404, 1),
-(34, '', 4, 405, 1),
-(35, '', 4, 406, 1),
-(36, '', 4, 407, 1),
-(37, '', 4, 408, 1),
-(38, '', 4, 409, 1),
-(39, '', 4, 409, 1),
-(40, '', 4, 410, 1),
-(41, '', 4, 411, 1),
-(42, '', 4, 412, 1),
-(43, '', 4, 413, 1),
-(44, '', 4, 414, 1),
+(30, 'Calamidad familiar', 4, 401, 1),
+(31, 'Llegada tarde', 4, 402, 1),
+(32, 'Liquidación vacaciones', 4, 403, 1),
+(33, 'Ausencia', 4, 404, 1),
+(34, 'Ausencia injustificada', 4, 405, 1),
+(35, 'Ingreso', 4, 406, 1),
+(36, 'Retiro', 4, 407, 1),
+(37, 'Permiso remunerado', 4, 408, 1),
+(38, 'Permiso no remunerado', 4, 409, 1),
+(39, 'Censantias', 4, 409, 1),
+(40, 'Prestamos', 4, 410, 1),
+(41, 'Licencias', 4, 411, 1),
+(42, 'Incapacidad Arl', 4, 412, 1),
+(43, 'Incapacidad Eps', 4, 413, 1),
+(44, 'Por si falta alguna jiji', 4, 414, 1);
 
 --
 -- Índices para tablas volcadas
---
+
+ALTER TABLE `novedad`
+  ADD PRIMARY KEY (`idnov`);
+
+
 ALTER TABLE `pedido`
   ADD KEY `idper` (`idper`),
   ADD KEY `idalm` (`idalm`);
@@ -493,7 +504,8 @@ ALTER TABLE `valor`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
-
+ALTER TABLE `novedad`
+  MODIFY `idnov` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `dominio`
 --

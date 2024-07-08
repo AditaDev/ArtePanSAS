@@ -3,22 +3,22 @@
 
         //------------Novedad-----------
         private $idnov;
-        private $fereg;
+        private $fecreg;
         private $fecinov;
         private $fecfnov;
         private $fecrev;
         private $tipnov;
         private $obsnov;
         private $estnov;
-        private $area;
+        // private $area;
         private $idper;
 
         //------------GET-----------
         public function getIdnov(){
             return $this->idnov;
         }
-        public function getFereg(){
-            return $this->fereg;
+        public function getFecreg(){
+            return $this->fecreg;
         }
         public function getFecinov(){
             return $this->fecinov;
@@ -38,9 +38,9 @@
         public function getIdper(){
             return $this->idper;
         }
-        public function getArea(){
-            return $this->area;
-        }
+        // public function getArea(){
+        //     return $this->area;
+        // }
         public function getObsnov(){
             return $this->obsnov;
         }
@@ -49,8 +49,8 @@
         public function setIdnov($idnov){
             $this->idnov=$idnov;
         }
-        public function setFereg($fereg){
-            $this->fereg=$fereg;
+        public function setFecreg($fecreg){
+            $this->fecreg=$fecreg;
         }
         public function setFecinov($fecinov){
             $this->fecinov=$fecinov;
@@ -70,15 +70,15 @@
         public function setIdper($idper){
             $this->idper=$idper;
         }
-        public function setArea($area){
-            $this->area=$area;
-        }
+        // public function setArea($area){
+        //     $this->area=$area;
+        // }
         public function setObsnov($obsnov){
             $this->obsnov=$obsnov;
         }
       
         function getAll(){
-            $sql = "SELECT n.fereg, n.fecinov, n.fecfnov, n.fecrev, n.tipnov, n.obsnov, n.estnov, n.area, n.idper, p.nomper, p.ndper, p.area FROM novedad AS n INNER JOIN persona AS p ON n.idper=p.idper";
+            $sql = "SELECT n.idnov, n.fecreg, n.fecinov, n.fecfnov, n.fecrev, n.tipnov, n.obsnov, n.estnov, n.idper, p.nomper, p.ndper, p.area FROM novedad AS n INNER JOIN persona AS p ON n.idper=p.idper";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -89,7 +89,7 @@
 
 
         function getOne(){
-            $sql = "SELECT fereg, fecinov, fecfnov, fecrev, tipnov, obsnov, estnov, area, idper FROM novedad WHERE idnov=:idnov";
+            $sql = "SELECT fecreg, fecinov, fecfnov, fecrev, tipnov, obsnov, estnov, area, idper FROM novedad WHERE idnov=:idnov";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -100,16 +100,16 @@
             return $res;
         }
 
-        // idnov, fereg, fecinov, fecfnov, fecrev, tipnov, obsnov, estnov, area, idper
+        // idnov, fecreg, fecinov, fecfnov, fecrev, tipnov, obsnov, estnov, area, idper
 
         function save(){
             // try {
-                $sql = "INSERT INTO novedad (fereg, fecinov, fecfnov, fecrev, tipnov, obsnov, estnov, area, idper) VALUES (:fereg, :fecinov, :fecfnov, f:ecrev, :tipnov, :obsnov, :estnov, :area, :idper)";
+                $sql = "INSERT INTO novedad (fecreg, fecinov, fecfnov, fecrev, tipnov, obsnov, estnov, area, idper) VALUES (:fecreg, :fecinov, :fecfnov, f:ecrev, :tipnov, :obsnov, :estnov, :area, :idper)";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
-                $fereg = $this->getFereg();
-                $result->bindParam(":fereg", $fereg);
+                $fecreg = $this->getFecreg();
+                $result->bindParam(":fecreg", $fecreg);
                 $fecinov = $this->getFecinov();
                 $result->bindParam(":fecinov", $fecinov);
                 $fecfnov = $this->getFecfnov();
@@ -124,8 +124,8 @@
                 $result->bindParam(":obsnov", $obsnov);
                 $estnov = $this->getEstnov();
                 $result->bindParam(":estnov", $estnov); 
-                $area = $this->getArea();
-                $result->bindParam(":area", $area);              
+                // $area = $this->getArea();
+                // $result->bindParam(":area", $area);              
                 $result->execute();
             // } catch (Exception $e) {
             //     ManejoError($e);
@@ -150,12 +150,12 @@
 
         function edit(){
             try {
-                $sql = "UPDATE factura  SET fereg=:fereg, fecinov=:fecinov, fecfnov=:fecfnov, fecrev=:fecrev, tipnov=:tipnov, obsnov=:obsnov, estnov=:estnov, area=:area WHERE idfac=:idfac";
+                $sql = "UPDATE factura  SET fecreg=:fecreg, fecinov=:fecinov, fecfnov=:fecfnov, fecrev=:fecrev, tipnov=:tipnov, obsnov=:obsnov, estnov=:estnov, area=:area WHERE idfac=:idfac";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
-                $fereg = $this->getFereg();
-                $result->bindParam(":fereg", $fereg);
+                $fecreg = $this->getFecreg();
+                $result->bindParam(":fecreg", $fecreg);
                 $fecinov = $this->getFecinov();
                 $result->bindParam(":fecinov", $fecinov);
                 $fecfnov = $this->getFecfnov();
@@ -168,8 +168,8 @@
                 $result->bindParam(":obsnov", $obsnov);
                 $estnov = $this->getEstnov();
                 $result->bindParam(":estnov", $estnov); 
-                $area = $this->getArea();
-                $result->bindParam(":area", $area);
+                // $area = $this->getArea();
+                // $result->bindParam(":area", $area);
                 $result->execute();
             } catch (Exception $e) {
                 ManejoError($e);

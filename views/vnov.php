@@ -30,16 +30,6 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 </select>
         </div>
         <div class="form-group col-md-4">
-            <label for=""><strong>Area:</strong></label>
-            <select name="area" id="forpag" class="form-control form-select" required>
-                    <?php foreach ($dattpe as $dte) { ?>
-                        <option value="<?= $dte['idval']; ?>" <?php if ($datOne && $dte['idval'] == $datOne[0]['area']) echo " selected "; ?>>
-                            <?= $dte['nomval']; ?>
-                        </option>
-                    <?php } ?>
-                </select>
-        </div>
-        <div class="form-group col-md-4">
             <label for="arcimg"><strong>Soporte:</strong></label>
             <input class="form-control" type="file" id="arcpdf" name="arcpdf">
         </div>
@@ -61,7 +51,8 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <th>No.</th>
             <th>Datos persona</th>
             <th>Estado</th>
-            <th></th>                  
+            <th>Acciones</th>
+        
         </tr>
     </thead>
     <tbody>
@@ -69,21 +60,25 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <tr>
                     <td tyle="text-align: left;"><?= $dta['idnov']; ?></td>
                     <td>
-                    <strong> <?=($dta['nofac']) .  " - "  . $dta['confac']; ?></strong><br>
+                    <strong> <?=($dta['ndper']) .  " - "  . $dta['nomper']; ?></strong><br>
                         <small>
-                            <strong>Empresa: </strong> <?= $dta['razsoem']; ?><br>
-                            <strong>Fecha de vencimiento: </strong><?= $dta['fvfac']; ?><br>                      
+                            <strong>Tipo novedad: </strong> <?= $dta['tipnov']; ?><br>
+                            <!-- <strong>: </strong><?= $dta['']; ?><br>                       -->
                         </small>
                     </td>
-                    
                     <td tyle="text-align: half;">
-                         <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idfac']; ?>" title="Detalles"></i>
-                        <?php
-                            $mfac->setIdfac($dta['idfac']);                           
-                            modalDet("mcbinf", $dta['idfac'], $dta['nofac']."-".$dta['confac'], $dta['razsoem'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['forpag'], $dta['nomper']);
-                        ?>
+                        <?php if ($dta['estnov'] == 1) { ?>
+                            <span style="font-size: 1px;opacity: 0;">+</span>
+                            <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&estnov=2&ope=act" title="Revisada">
+                                <i class="fa fa-solid fa-circle-check fa-2x act"></i>
+                            </a>
+                        <?php } else { ?>
+                            <span style="font-size: 1px;">--</span>
+                            <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&estnov=1&ope=act" title="No revisada">
+                                <i class="fa fa-solid fa-circle-xmark fa-2x desact"></i>
+                            </a>
+                        <?php } ?>
                     </td>
-
                     <td tyle="text-align: right;">
                         <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&ope=edi">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi"  title="Editar"></i>
@@ -91,20 +86,16 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&ope=eli" onclick="return eliminar('<?= $dta['idnov']; ?>');">
                             <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
                         </a>
-                    </td>
-                  
-                    
-                    
-                    
+                    </td>                    
             </tr>
         <?php }} ?>
     </tbody>
     <tfoot>
         <tr>
             <th>No.</th>
-            <th>Datos factura</th>
+            <th>Datos persona</th>
             <th>Estado</th>
-            <th></th> 
+            <th>Acciones</th>
         
           
         </tr>
