@@ -103,19 +103,19 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             modalDet("mcbinf", $dta['idfac'], $dta['nofac']."-".$dta['confac'], $dta['razsoem'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['forpag'], $dta['nomper']);
                         ?>
                         <?php if ($dta["estfac"] == 1) { ?>
-                            <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=2" onclick="return confirmar('<?= $dta['nofac'] .  ' - '  . $dta['confac']; ?>'>
+                            <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=2" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
                             <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="Sin Revisar"></i>
                             </a>
                         <?php } elseif ($dta["estfac"] == 2) { ?>
-                            <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=3" onclick="return confirmar('<?= $dta['nofac'] .  ' - '  . $dta['confac']; ?>'>
+                            <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=3" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
                             <i class="fa fa-solid fa-circle-check fa-2x iconi prv" title="Primera Revisión"></i>
                             </a>
                         <?php } elseif ($dta["estfac"] == 3) { ?>
-                            <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=4" onclick="return confirmar('<?= $dta['nofac'] .  ' - '  . $dta['confac']; ?>'>
+                            <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=4" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
                             <i class="fa fa-solid fa-circle-check fa-2x act" title="Revisada"></i>
                             </a>
                         <?php } elseif ($dta["estfac"] == 4) { ?>
-                            <i class="fa fa-solid fa-circle-check fa-2x chulo" title="Entregada"  onclick="return confirmar('<?= $dta['nofac'] .  ' - '  . $dta['confac']; ?>'></i>
+                            <i class="fa fa-solid fa-circle-check fa-2x chulo" title="Entregada"></i>
                         <?php } ?>
                     </td>
 

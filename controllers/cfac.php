@@ -9,7 +9,7 @@
     $nofac = isset($_POST['nofac']) ? $_POST['nofac']:NULL;
     $fifac = date("Y-m-d H:i:s");
     $confac = isset($_POST['confac']) ? $_POST['confac']:NULL;
-    $fffac = isset($_POST['fffac']) ? $_POST['fffac']:NULL;
+    $fffac = isset($_REQUEST['fffac']) ? $_REQUEST['fffac']:NULL;
     $estfac = isset($_REQUEST['estfac']) ? $_REQUEST['estfac']:1;
     $idemp = isset($_POST['idemp']) ? $_POST['idemp']:NULL;
     $idper = isset($_POST['idper']) ? $_POST['idper']:NULL;
