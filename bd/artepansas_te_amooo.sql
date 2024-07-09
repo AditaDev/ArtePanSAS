@@ -48,16 +48,17 @@ INSERT INTO `almuerzo` (`idalm`, `fecalm`, `idval`) VALUES
 
 CREATE TABLE `pedido` (
     `idalm` bigint(11) NOT NULL,
-    `idper` bigint(11) NOT NULL
+    `idper` bigint(11) NOT NULL,
+    `fecped` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `pedido` (`idalm`, `idper`) VALUES
-(1, '1'),
-(2, '2'),
-(3, '3'),
-(4, '4'),
-(5, '5'),
-(6, '6');
+INSERT INTO `pedido` (`idalm`, `idper`, `fecped`) VALUES
+(1, '1', '2024-07-01'),
+(2, '2', '2024-07-01'),
+(3, '3', '2024-07-01'),
+(4, '4', '2024-07-01'),
+(5, '5', '2024-07-01'),
+(6, '6', '2024-07-01');
 
 
 CREATE TABLE `producto` (
@@ -142,9 +143,9 @@ INSERT INTO `empresa` (`idemp`, `nitemp`, `razsoem`, `actemp`) VALUES
 CREATE TABLE `factura` (
   `idfac` bigint(11) NOT NULL,
   `nofac` bigint(11) NOT NULL,
-  `fifac` datetime NOT NULL,
+  `fifac` date NOT NULL,
   `confac` varchar(100) NOT NULL,
-  `fffac` datetime NOT NULL,
+  `fffac` date NOT NULL,
   `idemp` bigint(11) DEFAULT NULL,
   `estfac` int(4) DEFAULT NULL,
   `fefac` date NOT NULL,

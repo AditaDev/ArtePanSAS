@@ -43,7 +43,7 @@ require_once('controllers/cpro.php');
                 <tr>
                     <td>
                     <strong> <?= $dta['nompro']; ?></strong><br>
-                    <strong>Dominio: </strong><?= $dta['nomdom']; ?><br>
+                    <strong>Valor: </strong><?= $dta['idval']; ?><br>
                     </td>
                     <td style="text-align: right;">
                         <a href="home.php?pg=<?= $pg; ?>&idpro=<?= $dta['idpro']; ?>&ope=edi">

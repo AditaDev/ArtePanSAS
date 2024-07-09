@@ -12,7 +12,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 <option value="0"></option>
                 <?php if ($datPer) {
                     foreach ($datPer as $dep) { ?>
-                        <option value='<?= $dep['idper']; ?>' <?php if ($datOne && $dep['idper'] == $datOne[0]['idper']) echo " selected "; ?>>
+                        <option value='<?= $dep['idper']; ?>' <?php if ($datOne && $dep['idper'] == $datOne['idper']) echo " selected "; ?>>
                             <?= $dep['ndper'] . " - " . $dep['nomper']; ?>
                         </option>
                 <?php }

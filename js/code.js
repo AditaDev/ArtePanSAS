@@ -76,6 +76,11 @@ function eliminar(nom){
     return v;
 }
 
+function confirmar(nom){
+  let v = confirm("¿Está seguro de cambiar el estado de esta factura?\n\n- "+nom);
+  return v;
+}
+
 $('ul li').on('click', function() {
 	$('li').removeClass('active');
 	$(this).addClass('active');

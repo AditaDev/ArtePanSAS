@@ -10,7 +10,7 @@
     $fifac = date("Y-m-d H:i:s");
     $confac = isset($_POST['confac']) ? $_POST['confac']:NULL;
     $fffac = isset($_POST['fffac']) ? $_POST['fffac']:NULL;
-    $estfac = isset($_POST['estfac']) ? $_POST['estfac']:1;
+    $estfac = isset($_REQUEST['estfac']) ? $_REQUEST['estfac']:1;
     $idemp = isset($_POST['idemp']) ? $_POST['idemp']:NULL;
     $idper = isset($_POST['idper']) ? $_POST['idper']:NULL;
     $fefac = isset($_POST['fefac']) ? $_POST['fefac']:NULL;
@@ -24,6 +24,7 @@
     $datALL = NULL;
     $dattpe = $mfac->getAllDom(1);
     $dattip = $mfac->getAllDom(2);
+    $pg = 60;
 
     $mfac->setIdfac($idfac);
 
@@ -44,29 +45,19 @@
         else $mfac->edit();
     }
 
+
     if($ope=="edi" && $idfac) $datOne = $mfac->getOne();
     if($ope=="eli" && $idfac) $mfac->del();
 
     $datEmp = $mfac->getAll();
     $datAll = $mfac->getAll();
 
-    if ($ope == 'prevision' && $idfac && $estfac && $estfac == 2) {
+    if ($ope == 'est' && $idfac && $estfac) {
         $mfac->setIdfac($idfac);
         $mfac->setEstfac($estfac);
         $mfac->editEst();
     }
 
-    if ($ope == 'revisada' && $idfac && $estfac && $estfac == 3) {
-        $mfac->setIdfac($idfac);
-        $mfac->setEstfac($estfac);
-        $mfac->editEst();
-    }
-    
-    if ($ope == "entregada" && $idfac && $estfac && $estfac == 4){
-        $mfac->setIdfac($idfac);
-        $mfac->setEstfac($estfac);
-        $mfac->editEst();
-    }
 ?>
 <!-- if($ope=='act' && $idmod && $actmod){
         $mmod->setActmod($actmod);

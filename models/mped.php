@@ -4,6 +4,7 @@
 class Mped{
     private $idper;
     private $idalm;
+    private $fecped;
 
     // Metodos Get 
     public function getIdper(){
@@ -12,7 +13,9 @@ class Mped{
     public function getIdalm(){
          return $this->idalm;
     }
-    
+    public function getfecped(){
+        return $this->fecped;
+   }
     
 
     // Metodo Set
@@ -22,9 +25,12 @@ class Mped{
     public function setIdalm($idalm){
         $this->idalm=$idalm;
     }
+    public function setFecped($fecped){
+        $this->fecped=$fecped;
+    }
 
     function getAll(){
-        $sql = "SELECT a.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm, p.idper, r.nomper FROM almuerzo AS a INNER JOIN pedido AS p ON p.idalm=a.idalm INNER JOIN persona AS r ON p.idper=r.idper";
+        $sql = "SELECT a.idalm, p.idper, r.nomper, p.fecped FROM almuerzo AS a INNER JOIN pedido AS p ON p.idalm=a.idalm INNER JOIN persona AS r ON p.idper=r.idper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);

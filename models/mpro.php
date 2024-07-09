@@ -3,7 +3,7 @@ class Mpro
 {
     public $idpro;
     public $nompro;
-    public $iddom;
+    public $idval;
     
     function getIdpro(){
         return $this->idpro;
@@ -11,8 +11,8 @@ class Mpro
     function getNompro(){
         return $this->nompro;
     }
-    function getIddom(){
-        return $this->iddom;
+    function getIdval(){
+        return $this->idval;
     }
 
     function setIdpro($idpro){
@@ -21,13 +21,13 @@ class Mpro
     function setNompro($nompro){
         $this->nompro = $nompro;
     }
-    function setIddom($iddom){
-        $this->iddom = $iddom;
+    function setIdval($idval){
+        $this->idval = $idval;
     }
 
 
     function getAll(){
-        $sql = "SELECT p.idpro, p.nompro, p.iddom, d.nomdom FROM producto AS p LEFT JOIN dominio AS d ON p.iddom=d.iddom";
+        $sql = "SELECT p.idpro, p.nompro, p.idval FROM producto AS p LEFT JOIN valor AS d ON p.idval=d.idval";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -36,7 +36,7 @@ class Mpro
         return $res;
     }
     function getOne(){
-        $sql = "SELECT idpro, nompro, iddom FROM producto WHERE idpro=:idpro";
+        $sql = "SELECT idpro, nompro, idval FROM producto WHERE idpro=:idpro";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -49,14 +49,14 @@ class Mpro
 
     function save(){
         // try {
-            $sql = "INSERT INTO producto (nompro, iddom) VALUES (:nompro, :iddom)";
+            $sql = "INSERT INTO producto (nompro, idval) VALUES (:nompro, :idval)";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
             $nompro = $this->getNompro();
             $result->bindParam(":nompro", $nompro);
-            $iddom = $this->getIddom();
-            $result->bindParam(":iddom", $iddom);
+            $idval = $this->getIdval();
+            $result->bindParam(":idval", $idval);
             $result->execute();
         // } catch (Exception $e) {
         //     ManejoError($e);
@@ -64,7 +64,7 @@ class Mpro
     }
 
     function edit(){
-        $sql = "UPDATE producto SET nompro=:nompro, iddom=:iddom WHERE idpro=:idpro";
+        $sql = "UPDATE producto SET nompro=:nompro, idval=:idval WHERE idpro=:idpro";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -72,8 +72,8 @@ class Mpro
         $result->bindParam(":idpro", $idpro);
         $nompro = $this->getNompro();
         $result->bindParam(":nompro", $nompro);
-        $iddom = $this->getIddom();
-        $result->bindParam(":iddom", $iddom);
+        $idval = $this->getIdval();
+        $result->bindParam(":idval", $idval);
         $result->execute();
     }
 
