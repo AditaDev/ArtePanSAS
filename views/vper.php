@@ -17,6 +17,16 @@ require_once('controllers/cper.php');
             <input class="form-control" type="text" id="ndper" name="ndper" value="<?php if ($datOne) echo $datOne[0]['ndper']; ?>" onkeypress="return solonum(event);" required>
         </div>
         <div class="form-group col-md-4">
+            <label for="area"><strong>Area:</strong></label>
+            <select name="area" id="area" class="form-control form-select" required>
+                    <?php foreach ($datarea as $dte) { ?>
+                        <option value="<?= $dte['idval']; ?>" <?php if ($datOne && $dte['idval'] == $datOne[0]['area']) echo " selected "; ?>>
+                            <?= $dte['nomval']; ?>
+                        </option>
+                    <?php } ?>
+                </select>
+        </div>
+        <div class="form-group col-md-4">
             <label for="apeper"><strong>Correo Electrónico:</strong></label>
             <input class="form-control" type="email" id="emaper" name="emaper" value="<?php if ($datOne) echo $datOne[0]['emaper']; ?>" required>
         </div>

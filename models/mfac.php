@@ -14,6 +14,7 @@
         private $fvfac;
         private $tipfac;
         private $forpag;
+        private $fecact;
 
         //------------GET-----------
         public function getIdfac(){
@@ -95,8 +96,8 @@
         function getAll(){
             $idpef = $_SESSION['idpef'];
             $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.forpag, f.idper, f.fefac, f.fvfac, f.forpag, f.tipfac, e.razsoem, e.nitemp, r.nomper FROM factura AS f INNER JOIN empresa AS e ON f.idemp=e.idemp INNER JOIN persona AS r ON f.idper=r.idper";
-            if($idpef==2) $sql .= " WHERE f.estfac!=1";
-            elseif($idpef==2) $sql .= " WHERE f.estfac=2 OR f.estfac=3";
+            if($idpef==8 or $idpef==9 or $idpef==10 or $idpef==11) $sql .= " WHERE f.estfac!=3";
+            elseif($idpef==8) $sql .= " WHERE f.estfac=1 ";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -229,16 +230,30 @@
             $res = $result->fetchall(PDO::FETCH_ASSOC);
             return $res;
         }
+
+        function getAllEmp(){
+            $sql = "SELECT idemp, nitemp, razsoem FROM empresa WHERE actemp=1";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+        }
         
         function editEst()
     {
         try {
-            $sql = "UPDATE factura SET estfac=:estfac WHERE idfac=:idfac";
+            $fffac = $this->getFffac();
+            $sql = "UPDATE factura SET estfac=:estfac";
+            if($fffac) $sql .= ", fffac=:fffac";
+            $sql .= " WHERE idfac=:idfac";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
             $estfac = $this->getEstfac();
             $result->bindParam(":estfac", $estfac);
+            if($fffac) $result->bindParam(":fffac", $fffac);
             $idfac = $this->getIdfac();
             $result->bindParam(":idfac", $idfac);
             $result->execute();

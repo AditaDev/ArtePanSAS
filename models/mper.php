@@ -308,17 +308,17 @@ class Mper
         }
     }
 
-    //   function getAllTpd($iddom)
-    // {
-    //     $sql = "SELECT idval, nomval FROM valor WHERE iddom=:iddom";
-    //     $modelo = new conexion();
-    //     $conexion = $modelo->get_conexion();
-    //     $result = $conexion->prepare($sql);
-    //     $result->bindParam(":iddom", $iddom);
-    //     $result->execute();
-    //     $res = $result->fetchall(PDO::FETCH_ASSOC);
-    //     return $res;
-    // }
+      function getAllDom($iddom)
+    {
+        $sql = "SELECT idval, nomval FROM valor WHERE iddom=:iddom";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":iddom", $iddom);
+        $result->execute();
+        $res = $result->fetchall(PDO::FETCH_ASSOC);
+        return $res;
+    }
 
     function getAllMod()
     {

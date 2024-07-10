@@ -19,7 +19,7 @@ $mpro->setIdpro($idpro);
 
 if ($ope == "save") {
     $mpro->setNompro($nompro);
-    $mpro->setIddom($iddom);
+    $mpro->setIdval($idval);
     if (!$idpro) $mpro->save();
     else $mpro->edit();
 }

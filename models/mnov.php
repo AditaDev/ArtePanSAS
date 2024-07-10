@@ -201,6 +201,17 @@
             $res = $result->fetchall(PDO::FETCH_ASSOC);
             return $res;
         }
+
+        function getAllPer(){
+            $sql = "SELECT idper, nomper, apeper, ndper, area FROM persona WHERE actper=1";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
         
         function editEst()
     {

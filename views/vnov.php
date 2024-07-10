@@ -9,7 +9,6 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         <div class="form-group col-md-4">
             <label for="idper"><strong>Persona:</strong></label>
             <select id="idper" name="idper" class="form-control form-select" required>
-                <option value="0"></option>
                 <?php if ($datPer) {
                     foreach ($datPer as $dep) { ?>
                         <option value='<?= $dep['idper']; ?>' <?php if ($datOne && $dep['idper'] == $datOne['idper']) echo " selected "; ?>>
@@ -24,6 +23,16 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <select name="tipnov" id="tipnov" class="form-control form-select" required>
                     <?php foreach ($dattip as $dte) { ?>
                         <option value="<?= $dte['idval']; ?>" <?php if ($datOne && $dte['idval'] == $datOne[0]['tipnov']) echo " selected "; ?>>
+                            <?= $dte['nomval']; ?>
+                        </option>
+                    <?php } ?>
+                </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="area"><strong>Area:</strong></label>
+            <select name="area" id="area" class="form-control form-select" required>
+                    <?php foreach ($datarea as $dte) { ?>
+                        <option value="<?= $dte['idval']; ?>" <?php if ($datOne && $dte['idval'] == $datOne[0]['area']) echo " selected "; ?>>
                             <?= $dte['nomval']; ?>
                         </option>
                     <?php } ?>

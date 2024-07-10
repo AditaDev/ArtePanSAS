@@ -64,4 +64,5 @@
      //------------Traer valores-----------
     $datAll = $mper->getAll();
     $idmod = $mper->getAllMod();
+    $datarea = $mper->getAllDom(5);
 ?>

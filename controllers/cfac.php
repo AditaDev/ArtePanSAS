@@ -5,11 +5,13 @@
 
 
     //------------Factura-----------
+    $fecact = date("Y-m-d H:i:s");
+
     $idfac = isset($_REQUEST['idfac']) ? $_REQUEST['idfac']:NULL;
     $nofac = isset($_POST['nofac']) ? $_POST['nofac']:NULL;
     $fifac = date("Y-m-d H:i:s");
     $confac = isset($_POST['confac']) ? $_POST['confac']:NULL;
-    $fffac = isset($_REQUEST['fffac']) ? $_REQUEST['fffac']:NULL;
+    $fffac = date("Y-m-d H:i:s");
     $estfac = isset($_REQUEST['estfac']) ? $_REQUEST['estfac']:1;
     $idemp = isset($_POST['idemp']) ? $_POST['idemp']:NULL;
     $idper = isset($_POST['idper']) ? $_POST['idper']:NULL;
@@ -42,18 +44,20 @@
         $mfac->setForpag($forpag);
         if(!$idfac) $mfac->save();
         else $mfac->edit();
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
 
     if($ope=="edi" && $idfac) $datOne = $mfac->getOne();
     if($ope=="eli" && $idfac) $mfac->del();
 
-    $datEmp = $mfac->getAll();
+    $datEmp = $mfac->getAllEmp();
     $datAll = $mfac->getAll();
 
     if ($ope == 'est' && $idfac && $estfac) {
         $mfac->setIdfac($idfac);
         $mfac->setEstfac($estfac);
+        if($estfac==4) $mfac->setFffac($fecact);
         $mfac->editEst();
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }

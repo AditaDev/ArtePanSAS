@@ -19,8 +19,6 @@
     $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
 
     $datOne = NULL;
-    $datAll = $mnov->getAll();
-    $dattip = $mnov->getAllDom(4);
 
     $mnov->setIdnov($idnov);
 
@@ -43,8 +41,10 @@
     if($ope=="edi" && $idnov) $datOne = $mnov->getOne();
     if($ope=="eli" && $idnov) $mnov->del();
 
-    $datPer = $mnov->getAll();
-    $datarea = $mnov->getAll();
+    $datAll = $mnov->getAll();
+    $datPer = $mnov->getAllPer();
+    $dattip = $mnov->getAllDom(4);
+    $datarea = $mnov->getAllDom(5);
 
 ?>
 <!-- if($ope=='act' && $idmod && $actmod){

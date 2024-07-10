@@ -1,34 +1,14 @@
 DROP DATABASE IF EXISTS artepansas;
 CREATE DATABASE artepansas;
 USE artepansas;
---
 -- Base de datos: `artepansas`
 --
+
 -- --------------------------------------------------------
+
 --
 -- Estructura de tabla para la tabla `almuerzo`
 --
-CREATE TABLE `novedad` (
-  `idnov` bigint(11) NOT NULL,
-  `fecreg` date DEFAULT NULL,
-  `fecinov` date DEFAULT NULL,
-  `fecfnov` date DEFAULT NULL,
-  `fecrev` date DEFAULT NULL,
-  `tipnov` varchar(100) NOT NULL,
-  `obsnov` varchar(100) NOT NULL,
-  `estnov` varchar(100) NOT NULL,
-  `idper` bigint(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-INSERT INTO `novedad` (`idnov`, `fecreg`, `fecinov`, `fecfnov`, `fecrev`, `tipnov`, `obsnov`, `estnov`, `idper`) VALUES
-(1, '2024-07-01','2024-08-01','2024-09-01','2024-07-01', 'Incapacidad Arl', 'Se cancela todo', 1, 1),
-(2, '2024-07-01','2024-08-01','2024-09-01','2024-07-01', 'Permiso no remunerado' , 'Se cancela todo', 1, 2),
-(3, '2024-07-01','2024-08-01','2024-09-01','2024-07-01', 'Licencia', 'Se cancela todo', 1, 3),
-(4, '2024-07-01','2024-08-01','2024-09-01','2024-07-01', 'Retiro', 'Se cancela todo', 1, 4),
-(5, '2024-07-01','2024-08-01','2024-09-01','2024-07-01', 'Ingreso', 'Se cancela todo', 1, 5),
-(6, '2024-07-01','2024-08-01','2024-09-01','2024-07-01', 'Cesantias', 'Se cancela todo', 1, 6);
-
-
 
 CREATE TABLE `almuerzo` (
   `idalm` bigint(11) NOT NULL,
@@ -36,6 +16,9 @@ CREATE TABLE `almuerzo` (
   `idval` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `almuerzo`
+--
 
 INSERT INTO `almuerzo` (`idalm`, `fecalm`, `idval`) VALUES
 (1, '2024-07-01', 29),
@@ -44,52 +27,6 @@ INSERT INTO `almuerzo` (`idalm`, `fecalm`, `idval`) VALUES
 (4, '2024-07-01', 28),
 (5, '2024-07-01', 26),
 (6, '2024-07-01', 27);
-
-
-CREATE TABLE `pedido` (
-    `idalm` bigint(11) NOT NULL,
-    `idper` bigint(11) NOT NULL,
-    `fecped` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-INSERT INTO `pedido` (`idalm`, `idper`, `fecped`) VALUES
-(1, '1', '2024-07-01'),
-(2, '2', '2024-07-01'),
-(3, '3', '2024-07-01'),
-(4, '4', '2024-07-01'),
-(5, '5', '2024-07-01'),
-(6, '6', '2024-07-01');
-
-
-CREATE TABLE `producto` (
-    `idpro` bigint(11) NOT NULL,
-    `nompro` varchar(100) NOT NULL,
-    `idval` bigint(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-INSERT INTO `producto` (`idpro`, `nompro`, `idval` ) VALUES
-(1, 'Lentejas', 26),
-(2, 'Pasta', 27),
-(3, 'Arroz', 28),
-(4, 'Pollo frito', 29),
-(5, 'Carne sudada', 30),
-(6, 'Pepinos', 31);
-
-
-CREATE TABLE `proxalm` (
-    `idpro` bigint(11) NOT NULL,
-    `idalm` bigint(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-INSERT INTO `proxalm` ( `idpro`, `idalm`) VALUES
-(1, 1),
-(2, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6);
-
 
 -- --------------------------------------------------------
 
@@ -113,7 +50,6 @@ INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (4, 'Tipo de Novedad'),
 (5, 'Area');
 
-
 -- --------------------------------------------------------
 
 --
@@ -127,12 +63,17 @@ CREATE TABLE `empresa` (
   `actemp` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `empresa`
+--
+
 INSERT INTO `empresa` (`idemp`, `nitemp`, `razsoem`, `actemp`) VALUES
-(1, '12345698', 'Cartones America', 1),
-(2, '98756485', 'Tracto Carga', 1),
-(3, '78516362', 'Palnorte', 1),
-(4, '95463198', 'Cimpa', 1),
-(5, '84521098', 'Quimerco', 1);
+(1, 12345698, 'Cartones America', 1),
+(2, 98756485, 'Tracto Carga', 1),
+(3, 78516362, 'Palnorte', 1),
+(4, 95463198, 'Cimpa', 1),
+(5, 84521098, 'Quimerco', 1),
+(6, 4511255, 'te amo', 1);
 
 -- --------------------------------------------------------
 
@@ -145,7 +86,7 @@ CREATE TABLE `factura` (
   `nofac` bigint(11) NOT NULL,
   `fifac` date NOT NULL,
   `confac` varchar(100) NOT NULL,
-  `fffac` date NOT NULL,
+  `fffac` date DEFAULT NULL,
   `idemp` bigint(11) DEFAULT NULL,
   `estfac` int(4) DEFAULT NULL,
   `fefac` date NOT NULL,
@@ -155,12 +96,19 @@ CREATE TABLE `factura` (
   `idper` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `factura` (`idfac`, `nofac`, `fifac`,`fffac`, `confac`, `idemp`, `estfac`, `fefac`, `fvfac`, `tipfac`, `idper`, `forpag`) VALUES
-(1, '123456', '2024-05-01', '2024-06-01',  '2000 kl de sodio', 1, 1, '2024-08-01', '2024-09-01','Dotación', 1, '2 Días'),
-(2, '987564', '2024-05-02', '2024-06-02',  '2000 kl de potacsio', 2, 2, '2024-08-01', '2024-09-01','Papelería', 2, '8 Días'),
-(3, '785163', '2024-05-03', '2024-06-03',  '2000 kl de aguacate', 3, 3, '2024-08-01', '2024-09-01','Importación', 3, '10 Días'),
-(4, '954631', '2024-05-04', '2024-06-04',  '2000 kl de plata', 4, 4, '2024-08-01', '2024-09-01','Mercado', 4, '20 Días'),
-(5, '845210', '2024-05-05', '2024-06-05',  '2000 kl de azucar', 4, 2, '2024-08-01', '2024-09-01','Servicios', 3, '60 Días');
+--
+-- Volcado de datos para la tabla `factura`
+--
+
+INSERT INTO `factura` (`idfac`, `nofac`, `fifac`, `confac`, `fffac`, `idemp`, `estfac`, `fefac`, `fvfac`, `forpag`, `tipfac`, `idper`) VALUES
+(1, 123456, '2024-05-01', '2000 kl de sodio', '2024-06-01', 1, 2, '2024-08-01', '2024-09-01', '2 Días', 'Dotación', 1),
+(2, 987564, '2024-05-02', '2000 kl de potacsio', '2024-06-02', 2, 2, '2024-08-01', '2024-09-01', '8 Días', 'Papelería', 2),
+(3, 785163, '2024-05-03', '2000 kl de aguacate', '2024-06-03', 3, 3, '2024-08-01', '2024-09-01', '10 Días', 'Importación', 3),
+(4, 954631, '2024-05-04', '2000 kl de plata', '2024-06-04', 4, 4, '2024-08-01', '2024-09-01', '20 Días', 'Mercado', 4),
+(5, 845210, '2024-05-05', '2000 kl de azucar', '2024-06-05', 4, 2, '2024-08-01', '2024-09-01', '60 Días', 'Servicios', 3),
+(6, 4589, '2024-07-10', 'Arroz', '2024-07-10', 1, 4, '2024-07-10', '2024-07-25', '1', '14', 4),
+(7, 89898, '2024-07-10', 'Helado', NULL, 2, 1, '2024-07-16', '2024-07-24', '5', '23', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -188,6 +136,36 @@ INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`, `idpag`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `novedad`
+--
+
+CREATE TABLE `novedad` (
+  `idnov` bigint(11) NOT NULL,
+  `fecreg` date DEFAULT NULL,
+  `fecinov` date DEFAULT NULL,
+  `fecfnov` date DEFAULT NULL,
+  `fecrev` date DEFAULT NULL,
+  `tipnov` varchar(100) NOT NULL,
+  `obsnov` varchar(100) NOT NULL,
+  `estnov` varchar(100) NOT NULL,
+  `idper` bigint(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `novedad`
+--
+
+INSERT INTO `novedad` (`idnov`, `fecreg`, `fecinov`, `fecfnov`, `fecrev`, `tipnov`, `obsnov`, `estnov`, `idper`) VALUES
+(1, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 'Incapacidad Arl', 'Se cancela todo', '1', 1),
+(2, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 'Permiso no remunerado', 'Se cancela todo', '1', 2),
+(3, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 'Licencia', 'Se cancela todo', '1', 3),
+(4, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 'Retiro', 'Se cancela todo', '1', 4),
+(5, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 'Ingreso', 'Se cancela todo', '1', 5),
+(6, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 'Cesantias', 'Se cancela todo', '1', 6);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pagina`
 --
 
@@ -210,7 +188,7 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (60, 'fa fa-solid fa-file-invoice-dollar', 'Facturas', 'views/vfac.php', 12, 'home.php', 1, 1),
 (61, 'fa-solid fa-bacon', 'Almuerzos', 'views/valm.php', 13, 'home.php', 1, 3),
 (62, 'fa fa-solid fa-file-invoice-dollar', 'Pedidos', 'views/vped.php', 14, 'home.php', 1, 3),
-(63, 'fa fa-solid fa-duotone fa-wallet', 'Facturas por revisar', 'views/vfacpr.php', 15, 'home.php', 1, 1),
+(63, 'fa fa-solid fa-duotone fa-wallet', 'Facturas por revisar', 'views/vfac.php', 15, 'home.php', 1, 1),
 (64, 'fa fa-solid fa-cookie-bite', 'Producto', 'views/vpro.php', 17, 'home.php', 1, 3),
 (101, 'fa fa-solid fa-cubes', 'Módulos', 'views/vmod.php', 1, 'home.php', 1, 2),
 (102, 'fa fa-regular fa-file', 'Paginas', 'views/vpag.php', 2, 'home.php', 1, 2),
@@ -222,7 +200,6 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 2),
 (109, 'fa fa-solid fa-building', 'Empresas', 'views/vemp.php', 11, 'home.php', 1, 1),
 (110, 'fa fa-solid fa-solid fa-lightbulb', 'Novedades', 'views/vnov.php', 16, 'home.php', 1, 4);
-
 
 -- --------------------------------------------------------
 
@@ -259,7 +236,35 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (64, 1),
 (64, 6),
 (110, 7),
-(63, 2);
+(63, 2),
+(63, 8),
+(63, 9),
+(63, 10),
+(63, 11);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedido`
+--
+
+CREATE TABLE `pedido` (
+  `idalm` bigint(11) NOT NULL,
+  `idper` bigint(11) NOT NULL,
+  `fecped` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`idalm`, `idper`, `fecped`) VALUES
+(1, 1, '2024-07-01'),
+(2, 2, '2024-07-01'),
+(3, 3, '2024-07-01'),
+(4, 4, '2024-07-01'),
+(5, 5, '2024-07-01'),
+(6, 6, '2024-07-01');
 
 -- --------------------------------------------------------
 
@@ -285,7 +290,11 @@ INSERT INTO `perfil` (`idpef`, `nompef`, `idmod`, `idpag`) VALUES
 (4, 'Contabilidad', 1, 60),
 (5, 'Colaborador', 3, 62),
 (6, 'Servicios generales', 3, 61),
-(7, 'Talento humano', 4, 110);
+(7, 'Talento humano', 4, 110),
+(8, 'Coordinador exportaciones', 1, 63),
+(9, 'Mantenimiento', 1, 63),
+(10, 'Coordinador logistica', 1, 63),
+(11, 'Coordinador calidad', 1, 63);
 
 -- --------------------------------------------------------
 
@@ -309,14 +318,19 @@ CREATE TABLE `persona` (
 -- Volcado de datos para la tabla `persona`
 --
 
-INSERT INTO `persona` (`idper`, `nomper`, `pasper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`, `area` ) VALUES
+INSERT INTO `persona` (`idper`, `nomper`, `pasper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`, `area`) VALUES
 (1, 'Ada', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada@artepan.com', '3215646857', 'Rodriguez', '1071328321', 1, 'Contabilidad'),
 (2, 'Nico', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico@artepan.com', '3215456998', 'Rodriguez', '1072749321', 1, 'Logistica'),
 (3, 'Amy', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy@artepan.com', '3021845120', 'Gavilan', '1004985502', 1, 'Tesoreria'),
 (4, 'Andrea', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada2@artepan.com', '3112132208', 'Casas', '1076655342', 1, 'Cartera'),
 (5, 'Luisa', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico2@artepan.com', '3215495204', 'Jiménez', '1078944563', 1, 'Facturación'),
 (6, 'Lucas', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy2@artepan.com', '3223548793', 'Mora', '1077954332', 1, 'Ventas'),
-(7, 'Prueba', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba@artepan.com', '322894463', 'Prueba', '1077954332', 1, 'Cartera');
+(7, 'Prueba', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba@artepan.com', '322894463', 'Prueba', '1077954332', 1, 'Cartera'),
+(8, 'Prueba1', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba1@artepan.com', '322894463', 'Prueba1', '1077954332', 1, 'Facturación'),
+(9, 'Prueba2', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba2@artepan.com', '322894463', 'Prueba2', '1077954332', 1, 'Facturación'),
+(10, 'Prueba3', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba3@artepan.com', '322894463', 'Prueba3', '1077954332', 1, 'Facturación'),
+(11, 'Prueba4', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba4@artepan.com', '322894463', 'Prueba4', '1077954332', 1, 'Facturación');
+
 -- --------------------------------------------------------
 
 --
@@ -342,7 +356,59 @@ INSERT INTO `perxpef` (`idper`, `idpef`) VALUES
 (1, 4),
 (1, 6),
 (1, 3),
-(1, 7);
+(1, 7),
+(8, 8),
+(9, 9),
+(10, 10),
+(11, 11);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `producto`
+--
+
+CREATE TABLE `producto` (
+  `idpro` bigint(11) NOT NULL,
+  `nompro` varchar(100) NOT NULL,
+  `idval` bigint(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`idpro`, `nompro`, `idval`) VALUES
+(1, 'Lentejas', 26),
+(2, 'Pasta', 27),
+(3, 'Arroz', 28),
+(4, 'Pollo frito', 29),
+(5, 'Carne sudada', 30),
+(6, 'Pepinos', 31);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proxalm`
+--
+
+CREATE TABLE `proxalm` (
+  `idpro` bigint(11) NOT NULL,
+  `idalm` bigint(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `proxalm`
+--
+
+INSERT INTO `proxalm` (`idpro`, `idalm`) VALUES
+(1, 1),
+(2, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6);
 
 -- --------------------------------------------------------
 
@@ -406,29 +472,29 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (41, 'Licencias', 4, 411, 1),
 (42, 'Incapacidad Arl', 4, 412, 1),
 (43, 'Incapacidad Eps', 4, 413, 1),
-(44, 'Por si falta alguna jiji', 4, 414, 1);
+(44, 'Por si falta alguna jiji', 4, 414, 1),
+(45, 'Contabilidad', 5, 501, 1),
+(46, 'Logistica', 5, 502, 1),
+(47, 'Tesoreria', 5, 503, 1),
+(48, 'Cartera', 5, 504, 1),
+(49, 'Facturación', 5, 505, 1),
+(50, 'Ventas', 5, 506, 1);
+
+
+
+
+
 
 --
 -- Índices para tablas volcadas
+--
 
-ALTER TABLE `novedad`
-  ADD PRIMARY KEY (`idnov`);
-
-
-ALTER TABLE `pedido`
-  ADD KEY `idper` (`idper`),
-  ADD KEY `idalm` (`idalm`);
 --
 -- Indices de la tabla `almuerzo`
 --
 ALTER TABLE `almuerzo`
   ADD PRIMARY KEY (`idalm`),
   ADD KEY `fk_almxval` (`idval`) USING BTREE;
-
-
-ALTER TABLE `producto`
-  ADD PRIMARY KEY (`idpro`),
-  ADD KEY `fk_proxval` (`idval`) USING BTREE;
 
 --
 -- Indices de la tabla `dominio`
@@ -453,12 +519,14 @@ ALTER TABLE `factura`
 --
 -- Indices de la tabla `modulo`
 --
-ALTER TABLE `proxalm`
-  ADD KEY `idpro` (`idpro`),
-  ADD KEY `idalm` (`idalm`);
-
 ALTER TABLE `modulo`
   ADD PRIMARY KEY (`idmod`);
+
+--
+-- Indices de la tabla `novedad`
+--
+ALTER TABLE `novedad`
+  ADD PRIMARY KEY (`idnov`);
 
 --
 -- Indices de la tabla `pagina`
@@ -473,6 +541,13 @@ ALTER TABLE `pagina`
 ALTER TABLE `pagxpef`
   ADD KEY `idpag` (`idpag`),
   ADD KEY `idpef` (`idpef`);
+
+--
+-- Indices de la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  ADD KEY `idper` (`idper`),
+  ADD KEY `idalm` (`idalm`);
 
 --
 -- Indices de la tabla `perfil`
@@ -496,6 +571,20 @@ ALTER TABLE `perxpef`
   ADD KEY `idpef` (`idpef`);
 
 --
+-- Indices de la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`idpro`),
+  ADD KEY `fk_proxval` (`idval`) USING BTREE;
+
+--
+-- Indices de la tabla `proxalm`
+--
+ALTER TABLE `proxalm`
+  ADD KEY `idpro` (`idpro`),
+  ADD KEY `idalm` (`idalm`);
+
+--
 -- Indices de la tabla `valor`
 --
 ALTER TABLE `valor`
@@ -505,19 +594,30 @@ ALTER TABLE `valor`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
-ALTER TABLE `novedad`
-  MODIFY `idnov` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `dominio`
 --
 ALTER TABLE `dominio`
-  MODIFY `iddom` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `iddom` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `factura`
+--
+ALTER TABLE `factura`
+  MODIFY `idfac` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `modulo`
 --
 ALTER TABLE `modulo`
-  MODIFY `idmod` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idmod` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `novedad`
+--
+ALTER TABLE `novedad`
+  MODIFY `idnov` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `pagina`
@@ -529,7 +629,7 @@ ALTER TABLE `pagina`
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `idpef` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idpef` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `persona`
@@ -538,25 +638,28 @@ ALTER TABLE `persona`
   MODIFY `idper` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
+-- AUTO_INCREMENT de la tabla `producto`
+--
+ALTER TABLE `producto`
+  MODIFY `idpro` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `valor`
 --
 ALTER TABLE `valor`
-  MODIFY `idval` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
-
-ALTER TABLE `producto`
-  MODIFY `idpro` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idval` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- Restricciones para tablas volcadas
 --
-ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`),
-  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`idalm`) REFERENCES `almuerzo` (`idalm`);
+
 --
 -- Filtros para la tabla `almuerzo`
 --
+ALTER TABLE `almuerzo`
+  ADD CONSTRAINT `almuerzo_ibfk_1` FOREIGN KEY (`idval`) REFERENCES `valor` (`idval`);
 
+--
 -- Filtros para la tabla `factura`
 --
 ALTER TABLE `factura`
@@ -577,6 +680,13 @@ ALTER TABLE `pagxpef`
   ADD CONSTRAINT `pagxpef_ibfk_2` FOREIGN KEY (`idpef`) REFERENCES `perfil` (`idpef`);
 
 --
+-- Filtros para la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`idalm`) REFERENCES `almuerzo` (`idalm`);
+
+--
 -- Filtros para la tabla `perfil`
 --
 ALTER TABLE `perfil`
@@ -590,18 +700,20 @@ ALTER TABLE `perxpef`
   ADD CONSTRAINT `perxpef_ibfk_2` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`);
 
 --
--- Filtros para la tabla `valor`
+-- Filtros para la tabla `producto`
 --
-ALTER TABLE `valor`
-  ADD CONSTRAINT `valor_ibfk_1` FOREIGN KEY (`iddom`) REFERENCES `dominio` (`iddom`);
+ALTER TABLE `producto`
+  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idval`) REFERENCES `valor` (`idval`);
 
-
+--
+-- Filtros para la tabla `proxalm`
+--
 ALTER TABLE `proxalm`
   ADD CONSTRAINT `proxalm_ibfk_1` FOREIGN KEY (`idpro`) REFERENCES `producto` (`idpro`),
   ADD CONSTRAINT `proxalm_ibfk_2` FOREIGN KEY (`idalm`) REFERENCES `almuerzo` (`idalm`);
 
-ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idval`) REFERENCES `valor` (`idval`);
-
-ALTER TABLE `almuerzo`
-  ADD CONSTRAINT `almuerzo_ibfk_1` FOREIGN KEY (`idval`) REFERENCES `valor` (`idval`);
+--
+-- Filtros para la tabla `valor`
+--
+ALTER TABLE `valor`
+  ADD CONSTRAINT `valor_ibfk_1` FOREIGN KEY (`iddom`) REFERENCES `dominio` (`iddom`);

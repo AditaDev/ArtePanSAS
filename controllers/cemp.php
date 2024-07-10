@@ -13,7 +13,6 @@ require_once("models/memp.php");
 
     $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
-    $pg = 109;
     $datOne = NULL;
     $datALL = $memp->getAll();
 
@@ -25,11 +24,13 @@ require_once("models/memp.php");
     $memp->setActemp($actemp);
     if (!$idemp) $memp->save();
     else $memp->edit();
+
 }
 
 if ($ope == "act" && $idemp && $actemp) {
     $memp->setActemp($actemp);
     $memp->editActEmp();
+    echo "<script>window.location='home.php?pg=".$pg."';</script>";
 }
 if ($ope == "eli" && $idemp) $memp->del();
 if ($ope == "edi" && $idemp) $datOne = $memp->getOne();

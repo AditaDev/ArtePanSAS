@@ -18,10 +18,9 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <div class="form-group col-md-4">
                 <label for=""><strong>Empresa:</strong></label>
                 <select id="idempresa" name="idemp" class="form-control form-select" required>
-                    <option value="0"></option>
                     <?php if ($datEmp) {
                         foreach ($datEmp as $dep) { ?>
-                            <option value='<?= $dep['idper']; ?>' <?php if ($datOne && $dep['idper'] == $datOne[0]['idemp']) echo " selected "; ?>>
+                            <option value='<?= $dep['idemp']; ?>' <?php if ($datOne && $dep['idemp'] == $datOne[0]['idemp']) echo " selected "; ?>>
                                 <?= $dep['nitemp'] . " - " . $dep['razsoem']; ?>
                             </option>
                     <?php }
@@ -120,9 +119,9 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <?php }
                         } elseif ($dta["estfac"] == 2) { ?>
                             <span style="font-size: 1px;opacity: 0;">2</span>
-                            <?php if ($_SESSION['idpef'] == 4) { ?>
+                            <?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 8 OR $_SESSION['idpef'] == 9 OR $_SESSION['idpef'] == 10 OR $_SESSION['idpef'] == 11) { ?>
                                 <i class="fa fa-solid fa-circle-check fa-2x iconi prv" title="Primera Revisión"></i>
-                            <?php } else { ?>
+                            <?php } else { ?>  
                                 <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=3" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
                                     <i class="fa fa-solid fa-circle-check fa-2x iconi prv" title="Primera Revisión"></i>
                                 </a>
