@@ -93,7 +93,10 @@
 
       
         function getAll(){
+            $idpef = $_SESSION['idpef'];
             $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.forpag, f.idper, f.fefac, f.fvfac, f.forpag, f.tipfac, e.razsoem, e.nitemp, r.nomper FROM factura AS f INNER JOIN empresa AS e ON f.idemp=e.idemp INNER JOIN persona AS r ON f.idper=r.idper";
+            if($idpef==2) $sql .= " WHERE f.estfac!=1";
+            elseif($idpef==2) $sql .= " WHERE f.estfac=2 OR f.estfac=3";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);

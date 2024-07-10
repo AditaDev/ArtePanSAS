@@ -24,7 +24,6 @@
     $datALL = NULL;
     $dattpe = $mfac->getAllDom(1);
     $dattip = $mfac->getAllDom(2);
-    $pg = 60;
 
     $mfac->setIdfac($idfac);
 
@@ -56,6 +55,7 @@
         $mfac->setIdfac($idfac);
         $mfac->setEstfac($estfac);
         $mfac->editEst();
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
 ?>
