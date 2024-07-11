@@ -27,7 +27,7 @@ class Mpro
 
 
     function getAll(){
-        $sql = "SELECT p.idpro, p.nompro, p.idval FROM producto AS p LEFT JOIN valor AS d ON p.idval=d.idval";
+        $sql = "SELECT p.idpro, p.nompro, p.idval, d.nomval FROM producto AS p LEFT JOIN valor AS d ON p.idval=d.idval";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -75,6 +75,16 @@ class Mpro
         $idval = $this->getIdval();
         $result->bindParam(":idval", $idval);
         $result->execute();
+    }
+    function getAllDom($iddom){
+        $sql = "SELECT idval, nomval FROM valor WHERE iddom=:iddom";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":iddom", $iddom);
+        $result->execute();
+        $res = $result->fetchall(PDO::FETCH_ASSOC);
+        return $res;
     }
 
     function del(){

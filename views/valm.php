@@ -1,74 +1,101 @@
 <?php
- require_once ('controllers/calm.php'); ?>
+require_once('controllers/calm.php'); ?>
 
- 		
-    <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
-        <div class="row">
-        <div class="container"> 
-        <div class="dropdown"> 
-            <button class="btn btn-success dropdown-toggle"
-                    type="button" 
-                    id="multiSelectDropdown"
-                    data-bs-toggle="dropdown" 
-                    aria-expanded="false"> 
-                Seleccionar 
-            </button> 
-            <ul class="dropdown-menu" 
-                aria-labelledby="multiSelectDropdown"> 
-                <li> 
-                  <label> 
-                    <input type="checkbox" 
-                           value="Java"> 
-                        Java 
-                    </label> 
-                </li> 
-                <li>
-                    <label>
-                    <?php if ($datAll) {
-                    foreach ($datAll as $ddo) { ?>
-                        <option value="<?= $ddo['iddom']; ?>" <?php if ($datOne && $ddo['iddom'] == $datOne[0]['iddom']) echo "selected"; ?>>
-                            <?= $ddo['iddom']; ?>
-                        </option>
-                <?php }
-                } ?>
-                    </label>
-                </li>
-            </ul> 
-        </div> 
-    </div> 
-    <script> 
-		const chBoxes = 
-			document.querySelectorAll('.dropdown-menu input[type="checkbox"]'); 
-		const dpBtn = 
-			document.getElementById('multiSelectDropdown'); 
-		let mySelectedListItems = []; 
 
-		function handleCB() { 
-			mySelectedListItems = []; 
-			let mySelectedListItemsText = ''; 
+<form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="container">
+            <h2>sopa</h2>
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="multiSelectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Seleccionar
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="multiSelectDropdown">
+                        <?php if ($datProSop) {
+                            foreach ($datProSop as $dtp) { ?>
+                                <li>
+                                    <input name="idpro[]" type="checkbox" value="<?= $dtp['idpro']; ?>" <?php if ($datOne && $dtp['idpro'] == $datOne[0]['idpro']) echo "selected"; ?>>
+                                    <label> <?= $dtp['nompro']; ?></label>
+                                </li>
+                        <?php }
+                        } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container">
+            <h2>Pf</h2>
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="multiSelectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Seleccionar
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="multiSelectDropdown">
+                        <?php if ($datProPf) {
+                            foreach ($datProPf as $dtp) { ?>
+                                <li>
+                                    <input name="idpro[]" type="checkbox" value="<?= $dtp['idpro']; ?>" <?php if ($datOne && $dtp['idpro'] == $datOne[0]['idpro']) echo "selected"; ?>>
+                                    <label> <?= $dtp['nompro']; ?></label>
+                                </li>
+                        <?php }
+                        } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container">
+                <h2>jugo</h2>
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="multiSelectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Seleccionar
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="multiSelectDropdown">
+                        <?php if ($datProJg) {
+                            foreach ($datProJg as $dtp) { ?>
+                                <li>
+                                    <input name="idpro[]" type="checkbox" value="<?= $dtp['idpro']; ?>" <?php if ($datOne && $dtp['idpro'] == $datOne[0]['idpro']) echo "selected"; ?>>
+                                    <label> <?= $dtp['nompro']; ?></label>
+                                </li>
+                        <?php }
+                        } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script>
+            const chBoxes = document.querySelectorAll('.dropdown-menu input[type="checkbox"]');
+            const dpBtn = document.getElementById('multiSelectDropdown');
+            let mySelectedListItems = [];
 
-			chBoxes.forEach((checkbox) => { 
-				if (checkbox.checked) { 
-					mySelectedListItems.push(checkbox.value); 
-					mySelectedListItemsText += checkbox.value + ', '; 
-				} 
-			}); 
+            function handleCB() {
+                mySelectedListItems = [];
+                let mySelectedListItemsText = '';
 
-			dpBtn.innerText = 
-				mySelectedListItems.length > 0 
-					? mySelectedListItemsText.slice(0, -2) : 'Select'; 
-		} 
+                chBoxes.forEach((checkbox) => {
+                    if (checkbox.checked) {
+                        mySelectedListItems.push(checkbox.value);
+                        mySelectedListItemsText += checkbox.value + ', ';
+                    }
+                });
+                dpBtn.innerText =
+                    mySelectedListItems.length > 0 ?
+                    mySelectedListItemsText.slice(0, -2) : 'Select';
+            }
 
-		chBoxes.forEach((checkbox) => { 
-			checkbox.addEventListener('change', handleCB); 
-		}); 
-	</script> 
+            chBoxes.forEach((checkbox) => {
+                checkbox.addEventListener('change', handleCB);
+            });
+        </script>
+
 
         <input class="btn btn-primary" type="submit" value="Registrar" id="btns">
         <input type="hidden" name="ope" value="save">
-        <input type="hidden" name="idalm" value="<?php if ($datOne) echo $datOne[0]['idalm'];?>">
+        <input type="hidden" name="idalm" value="<?php if ($datOne) echo $datOne[0]['idalm']; ?>">
     </div>
-    
+
+
 </form>
 
 <table id="mytable" class="table table-striped" tyle="width:100%">
@@ -85,11 +112,11 @@
                 <tr>
                     <td>
                         <small>
-                            <strong><?= $dta['fecalm']; ?> </strong><br>                                    
+                            <strong><?= $dta['fecalm']; ?> </strong><br>
                         </small>
                     </td>
                     <td tyle="text-align: left;">
-                    <i class="fa-solid fa-rectangle-list fa-2x iconi" title="Detalle almuerzo"></i>
+                        <i class="fa-solid fa-rectangle-list fa-2x iconi" title="Detalle almuerzo"></i>
                     </td>
 
                     <td tyle="text-align: right;">
@@ -101,7 +128,8 @@
                         </a>
                     </td>
                 </tr>
-        <?php }} ?>
+        <?php }
+        } ?>
     </tbody>
     <tfoot>
         <tr>

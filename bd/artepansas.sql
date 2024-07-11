@@ -381,10 +381,10 @@ CREATE TABLE `producto` (
 INSERT INTO `producto` (`idpro`, `nompro`, `idval`) VALUES
 (1, 'Lentejas', 26),
 (2, 'Pasta', 27),
-(3, 'Arroz', 28),
-(4, 'Pollo frito', 29),
-(5, 'Carne sudada', 30),
-(6, 'Pepinos', 31);
+(3, 'Arroz', 25),
+(4, 'Pollo frito', 26),
+(5, 'Carne sudada', 27),
+(6, 'Pepinos', 25);
 
 -- --------------------------------------------------------
 

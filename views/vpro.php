@@ -10,16 +10,14 @@ require_once('controllers/cpro.php');
                 echo $datOne[0]['nompro']; ?>" required>
         </div>
         <div class="form-group col-md-6">
-            <label for="iddom" class="titulo"><strong>Dominio:</strong></label>
-            <select name="iddom" id="iddom" class="form form-select">
-                <?php if ($datDom) {
-                    foreach ($datDom as $ddo) { ?>
-                        <option value="<?= $ddo['iddom']; ?>" <?php if ($datOne && $ddo['iddom'] == $datOne[0]['iddom']) echo "selected"; ?>>
-                            <?= $ddo['iddom']." - ". $ddo['nomdom']; ?>
+            <label for="idval" class="titulo"><strong>Tipo producto:</strong></label>
+            <select name="idval" id="dominio" class="form-control form-select" required>
+                    <?php foreach ($datDom as $dte) { ?>
+                        <option value="<?= $dte['idval']; ?>" <?php if ($datOne && $dte['idval'] == $datOne[0]['idval']) echo " selected "; ?>>
+                            <?= $dte['nomval']; ?>
                         </option>
-                <?php }
-                } ?>
-            </select>
+                    <?php } ?>
+                </select> 
         </div>
         <div class="form-group col-md-12" id="boxbtn">
             <br>
@@ -43,7 +41,7 @@ require_once('controllers/cpro.php');
                 <tr>
                     <td>
                     <strong> <?= $dta['nompro']; ?></strong><br>
-                    <strong>Valor: </strong><?= $dta['idval']; ?><br>
+                    <strong>Tipo: </strong><?= $dta['nomval']; ?><br>
                     </td>
                     <td style="text-align: right;">
                         <a href="home.php?pg=<?= $pg; ?>&idpro=<?= $dta['idpro']; ?>&ope=edi">

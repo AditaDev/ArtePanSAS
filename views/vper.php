@@ -16,7 +16,7 @@ require_once('controllers/cper.php');
             <label for="ndper"><strong>N° Documento:</strong></label>
             <input class="form-control" type="text" id="ndper" name="ndper" value="<?php if ($datOne) echo $datOne[0]['ndper']; ?>" onkeypress="return solonum(event);" required>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             <label for="area"><strong>Area:</strong></label>
             <select name="area" id="area" class="form-control form-select" required>
                     <?php foreach ($datarea as $dte) { ?>
@@ -24,18 +24,18 @@ require_once('controllers/cper.php');
                             <?= $dte['nomval']; ?>
                         </option>
                     <?php } ?>
-                </select>
+            </select>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             <label for="apeper"><strong>Correo Electrónico:</strong></label>
             <input class="form-control" type="email" id="emaper" name="emaper" value="<?php if ($datOne) echo $datOne[0]['emaper']; ?>" required>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             <label for="apeper"><strong>N° telefono:</strong></label>
             <input class="form-control" type="text" id="telper" name="telper" value="<?php if ($datOne) echo $datOne[0]['telper']; ?>" onkeypress="return solonum(event);" required>
         </div>
         <?php if ($_SESSION['idpef'] != 3) { ?>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <label for="actper" class="titulo"><strong>Activo:</strong></label>
                 <select name="actper" id="actper" class="form-control form-select" required>
                     <option value="1" <?php if ($datOne && $datOne[0]['actper'] == 1) echo " selected "; ?>>Si</option>
@@ -77,17 +77,8 @@ require_once('controllers/cper.php');
                         <div class="row">
                             <?php if ($dta['emaper']) { ?>
                                 <div class="form-group col-md-12">
-                                    <strong>Email: </strong> <?= $dta['emaper']; ?>
-                                </div>
-                            <!-- <?php } if ($dta['']) { ?>
-                                <div class="form-group col-md-12">
-                                    <strong>Cargo: </strong> <?= $dta['cargo']; ?>
-                                </div>
-                            <?php } if ($dta['usured']) { ?>
-                                <div class="form-group col-md-12">
-                                    <strong>Red: </strong> <?= $dta['usured']; ?>
-                                </div>
-                            <?php } ?>  -->
+                                    <strong>Email: </strong> <?= $dta['emaper']; }?>
+                                </div> 
                         </div>
                     </small>
                 </td>

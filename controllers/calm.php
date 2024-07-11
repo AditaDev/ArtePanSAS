@@ -11,6 +11,9 @@ $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
 $datOne = NULL;
 $datAll = $malm->getAll();
+$datProSop = $malm->getAllPro(25);
+$datProPf = $malm->getAllPro(26);
+$datProJg = $malm->getAllPro(27);
 
 $malm->setIdalm($idalm);
 // $datDom = $mdom-> getALL();

@@ -41,7 +41,7 @@ class Malm
         // }catch(Exception $e){
         //     ManejoError($e);
         // }
-        return $res;
+        return $res; 
     }
     function getOne(){
         $modelo = new conexion();
@@ -84,7 +84,17 @@ class Malm
         }
     }
 
-
+    function getAllPro($idval)
+    {
+        $sql = "SELECT idpro, nompro FROM producto WHERE idval=:idval";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idval", $idval);
+        $result->execute();
+        $res = $result->fetchall(PDO::FETCH_ASSOC);
+        return $res;
+    }
 
 
 }

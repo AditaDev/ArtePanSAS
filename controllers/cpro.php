@@ -7,7 +7,7 @@ $mdom = new Mdom();
 
 $idpro = isset($_REQUEST['idpro']) ? $_REQUEST['idpro'] : NULL;
 $nompro = isset($_POST['nompro']) ? $_POST['nompro'] : NULL;
-$iddom = isset($_REQUEST['iddom']) ? $_REQUEST['iddom']:NULL;
+$idval = isset($_REQUEST['idval']) ? $_REQUEST['idval']:NULL;
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 // $pg = ;
 
@@ -28,7 +28,7 @@ if ($ope == "edi" && $idpro) $datOne = $mpro->getOne();
 if ($ope == "eli" && $idpro) $mpro->del();
 
 $datAll = $mpro->getAll();
-$datDom = $mdom-> getALL();
-
+$datDom = $mpro-> getAllDom(3);
 $obtOne= $mpro->getOne();
+
 ?>
