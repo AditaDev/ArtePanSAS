@@ -12,21 +12,20 @@ USE artepansas;
 
 CREATE TABLE `almuerzo` (
   `idalm` bigint(11) NOT NULL,
-  `fecalm` date DEFAULT NULL,
-  `idval` bigint(11) NOT NULL
+  `fecalm` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `almuerzo`
 --
 
-INSERT INTO `almuerzo` (`idalm`, `fecalm`, `idval`) VALUES
-(1, '2024-07-01', 29),
-(2, '2024-07-01', 28),
-(3, '2024-07-01', 27),
-(4, '2024-07-01', 28),
-(5, '2024-07-01', 26),
-(6, '2024-07-01', 27);
+INSERT INTO `almuerzo` (`idalm`, `fecalm`) VALUES
+(1, '2024-07-01'),
+(2, '2024-07-01'),
+(3, '2024-07-01'),
+(4, '2024-07-01'),
+(5, '2024-07-01'),
+(6, '2024-07-01');
 
 -- --------------------------------------------------------
 
@@ -91,23 +90,24 @@ CREATE TABLE `factura` (
   `estfac` int(4) DEFAULT NULL,
   `fefac` date NOT NULL,
   `fvfac` date NOT NULL,
-  `forpag` varchar(100) NOT NULL,
-  `tipfac` varchar(100) NOT NULL,
-  `idper` bigint(11) NOT NULL
+  `forpag` bigint(11) NOT NULL,
+  `tipfac` bigint(11) NOT NULL,
+  `idpercre` bigint(11) NOT NULL,
+  `idperrev` bigint(11) DEFAULT NULL,
+  `idperapr` bigint(11) DEFAULT NULL,
+  `idperent` bigint(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `factura`
 --
 
-INSERT INTO `factura` (`idfac`, `nofac`, `fifac`, `confac`, `fffac`, `idemp`, `estfac`, `fefac`, `fvfac`, `forpag`, `tipfac`, `idper`) VALUES
-(1, 123456, '2024-05-01', '2000 kl de sodio', '2024-06-01', 1, 2, '2024-08-01', '2024-09-01', '2 Días', 'Dotación', 1),
-(2, 987564, '2024-05-02', '2000 kl de potacsio', '2024-06-02', 2, 2, '2024-08-01', '2024-09-01', '8 Días', 'Papelería', 2),
-(3, 785163, '2024-05-03', '2000 kl de aguacate', '2024-06-03', 3, 3, '2024-08-01', '2024-09-01', '10 Días', 'Importación', 3),
-(4, 954631, '2024-05-04', '2000 kl de plata', '2024-06-04', 4, 4, '2024-08-01', '2024-09-01', '20 Días', 'Mercado', 4),
-(5, 845210, '2024-05-05', '2000 kl de azucar', '2024-06-05', 4, 2, '2024-08-01', '2024-09-01', '60 Días', 'Servicios', 3),
-(6, 4589, '2024-07-10', 'Arroz', '2024-07-10', 1, 4, '2024-07-10', '2024-07-25', '1', '14', 4),
-(7, 89898, '2024-07-10', 'Helado', NULL, 2, 1, '2024-07-16', '2024-07-24', '5', '23', 4);
+INSERT INTO `factura` (`idfac`, `nofac`, `fifac`, `confac`, `fffac`, `idemp`, `estfac`, `fefac`, `fvfac`, `forpag`, `tipfac`, `idpercre`, idperrev, idperapr, idperent) VALUES
+(1, 123456, '2024-05-01', '2000 kl de sodio', '2024-06-01', 1, 2, '2024-08-01', '2024-09-01', 1, 22, 1,NULL,NULL,NULL),
+(2, 987564, '2024-05-02', '2000 kl de potacsio', '2024-06-02', 2, 2, '2024-08-01', '2024-09-01', 4, 23, 2,NULL,NULL,NULL),
+(3, 785163, '2024-05-03', '2000 kl de aguacate', '2024-06-03', 3, 3, '2024-08-01', '2024-09-01', 5, 20, 3,NULL,NULL,NULL),
+(4, 954631, '2024-05-04', '2000 kl de plata', '2024-06-04', 4, 4, '2024-08-01', '2024-09-01', 7, 24, 4,NULL,NULL,NULL),
+(5, 845210, '2024-05-05', '2000 kl de azucar', '2024-06-05', 4, 2, '2024-08-01', '2024-09-01', 11, 19, 3,NULL,NULL,NULL);
 
 -- --------------------------------------------------------
 
@@ -145,7 +145,7 @@ CREATE TABLE `novedad` (
   `fecinov` date DEFAULT NULL,
   `fecfnov` date DEFAULT NULL,
   `fecrev` date DEFAULT NULL,
-  `tipnov` varchar(100) NOT NULL,
+  `tipnov` bigint(11) NOT NULL,
   `obsnov` varchar(100) NOT NULL,
   `estnov` varchar(100) NOT NULL,
   `idper` bigint(11) NOT NULL
@@ -156,12 +156,12 @@ CREATE TABLE `novedad` (
 --
 
 INSERT INTO `novedad` (`idnov`, `fecreg`, `fecinov`, `fecfnov`, `fecrev`, `tipnov`, `obsnov`, `estnov`, `idper`) VALUES
-(1, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 'Incapacidad Arl', 'Se cancela todo', '1', 1),
-(2, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 'Permiso no remunerado', 'Se cancela todo', '1', 2),
-(3, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 'Licencia', 'Se cancela todo', '1', 3),
-(4, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 'Retiro', 'Se cancela todo', '1', 4),
-(5, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 'Ingreso', 'Se cancela todo', '1', 5),
-(6, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 'Cesantias', 'Se cancela todo', '1', 6);
+(1, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 42, 'Se cancela todo', '1', 1),
+(2, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 38, 'Se cancela todo', '1', 2),
+(3, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 41, 'Se cancela todo', '1', 3),
+(4, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 36, 'Se cancela todo', '1', 4),
+(5, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 35, 'Se cancela todo', '1', 5),
+(6, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 39, 'Se cancela todo', '1', 6);
 
 -- --------------------------------------------------------
 
@@ -250,6 +250,7 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 
 CREATE TABLE `pedido` (
   `idalm` bigint(11) NOT NULL,
+  `idpro` bigint(11) NOT NULL,
   `idper` bigint(11) NOT NULL,
   `fecped` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -258,13 +259,13 @@ CREATE TABLE `pedido` (
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`idalm`, `idper`, `fecped`) VALUES
-(1, 1, '2024-07-01'),
-(2, 2, '2024-07-01'),
-(3, 3, '2024-07-01'),
-(4, 4, '2024-07-01'),
-(5, 5, '2024-07-01'),
-(6, 6, '2024-07-01');
+INSERT INTO `pedido` (idalm, `idpro`, `idper`, `fecped`) VALUES
+(1, 1, 1,'2024-07-01'),
+(2, 2, 2,'2024-07-01'),
+(3, 3, 3,'2024-07-01'),
+(4, 4, 4,'2024-07-01'),
+(5, 5, 5,'2024-07-01'),
+(6, 6, 6,'2024-07-01');
 
 -- --------------------------------------------------------
 
@@ -311,7 +312,7 @@ CREATE TABLE `persona` (
   `apeper` varchar(50) NOT NULL,
   `ndper` varchar(12) NOT NULL,
   `actper` tinyint(1) DEFAULT 1,
-  `area` varchar(100) NOT NULL
+  `area` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -319,17 +320,17 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`idper`, `nomper`, `pasper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`, `area`) VALUES
-(1, 'Ada', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada@artepan.com', '3215646857', 'Rodriguez', '1071328321', 1, 'Contabilidad'),
-(2, 'Nico', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico@artepan.com', '3215456998', 'Rodriguez', '1072749321', 1, 'Logistica'),
-(3, 'Amy', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy@artepan.com', '3021845120', 'Gavilan', '1004985502', 1, 'Tesoreria'),
-(4, 'Andrea', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada2@artepan.com', '3112132208', 'Casas', '1076655342', 1, 'Cartera'),
-(5, 'Luisa', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico2@artepan.com', '3215495204', 'Jiménez', '1078944563', 1, 'Facturación'),
-(6, 'Lucas', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy2@artepan.com', '3223548793', 'Mora', '1077954332', 1, 'Ventas'),
-(7, 'Prueba', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba@artepan.com', '322894463', 'Prueba', '1077954332', 1, 'Cartera'),
-(8, 'Prueba1', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba1@artepan.com', '322894463', 'Prueba1', '1077954332', 1, 'Facturación'),
-(9, 'Prueba2', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba2@artepan.com', '322894463', 'Prueba2', '1077954332', 1, 'Facturación'),
-(10, 'Prueba3', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba3@artepan.com', '322894463', 'Prueba3', '1077954332', 1, 'Facturación'),
-(11, 'Prueba4', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba4@artepan.com', '322894463', 'Prueba4', '1077954332', 1, 'Facturación');
+(1, 'Ada', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada@artepan.com', '3215646857', 'Rodriguez', '1071328321', 1, 45),
+(2, 'Nico', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico@artepan.com', '3215456998', 'Rodriguez', '1072749321', 1, 46),
+(3, 'Amy', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy@artepan.com', '3021845120', 'Gavilan', '1004985502', 1, 47),
+(4, 'Andrea', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada2@artepan.com', '3112132208', 'Casas', '1076655342', 1, 48),
+(5, 'Luisa', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico2@artepan.com', '3215495204', 'Jiménez', '1078944563', 1, 49),
+(6, 'Lucas', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy2@artepan.com', '3223548793', 'Mora', '1077954332', 1, 50),
+(7, 'Prueba', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba@artepan.com', '322894463', 'Prueba', '1077954332', 1, 48),
+(8, 'Prueba1', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba1@artepan.com', '322894463', 'Prueba1', '1077954332', 1, 49),
+(9, 'Prueba2', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba2@artepan.com', '322894463', 'Prueba2', '1077954332', 1, 49),
+(10, 'Prueba3', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba3@artepan.com', '322894463', 'Prueba3', '1077954332', 1, 49),
+(11, 'Prueba4', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba4@artepan.com', '322894463', 'Prueba4', '1077954332', 1, 49);
 
 -- --------------------------------------------------------
 
@@ -493,8 +494,7 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 -- Indices de la tabla `almuerzo`
 --
 ALTER TABLE `almuerzo`
-  ADD PRIMARY KEY (`idalm`),
-  ADD KEY `fk_almxval` (`idval`) USING BTREE;
+  ADD PRIMARY KEY (`idalm`);
 
 --
 -- Indices de la tabla `dominio`
@@ -513,8 +513,13 @@ ALTER TABLE `empresa`
 --
 ALTER TABLE `factura`
   ADD PRIMARY KEY (`idfac`),
-  ADD KEY `factura_ibfk_1` (`idemp`),
-  ADD KEY `persona_ibfk_1` (`idper`);
+  ADD KEY `idemp` (`idemp`),
+  ADD KEY `tipfac` (`tipfac`),
+  ADD KEY `forpag` (`forpag`),
+  ADD KEY `idpercre` (`idpercre`),
+  ADD KEY `idperrev` (`idperrev`),
+  ADD KEY `idperapr` (`idperapr`), 
+  ADD KEY `idperent` (`idperent`); 
 
 --
 -- Indices de la tabla `modulo`
@@ -526,7 +531,9 @@ ALTER TABLE `modulo`
 -- Indices de la tabla `novedad`
 --
 ALTER TABLE `novedad`
-  ADD PRIMARY KEY (`idnov`);
+  ADD PRIMARY KEY (`idnov`),
+  ADD KEY `tipnov` (`tipnov`),
+  ADD KEY `idper` (`idper`);
 
 --
 -- Indices de la tabla `pagina`
@@ -546,8 +553,9 @@ ALTER TABLE `pagxpef`
 -- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
+  ADD KEY `idalm` (`idalm`),
   ADD KEY `idper` (`idper`),
-  ADD KEY `idalm` (`idalm`);
+  ADD KEY `idpro` (`idpro`);
 
 --
 -- Indices de la tabla `perfil`
@@ -561,7 +569,8 @@ ALTER TABLE `perfil`
 -- Indices de la tabla `persona`
 --
 ALTER TABLE `persona`
-  ADD PRIMARY KEY (`idper`);
+  ADD PRIMARY KEY (`idper`),
+  ADD KEY `area` (`area`);
 
 --
 -- Indices de la tabla `perxpef`
@@ -575,7 +584,7 @@ ALTER TABLE `perxpef`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`idpro`),
-  ADD KEY `fk_proxval` (`idval`) USING BTREE;
+  ADD KEY `idval` (`idval`);
 
 --
 -- Indices de la tabla `proxalm`
@@ -589,65 +598,68 @@ ALTER TABLE `proxalm`
 --
 ALTER TABLE `valor`
   ADD PRIMARY KEY (`idval`),
-  ADD KEY `fk_valxdom` (`iddom`) USING BTREE;
+  ADD KEY `iddom` (`iddom`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
-
+ALTER TABLE `almuerzo`
+  MODIFY `idalm` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT de la tabla `dominio`
 --
 ALTER TABLE `dominio`
-  MODIFY `iddom` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `iddom` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
+ALTER TABLE `empresa`
+  MODIFY `idemp` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idfac` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idfac` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `modulo`
 --
 ALTER TABLE `modulo`
-  MODIFY `idmod` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idmod` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `novedad`
 --
 ALTER TABLE `novedad`
-  MODIFY `idnov` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idnov` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `pagina`
 --
 ALTER TABLE `pagina`
-  MODIFY `idpag` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `idpag` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `idpef` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idpef` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idper` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `idper` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idpro` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idpro` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `valor`
 --
 ALTER TABLE `valor`
-  MODIFY `idval` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idval` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Restricciones para tablas volcadas
@@ -656,16 +668,20 @@ ALTER TABLE `valor`
 --
 -- Filtros para la tabla `almuerzo`
 --
-ALTER TABLE `almuerzo`
-  ADD CONSTRAINT `almuerzo_ibfk_1` FOREIGN KEY (`idval`) REFERENCES `valor` (`idval`);
 
 --
 -- Filtros para la tabla `factura`
 --
 ALTER TABLE `factura`
   ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`idemp`) REFERENCES `empresa` (`idemp`),
-  ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`);
+  ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`idpercre`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `factura_ibfk_3` FOREIGN KEY (`idperrev`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `factura_ibfk_4` FOREIGN KEY (`idperapr`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `factura_ibfk_5` FOREIGN KEY (`idperent`) REFERENCES `persona` (`idper`);
 
+
+ALTER TABLE `novedad`
+  ADD CONSTRAINT `novedad_ibfk_1` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`);
 --
 -- Filtros para la tabla `pagina`
 --
@@ -702,8 +718,6 @@ ALTER TABLE `perxpef`
 --
 -- Filtros para la tabla `producto`
 --
-ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idval`) REFERENCES `valor` (`idval`);
 
 --
 -- Filtros para la tabla `proxalm`

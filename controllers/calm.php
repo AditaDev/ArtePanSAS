@@ -4,7 +4,7 @@ require_once 'models/malm.php';
 $malm = new Malm();
 
 $idalm = isset($_REQUEST['idalm']) ? $_REQUEST['idalm'] : NULL;
-$iddom = isset($_REQUEST['iddom']) ? $_REQUEST['iddom'] : NULL;
+$idpro = isset($_REQUEST['idpro']) ? $_REQUEST['idpro'] : NULL;
 $fecalm = date("Y-m-d H:i:s");
 
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
@@ -24,6 +24,16 @@ $malm->setIdalm($idalm);
 //     if (!$ppalm) $malm->save();
 //     else $malm->edit();
 // }
+
+if($ope=="savepxa"){
+    if($idper) $mper->delPxF();
+    if($idpef){ foreach ($idpef as $pf) {
+        if($pf){
+            $mper->setIdpef($pf);
+            $mper->savePxF();
+        }
+    }}
+}
 
 if ($ope == "edi" && $idalm) $datOne = $malm->getOne();
 if ($ope == "eli" && $idalm) $malm->del();
