@@ -123,7 +123,7 @@ function modalCmb($nm, $id, $tit, $idmod, $pg, $dms)
  
 
 //------------Modal vfac, info facturas-----------
-function modalDet($nom, $id, $titulo, $razsoem, $fefac, $fifac, $fvfac, $forpag, $nomper){
+function modalDet($nom, $id, $titulo, $info){
 	$txt = '';
 	$txt .= '<div class="modal fade" id="' . $nom . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
 		$txt .= '<div class="modal-dialog">';
@@ -136,12 +136,15 @@ function modalDet($nom, $id, $titulo, $razsoem, $fefac, $fifac, $fvfac, $forpag,
 				$txt .= '<div class="row"';
 					$txt .= '<div">';
 						$txt .= '<table>';
-							$txt .= '<tr><td><strong>Empresa: </strong></td><td class="inffac">'.$razsoem.'</td></tr>';	
-							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$fefac.'</td></tr>';				
-							$txt .= '<tr><td><strong>Fecha de registro: </strong></td><td class="inffac">'.$fifac.'</td></tr>';
-							$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$fvfac.'</td></tr>';
-							$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$forpag.'</td></tr>';
-							$txt .= '<tr><td><strong>Persona que registro: </strong></td><td class="inffac">'.$nomper.'</td></tr>';
+							$txt .= '<tr><td><strong>Empresa: </strong></td><td class="inffac">'.$info[0]['razsoem'].'</td></tr>';	
+							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$info[0]['fefac'].'</td></tr>';
+							$txt .= '<tr><td><strong>Fecha de registro: </strong></td><td class="inffac">'.$info[0]['fifac'].'</td></tr>';
+							$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$info[0]['fvfac'].'</td></tr>';
+							$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$info[0]['fpag'].'</td></tr>';
+							$txt .= '<tr><td><strong>Registro: </strong></td><td class="inffac">'.$info[0]['nompcre'].'</td></tr>';
+							if($info[0]['prev'])$txt .= '<tr><td><strong>Primer revisión: </strong></td><td class="inffac">'.$info[0]['nomprev'].'</td></tr>';
+							if($info[0]['papr'])$txt .= '<tr><td><strong>Aprobada: </strong></td><td class="inffac">'.$info[0]['nompapr'].'</td></tr>';
+							if($info[0]['pent'])$txt .= '<tr><td><strong>Entregada: </strong></td><td class="inffac">'.$info[0]['nompent'].'</td></tr>';
 							
 							
 						$txt .= '</table>';

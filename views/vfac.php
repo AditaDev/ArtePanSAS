@@ -103,41 +103,42 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idfac']; ?>" title="Detalles"></i>
                                 <?php
                                 $mfac->setIdfac($dta['idfac']);
-                                modalDet("mcbinf", $dta['idfac'], $dta['nofac'] . "-" . $dta['confac'], $dta['razsoem'], $dta['fefac'], $dta['fifac'], $dta['fvfac'], $dta['forpag'], $dta['nomper']);
+                                $info = $mfac->getOne();
+                                modalDet("mcbinf", $dta['idfac'], $dta['nofac'] . "-" . $dta['confac'], $info);
                                 ?>
                             </div>
                     </td>
                     <td tyle="text-align: half;">
-                        <?php if ($dta["estfac"] == 1) { ?>
+                        <?php if ($dta["estfac"] == 51) { ?>
                             <span style="font-size: 1px;opacity: 0;">1</span>
                             <?php if ($_SESSION['idpef'] == 4) { ?>
-                                <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="Sin Revisar"></i>
+                                <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="<?= $dta['est']; ?>"></i>
                             <?php } else { ?>
-                                <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=2" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
-                                    <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="Sin Revisar"></i>
+                                <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=52" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
+                                    <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="<?= $dta['est']; ?>"></i>
                                 </a>
                             <?php }
-                        } elseif ($dta["estfac"] == 2) { ?>
+                        } elseif ($dta["estfac"] == 52) { ?>
                             <span style="font-size: 1px;opacity: 0;">2</span>
                             <?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 8 OR $_SESSION['idpef'] == 9 OR $_SESSION['idpef'] == 10 OR $_SESSION['idpef'] == 11) { ?>
-                                <i class="fa fa-solid fa-circle-check fa-2x iconi prv" title="Primera Revisión"></i>
+                                <i class="fa fa-solid fa-circle-check fa-2x iconi prv" title="<?= $dta['est']; ?>"></i>
                             <?php } else { ?>  
-                                <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=3" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
-                                    <i class="fa fa-solid fa-circle-check fa-2x iconi prv" title="Primera Revisión"></i>
+                                <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=53" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
+                                    <i class="fa fa-solid fa-circle-check fa-2x iconi prv" title="<?= $dta['est']; ?>"></i>
                                 </a>
                             <?php }
-                        } elseif ($dta["estfac"] == 3) { ?>
+                        } elseif ($dta["estfac"] == 53) { ?>
                             <span style="font-size: 1px;opacity: 0;">3</span>
                             <?php if ($_SESSION['idpef'] == 2) { ?>
-                                <i class="fa fa-solid fa-circle-check fa-2x act" title="Revisada"></i>
+                                <i class="fa fa-solid fa-circle-check fa-2x act" title="<?= $dta['est']; ?>"></i>
                             <?php } else { ?>
-                                <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=4" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
-                                    <i class="fa fa-solid fa-circle-check fa-2x act" title="Revisada"></i>
+                                <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=54" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
+                                    <i class="fa fa-solid fa-circle-check fa-2x act" title="<?= $dta['est']; ?>"></i>
                                 </a>
                             <?php }
-                        } elseif ($dta["estfac"] == 4) { ?>
+                        } elseif ($dta["estfac"] == 54) { ?>
                             <span style="font-size: 1px;opacity: 0;">4</span>
-                            <i class="fa fa-solid fa-circle-check fa-2x chulo" title="Entregada"></i>
+                            <i class="fa fa-solid fa-circle-check fa-2x chulo" title="<?= $dta['est']; ?>"></i>
                         <?php } ?>
                     </td>
 

@@ -51,12 +51,15 @@
 					<div class="div">
 						<input type="password" required="true" name="password" placeholder=" CONTRASEÑA" id="password" required>
 					</div>
+					<!-- <div class="i">
+						<i id="vpass" class="fas fa-eye" onclick="verpass()"></i>
+					</div> -->
 				</div>
 				<?php
 					$err = isset($_GET['err']) ? $_GET['err'] : NULL;
 					if ($err == "s") {
 				?>
-					<div class="alert alert-danger" id="msg_error" role="alert" style="display: block; margin-top: 20px;">Datos
+					<div class="alert alert-danger" id="msg_error" role="alert" tyle="display: block; margin-top: 20px;">Datos
 						Inválidos
 					</div>
 				<?php } ?>

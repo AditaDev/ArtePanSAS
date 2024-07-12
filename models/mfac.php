@@ -9,13 +9,19 @@
         private $fffac;
         private $estfac;
         private $idemp;
-        private $idper;
         private $fefac;
         private $fvfac;
         private $tipfac;
         private $forpag;
-        private $fecact;
-
+        private $idpercre;
+        private $idper;
+        private $fecha;
+        // private $idperrev;
+        // private $idperapr;
+        // private $idperent;
+        // private $fprfac;
+        // private $faprfac;
+        
         //------------GET-----------
         public function getIdfac(){
             return $this->idfac;
@@ -38,9 +44,6 @@
         public function getIdemp(){
             return $this->idemp;
         }
-        public function getIdper(){
-            return $this->idper;
-        }
         public function getFefac(){
             return $this->fefac;
         }
@@ -53,6 +56,30 @@
         public function getTipfac(){
             return $this->tipfac;
         }
+        public function getIdpercre(){
+            return $this->idpercre;
+        }
+        public function getIdper(){
+            return $this->idper;
+        }
+        public function getFecha(){
+            return $this->fecha;
+        }
+        // public function getIdperrev(){
+        //     return $this->idperrev;
+        // }
+        // public function getIdperapr(){
+        //     return $this->idperapr;
+        // }
+        // public function getIdperent(){
+        //     return $this->idperent;
+        // }
+        // public function getFprfac(){
+        //     return $this->fprfac;
+        // }
+        // public function getFaprfac(){
+        //     return $this->faprfac;
+        // }
 
         //------------SET-----------
         public function setIdfac($idfac){
@@ -76,9 +103,6 @@
         public function setIdemp($idemp){
             $this->idemp=$idemp;
         }
-        public function setIdper($idper){
-            $this->idper=$idper;
-        }
         public function setFefac($fefac){
             $this->fefac=$fefac;
         }
@@ -91,12 +115,36 @@
         public function setTipfac($tipfac){
             $this->tipfac=$tipfac;
         }
+        public function setIdpercre($idpercre){
+            $this->idpercre=$idpercre;
+        }
+        public function setIdper($idper){
+            $this->idper=$idper;
+        }
+        public function setFecha($fecha){
+            $this->fecha=$fecha;
+        }
+        // public function setIdperrev($idperrev){
+        //     $this->idperrev=$idperrev;
+        // }
+        // public function setIdperapr($idperapr){
+        //     $this->idperapr=$idperapr;
+        // }
+        // public function setIdperent($idperent){
+        //     $this->idperent=$idperent;
+        // }
+        // public function setFprfac($fprfac){
+        //     $this->fprfac=$fprfac;
+        // }
+        // public function setFaprfac($faprfac){
+        //     $this->faprfac=$faprfac;
+        // }
 
       
-        function getAll(){
+        function getAll(){//en que estado estaba?
             $idpef = $_SESSION['idpef'];
-            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.forpag, f.idper, f.fefac, f.fvfac, f.forpag, f.tipfac, e.razsoem, e.nitemp, r.nomper FROM factura AS f INNER JOIN empresa AS e ON f.idemp=e.idemp INNER JOIN persona AS r ON f.idper=r.idper";
-            if($idpef==8 or $idpef==9 or $idpef==10 or $idpef==11) $sql .= " WHERE f.estfac!=3";
+            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.idpercre AS pcre, f.idperrev AS prev, f.idperapr AS papr, f.idperent AS pent, f.fefac, f.fvfac, f.forpag, f.tipfac,f.faprfac, f.fprfac, e.razsoem, e.nitemp, CONCAT(rc.nomper,' ',rc.apeper) AS nompcre, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, CONCAT(ra.nomper,' ',ra.apeper) AS nompapr,CONCAT(re.nomper,' ',re.apeper) AS nompent, ve.nomval AS est, vf.nomval AS fpag, vt.nomval AS tip FROM factura AS f INNER JOIN empresa AS e ON f.idemp=e.idemp INNER JOIN persona AS rc ON f.idpercre=rc.idper LEFT JOIN persona AS rr ON f.idperrev=rr.idper LEFT JOIN persona AS ra ON f.idperapr=ra.idper LEFT JOIN persona AS re ON f.idperent=re.idper INNER JOIN valor AS ve ON f.estfac=ve.idval INNER JOIN valor AS vf ON f.forpag=vf.idval INNER JOIN valor AS vt ON f.tipfac=vt.idval";
+            if($idpef==8 or $idpef==9 or $idpef==10 or $idpef==11) $sql .= " WHERE f.estfac!=3"; 
             elseif($idpef==8) $sql .= " WHERE f.estfac=1 ";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
@@ -118,7 +166,7 @@
         // }
 
         function getOne(){
-            $sql = "SELECT idfac, nofac, confac, fifac, estfac, idemp, idper, fefac, fvfac, forpag, tipfac FROM factura WHERE idfac=:idfac";
+            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.idpercre AS pcre, f.idperrev AS prev, f.idperapr AS papr, f.idperent AS pent, f.fefac, f.fvfac, f.forpag, f.tipfac, e.razsoem, e.nitemp, CONCAT(rc.nomper,' ',rc.apeper) AS nompcre, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, CONCAT(ra.nomper,' ',ra.apeper) AS nompapr,CONCAT(re.nomper,' ',re.apeper) AS nompent, ve.nomval AS est, vf.nomval AS fpag, vt.nomval AS tip FROM factura AS f INNER JOIN empresa AS e ON f.idemp=e.idemp INNER JOIN persona AS rc ON f.idpercre=rc.idper LEFT JOIN persona AS rr ON f.idperrev=rr.idper LEFT JOIN persona AS ra ON f.idperapr=ra.idper LEFT JOIN persona AS re ON f.idperent=re.idper INNER JOIN valor AS ve ON f.estfac=ve.idval INNER JOIN valor AS vf ON f.forpag=vf.idval INNER JOIN valor AS vt ON f.tipfac=vt.idval WHERE idfac=:idfac";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -131,7 +179,7 @@
 
         function save(){
             // try {
-                $sql = "INSERT INTO factura (nofac, confac, fifac, estfac, idemp, idper, fefac, fvfac, forpag, tipfac) VALUES (:nofac, :confac, :fifac, :estfac, :idemp, :idper, :fefac, :fvfac, :forpag, :tipfac)";
+                $sql = "INSERT INTO factura (nofac, confac, fifac, estfac, idemp, idpercre, fefac, fvfac, forpag, tipfac) VALUES (:nofac, :confac, :fifac, :estfac, :idemp, :idpercre, :fefac, :fvfac, :forpag, :tipfac)";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -145,8 +193,8 @@
                 $result->bindParam(":estfac", $estfac);
                 $idemp = $this->getIdemp();
                 $result->bindParam(":idemp", $idemp);
-                $idper = $_SESSION['idper'];
-                $result->bindParam(":idper", $idper);
+                $idpercre = $this->getIdpercre();
+                $result->bindParam(":idpercre", $idpercre);
                 $fefac = $this->getFefac();
                 $result->bindParam(":fefac", $fefac);
                 $fvfac = $this->getFvfac();
@@ -163,14 +211,22 @@
 
         function editAct(){
             try{
-                $sql = "UPDATE factura SET estfac=:estfac WHERE idfac=:idfac";
+                $estfac = $this->getEstfac();
+                $sql = "UPDATE factura SET estfac=:estfac,";
+                if($estfac==52) $sql .= " idperrev=:idper, fprfac=:fecha";
+                if($estfac==53) $sql .= " idperapr=:idper, faprfac=:fecha";
+                if($estfac==54) $sql .= " idperent=:idper, fffac=:fecha";
+                $sql .= " WHERE idfac=:idfac";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
                 $idfac = $this->getIdfac();
                 $result->bindParam(":idfac",$idfac);
-                $estfac = $this->getEstfac();
                 $result->bindParam(":estfac",$estfac);
+                $idper = $this->getIdper();
+                $result->bindParam(":idper",$idper);
+                $fecha = $this->getFecha();
+                $result->bindParam(":fecha",$fecha);
                 $result->execute();
             }catch(Exception $e){
                 ManejoError($e);
@@ -246,7 +302,7 @@
         try {
             $fffac = $this->getFffac();
             $sql = "UPDATE factura SET estfac=:estfac";
-            if($fffac) $sql .= ", fffac=:fffac";
+            if($fffac) $sql .= ", fffac=:fffac"; //porque esa coma 
             $sql .= " WHERE idfac=:idfac";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();

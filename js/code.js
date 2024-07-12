@@ -23,6 +23,21 @@ $(document).ready(function () {
 });
 });
 
+// function verpass() {
+//   const passwordInput = document.getElementById('password');
+//   const eyeIcon = document.getElementById('vpass');
+
+//   if (passwordInput.type === 'password') {
+//       passwordInput.type = 'text';
+//       eyeIcon.classList.remove('fa-eye');
+//       eyeIcon.classList.add('fa-eye-slash');
+//   } else if (passwordInput.type === 'text'){
+//       passwordInput.type = 'password';
+//       eyeIcon.classList.remove('fa-eye-slash');
+//       eyeIcon.classList.add('fa-eye');
+//   }
+// }
+
 function solonum(e) {
 	key=e.keyCode || e.which;
 	teclado=String.fromCharCode(key);
@@ -80,6 +95,8 @@ function confirmar(nom){
   let v = confirm("¿Está seguro de cambiar el estado de esta factura?\n\n- "+nom);
   return v;
 }
+
+
 
 $('ul li').on('click', function() {
 	$('li').removeClass('active');

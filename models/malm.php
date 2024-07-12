@@ -4,16 +4,13 @@
 class Malm
 {
     private $idalm;
-    private $idval;
     private $fecalm;
 
 //-------------------------------GET---------------------------//
     public function getIdalm(){
         return $this->idalm;
     }
-    public function getIdval(){
-        return $this->idval;
-    }
+
     public function getFecalm(){
         return $this->fecalm;
     }
@@ -22,9 +19,6 @@ class Malm
     public function setIdalm($idalm){
         $this->idalm = $idalm;
     }
-    public function setIdval($idval){
-        $this->idval = $idval;
-    }
     public function setFecalm($fecalm){
         $this->fecalm = $fecalm;
     }
@@ -32,7 +26,7 @@ class Malm
 
     function getAll(){
         // try{
-            $sql = "SELECT idalm, fecalm, idval FROM almuerzo";
+            $sql = "SELECT idalm, fecalm FROM almuerzo";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -46,7 +40,7 @@ class Malm
     function getOne(){
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "SELECT idalm, fecalm, idval FROM almuerzo WHERE idalm=:idalm";
+        $sql = "SELECT idalm, fecalm FROM almuerzo WHERE idalm=:idalm";
         $result = $conexion->prepare($sql);
         $idalm = $this->getIdalm();
         $result->bindParam(":idalm", $idalm);
@@ -58,7 +52,7 @@ class Malm
     function save(){
         try {
             // SELECT a.idalm, a.fecalm, d.idval, d.nomdom FROM almuerzo AS a INNER JOIN dominio;
-            $sql = "INSERT INTO almuerzo (idalm, fecalm, idval) VALUES (:idalm, :fecalm)";
+            $sql = "INSERT INTO almuerzo (idalm, fecalm) VALUES (:idalm, :fecalm)";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);

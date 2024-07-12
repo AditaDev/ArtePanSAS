@@ -47,7 +47,9 @@ INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (2, 'Tipo de factura'),
 (3, 'Tipo de plato'),
 (4, 'Tipo de Novedad'),
-(5, 'Area');
+(5, 'Area'),
+(6, 'Estado de factura');
+
 
 -- --------------------------------------------------------
 
@@ -83,31 +85,22 @@ INSERT INTO `empresa` (`idemp`, `nitemp`, `razsoem`, `actemp`) VALUES
 CREATE TABLE `factura` (
   `idfac` bigint(11) NOT NULL,
   `nofac` bigint(11) NOT NULL,
-  `fifac` date NOT NULL,
   `confac` varchar(100) NOT NULL,
-  `fffac` date DEFAULT NULL,
   `idemp` bigint(11) DEFAULT NULL,
-  `estfac` int(4) DEFAULT NULL,
+  `estfac` bigint(11) NOT NULL,
   `fefac` date NOT NULL,
   `fvfac` date NOT NULL,
   `forpag` bigint(11) NOT NULL,
   `tipfac` bigint(11) NOT NULL,
   `idpercre` bigint(11) NOT NULL,
+  `fifac` date NOT NULL,
   `idperrev` bigint(11) DEFAULT NULL,
+  `fprfac` date DEFAULT NULL,
   `idperapr` bigint(11) DEFAULT NULL,
-  `idperent` bigint(11) DEFAULT NULL
+  `faprfac` date DEFAULT NULL,
+  `idperent` bigint(11) DEFAULT NULL, 
+  `fffac` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `factura`
---
-
-INSERT INTO `factura` (`idfac`, `nofac`, `fifac`, `confac`, `fffac`, `idemp`, `estfac`, `fefac`, `fvfac`, `forpag`, `tipfac`, `idpercre`, idperrev, idperapr, idperent) VALUES
-(1, 123456, '2024-05-01', '2000 kl de sodio', '2024-06-01', 1, 2, '2024-08-01', '2024-09-01', 1, 22, 1,NULL,NULL,NULL),
-(2, 987564, '2024-05-02', '2000 kl de potacsio', '2024-06-02', 2, 2, '2024-08-01', '2024-09-01', 4, 23, 2,NULL,NULL,NULL),
-(3, 785163, '2024-05-03', '2000 kl de aguacate', '2024-06-03', 3, 3, '2024-08-01', '2024-09-01', 5, 20, 3,NULL,NULL,NULL),
-(4, 954631, '2024-05-04', '2000 kl de plata', '2024-06-04', 4, 4, '2024-08-01', '2024-09-01', 7, 24, 4,NULL,NULL,NULL),
-(5, 845210, '2024-05-05', '2000 kl de azucar', '2024-06-05', 4, 2, '2024-08-01', '2024-09-01', 11, 19, 3,NULL,NULL,NULL);
 
 -- --------------------------------------------------------
 
@@ -479,7 +472,13 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (47, 'Tesoreria', 5, 503, 1),
 (48, 'Cartera', 5, 504, 1),
 (49, 'Facturación', 5, 505, 1),
-(50, 'Ventas', 5, 506, 1);
+(50, 'Ventas', 5, 506, 1),
+(51, 'Sin revisar', 6, 601, 1),
+(52, 'Primera Revisión', 6, 602, 1),
+(53, 'Revisada', 6, 603, 1),
+(54, 'Entregada', 6, 604, 1);
+
+
 
 
 
@@ -516,13 +515,14 @@ ALTER TABLE `factura`
   ADD KEY `idemp` (`idemp`),
   ADD KEY `tipfac` (`tipfac`),
   ADD KEY `forpag` (`forpag`),
+  ADD KEY `estfac` (`estfac`),
   ADD KEY `idpercre` (`idpercre`),
   ADD KEY `idperrev` (`idperrev`),
   ADD KEY `idperapr` (`idperapr`), 
   ADD KEY `idperent` (`idperent`); 
 
 --
--- Indices de la tabla `modulo`
+-- Indices de la tabla `modulo`                                        
 --
 ALTER TABLE `modulo`
   ADD PRIMARY KEY (`idmod`);
