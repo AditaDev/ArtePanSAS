@@ -1,104 +1,32 @@
 <?php
-require_once('controllers/calm.php'); ?>
+ require_once ('controllers/calm.php'); ?>
 
 
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
     <div class="row">
-        <div class="col-md-4">
-            <div class="container">
-            <h2>sopa</h2>
-                <div class="dropdown">
-                    <button class="btn btn-success dropdown-toggle" type="button" id="multiSelectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Seleccionar
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="multiSelectDropdown">
-                        <?php if ($datProSop) {
-                            foreach ($datProSop as $dtp) { ?>
-                                <li>
-                                    <input name="idpro[]" type="checkbox" value="<?= $dtp['idpro']; ?>" <?php if ($datOne && $dtp['idpro'] == $datOne[0]['idpro']) echo "selected"; ?>>
-                                    <label> <?= $dtp['nompro']; ?></label>
-                                </li>
-                        <?php }
-                        } ?>
-                    </ul>
-                </div>
-            </div>
+        <div class="form-group col-md-4">
+            <label for="ppalm"><strong>Plato principal:</strong></label>
+            <input type="text" name="ppalm" id="ppalm" class="form-control" value="<?php if ($datOne) echo $datOne[0]['ppalm']; ?>" <?php if ($datOne) echo $datOne[0]['ppalm']; ?> required>
         </div>
-        <div class="col-md-4">
-            <div class="container">
-            <h2>Pf</h2>
-                <div class="dropdown">
-                    <button class="btn btn-success dropdown-toggle" type="button" id="multiSelectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Seleccionar
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="multiSelectDropdown">
-                        <?php if ($datProPf) {
-                            foreach ($datProPf as $dtp) { ?>
-                                <li>
-                                    <input name="idpro[]" type="checkbox" value="<?= $dtp['idpro']; ?>" <?php if ($datOne && $dtp['idpro'] == $datOne[0]['idpro']) echo "selected"; ?>>
-                                    <label> <?= $dtp['nompro']; ?></label>
-                                </li>
-                        <?php }
-                        } ?>
-                    </ul>
-                </div>
-            </div>
+        <div class="form-group col-md-4">
+            <label for="spalm"><strong>Sopa:</strong></label>
+            <input class="form-control" type="text" id="spalm" name="spalm" value="<?php if ($datOne) echo $datOne[0]['spalm']; ?>" required>
         </div>
-        <div class="col-md-4">
-            <div class="container">
-                <h2>jugo</h2>
-                <div class="dropdown">
-                    <button class="btn btn-success dropdown-toggle" type="button" id="multiSelectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Seleccionar
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="multiSelectDropdown">
-                        <?php if ($datProJg) {
-                            foreach ($datProJg as $dtp) { ?>
-                                <li>
-                                    <input name="idpro[]" type="checkbox" value="<?= $dtp['idpro']; ?>" <?php if ($datOne && $dtp['idpro'] == $datOne[0]['idpro']) echo "selected"; ?>>
-                                    <label> <?= $dtp['nompro']; ?></label>
-                                </li>
-                        <?php }
-                        } ?>
-                    </ul>
-                </div>
-            </div>
+        <div class="form-group col-md-4">
+            <label for="jgalm"><strong>Jugo:</strong></label>
+            <input type="text" name="jgalm" id="jgalm" class="form-control" value="<?php if ($datOne) echo $datOne[0]['jgalm']; ?>" <?php if ($datOne) echo $datOne[0]['jgalm']; ?> required>
         </div>
-        <script>
-            const chBoxes = document.querySelectorAll('.dropdown-menu input[type="checkbox"]');
-            const dpBtn = document.getElementById('multiSelectDropdown');
-            let mySelectedListItems = [];
-
-            function handleCB() {
-                mySelectedListItems = [];
-                let mySelectedListItemsText = '';
-
-                chBoxes.forEach((checkbox) => {
-                    if (checkbox.checked) {
-                        mySelectedListItems.push(checkbox.value);
-                        mySelectedListItemsText += checkbox.value + ', ';
-                    }
-                });
-                dpBtn.innerText =
-                    mySelectedListItems.length > 0 ?
-                    mySelectedListItemsText.slice(0, -2) : 'Select';
-            }
-
-            chBoxes.forEach((checkbox) => {
-                checkbox.addEventListener('change', handleCB);
-            });
-        </script>
-
-
+    </div>
+    <div class="form-group col-md-12" id="boxbtn">
+        <br><br>
         <input class="btn btn-primary" type="submit" value="Registrar" id="btns">
         <input type="hidden" name="ope" value="save">
-        <input type="hidden" name="idalm" value="<?php if ($datOne) echo $datOne[0]['idalm']; ?>">
+        <input type="hidden" name="idalm" value="<?php if ($datOne) echo $datOne[0]['idalm'];?>">
     </div>
-
-
+    </div>
 </form>
 
-<table id="mytable" class="table table-striped" tyle="width:100%">
+<table id="mytable" class="table table-striped" style="width:100%">
     <thead>
         <tr>
             <th>Datos</th>
@@ -113,13 +41,18 @@ require_once('controllers/calm.php'); ?>
                     <td>
                         <small>
                             <strong><?= $dta['fecalm']; ?> </strong><br>
+                            <strong>Plato principal: </strong><?= $dta['ppalm']; ?><br>
+                            <strong>Sopa: </strong> <?= $dta['spalm']; ?><br>
+                            <strong>Jugo: </strong> <?= $dta['jgalm']; ?><br>
+
                         </small>
                     </td>
-                    <td tyle="text-align: left;">
-                        <i class="fa-solid fa-rectangle-list fa-2x iconi" title="Detalle almuerzo"></i>
-                    </td>
+                    <td style="text-align: left;">
+                    <i class="fa-solid fa-rectangle-list fa-2x iconi" title="Detalle almuerzo"></i>
 
-                    <td tyle="text-align: right;">
+
+                    </td>
+                    <td style="text-align: right;">
                         <a href="home.php?pg=<?= $pg; ?>&idalm=<?= $dta['idalm']; ?>&ope=edi" title="Editar">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
                         </a>
@@ -128,8 +61,7 @@ require_once('controllers/calm.php'); ?>
                         </a>
                     </td>
                 </tr>
-        <?php }
-        } ?>
+        <?php }} ?>
     </tbody>
     <tfoot>
         <tr>
@@ -139,51 +71,3 @@ require_once('controllers/calm.php'); ?>
         </tr>
     </tfoot>
 </table>
-
-<!-- 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">    
-  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">  
-
- <body>  
-  
-<div class="container">  
-    <strong>Seleccione los productos:</strong>  
-    <select id="multiple-checkboxes" multiple="multiple">  
-        <option value="php">PHP</option>  
-        <option value="javascript">JavaScript</option>  
-        <option value="java">Java</option>  
-        <option value="sql">SQL</option>  
-        <option value="jquery">Jquery</option>  
-        <option value=".net">.Net</option>  
-    </select>  
-</div>  
-  
-<script type="text/javascript">  
-    $(document).ready(function() {  
-        $('#multiple-checkboxes').multiselect();  
-    });  
-</script>  
-  
-</body>   -->
-
-<!-- <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
-    <div class="row">
-        <div class="form-group col-md-6 container">  
-            <strong>Seleccione los productos:</strong>  
-            <select id="multiple-checkboxes" multiple="multiple">  
-                <option value="php">hola</option>  
-                <option value="javascript">te</option>  
-                <option value="java">amo</option>  
-                <option value="sql">mucho</option>  
-                <option value="jquery">bay</option>  
-                <option value=".net">.Net</option>  
-            </select>  
-        </div>  
-            <script type="text/javascript">  
-                    $(document).ready(function() {  
-                    $('#multiple-checkboxes').multiselect();  
-                    });  
-            </script>  -->

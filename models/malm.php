@@ -1,19 +1,30 @@
 <?php
-   
 
 class Malm
 {
     private $idalm;
     private $fecalm;
+    private $ppalm;
+    private $spalm;
+    private $jgalm;
 
 //-------------------------------GET---------------------------//
     public function getIdalm(){
         return $this->idalm;
     }
-
     public function getFecalm(){
         return $this->fecalm;
     }
+    public function getPpalm(){
+        return $this->ppalm;
+    }
+    public function getSpalm(){
+        return $this->spalm;
+    }
+    public function getJgalm(){
+        return $this->jgalm;
+    }
+
 
 //-------------------------------SET---------------------------//
     public function setIdalm($idalm){
@@ -22,11 +33,21 @@ class Malm
     public function setFecalm($fecalm){
         $this->fecalm = $fecalm;
     }
+    public function setPpalm($ppalm){
+        $this->ppalm = $ppalm;
+    }
+    public function setSpalm($spalm){
+        $this->spalm = $spalm;
+    }
+    public function setJgalm($jgalm){
+        $this->jgalm = $jgalm;
+    }
+
   
 
     function getAll(){
         // try{
-            $sql = "SELECT idalm, fecalm FROM almuerzo";
+            $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm FROM almuerzo";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -38,9 +59,9 @@ class Malm
         return $res; 
     }
     function getOne(){
+        $sql = "SELECT fecalm, ppalm, spalm, jgalm FROM almuerzo WHERE idalm=:idalm";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "SELECT idalm, fecalm FROM almuerzo WHERE idalm=:idalm";
         $result = $conexion->prepare($sql);
         $idalm = $this->getIdalm();
         $result->bindParam(":idalm", $idalm);
@@ -50,18 +71,37 @@ class Malm
     }
 
     function save(){
-        try {
-            // SELECT a.idalm, a.fecalm, d.idval, d.nomdom FROM almuerzo AS a INNER JOIN dominio;
-            $sql = "INSERT INTO almuerzo (idalm, fecalm) VALUES (:idalm, :fecalm)";
+        //try {
+            $sql = "INSERT INTO almuerzo (fecalm, ppalm, spalm, jgalm) VALUES (:fecalm, :ppalm, :spalm, :jgalm)";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
-            $idalm = $this->getIdalm();
-            $result->bindParam(":idalm", $idalm);
+            $ppalm = $this->getPpalm();
+            $result->bindParam(":ppalm", $ppalm);
+            $spalm = $this->getSpalm();
+            $result->bindParam(":spalm", $spalm);
+            $jgalm = $this->getJgalm();
+            $result->bindParam(":jgalm", $jgalm);
+            $fecalm = $this->getFecalm();
+            $result->bindParam(":fecalm", $fecalm);
             $result->execute();
-        } catch (Exception $e) {
-            ManejoError($e);
-        }
+    //     } catch (Exception $e) {
+    //         ManejoError($e);
+    //     }
+    }
+
+    function edit(){
+        $sql = "UPDATE almuerzo SET ppalm=:ppalm, spalm=:spalm, jgalm=:jgalm WHERE idalm=:idalm";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $ppalm = $this->getPpalm();
+        $result->bindParam(":ppalm", $ppalm);
+        $spalm = $this->getSpalm();
+        $result->bindParam(":spalm", $spalm);
+        $jgalm = $this->getJgalm();
+        $result->bindParam(":jgalm", $jgalm);
+        $result->execute();
     }
 
     function del(){
@@ -77,19 +117,5 @@ class Malm
             ManejoError($e);
         }
     }
-
-    function getAllPro($idval)
-    {
-        $sql = "SELECT idpro, nompro FROM producto WHERE idval=:idval";
-        $modelo = new conexion();
-        $conexion = $modelo->get_conexion();
-        $result = $conexion->prepare($sql);
-        $result->bindParam(":idval", $idval);
-        $result->execute();
-        $res = $result->fetchall(PDO::FETCH_ASSOC);
-        return $res;
     }
-
-
-}
 ?>

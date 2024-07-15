@@ -15,7 +15,8 @@
     $mped->setIdper($idper);
 
     $datOne = $mped->getOne();
-    $datAll = $mped->getAll();
+    $datAllAlm = $mped->getAllAlm();
+ 
     
 // if ($opera == "save") {
 //     // Verificar si el usuario ya ha votado antes de guardar el voto

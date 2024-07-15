@@ -1,6 +1,7 @@
 
 <?php
 require_once('controllers/cped.php');
+require_once('controllers/calm.php');
 ?>
 
 <style>
@@ -31,17 +32,14 @@ require_once('controllers/cped.php');
     text-decoration: none;
     color: white;
 }
-
     </style>
-
-<?php if ($datAll) { foreach ($datAll as $dta)  {?>
     
-
-        <div class="tarjeta" style= "text-align: center;">
+    <?php if ($datAll) {foreach ($datAll as $dta) { ?>
+    <div class="tarjeta" tyle= "text-align: center;">
         <div class="titulo">Almuerzo del día</div>
-    <div class="cuerpo">
-        <!---    <div>
-                <strong>Fecha: </strong><?= $dta['']; ?>
+        <div class="cuerpo">
+            <div>
+                <strong>Fecha: </strong><?= $dta['fecalm']; ?>
             </div>
             <div>
                 <strong>Plato principal: </strong><?= $dta['ppalm']; ?>
@@ -51,10 +49,10 @@ require_once('controllers/cped.php');
             </div>
             <div>
                 <strong>Jugo: </strong><?= $dta['jgalm']; ?>
-            </div> --->
+            </div> 
     </div>
     <div class="pie">
-            <button type="button"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcb<?= $dta['idper']; ?>" title="Pedir">  PEDIR  </button>
+            <button type="button"  class="btn btn-primary" title="Pedir">  PEDIR  </button>
 </div>
 
 

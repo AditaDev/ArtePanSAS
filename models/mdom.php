@@ -29,9 +29,9 @@ class Mdom
         return $res;
     }
     function getOne(){
+        $sql = "SELECT iddom, nomdom FROM dominio WHERE iddom=:iddom";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "SELECT iddom, nomdom FROM dominio WHERE iddom=:iddom";
         $result = $conexion->prepare($sql);
         $iddom = $this->getIddom();
         $result->bindParam(":iddom", $iddom);

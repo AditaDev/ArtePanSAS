@@ -45,7 +45,7 @@
         $mfac->setForpag($forpag);
         $mfac->setIdpercre($_SESSION['idper']);
         // $mfac->setIdperrev($idperrev);
-        // $mfac->setIdperapr($idperapr); //las pongo aca? o arriba?
+        // $mfac->setIdperapr($idperapr); 
         // $mfac->setIdperent($idperent);
 
         if(!$idfac) $mfac->save();
@@ -68,7 +68,7 @@
         $mfac->editAct(); 
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
-//estas viendo?
+
 ?>
 <!-- if($ope=='act' && $idmod && $actmod){
         $mmod->setActmod($actmod);

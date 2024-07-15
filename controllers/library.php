@@ -32,7 +32,6 @@ function ManejoError($e)
 		echo '<script>err("Se generó un error comuníquese con el administrador del sistema.");</script>';
 	}
 }
-
 //------------Modal vpef, pagxpef-----------
 function modalChk($nm, $id, $tit, $mt, $pg, $dms)
 {
@@ -158,6 +157,46 @@ function modalDet($nom, $id, $titulo, $info){
 	$txt .= '</div>';
 	echo $txt;
 }
+
+//modal numero de personas
+function modalnper($nom, $id, $titulo, $info){
+	$txt = '';
+	$txt .= '<div class="modal fade" id="' . $nom . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+		$txt .= '<div class="modal-dialog">';
+			$txt .= '<div class="modal-content">';
+				$txt .= '<div class="modal-header">';
+					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$titulo.'</strong></h1>';
+					$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
+				$txt .= '</div>';
+				$txt .= '<div class="modal-body" style="margin: 0px 25px;">';
+				$txt .= '<div class="row"';
+					$txt .= '<div">';
+						$txt .= '<table>';
+							$txt .= '<tr><td><strong>Empresa: </strong></td><td class="inffac">'.$info[0]['razsoem'].'</td></tr>';	
+							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$info[0]['fefac'].'</td></tr>';
+							$txt .= '<tr><td><strong>Fecha de registro: </strong></td><td class="inffac">'.$info[0]['fifac'].'</td></tr>';
+							$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$info[0]['fvfac'].'</td></tr>';
+							$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$info[0]['fpag'].'</td></tr>';
+							$txt .= '<tr><td><strong>Registro: </strong></td><td class="inffac">'.$info[0]['nompcre'].'</td></tr>';
+							if($info[0]['prev'])$txt .= '<tr><td><strong>Primer revisión: </strong></td><td class="inffac">'.$info[0]['nomprev'].'</td></tr>';
+							if($info[0]['papr'])$txt .= '<tr><td><strong>Aprobada: </strong></td><td class="inffac">'.$info[0]['nompapr'].'</td></tr>';
+							if($info[0]['pent'])$txt .= '<tr><td><strong>Entregada: </strong></td><td class="inffac">'.$info[0]['nompent'].'</td></tr>';
+							
+							
+						$txt .= '</table>';
+					$txt .= '</div>';
+				$txt .= '</div>';
+				$txt .= '<div class="modal-footer">';
+					$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
+				$txt .= '</div>';
+			$txt .= '</div>';
+		$txt .= '</div>';
+	$txt .= '</div>';
+	echo $txt;
+}
+
+
+
 
 // ------------Modal vequ, prgxequi-----------
 // function modalPxE($nm, $id, $tit, $dom, $pg, $dms, $dga)

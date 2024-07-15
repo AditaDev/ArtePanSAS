@@ -12,20 +12,22 @@ USE artepansas;
 
 CREATE TABLE `almuerzo` (
   `idalm` bigint(11) NOT NULL,
-  `fecalm` date DEFAULT NULL
+  `ppalm` varchar(70) NOT NULL,
+  `spalm` varchar(70) NOT NULL,
+  `jgalm` varchar(70) NOT NULL,
+  `fecalm` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `almuerzo`
 --
+-- INSERT INTO `almuerzo` (`idalm`, `ppalm`, `spalm`, `jgalm`, `fecalm`) VALUES
+-- (1, 'Arroz, lentejas y papa sudada', 'Arroz', 'Piña' , NULL),
+-- (2, 'Arroz chino', 'Pasta', 'Mora', NULL),
+-- (3, 'Arroz con pollo', 'Platano', 'Guanabana', NULL),
+-- (4, 'Lasaña', 'Avena', 'Fresa',  NULL),
+-- (5, 'Ajiaco', 'Verduras', 'Mango', NULL);
 
-INSERT INTO `almuerzo` (`idalm`, `fecalm`) VALUES
-(1, '2024-07-01'),
-(2, '2024-07-01'),
-(3, '2024-07-01'),
-(4, '2024-07-01'),
-(5, '2024-07-01'),
-(6, '2024-07-01');
 
 -- --------------------------------------------------------
 
@@ -93,13 +95,13 @@ CREATE TABLE `factura` (
   `forpag` bigint(11) NOT NULL,
   `tipfac` bigint(11) NOT NULL,
   `idpercre` bigint(11) NOT NULL,
-  `fifac` date NOT NULL,
+  `fifac` datetime NOT NULL,
   `idperrev` bigint(11) DEFAULT NULL,
-  `fprfac` date DEFAULT NULL,
+  `fprfac` datetime DEFAULT NULL,
   `idperapr` bigint(11) DEFAULT NULL,
-  `faprfac` date DEFAULT NULL,
+  `faprfac` datetime DEFAULT NULL,
   `idperent` bigint(11) DEFAULT NULL, 
-  `fffac` date DEFAULT NULL
+  `fffac` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -242,23 +244,22 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 --
 
 CREATE TABLE `pedido` (
+  `idped` bigint(11) NOT NULL,
   `idalm` bigint(11) NOT NULL,
-  `idpro` bigint(11) NOT NULL,
   `idper` bigint(11) NOT NULL,
-  `fecped` date DEFAULT NULL
+  `fecped` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (idalm, `idpro`, `idper`, `fecped`) VALUES
-(1, 1, 1,'2024-07-01'),
-(2, 2, 2,'2024-07-01'),
-(3, 3, 3,'2024-07-01'),
-(4, 4, 4,'2024-07-01'),
-(5, 5, 5,'2024-07-01'),
-(6, 6, 6,'2024-07-01');
+-- INSERT INTO `pedido` (`idped`, `idalm`, `idper`, `fecped`) VALUES
+-- (1, 1, 1,'2024-07-01'),
+-- (2, 2, 2,'2024-07-01'),
+-- (3, 3, 3,'2024-07-01'),
+-- (4, 4, 4,'2024-07-01'),
+-- (5, 5, 5,'2024-07-01');
 
 -- --------------------------------------------------------
 
@@ -385,24 +386,6 @@ INSERT INTO `producto` (`idpro`, `nompro`, `idval`) VALUES
 --
 -- Estructura de tabla para la tabla `proxalm`
 --
-
-CREATE TABLE `proxalm` (
-  `idpro` bigint(11) NOT NULL,
-  `idalm` bigint(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `proxalm`
---
-
-INSERT INTO `proxalm` (`idpro`, `idalm`) VALUES
-(1, 1),
-(2, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6);
 
 -- --------------------------------------------------------
 
@@ -554,8 +537,7 @@ ALTER TABLE `pagxpef`
 --
 ALTER TABLE `pedido`
   ADD KEY `idalm` (`idalm`),
-  ADD KEY `idper` (`idper`),
-  ADD KEY `idpro` (`idpro`);
+  ADD KEY `idper` (`idper`);
 
 --
 -- Indices de la tabla `perfil`
@@ -589,9 +571,6 @@ ALTER TABLE `producto`
 --
 -- Indices de la tabla `proxalm`
 --
-ALTER TABLE `proxalm`
-  ADD KEY `idpro` (`idpro`),
-  ADD KEY `idalm` (`idalm`);
 
 --
 -- Indices de la tabla `valor`
@@ -604,7 +583,7 @@ ALTER TABLE `valor`
 -- AUTO_INCREMENT de las tablas volcadas
 --
 ALTER TABLE `almuerzo`
-  MODIFY `idalm` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `idalm` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `dominio`
 --
@@ -722,9 +701,7 @@ ALTER TABLE `perxpef`
 --
 -- Filtros para la tabla `proxalm`
 --
-ALTER TABLE `proxalm`
-  ADD CONSTRAINT `proxalm_ibfk_1` FOREIGN KEY (`idpro`) REFERENCES `producto` (`idpro`),
-  ADD CONSTRAINT `proxalm_ibfk_2` FOREIGN KEY (`idalm`) REFERENCES `almuerzo` (`idalm`);
+
 
 --
 -- Filtros para la tabla `valor`
