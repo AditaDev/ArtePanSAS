@@ -12,7 +12,6 @@ $fecalm = date("Y-m-d H:i:s");
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
 $datOne = NULL;
-$datAll = NULL;
 $datAll = $malm->getAll();
 
 $malm->setIdalm($idalm);
@@ -25,6 +24,7 @@ if ($ope == "save") {
     $malm->setFecalm($fecalm);
     if(!$idalm) $malm->save();
     else $malm->edit();
+    echo "<script>window.location='home.php?pg=".$pg."';</script>";
 }
 if ($ope == "edi" && $idalm) $datOne = $malm->getOne();
 if ($ope == "eli" && $idalm) $malm->del();

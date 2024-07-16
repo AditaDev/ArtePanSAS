@@ -21,12 +21,12 @@
         <br><br>
         <input class="btn btn-primary" type="submit" value="Registrar" id="btns">
         <input type="hidden" name="ope" value="save">
-        <input type="hidden" name="idalm" value="<?php if ($datOne) echo $datOne[0]['idalm'];?>">
+        <input type="hidden" name="idalm" value="<?php if ($datOne) echo $datOne[0]['idalm']; ?>">
     </div>
     </div>
 </form>
 
-<table id="mytable" class="table table-striped" style="width:100%">
+<table id="mytable" class="table table-striped" tyle="width:100%">
     <thead>
         <tr>
             <th>Datos</th>
@@ -47,12 +47,12 @@
 
                         </small>
                     </td>
-                    <td style="text-align: left;">
+                    <td tyle="text-align: left;">
                     <i class="fa-solid fa-rectangle-list fa-2x iconi" title="Detalle almuerzo"></i>
 
 
                     </td>
-                    <td style="text-align: right;">
+                    <td tyle="text-align: right;">
                         <a href="home.php?pg=<?= $pg; ?>&idalm=<?= $dta['idalm']; ?>&ope=edi" title="Editar">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
                         </a>

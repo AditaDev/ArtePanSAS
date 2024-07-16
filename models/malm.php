@@ -58,6 +58,21 @@ class Malm
         // }
         return $res; 
     }
+
+    function getAllAlm(){
+        // try{
+            $sql = "SELECT idalm, ppalm, spalm, jgalm, fecalm FROM almuerzo WHERE DATE(fecalm) >= DATE(NOW())";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+        // }catch(Exception $e){
+        //     ManejoError($e);
+        // }
+        return $res; 
+    }
+
     function getOne(){
         $sql = "SELECT fecalm, ppalm, spalm, jgalm FROM almuerzo WHERE idalm=:idalm";
         $modelo = new conexion();
@@ -95,6 +110,8 @@ class Malm
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
+        $idalm = $this->getIdalm();
+        $result->bindParam(":idalm", $idalm);
         $ppalm = $this->getPpalm();
         $result->bindParam(":ppalm", $ppalm);
         $spalm = $this->getSpalm();

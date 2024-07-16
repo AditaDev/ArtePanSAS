@@ -2,22 +2,38 @@
 <?php
 
     require_once ('models/mped.php');
+    include('models/malm.php');
 
     $mped = new Mped();
+    $malm = new Malm();
 
    
+    $idped = isset($_REQUEST['idped']) ? $_REQUEST['idped'] :NULL;
     $idper = isset($_SESSION['idper']) ? $_SESSION['idper'] :NULL;
     $idalm= isset($_REQUEST['idalm']) ? $_REQUEST['idalm']:NULL;
 
     $opera=isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
-    $pg = 62;
 
     $mped->setIdper($idper);
 
-    $datOne = $mped->getOne();
-    $datAllAlm = $mped->getAllAlm();
+    // $datOne = $mped->getOne();
+    $datAllAlm = $malm->getAllAlm();
+    $datOne = NULL;
  
+    if($ope=="save"){
+        $mped->setIdalm($idalm);
+        $mped->setFecped($fecact);
+        $mped->setIdper($_SESSION['idper']);
+        $mped->save(); 
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
+    }
+
     
+
+
+
+
+
 // if ($opera == "save") {
 //     // Verificar si el usuario ya ha votado antes de guardar el voto
 //     $getOne = $mped->getOne();

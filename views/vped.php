@@ -1,7 +1,6 @@
 
 <?php
 require_once('controllers/cped.php');
-require_once('controllers/calm.php');
 ?>
 
 <style>
@@ -10,7 +9,8 @@ require_once('controllers/calm.php');
     display: flex;
     flex-direction:column;
     justify-content:space-between;
-    width:600px;
+    width:500px;
+    text-align: center;
     border: 1px solid lightgray;
     box-shadow: 2px 2px 8px 4px #d3d3d3d1;
     border-radius:15px;
@@ -25,16 +25,17 @@ require_once('controllers/calm.php');
 .pie{
     background: #073663;
     border-radius:0 0 15px 15px;
-    padding: 10px;
+    padding: 1px;
     text-align:center;
 }
 .pie a{
     text-decoration: none;
     color: white;
 }
+
     </style>
     
-    <?php if ($datAll) {foreach ($datAll as $dta) { ?>
+    <?php if ($datAllAlm) {foreach ($datAllAlm as $dta) { ?>
     <div class="tarjeta" tyle= "text-align: center;">
         <div class="titulo">Almuerzo del día</div>
         <div class="cuerpo">
@@ -51,10 +52,12 @@ require_once('controllers/calm.php');
                 <strong>Jugo: </strong><?= $dta['jgalm']; ?>
             </div> 
     </div>
-    <div class="pie">
-            <button type="button"  class="btn btn-primary" title="Pedir">  PEDIR  </button>
-</div>
-
-
+    <div class="pie" id="boxbtn">
+                <br><br>
+                <input class="btn btn-primary" type="submit" value="Pedir">
+                <input type="hidden" name="ope" value="save">
+                <input type="hidden" name="idped" value="<?php if ($datOne) echo $datOne[0]['idped']; ?>">
+            </div>
 
 <?php }}?>
+            

@@ -29,8 +29,8 @@ class Mped{
         $this->fecped=$fecped;
     }
 
-    function getAllAlm(){
-        $sql = "SELECT a.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm FROM almuerzo AS a INNER JOIN pedido AS p ON p.idalm=a.idalm WHERE fecalm >= CURDATE()";
+    function getAll(){
+        $sql = "SELECT p.idped, p.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm, p.fecped, p.idper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -39,9 +39,23 @@ class Mped{
         return $res;
     }
 
-   
-    public function getOne(){
-        $sql = "SELECT count(idper) As al FROM pedido WHERE idper=:idper;";
+    function getOne(){
+        $sql = "SELECT p.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm, p.fecped, p.idper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm WHERE p.fecped=a.fecalm";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->execute();
+        $res = $result->fetchall(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
+
+
+
+
+   //para el modal
+    public function getAllPer(){
+        $sql = "SELECT count(idper) As al FROM pedido WHERE idper=:idper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -50,6 +64,24 @@ class Mped{
         $result->execute();
         $res=$result->fetchAll(PDO::FETCH_ASSOC);
         return $res;
+    }
+
+    function save(){
+        //try{
+            $sql = "INSERT INTO pedido (fecped, idper, idalm) VALUES (:fecped, :idper, :idalm)";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $fecped = $this->getfecped();
+            $result->bindParam(":fecped",$fecped);
+            $idper = $this->getIdper();
+            $result->bindParam(":idper",$idper);
+            $idalm = $this->getIdalm();
+            $result->bindParam(":idalm",$idalm);
+            $result->execute();
+    //     }catch(Exception $e){
+    //         ManejoError($e);
+    //     }
     }
 }
 ?>
