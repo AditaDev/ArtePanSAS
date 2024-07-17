@@ -16,7 +16,8 @@ $datAll = $malm->getAll();
 
 $malm->setIdalm($idalm);
 
-
+//ay problema de que no la ponga? que cosa? la fecha en save, nopi mi amor jummmm jajajaja te amo mucho, te amo mucho mas no me has contado el chisme no me amas jajajajjaja ahorita que slagamos te cuento, amor salganmos ya  y ya venimos , bueno chiqui jajajaj se me olvido escribir, es quer estaba mirando si se podia solucionar el editar rapido jajaj, amor pero no se que puede ser 
+// perdon perdon jajaja ya se que ese, creo que amor? es que de lo poco que se se supone que esta bien jsjsj, estara pegado? el error va a ser de sintaxis porque en la viista sale eso >" 
 if ($ope == "save") {
     $malm->setPpalm($ppalm);
     $malm->setSpalm($spalm);

@@ -247,7 +247,8 @@ CREATE TABLE `pedido` (
   `idped` bigint(11) NOT NULL,
   `idalm` bigint(11) NOT NULL,
   `idper` bigint(11) NOT NULL,
-  `fecped` datetime DEFAULT NULL
+  `fecped` datetime DEFAULT NULL,
+  `canalm` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -536,6 +537,7 @@ ALTER TABLE `pagxpef`
 -- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
+  ADD PRIMARY KEY `idped` (`idped`),
   ADD KEY `idalm` (`idalm`),
   ADD KEY `idper` (`idper`);
 
@@ -639,6 +641,10 @@ ALTER TABLE `producto`
 --
 ALTER TABLE `valor`
   MODIFY `idval` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+ALTER TABLE `pedido`
+  MODIFY `idped` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Restricciones para tablas volcadas

@@ -9,25 +9,26 @@
 
    
     $idped = isset($_REQUEST['idped']) ? $_REQUEST['idped'] :NULL;
-    $idper = isset($_SESSION['idper']) ? $_SESSION['idper'] :NULL;
-    $idalm= isset($_REQUEST['idalm']) ? $_REQUEST['idalm']:NULL;
-
+    $idalm = isset($_POST['idalm']) ? $_POST['idalm']:NULL;
+    $canalm = isset($_POST['canalm']) ? $_POST['canalm']:1;
+    $fecped = date("Y-m-d H:i:s");
+    
     $opera=isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
 
-    $mped->setIdper($idper);
+    $mped->setIdper($idped);
 
-    // $datOne = $mped->getOne();
     $datAllAlm = $malm->getAllAlm();
-    $datOne = NULL;
- 
+    $pg = 62;
+    
     if($ope=="save"){
         $mped->setIdalm($idalm);
-        $mped->setFecped($fecact);
+        $mped->setFecped($fecped);
+        $mped->setCanalm($canalm);
         $mped->setIdper($_SESSION['idper']);
         $mped->save(); 
-        echo "<script>window.location='home.php?pg=".$pg."';</script>";
+        echo "<script>alert('Has pedido ".$canalm." almuerzos exitosamente!!!');window.location='home.php?pg=".$pg."';</script>";
     }
-
+    $datOne = $mped->getOneAlm();
     
 
 
