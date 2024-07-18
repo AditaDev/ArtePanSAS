@@ -2,13 +2,22 @@
 
 class Malm
 {
+//--------Almuerzo-------
     private $idalm;
     private $fecalm;
     private $ppalm;
     private $spalm;
     private $jgalm;
 
-//-------------------------------GET---------------------------//
+//--------Pedido-------
+    private $idped;
+    private $idper;
+    private $fecped;
+    private $canalm;
+
+//------------------------------GET---------------------------//
+
+//--------Almuerzo-------
     public function getIdalm(){
         return $this->idalm;
     }
@@ -25,8 +34,22 @@ class Malm
         return $this->jgalm;
     }
 
-
+//--------Pedido-------
+    public function getIdped(){
+        return $this->idped;
+    }
+    public function getIdper(){
+        return $this->idper;
+    }
+    public function getfecped(){
+        return $this->fecped;
+    }
+    public function getCanalm(){
+        return $this->canalm;
+    }   
 //-------------------------------SET---------------------------//
+
+//--------Almuerzo-------
     public function setIdalm($idalm){
         $this->idalm = $idalm;
     }
@@ -43,38 +66,34 @@ class Malm
         $this->jgalm = $jgalm;
     }
 
-  
-
-    function getAll(){
-        // try{
-            $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm FROM almuerzo";
-            $modelo = new conexion();
-            $conexion = $modelo->get_conexion();
-            $result = $conexion->prepare($sql);
-            $result->execute();
-            $res = $result->fetchall(PDO::FETCH_ASSOC);
-        // }catch(Exception $e){
-        //     ManejoError($e);
-        // }
-        return $res; 
+//--------Pedido-------
+    public function setIdped($idped){
+        $this->idped=$idped;
+    }
+    public function setIdper($idper){
+        $this->idper=$idper;
+    }
+    public function setFecped($fecped){
+        $this->fecped=$fecped;
+    }
+    public function setCanalm($canalm){
+        $this->canalm=$canalm;
     }
 
-    function getAllAlm(){
-        // try{
-            $sql = "SELECT idalm, ppalm, spalm, jgalm, fecalm FROM almuerzo WHERE DATE(fecalm) >= DATE(NOW())";
-            $modelo = new conexion();
-            $conexion = $modelo->get_conexion();
-            $result = $conexion->prepare($sql);
-            $result->execute();
-            $res = $result->fetchall(PDO::FETCH_ASSOC);
-        // }catch(Exception $e){
-        //     ManejoError($e);
-        // }
+//--------Almuerzo-------
+    function getAll(){ 
+        $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm FROM almuerzo";
+        // $sql = "SELECT a.idalm, a.fecalm, a.ppalm, a.spalm, a.jgalm, p.idalm, p.idped FROM almuerzo AS a INNER JOIN pedido AS p ON a.idalm=p.idalm";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->execute();
+        $res = $result->fetchall(PDO::FETCH_ASSOC);
         return $res; 
     }
 
     function getOne(){
-        $sql = "SELECT fecalm, ppalm, spalm, jgalm FROM almuerzo WHERE idalm=:idalm";
+        $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm FROM almuerzo WHERE idalm=:idalm";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -86,7 +105,7 @@ class Malm
     }
 
     function save(){
-        //try {
+        try {
             $sql = "INSERT INTO almuerzo (fecalm, ppalm, spalm, jgalm) VALUES (:fecalm, :ppalm, :spalm, :jgalm)";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
@@ -100,9 +119,9 @@ class Malm
             $fecalm = $this->getFecalm();
             $result->bindParam(":fecalm", $fecalm);
             $result->execute();
-    //     } catch (Exception $e) {
-    //         ManejoError($e);
-    //     }
+        } catch (Exception $e) {
+            ManejoError($e);
+        }
     }
 
     function edit(){
@@ -134,5 +153,81 @@ class Malm
             ManejoError($e);
         }
     }
-    }
+
+//--------Pedido-------
+
+function getOneAlmF(){
+    $sql = "SELECT idalm, ppalm, spalm, jgalm, fecalm FROM almuerzo WHERE DATE(fecalm) >= DATE(NOW())";
+    $modelo = new conexion();
+    $conexion = $modelo->get_conexion();
+    $result = $conexion->prepare($sql);
+    $result->execute();
+    $res = $result->fetchall(PDO::FETCH_ASSOC);
+    return $res; 
+}
+
+function getAllDatPed(){
+    $sql = "SELECT p.idped, a.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm, p.fecped, p.idper, p.canalm, CONCAT(l.nomper,' ',l.apeper) AS nomper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm INNER JOIN persona AS l ON p.idper=l.idper WHERE p.idalm=:idalm";
+    $modelo = new conexion();
+    $conexion = $modelo->get_conexion();
+    $result = $conexion->prepare($sql);
+    $idalm= $this->getIdalm();
+    $result->bindParam(":idalm", $idalm);
+    $result->execute();
+    $res = $result->fetchall(PDO::FETCH_ASSOC);
+    return $res;
+}
+
+// function getOneAlm(){
+//     $sql = "SELECT p.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm, p.fecped, p.idper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm WHERE p.fecped=a.fecalm";
+//     $modelo = new conexion();
+//     $conexion = $modelo->get_conexion();
+//     $result = $conexion->prepare($sql);
+//     $result->execute();
+//     $res = $result->fetchall(PDO::FETCH_ASSOC);
+//     return $res;
+// }esa si se puede eliminar cre
+
+// function getOne(){
+//     $sql = "SELECT p.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm, p.fecped, p.idper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm WHERE p.fecped=a.fecalm";
+//     $modelo = new conexion();
+//     $conexion = $modelo->get_conexion();
+//     $result = $conexion->prepare($sql);
+//     //porahora entons dejemolo asi
+//     $result->execute();
+//     $res = $result->fetchall(PDO::FETCH_ASSOC);
+//     return $res;
+// }
+//para el modal
+public function getAllPer(){
+    $sql = "SELECT count(idper) AS al FROM pedido WHERE idper=:idper";
+    $modelo = new conexion();
+    $conexion = $modelo->get_conexion();
+    $result = $conexion->prepare($sql);
+    $idper= $this->getIdper();
+    $result->bindParam(":idper",$idper);
+    $result->execute();
+    $res=$result->fetchAll(PDO::FETCH_ASSOC);
+    return $res;
+}
+function savePed(){
+    //try{
+        $sql = "INSERT INTO pedido (fecped, idper, idalm, canalm) VALUES (:fecped, :idper, :idalm, :canalm)";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $fecped = $this->getfecped();
+        $result->bindParam(":fecped",$fecped);
+        $idper = $this->getIdper();
+        $result->bindParam(":idper",$idper);
+        $idalm = $this->getIdalm();
+        $result->bindParam(":idalm",$idalm);
+        $canalm = $this->getCanalm();
+        $result->bindParam(":canalm",$canalm);
+        $result->execute();
+//     }catch(Exception $e){
+//         ManejoError($e);
+//     }
+}
+}
 ?>

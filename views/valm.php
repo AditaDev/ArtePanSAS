@@ -21,8 +21,8 @@
     <div class="form-group col-md-12" id="boxbtn">
         <br><br>
         <input class="btn btn-primary" type="submit" value="Registrar" id="btns">
+        <input type="hidden" name="idalm" value="<?php if ($datOne) echo $datOne[0]['idalm'];?>"> 
         <input type="hidden" name="ope" value="save">
-        <input type="hidden" name="idalm" value="<?php if ($datOne) echo $datOne[0]['idalm'];?>">
     </div> 
 </form> 
 
@@ -33,12 +33,13 @@
             <th>No. de personas</th>
             <th></th>
         </tr>
+        </tr>
     </thead>
     <tbody>
         <?php if ($datAll) {
             foreach ($datAll as $dta) { ?>
                 <tr>
-                    <td>
+                    <td tyle="text-align: left;">
                         <small>
                             <strong><?= $dta['fecalm']; ?> </strong><br>
                             <strong>Plato principal: </strong><?= $dta['ppalm']; ?><br>
@@ -47,10 +48,12 @@
 
                         </small>
                     </td>
-                    <td tyle="text-align: left;">
-                    <i class="fa-solid fa-rectangle-list fa-2x iconi" title="Detalle almuerzo"></i>
-
-
+                    <td tyle="text-align: half;">
+                        <i class="fa-solid fa-rectangle-list fa-2x iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mtlp<?= $dta['idalm']; ?>" title="Detalle almuerzo"></i>              
+                        <?php
+                        $malm->setIdalm($dta['idalm']);
+                        $info = $malm->getAllDatPed();
+                        modalnper("mtlp", $dta['idalm'], $dta['fecalm'] . " - " .$dta['ppalm']. " - " .$dta['spalm']. " - " .$dta['jgalm'], $info);?>
                     </td>
                     <td tyle="text-align: right;">
                         <a href="home.php?pg=<?= $pg; ?>&idalm=<?= $dta['idalm']; ?>&ope=edi" title="Editar">
@@ -68,6 +71,7 @@
             <th>Datos</th>
             <th>No. de personas</th>
             <th></th>
+        </tr>
         </tr>
     </tfoot>
 </table>

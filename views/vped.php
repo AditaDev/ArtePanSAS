@@ -1,5 +1,5 @@
 <?php
-require_once('controllers/cped.php');
+require_once('controllers/calm.php');
 ?>
 
 <style>
@@ -45,9 +45,9 @@ require_once('controllers/cped.php');
 </style>
 
 
-<?php if ($datAllAlm) { ?>
+<?php if ($datOneAlmF) { ?>
     <div>
-        <?php foreach ($datAllAlm as $dta) { ?>
+        <?php foreach ($datOneAlmF as $dta) { ?>
             <form action="home.php?pg=<?= $pg; ?>" method="post" name="pedido">
                 <div class="tarjeta" tyle="text-align: center;">
                     <div class="titulo">Almuerzo del día</div>
@@ -73,7 +73,7 @@ require_once('controllers/cped.php');
                             <input class="btn btn-primary" type="submit" value="Pedir">
                             <input type="hidden" name="idalm" value="<?= $dta['idalm'] ?>">
                             <input type="hidden" name="idped" value="<?php if ($datOne) echo $datOne[0]['idped']; ?>">
-                            <input type="hidden" name="ope" value="save">
+                            <input type="hidden" name="ope" value="savePed">
                         </div>
             </form>
 

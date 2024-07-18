@@ -15,7 +15,7 @@ CREATE TABLE `almuerzo` (
   `ppalm` varchar(70) NOT NULL,
   `spalm` varchar(70) NOT NULL,
   `jgalm` varchar(70) NOT NULL,
-  `fecalm` datetime DEFAULT NULL
+  `fecalm` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -235,7 +235,9 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (63, 8),
 (63, 9),
 (63, 10),
-(63, 11);
+(63, 11),
+(63, 12);
+
 
 -- --------------------------------------------------------
 
@@ -290,7 +292,8 @@ INSERT INTO `perfil` (`idpef`, `nompef`, `idmod`, `idpag`) VALUES
 (8, 'Coordinador exportaciones', 1, 63),
 (9, 'Mantenimiento', 1, 63),
 (10, 'Coordinador logistica', 1, 63),
-(11, 'Coordinador calidad', 1, 63);
+(11, 'Coordinador calidad', 1, 63),
+(12, 'Tesoreria', 1, 63);
 
 -- --------------------------------------------------------
 
@@ -325,7 +328,8 @@ INSERT INTO `persona` (`idper`, `nomper`, `pasper`, `emaper`, `telper`, `apeper`
 (8, 'Prueba1', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba1@artepan.com', '322894463', 'Prueba1', '1077954332', 1, 49),
 (9, 'Prueba2', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba2@artepan.com', '322894463', 'Prueba2', '1077954332', 1, 49),
 (10, 'Prueba3', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba3@artepan.com', '322894463', 'Prueba3', '1077954332', 1, 49),
-(11, 'Prueba4', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba4@artepan.com', '322894463', 'Prueba4', '1077954332', 1, 49);
+(11, 'Prueba4', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba4@artepan.com', '322894463', 'Prueba4', '1077954332', 1, 49),
+(12, 'Prueba5', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba5@artepan.com', '322894463', 'Prueba5', '1077954332', 1, 49);
 
 -- --------------------------------------------------------
 
@@ -356,7 +360,8 @@ INSERT INTO `perxpef` (`idper`, `idpef`) VALUES
 (8, 8),
 (9, 9),
 (10, 10),
-(11, 11);
+(11, 11),
+(12, 12);
 
 -- --------------------------------------------------------
 
