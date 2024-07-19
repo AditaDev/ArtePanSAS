@@ -138,8 +138,18 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <?php }
                         } elseif ($dta["estfac"] == 54) { ?>
                             <span style="font-size: 1px;opacity: 0;">4</span>
+                            <?php if ($_SESSION['idpef'] == 12) { ?>
                             <i class="fa fa-solid fa-circle-check fa-2x chulo" title="<?= $dta['est']; ?>"></i>
+                        <?php } else { ?>
+                                <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=55" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
+                                    <i class="fa fa-solid fa-circle-check fa-2x chulo" title="<?= $dta['est']; ?>"></i>
+                                </a>
+                            <?php }
+                        } elseif ($dta["estfac"] == 55) { ?>
+                            <span style="font-size: 1px;opacity: 0;">4</span>
+                            <i class="fa fa-solid fa-circle-check fa-2x pagada" title="<?= $dta['est']; ?>"></i>
                         <?php } ?>
+
                     </td>
 
                     <td tyle="text-align: right;">

@@ -231,7 +231,9 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (64, 1),
 (64, 6),
 (110, 7),
+(63, 7),
 (63, 2),
+(63, 3),
 (63, 8),
 (63, 9),
 (63, 10),
@@ -319,17 +321,17 @@ CREATE TABLE `persona` (
 
 INSERT INTO `persona` (`idper`, `nomper`, `pasper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`, `area`) VALUES
 (1, 'Ada', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada@artepan.com', '3215646857', 'Rodriguez', '1071328321', 1, 45),
-(2, 'Nico', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico@artepan.com', '3215456998', 'Rodriguez', '1072749321', 1, 46),
-(3, 'Amy', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy@artepan.com', '3021845120', 'Gavilan', '1004985502', 1, 47),
-(4, 'Andrea', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada2@artepan.com', '3112132208', 'Casas', '1076655342', 1, 48),
-(5, 'Luisa', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'nico2@artepan.com', '3215495204', 'Jiménez', '1078944563', 1, 49),
-(6, 'Lucas', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy2@artepan.com', '3223548793', 'Mora', '1077954332', 1, 50),
-(7, 'Prueba', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba@artepan.com', '322894463', 'Prueba', '1077954332', 1, 48),
-(8, 'Prueba1', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba1@artepan.com', '322894463', 'Prueba1', '1077954332', 1, 49),
-(9, 'Prueba2', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba2@artepan.com', '322894463', 'Prueba2', '1077954332', 1, 49),
-(10, 'Prueba3', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba3@artepan.com', '322894463', 'Prueba3', '1077954332', 1, 49),
-(11, 'Prueba4', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba4@artepan.com', '322894463', 'Prueba4', '1077954332', 1, 49),
-(12, 'Prueba5', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'prueba5@artepan.com', '322894463', 'Prueba5', '1077954332', 1, 49);
+(2, 'Rita', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'rita@artepan.com', '3215456998', 'Bejarano', '1072749321', 1, 46),
+(3, 'Adriana', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'adriana@artepan.com', '3021845120', 'Montaño', '1004985502', 1, 47),
+(4, 'Amy', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy@artepan.com', '3112132208', 'Gavilan', '1076655342', 1, 48),
+(5, 'Lupita', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'lupita@artepan.com', '3215495204', 'Jiménez', '1078944563', 1, 49),
+(6, 'Ana', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ana@artepan.com', '3223548793', 'Moreno', '1077954332', 1, 50),
+(7, 'Jenny', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'jenny@artepan.com', '322894463', 'Barrera', '1077954332', 1, 48),
+(8, 'Fabian', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'fabianq@artepan.com', '322894463', 'Quiroga', '1077954332', 1, 49),
+(9, 'Fabian', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'fabianb@artepan.com', '322894463', 'Bastidas', '1077954332', 1, 49),
+(10, 'Jader', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'jader@artepan.com', '322894463', 'Mendoza', '1077954332', 1, 49),
+(11, 'Mery', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'mery@artepan.com', '322894463', 'Agudelo', '1077954332', 1, 49),
+(12, 'J', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'j@artepan.com', '322894463', 'Pardo', '1077954332', 1, 49);
 
 -- --------------------------------------------------------
 
@@ -356,7 +358,7 @@ INSERT INTO `perxpef` (`idper`, `idpef`) VALUES
 (1, 4),
 (1, 6),
 (1, 3),
-(1, 7),
+(7, 7),
 (8, 8),
 (9, 9),
 (10, 10),
@@ -465,7 +467,9 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (51, 'Sin revisar', 6, 601, 1),
 (52, 'Primera Revisión', 6, 602, 1),
 (53, 'Revisada', 6, 603, 1),
-(54, 'Entregada', 6, 604, 1);
+(54, 'Entregada', 6, 604, 1),
+(55, 'Pagada', 6, 605, 1),
+(56, 'En novedad', 6, 606, 1);
 
 
 
