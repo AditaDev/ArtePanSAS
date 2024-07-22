@@ -101,7 +101,9 @@ CREATE TABLE `factura` (
   `idperapr` bigint(11) DEFAULT NULL,
   `faprfac` datetime DEFAULT NULL,
   `idperent` bigint(11) DEFAULT NULL, 
-  `fffac` datetime DEFAULT NULL
+  `fffac` datetime DEFAULT NULL,
+  `idperpag` bigint(11) DEFAULT NULL, 
+  `fpagfac` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -123,9 +125,9 @@ CREATE TABLE `modulo` (
 --
 
 INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`, `idpag`) VALUES
-(1, 'Facturas', 'img/mod_facturas.png', 1, 60),
+(1, 'Facturas', 'img/mod_facturas.png', 1, 63),
 (2, 'Configuración', 'img/mod_configuracion.png', 1, 101),
-(3, 'Almuerzos', 'img/mod_almuerzos.png', 1, 61),
+(3, 'Almuerzos', 'img/mod_almuerzos.png', 1, 62),
 (4, 'Novedades', 'img/mod_configuracion.png', 1, 110);
 
 -- --------------------------------------------------------
@@ -184,7 +186,6 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (61, 'fa-solid fa-bacon', 'Almuerzos', 'views/valm.php', 13, 'home.php', 1, 3),
 (62, 'fa fa-solid fa-file-invoice-dollar', 'Pedidos', 'views/vped.php', 14, 'home.php', 1, 3),
 (63, 'fa fa-solid fa-duotone fa-wallet', 'Facturas por revisar', 'views/vfac.php', 15, 'home.php', 1, 1),
-(64, 'fa fa-solid fa-cookie-bite', 'Producto', 'views/vpro.php', 17, 'home.php', 1, 3),
 (101, 'fa fa-solid fa-cubes', 'Módulos', 'views/vmod.php', 1, 'home.php', 1, 2),
 (102, 'fa fa-regular fa-file', 'Paginas', 'views/vpag.php', 2, 'home.php', 1, 2),
 (103, 'fa fa-solid fa-user', 'PagxPef', 'views/vpgxf.php', 3, 'home.php', 2, 2),
@@ -212,10 +213,6 @@ CREATE TABLE `pagxpef` (
 --
 
 INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
-(109, 4),
-(60, 4),
-(61, 6),
-(62, 5),
 (101, 1),
 (102, 1),
 (103, 1),
@@ -223,22 +220,37 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (105, 1),
 (106, 1),
 (107, 1),
-(62, 1),
-(61, 1),
-(62, 6),
 (108, 1),
+(109, 1),
+(110, 1),
+(60, 1),
+(61, 1), 
+(62, 1),
 (63, 1),
-(64, 1),
-(64, 6),
-(110, 7),
-(63, 7),
 (63, 2),
+(62, 2),
 (63, 3),
+(62, 3),
+(60, 4),
+(109, 4),
+(110, 4),
+(62, 4),
+(62, 5),
+(61, 6),
+(62, 6),
+(110, 7),
+(62, 7),
+(63, 7),
 (63, 8),
+(62, 8),
 (63, 9),
+(62, 9),
 (63, 10),
+(62, 10),
 (63, 11),
-(63, 12);
+(62, 11),
+(63, 12),
+(62, 12);
 
 
 -- --------------------------------------------------------
@@ -350,52 +362,33 @@ CREATE TABLE `perxpef` (
 
 INSERT INTO `perxpef` (`idper`, `idpef`) VALUES
 (1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6),
 (1, 4),
 (1, 6),
-(1, 3),
+(1, 7),
+(2, 2),
+(2, 5),
+(3, 3),
+(3, 5),
+(4, 4),
+(4, 5),
+(5, 5),
+(6, 6),
+(6, 5),
 (7, 7),
+(7, 5),
 (8, 8),
+(8, 5),
 (9, 9),
+(9, 5),
 (10, 10),
+(10, 5),
 (11, 11),
-(12, 12);
+(11, 5),
+(12, 12),
+(12, 5);
 
 -- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `producto`
---
-
-CREATE TABLE `producto` (
-  `idpro` bigint(11) NOT NULL,
-  `nompro` varchar(100) NOT NULL,
-  `idval` bigint(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `producto`
---
-
-INSERT INTO `producto` (`idpro`, `nompro`, `idval`) VALUES
-(1, 'Lentejas', 26),
-(2, 'Pasta', 27),
-(3, 'Arroz', 25),
-(4, 'Pollo frito', 26),
-(5, 'Carne sudada', 27),
-(6, 'Pepinos', 25);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proxalm`
---
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `valor`
@@ -427,54 +420,58 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (11, '60 Días', 1, 111, 1),
 (12, '70 Días', 1, 112, 1),
 (13, 'Contado-Crédito', 1, 113, 1),
-(14, 'Materia prima', 2, 201, 1),
+
+--14/15/16 controlinterno   / no pasan pr
+--17/18 gerencia   / no pasan pr
+--19/20 coordinador exportaciones / gerencia
+--21 mantenimiento  /  gerencia
+--22/23/24 talento humano    /  gerencia
+--25 coordiandor logistica  /  gerencia
+
+(14, 'Materia prima', 2, 201, 1), 
 (15, 'Insumo', 2, 202, 1),
-(16, 'Transporte', 2, 203, 1),
-(17, 'Cartón', 2, 204, 1),
-(18, 'Cuenta de cobro', 2, 205, 1),
-(19, 'Servicio', 2, 206, 1),
+(16, 'Cartón', 2, 203, 1),
+(17, 'Cuenta de cobro', 2, 204, 1),
+(18, 'Servicio', 2, 205, 1),
+(19, 'Importación', 2, 206, 1),
 (20, 'Exportación', 2, 207, 1),
 (21, 'Mantenimiento', 2, 208, 1),
 (22, 'Dotación', 2, 209, 1),
 (23, 'Papelería', 2, 210, 1),
 (24, 'Mercado', 2, 210, 1),
-(25, 'Plato fuerte', 3, 301, 1),
-(26, 'Sopa', 3, 302, 1),
-(27, 'Jugo', 3, 303, 1),
-(28, 'Ensalada', 3, 304, 1),
-(29, 'Postre', 3, 305, 1),
-(30, 'Calamidad familiar', 4, 401, 1),
-(31, 'Llegada tarde', 4, 402, 1),
-(32, 'Liquidación vacaciones', 4, 403, 1),
-(33, 'Ausencia', 4, 404, 1),
-(34, 'Ausencia injustificada', 4, 405, 1),
-(35, 'Ingreso', 4, 406, 1),
-(36, 'Retiro', 4, 407, 1),
-(37, 'Permiso remunerado', 4, 408, 1),
-(38, 'Permiso no remunerado', 4, 409, 1),
-(39, 'Censantias', 4, 409, 1),
-(40, 'Prestamos', 4, 410, 1),
-(41, 'Licencias', 4, 411, 1),
-(42, 'Incapacidad Arl', 4, 412, 1),
-(43, 'Incapacidad Eps', 4, 413, 1),
-(44, 'Por si falta alguna jiji', 4, 414, 1),
-(45, 'Contabilidad', 5, 501, 1),
-(46, 'Logistica', 5, 502, 1),
-(47, 'Tesoreria', 5, 503, 1),
-(48, 'Cartera', 5, 504, 1),
-(49, 'Facturación', 5, 505, 1),
-(50, 'Ventas', 5, 506, 1),
-(51, 'Sin revisar', 6, 601, 1),
-(52, 'Primera Revisión', 6, 602, 1),
-(53, 'Revisada', 6, 603, 1),
-(54, 'Entregada', 6, 604, 1),
-(55, 'Pagada', 6, 605, 1),
-(56, 'En novedad', 6, 606, 1);
-
-
-
-
-
+(25, 'Transporte M', 2, 210, 1),
+(26, 'Plato fuerte', 3, 301, 1),
+(27, 'Sopa', 3, 302, 1),
+(28, 'Jugo', 3, 303, 1),
+(29, 'Ensalada', 3, 304, 1),
+(30, 'Postre', 3, 305, 1),
+(31, 'Calamidad familiar', 4, 401, 1),
+(32, 'Llegada tarde', 4, 402, 1),
+(33, 'Liquidación vacaciones', 4, 403, 1),
+(34, 'Ausencia', 4, 404, 1),
+(35, 'Ausencia injustificada', 4, 405, 1),
+(36, 'Ingreso', 4, 406, 1),
+(37, 'Retiro', 4, 407, 1),
+(38, 'Permiso remunerado', 4, 408, 1),
+(39, 'Permiso no remunerado', 4, 409, 1),
+(40, 'Censantias', 4, 409, 1),
+(41, 'Prestamos', 4, 410, 1),
+(42, 'Licencias', 4, 411, 1),
+(43, 'Incapacidad Arl', 4, 412, 1),
+(44, 'Incapacidad Eps', 4, 413, 1),
+(45, 'Por si falta alguna jiji', 4, 414, 1),
+(46, 'Contabilidad', 5, 501, 1),
+(47, 'Logistica', 5, 502, 1),
+(48, 'Tesoreria', 5, 503, 1),
+(49, 'Cartera', 5, 504, 1),
+(50, 'Facturación', 5, 505, 1),
+(51, 'Ventas', 5, 506, 1),
+(52, 'Sin revisar', 6, 601, 1),
+(53, 'Primera Revisión', 6, 602, 1),
+(54, 'Revisada', 6, 603, 1),
+(55, 'Entregada', 6, 604, 1),
+(56, 'Pagada', 6, 605, 1),
+(57, 'En novedad', 6, 606, 1); 
 
 
 
@@ -512,7 +509,8 @@ ALTER TABLE `factura`
   ADD KEY `idpercre` (`idpercre`),
   ADD KEY `idperrev` (`idperrev`),
   ADD KEY `idperapr` (`idperapr`), 
-  ADD KEY `idperent` (`idperent`); 
+  ADD KEY `idperent` (`idperent`), 
+  ADD KEY `idperpag` (`idperpag`); 
 
 --
 -- Indices de la tabla `modulo`                                        
@@ -573,17 +571,6 @@ ALTER TABLE `perxpef`
   ADD KEY `idpef` (`idpef`);
 
 --
--- Indices de la tabla `producto`
---
-ALTER TABLE `producto`
-  ADD PRIMARY KEY (`idpro`),
-  ADD KEY `idval` (`idval`);
-
---
--- Indices de la tabla `proxalm`
---
-
---
 -- Indices de la tabla `valor`
 --
 ALTER TABLE `valor`
@@ -640,12 +627,6 @@ ALTER TABLE `persona`
   MODIFY `idper` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
--- AUTO_INCREMENT de la tabla `producto`
---
-ALTER TABLE `producto`
-  MODIFY `idpro` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
 -- AUTO_INCREMENT de la tabla `valor`
 --
 ALTER TABLE `valor`
@@ -671,7 +652,8 @@ ALTER TABLE `factura`
   ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`idpercre`) REFERENCES `persona` (`idper`),
   ADD CONSTRAINT `factura_ibfk_3` FOREIGN KEY (`idperrev`) REFERENCES `persona` (`idper`),
   ADD CONSTRAINT `factura_ibfk_4` FOREIGN KEY (`idperapr`) REFERENCES `persona` (`idper`),
-  ADD CONSTRAINT `factura_ibfk_5` FOREIGN KEY (`idperent`) REFERENCES `persona` (`idper`);
+  ADD CONSTRAINT `factura_ibfk_5` FOREIGN KEY (`idperent`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `factura_ibfk_6` FOREIGN KEY (`idperpag`) REFERENCES `persona` (`idper`);
 
 
 ALTER TABLE `novedad`
@@ -708,14 +690,6 @@ ALTER TABLE `perfil`
 ALTER TABLE `perxpef`
   ADD CONSTRAINT `perxpef_ibfk_1` FOREIGN KEY (`idpef`) REFERENCES `perfil` (`idpef`),
   ADD CONSTRAINT `perxpef_ibfk_2` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`);
-
---
--- Filtros para la tabla `producto`
---
-
---
--- Filtros para la tabla `proxalm`
---
 
 
 --

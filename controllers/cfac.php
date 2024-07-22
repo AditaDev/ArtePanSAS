@@ -9,7 +9,7 @@
     $idfac = isset($_REQUEST['idfac']) ? $_REQUEST['idfac']:NULL;
     $nofac = isset($_POST['nofac']) ? $_POST['nofac']:NULL;
     $confac = isset($_POST['confac']) ? $_POST['confac']:NULL;
-    $estfac = isset($_REQUEST['estfac']) ? $_REQUEST['estfac']:51;
+    $estfac = isset($_REQUEST['estfac']) ? $_REQUEST['estfac']:52;
     $idemp = isset($_POST['idemp']) ? $_POST['idemp']:NULL;
     $fefac = isset($_POST['fefac']) ? $_POST['fefac']:NULL; // fecha emision
     $fvfac = isset($_POST['fvfac']) ? $_POST['fvfac']:NULL; // fecha vencimiento
