@@ -58,4 +58,13 @@
         $mfac->editAct(); 
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
+
+    if ($estfac == 52 && ($tipfac == 15 OR $tipfac == 16 OR $tipfac == 17 OR $tipfac == 18)){
+        $mfac->setIdfac($idfac);
+        $mfac->setEstfac($estfac);
+        $mfac->setFecha($fecact);
+        $mfac->setIdper($_SESSION['idper']);
+        $mfac->editAct(); 
+    }
+
 ?>
