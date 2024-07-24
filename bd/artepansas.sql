@@ -420,14 +420,6 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (11, '60 Días', 1, 111, 1),
 (12, '70 Días', 1, 112, 1),
 (13, 'Contado-Crédito', 1, 113, 1),
-
---14/15/16 controlinterno   / no pasan pr
---17/18 gerencia   / no pasan pr
---19/20 coordinador exportaciones / gerencia
---21 mantenimiento  /  gerencia
---22/23/24 talento humano    /  gerencia
---25 coordiandor logistica  /  gerencia
-
 (14, 'Materia prima', 2, 201, 1), 
 (15, 'Insumo', 2, 202, 1),
 (16, 'Cartón', 2, 203, 1),
