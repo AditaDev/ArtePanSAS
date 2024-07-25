@@ -109,7 +109,7 @@
       
         function getAll(){
             $idpef = $_SESSION['idpef'];
-            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.idpercre AS pcre, f.idperrev AS prev, f.idperapr AS papr, f.idperent AS pent, f.idperpag AS ppag, f.fefac, f.fvfac, f.forpag, f.tipfac, f.faprfac, f.fprfac, f.fpagfac, e.razsoem, e.nitemp, CONCAT(rc.nomper,' ',rc.apeper) AS nompcre, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, CONCAT(ra.nomper,' ',ra.apeper) AS nompapr,CONCAT(re.nomper,' ',re.apeper) AS nompent, CONCAT(rg.nomper,' ',rg.apeper) AS nomppag, ve.nomval AS est, vf.nomval AS fpag, vt.nomval AS tip FROM factura AS f INNER JOIN empresa AS e ON f.idemp=e.idemp INNER JOIN persona AS rc ON f.idpercre=rc.idper LEFT JOIN persona AS rr ON f.idperrev=rr.idper LEFT JOIN persona AS ra ON f.idperapr=ra.idper LEFT JOIN persona AS re ON f.idperent=re.idper LEFT JOIN persona AS rg ON f.idperpag=rg.idper INNER JOIN valor AS ve ON f.estfac=ve.idval INNER JOIN valor AS vf ON f.forpag=vf.idval INNER JOIN valor AS vt ON f.tipfac=vt.idval";
+            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.idpercre AS pcre, f.idperrev AS prev, f.idperapr AS papr, f.idperent AS pent, f.idperpag AS ppag, f.fefac, f.fvfac, f.forpag, f.tipfac, f.faprfac, f.fprfac, f.fpagfac, e.razsoem, e.nitemp, CONCAT(rc.nomper,' ',rc.apeper) AS nompcre, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, CONCAT(ra.nomper,' ',ra.apeper) AS nompapr,CONCAT(re.nomper,' ',re.apeper) AS nompent, CONCAT(rg.nomper,' ',rg.apeper) AS nomppag, ve.nomval AS est, vf.nomval AS fpag, vt.nomval AS tip FROM factura AS f  INNER JOIN empresa AS e ON f.idemp=e.idemp INNER JOIN persona AS rc ON f.idpercre=rc.idper LEFT JOIN persona AS rr ON f.idperrev=rr.idper LEFT JOIN persona AS ra ON f.idperapr=ra.idper LEFT JOIN persona AS re ON f.idperent=re.idper LEFT JOIN persona AS rg ON f.idperpag=rg.idper INNER JOIN valor AS ve ON f.estfac=ve.idval INNER JOIN valor AS vf ON f.forpag=vf.idval INNER JOIN valor AS vt ON f.tipfac=vt.idval";
             if ($idpef == 7 ) {
                 $sql .= " WHERE (f.tipfac = 22 OR f.tipfac = 23 OR f.tipfac = 24) AND (f.estfac = 52 OR f.estfac = 53)"; 
             }if ($idpef == 8 ) { 
@@ -119,7 +119,7 @@
             }if ($idpef == 10 ) {
                 $sql .= " WHERE f.tipfac = 25 AND (f.estfac = 52 OR f.estfac = 53)"; 
             }if ($idpef == 11 ) {
-                $sql .= " WHERE f.tipfac = 14 AND (f.estfac = 52 OR f.estfac = 53)"; 
+                $sql .= " WHERE (f.tipfac = 58 OR f.tipfac = 59 OR f.tipfac = 60) AND (f.estfac = 52 OR f.estfac = 53)"; 
             }
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();

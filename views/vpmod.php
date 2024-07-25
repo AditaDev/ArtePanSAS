@@ -38,28 +38,27 @@
 </div>
 <style>
 	.secmod {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		display: flex;
 		gap: 30px;
-		width: 70%;
-		margin: auto;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		height: 500px;
+    	margin: auto;
+    	justify-content: center;
+    	align-items: center;
+    	text-align: center;
+    	height: 350px;
 	}
 
-	.modulo,
-	.modulo1 {
+	.modulo {
 		background-color: rgba(255, 255, 255, 0.8);
-		padding: 15px;
-		border-radius: 30px;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		box-shadow: 0 4px 10px rgba(7, 54, 99, 0.2);
-		border: none;
-		width: 80%;
+   		padding: 15px;
+   		border-radius: 30px;
+   		text-align: center;
+   		box-shadow: 0 4px 10px rgba(7, 54, 99, 0.2);
+   		border: none;
+   		width: 150px;
+	}
+
+	.modulo1{
+		display: none;
 	}
 
 	.logmod {
@@ -74,7 +73,7 @@
 	@media screen and (max-width: 1024px) {
 		.secmod {
 			width: 90%;
-			gap: 15px;
+			gap: 20px;
 		}
 	}
 

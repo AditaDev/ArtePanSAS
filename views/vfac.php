@@ -28,7 +28,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="fefac"><strong>Fecha emisión:</strong></label>
+                <label for="fi"><strong>Fecha emisión:</strong></label>
                 <input class="form-control" type="date" id="fefac" name="fefac" value="<?php if ($datOne) echo $datOne[0]['fefac']; ?>" required>
             </div>
             <div class="form-group col-md-4">
@@ -56,12 +56,12 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="arcimg"><strong>Pdf:</strong></label>
-                <input class="form-control" type="file" id="arcpdf" name="arcpdf">
+                <label for="arcpdf"><strong>Pdf:</strong></label>
+                <input class="form-control" type="file" id="arcpdf" name="arcpdf" accept=".pdf">
             </div>
             <div class="form-group col-md-4">
-                <label for="arcimg"><strong>Soporte:</strong></label>
-                <input class="form-control" type="file" id="arcpdf" name="arcpdf">
+                <label for="arcspt"><strong>Soporte:</strong></label>
+                <input class="form-control" type="file" id="arcspt" name="arcspt" accept=".">
             </div>
 
             <div class="form-group col-md-12" id="boxbtn">
@@ -111,11 +111,11 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <td tyle="text-align: half;">
                         <?php if ($dta["estfac"] == 52) { ?>
                             <span style="font-size: 1px;opacity: 0;">1</span>
-                            <?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 12) { ?>
+                            <?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 12 OR $_SESSION['idpef'] == 2) { ?>
                                 <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="<?= $dta['est']; ?>"></i>
                             <?php } else { ?>
-                                <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=53" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
-                                    <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="<?= $dta['est']; ?>"></i>
+                                <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=53&tipfac=<?= $dta['tipfac']; ?>" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
+                                    <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="<?= $dta['est']; ?>"></i> 
                                 </a>
                             <?php }
                         } elseif ($dta["estfac"] == 53) { ?>
@@ -126,7 +126,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=54" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">
                                     <i class="fa fa-solid fa-circle-check fa-2x iconi prv" title="<?= $dta['est']; ?>"></i>
                                 </a>
-                            <?php }
+                            <?php } 
                         } elseif ($dta["estfac"] == 54) { ?>
                             <span style="font-size: 1px;opacity: 0;">3</span>
                             <?php if ($_SESSION['idpef'] == 3 OR $_SESSION['idpef'] == 12 OR $_SESSION['idpef'] == 4) { ?>

@@ -4,7 +4,25 @@ USE artepansas;
 -- Base de datos: `artepansas`
 --
 
--- --------------------------------------------------------
+-- -- --------------------------------------------------------
+-- CREATE TABLE `dotacion` (
+--   `iddot` bigint(11) NOT NULL,
+--   `botdot` varchar(70) NOT NULL,
+--   `guadot` varchar(70) NOT NULL,
+--   `pandot` varchar(70) NOT NULL,
+--   `camdot` varchar(70) NOT NULL,
+--   `chadot` varchar(70) NOT NULL,
+--   `talla` varchar(70) DEFAULT NULL,
+--   `obsdot` varchar(70) DEFAULT NULL,
+
+--   que es cada campo?botas, guantes, pantalon, camisa, chaquetsa pues amor, pueden ser varias tallas, ej
+--                       38      s       28        s         m     
+--                       como las guardas? estaba pensando poner un rango de tallas en valor como son puros hombre sjjsj
+--                       calzan arto masomenos jajajaja piede haber un pieniña como yo jaj pero amor aun asi la talla mas baja seria 37 porlo mucho maximo 44, por eso amor, crearias las tallas en valor?sipino? o mejro wue la escriban? crearlas y digamos, hace falta 1 intermedia jijiji espera, ya la pense
+ 
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 
 --
 -- Estructura de tabla para la tabla `almuerzo`
@@ -17,16 +35,6 @@ CREATE TABLE `almuerzo` (
   `jgalm` varchar(70) NOT NULL,
   `fecalm` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `almuerzo`
---
--- INSERT INTO `almuerzo` (`idalm`, `ppalm`, `spalm`, `jgalm`, `fecalm`) VALUES
--- (1, 'Arroz, lentejas y papa sudada', 'Arroz', 'Piña' , NULL),
--- (2, 'Arroz chino', 'Pasta', 'Mora', NULL),
--- (3, 'Arroz con pollo', 'Platano', 'Guanabana', NULL),
--- (4, 'Lasaña', 'Avena', 'Fresa',  NULL),
--- (5, 'Ajiaco', 'Verduras', 'Mango', NULL);
 
 
 -- --------------------------------------------------------
@@ -103,7 +111,9 @@ CREATE TABLE `factura` (
   `idperent` bigint(11) DEFAULT NULL, 
   `fffac` datetime DEFAULT NULL,
   `idperpag` bigint(11) DEFAULT NULL, 
-  `fpagfac` datetime DEFAULT NULL
+  `fpagfac` datetime DEFAULT NULL,
+  `rutpdf` varchar(255) DEFAULT NULL,
+  `rutspt` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -128,7 +138,8 @@ INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`, `idpag`) VALUES
 (1, 'Facturas', 'img/mod_facturas.png', 1, 63),
 (2, 'Configuración', 'img/mod_configuracion.png', 1, 101),
 (3, 'Almuerzos', 'img/mod_almuerzos.png', 1, 62),
-(4, 'Novedades', 'img/mod_configuracion.png', 1, 110);
+(4, 'Novedades', 'img/mod_novedades.png', 1, 110),
+(5, 'Dotación', 'img/mod_dotacion.png', 1, 111);
 
 -- --------------------------------------------------------
 
@@ -143,22 +154,13 @@ CREATE TABLE `novedad` (
   `fecfnov` date DEFAULT NULL,
   `fecrev` date DEFAULT NULL,
   `tipnov` bigint(11) NOT NULL,
-  `obsnov` varchar(100) NOT NULL,
+  `area` bigint(11) NOT NULL,
+  `obsnov` varchar(100) DEFAULT NULL,
   `estnov` varchar(100) NOT NULL,
-  `idper` bigint(11) NOT NULL
+  `idpercre` bigint(11) NOT NULL,
+  `idperrev` bigint(11) DEFAULT NULL,
+  `idperg` bigint(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `novedad`
---
-
-INSERT INTO `novedad` (`idnov`, `fecreg`, `fecinov`, `fecfnov`, `fecrev`, `tipnov`, `obsnov`, `estnov`, `idper`) VALUES
-(1, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 42, 'Se cancela todo', '1', 1),
-(2, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 38, 'Se cancela todo', '1', 2),
-(3, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 41, 'Se cancela todo', '1', 3),
-(4, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 36, 'Se cancela todo', '1', 4),
-(5, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 35, 'Se cancela todo', '1', 5),
-(6, '2024-07-01', '2024-08-01', '2024-09-01', '2024-07-01', 39, 'Se cancela todo', '1', 6);
 
 -- --------------------------------------------------------
 
@@ -195,7 +197,8 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (107, 'fa fa-solid fa-boxes-stacked', 'Dominio', 'views/vdom.php', 7, 'home.php', 1, 2),
 (108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 2),
 (109, 'fa fa-solid fa-building', 'Empresas', 'views/vemp.php', 11, 'home.php', 1, 1),
-(110, 'fa fa-solid fa-solid fa-lightbulb', 'Novedades', 'views/vnov.php', 16, 'home.php', 1, 4);
+(110, 'fa fa-solid fa-solid fa-lightbulb', 'Novedades', 'views/vnov.php', 16, 'home.php', 1, 4),
+(111, 'fa fa-solid fa-solid fa-lightbulb', 'Dotación', 'views/vdot.php', 17, 'home.php', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -250,7 +253,10 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (63, 11),
 (62, 11),
 (63, 12),
-(62, 12);
+(62, 12),
+(111, 1),
+(111, 4);
+
 
 
 -- --------------------------------------------------------
@@ -267,16 +273,6 @@ CREATE TABLE `pedido` (
   `canalm` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `pedido`
---
-
--- INSERT INTO `pedido` (`idped`, `idalm`, `idper`, `fecped`) VALUES
--- (1, 1, 1,'2024-07-01'),
--- (2, 2, 2,'2024-07-01'),
--- (3, 3, 3,'2024-07-01'),
--- (4, 4, 4,'2024-07-01'),
--- (5, 5, 5,'2024-07-01');
 
 -- --------------------------------------------------------
 
@@ -463,7 +459,10 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (54, 'Revisada', 6, 603, 1),
 (55, 'Entregada', 6, 604, 1),
 (56, 'Pagada', 6, 605, 1),
-(57, 'En novedad', 6, 606, 1); 
+(57, 'En novedad', 6, 606, 1),
+(58, 'Fumigaciones', 2, 211, 1), 
+(59, 'Analisis de laboratorio', 2, 212, 1), 
+(60, 'Compras ocasionales', 2, 213, 1);
 
 
 
@@ -516,7 +515,10 @@ ALTER TABLE `modulo`
 ALTER TABLE `novedad`
   ADD PRIMARY KEY (`idnov`),
   ADD KEY `tipnov` (`tipnov`),
-  ADD KEY `idper` (`idper`);
+  ADD KEY `area` (`area`),
+  ADD KEY `idperg` (`idperg`),
+  ADD KEY `idpercre` (`idpercre`),
+  ADD KEY `idperrev` (`idperrev`);
 
 --
 -- Indices de la tabla `pagina`
@@ -649,7 +651,9 @@ ALTER TABLE `factura`
 
 
 ALTER TABLE `novedad`
-  ADD CONSTRAINT `novedad_ibfk_1` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`);
+  ADD CONSTRAINT `novedad_ibfk_1` FOREIGN KEY (`idperg`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `novedad_ibfk_2` FOREIGN KEY (`idpercre`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `novedad_ibfk_3` FOREIGN KEY (`idperrev`) REFERENCES `persona` (`idper`);
 --
 -- Filtros para la tabla `pagina`
 --

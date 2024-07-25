@@ -7,8 +7,8 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
     <div class="row">
         <div class="form-group col-md-4">
-            <label for="idper"><strong>Persona:</strong></label>
-            <select id="idper" name="idper" class="form-control form-select" required>
+            <label for="idperg"><strong>Persona:</strong></label>
+            <select id="idperg" name="idperg" class="form-control form-select" required>
                 <?php if ($datPer) {
                     foreach ($datPer as $dep) { ?>
                         <option value='<?= $dep['idper']; ?>' <?php if ($datOne && $dep['idper'] == $datOne['idper']) echo " selected "; ?>>
@@ -39,9 +39,20 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 </select>
         </div>
         <div class="form-group col-md-4">
+                <label for="fecinov"><strong>Fecha inicial:</strong></label>
+                <input class="form-control" type="date" id="fecinov" name="fecinov" value="<?php if ($datOne) echo $datOne[0]['fecinov']; ?>" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="fecfnov"><strong>Fecha final:</strong></label>
+                <input class="form-control" type="date" id="fecfnov" name="fecfnov" value="<?php if ($datOne) echo $datOne[0]['fecfnov']; ?>" required>
+            </div>
+        <div class="form-group col-md-4">
             <label for="arcimg"><strong>Soporte:</strong></label>
             <input class="form-control" type="file" id="arcpdf" name="arcpdf">
         </div>
+        <div class="form-group col-md-12"> 
+                <label for="obsnov"><strong>Observación:</strong></label>
+                <textarea class="form-control" type="text" id="obsnov" name="obsnov" <?php if ($datOne) echo 'required';?>><?php if ($datOne) echo $datOne[0]['obsnov']; ?></textarea>
         
         <div class="form-group col-md-12" id="boxbtn">
             <br><br>

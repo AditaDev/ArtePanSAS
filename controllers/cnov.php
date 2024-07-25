@@ -3,18 +3,15 @@
 
     $mnov = new Mnov();
 
-
+    $fecact = date("Y-m-d H:i:s"); 
     $idnov = isset($_REQUEST['idnov']) ? $_REQUEST['idnov']:NULL;
-    $fecreg = date("Y-m-d H:i:s");
     $fecinov = isset($_POST['fecinov']) ? $_POST['fecinov']:NULL;
+    $idperg = isset($_POST['idperg']) ? $_POST['idperg']:NULL;
     $fecfnov = isset($_POST['fecfnov']) ? $_POST['fecfnov']:NULL;
-    $fecrev = isset($_POST['fecrev']) ? $_POST['fecrev']:NULL;
-    $tipnov = isset($_POST['tipnov']) ? $_POST['tipnov']:NULL;
-    $idper = isset($_POST['idper']) ? $_POST['idper']:NULL;
+    $tipnov = isset($_REQUEST['tipnov']) ? $_REQUEST['tipnov']:NULL;
     $obsnov = isset($_POST['obsnov']) ? $_POST['obsnov']:NULL;
-    $estnov = isset($_POST['estnov']) ? $_POST['estnov']:1;
-    // $area = isset($_POST['area']) ? $_POST['area']:NULL;
-
+    $estnov = isset($_REQUEST['estnov']) ? $_REQUEST['estnov']:1;
+    $area = isset($_POST['area']) ? $_POST['area']:NULL;
 
     $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
 
@@ -25,17 +22,18 @@
     //------------Factura-----------
     if($ope=="save"){
         $mnov->setIdnov($idnov);
-        $mnov->setFecreg($fecreg);
+        $mnov->setIdperg($idperg);
+        $mnov->setFecreg($fecact);
         $mnov->setFecinov($fecinov);
         $mnov->setFecfnov($fecfnov);
-        $mnov->setFecrev($fecrev);
         $mnov->setTipnov($tipnov);
         $mnov->setEstnov($estnov);
-        $mnov->setIdper($idper);
-        // $mnov->setArea($area);
+        $mnov->setIdpercre($_SESSION['idper']);
         $mnov->setObsnov($obsnov);
+        $mnov->setArea($area);
         if(!$idnov) $mnov->save();
         else $mnov->edit();
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
     if($ope=="edi" && $idnov) $datOne = $mnov->getOne();

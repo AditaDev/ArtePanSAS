@@ -14,7 +14,7 @@
     $fefac = isset($_POST['fefac']) ? $_POST['fefac']:NULL; // fecha emision
     $fvfac = isset($_POST['fvfac']) ? $_POST['fvfac']:NULL; // fecha vencimiento
     $forpag = isset($_POST['forpag']) ? $_POST['forpag']:NULL;
-    $tipfac = isset($_POST['tipfac']) ? $_POST['tipfac']:NULL;
+    $tipfac = isset($_REQUEST['tipfac']) ? $_REQUEST['tipfac']:NULL;
   
     $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
 
@@ -52,19 +52,11 @@
 
     if ($ope == 'est' && $idfac && $estfac) {
         $mfac->setIdfac($idfac);
+        if ($estfac == 53 && ($tipfac == 14 OR $tipfac == 15 OR $tipfac == 16 OR $tipfac == 17 OR $tipfac == 18)) $estfac=54;
         $mfac->setEstfac($estfac);
         $mfac->setFecha($fecact);
         $mfac->setIdper($_SESSION['idper']);
         $mfac->editAct(); 
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
-
-    if ($estfac == 52 && ($tipfac == 15 OR $tipfac == 16 OR $tipfac == 17 OR $tipfac == 18)){
-        $mfac->setIdfac($idfac);
-        $mfac->setEstfac($estfac);
-        $mfac->setFecha($fecact);
-        $mfac->setIdper($_SESSION['idper']);
-        $mfac->editAct(); 
-    }
-
 ?>

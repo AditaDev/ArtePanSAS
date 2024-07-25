@@ -35,7 +35,7 @@
     }
 
 .contenedor{
-    margin: 350px auto 100PX auto;
+    margin: 250px auto 100PX auto;
     padding: 0;
     text-align: center;
     display: block;
