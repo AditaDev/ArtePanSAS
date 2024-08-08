@@ -48,9 +48,10 @@
         $mnov->setIdnov($idnov);
         if ($estnov == 1)
         $mnov->setEstnov($estnov);
-        $mnov->setFecrev($fecact);
+        $mnov->setFecha($fecact);
         $mnov->setIdper($_SESSION['idper']);
         $mnov->editAct();
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
     } 
 
 ?>

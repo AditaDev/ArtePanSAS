@@ -187,7 +187,7 @@
         function editAct(){
             // try{
                 $estfac = $this->getEstfac();
-                $sql = "UPDATE factura SET estfac=:estfac,";
+                $sql = "UPDATE factura SET estfac=:estfac";
                 if($estfac==53) $sql .= " idperrev=:idper, fprfac=:fecha";
                 if($estfac==54) $sql .= " idperapr=:idper, faprfac=:fecha";
                 if($estfac==55) $sql .= " idperent=:idper, fffac=:fecha";

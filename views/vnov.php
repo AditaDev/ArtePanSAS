@@ -4,6 +4,7 @@ $hoy = date("Y-m-d");
 $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 ?>
 
+<?php if ($_SESSION['idpef'] == 7) { ?>
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
     <div class="row">
         <div class="form-group col-md-4">
@@ -63,7 +64,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     </div>
     </div>
 </form>
-
+<?php } ?>
 
 <table id="mytable" class="table table-striped">
     <thead>

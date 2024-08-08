@@ -15,6 +15,7 @@
         private $idpercre;
         private $idperrev;
         private $area;
+        private $fecha;
     
 
 
@@ -58,6 +59,9 @@
         public function getArea(){
             return $this->area;
         }
+        public function getFecha(){
+            return $this->fecha;
+        }
 
 
         //------------SET-----------
@@ -100,6 +104,10 @@
         public function setArea($area){
             $this->area=$area;
         }
+        public function setFecha($fecha){
+            $this->fecha=$fecha;
+        }
+
 
 
         function getAll(){
@@ -157,8 +165,8 @@
         function editAct(){
             //try{
                 $estnov = $this->getEstnov();
-                $sql = "UPDATE novedad SET estnov=:estnov WHERE idnov=:idnov";
-                if($estnov==2) $sql .= " idperrev=:idper, fecrev=:fecrev";
+                $sql = "UPDATE novedad SET estnov=:estnov";
+                if($estnov==2) $sql .= " idperrev=:idper, fecrev=:fecha";
                 $sql .= " WHERE idnov=:idnov";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
@@ -167,10 +175,10 @@
                 $result->bindParam(":idnov",$idnov);
                 $estnov = $this->getEstnov();
                 $result->bindParam(":estnov",$estnov);
-                $idper = $this->getIdper();
-                $result->bindParam(":idper",$idper);
-                $fecrev = $this->getFecrev();
-                $result->bindParam(":fecrev",$fecrev);
+                // $idper = $this->getIdper();
+                // $result->bindParam(":idper",$idper);
+                // $fecha = $this->getFecha();
+                // $result->bindParam(":fecha",$fecha);
                 $result->execute();
             // }catch(Exception $e){
             //     ManejoError($e);
