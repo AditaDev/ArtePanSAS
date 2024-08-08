@@ -101,7 +101,7 @@
 
 
         function getAll(){
-            $sql = "SELECT n.idnov, n.fecreg, n.fecinov, n.fecfnov, n.obsnov, n.estnov, n.idperg AS perg, n.idpercre AS pcre, n.idperrev AS prev, CONCAT(rg.nomper,' ',rg.apeper) AS nomperg, CONCAT(rc.nomper,' ',rc.apeper) AS nomperc, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev FROM novedad AS n LEFT JOIN persona AS rg ON n.idperg=rg.idper INNER JOIN persona AS rc ON n.idpercre=rc.idper LEFT JOIN persona AS rr ON n.idperrev=rr.idper INNER JOIN valor AS vt ON n.tipnov=vt.idval INNER JOIN valor AS va ON n.area=va.idval";
+            $sql = "SELECT n.idnov, n.fecreg, n.fecinov, n.fecfnov, n.obsnov, n.tipnov, n.estnov, n.idperg AS perg, n.idpercre AS pcre, n.idperrev AS prev, CONCAT(rg.nomper,' ',rg.apeper) AS nomperg, CONCAT(rc.nomper,' ',rc.apeper) AS nomperc, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, rg.ndper, vt.nomval AS tip FROM novedad AS n LEFT JOIN persona AS rg ON n.idperg=rg.idper INNER JOIN persona AS rc ON n.idpercre=rc.idper LEFT JOIN persona AS rr ON n.idperrev=rr.idper INNER JOIN valor AS vt ON n.tipnov=vt.idval INNER JOIN valor AS va ON n.area=va.idval";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -182,6 +182,8 @@
                 $result->bindParam(":tipnov", $tipnov);
                 $obsnov = $this->getObsnov();
                 $result->bindParam(":obsnov", $obsnov);
+                $estnov = $this->getEstnov();
+                $result->bindParam(":estnov", $estnov);
                 $area = $this->getArea();
                 $result->bindParam(":area", $area);
                 $result->execute();

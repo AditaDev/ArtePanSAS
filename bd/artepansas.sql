@@ -15,10 +15,6 @@ USE artepansas;
 --   `talla` varchar(70) DEFAULT NULL,
 --   `obsdot` varchar(70) DEFAULT NULL,
 
---   que es cada campo?botas, guantes, pantalon, camisa, chaquetsa pues amor, pueden ser varias tallas, ej
---                       38      s       28        s         m     
---                       como las guardas? estaba pensando poner un rango de tallas en valor como son puros hombre sjjsj
---                       calzan arto masomenos jajajaja piede haber un pieniña como yo jaj pero amor aun asi la talla mas baja seria 37 porlo mucho maximo 44, por eso amor, crearias las tallas en valor?sipino? o mejro wue la escriban? crearlas y digamos, hace falta 1 intermedia jijiji espera, ya la pense
  
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

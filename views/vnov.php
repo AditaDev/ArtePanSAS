@@ -80,22 +80,28 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <tr>
                     <td tyle="text-align: left;"><?= $dta['idnov']; ?></td>
                     <td>
-                    <strong> <?=($dta['ndper']) .  " - "  . $dta['nomper']; ?></strong><br>
-                        <small>
-                            <strong>Tipo novedad: </strong> <?= $dta['tipnov']; ?><br>
-                            <!-- <strong>: </strong><?= $dta['']; ?><br>                       -->
-                        </small>
+                    <div class="row">
+                        <div class="form-group col-md-10">
+                        <strong> <?=($dta['ndper']) .  " - "  . $dta['nomperg']; ?></strong><br>
+                            <small>
+                                <strong>Tipo novedad: </strong> <?= $dta['tip']; ?><br>
+                                <!-- <strong>: </strong><?= $dta['']; ?><br>                       -->
+                            </small>
+                        </div>
+                        <div class="form-group col-md-2" style="text-align: right;">
+                            <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idnov']; ?>" title="Detalles"></i> 
+                        </div>
                     </td>
-                    <td tyle="text-align: half;">
+                    <td style="text-align: left;">
                         <?php if ($dta['estnov'] == 1) { ?>
-                            <span style="font-size: 1px;opacity: 0;">+</span>
-                            <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&estnov=2&ope=act" title="Revisada">
-                                <i class="fa fa-solid fa-circle-check fa-2x act"></i>
-                            </a>
-                        <?php } else { ?>
-                            <span style="font-size: 1px;">--</span>
+                            <span style="font-size: 1px;opacity: 0;">--</span>
                             <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&estnov=1&ope=act" title="No revisada">
                                 <i class="fa fa-solid fa-circle-xmark fa-2x desact"></i>
+                            </a>
+                        <?php } else { ?>
+                            <span style="font-size: 1px;">+</span>
+                            <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&estnov=2&ope=act" title="Revisada">
+                                <i class="fa fa-solid fa-circle-check fa-2x act"></i>
                             </a>
                         <?php } ?>
                     </td>

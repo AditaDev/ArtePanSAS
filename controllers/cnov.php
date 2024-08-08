@@ -19,7 +19,7 @@
 
     $mnov->setIdnov($idnov);
 
-    //------------Factura-----------
+    //------------Novedad-----------
     if($ope=="save"){
         $mnov->setIdnov($idnov);
         $mnov->setIdperg($idperg);
@@ -44,8 +44,10 @@
     $dattip = $mnov->getAllDom(4);
     $datarea = $mnov->getAllDom(5);
 
+    if($ope=='act' && $idnov && $estnov){
+        $mnov->editAct();
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
+    } 
+
 ?>
-<!-- if($ope=='act' && $idmod && $actmod){
-        $mmod->setActmod($actmod);
-        $mmod->editAct();
-    } -->
+
