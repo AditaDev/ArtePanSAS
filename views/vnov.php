@@ -68,7 +68,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 <table id="mytable" class="table table-striped">
     <thead>
         <tr>
-            <th>No.</th>
+            <th>Fecha registro</th>
             <th>Datos persona</th>
             <th>Estado</th>
             <th>Acciones</th>
@@ -78,7 +78,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     <tbody>
         <?php if ($datAll) { foreach ($datAll as $dta) { ?>
             <tr>
-                    <td tyle="text-align: left;"><?= $dta['idnov']; ?></td>
+                    <td tyle="text-align: left;"><?= $dta['fecreg']; ?></td>
                     <td>
                     <div class="row">
                         <div class="form-group col-md-10">
@@ -89,16 +89,22 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             </small>
                         </div>
                         <div class="form-group col-md-2" style="text-align: right;">
-                            <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idnov']; ?>" title="Detalles"></i> 
+                            <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mdetnov<?= $dta['idnov']; ?>" title="Detalles"></i> 
                         </div>
+                            <?php
+                                $mnov->setIdnov($dta['idnov']);
+                                $info = $mnov->getOne();
+                                modalnov("mdetnov", $dta['idnov'], $dta['ndper'] . "-" . $dta['nomperg'], $info);
+                                ?>
                     </td>
                     <td style="text-align: left;">
                         <?php if ($dta['estnov'] == 1) { ?>
+                            <?php if ($_SESSION['idpef'] == 7) { ?>
                             <span style="font-size: 1px;opacity: 0;">--</span>
                             <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&estnov=1&ope=act" title="No revisada">
                                 <i class="fa fa-solid fa-circle-xmark fa-2x desact"></i>
                             </a>
-                        <?php } else { ?>
+                        <?php }} else { ?>
                             <span style="font-size: 1px;">+</span>
                             <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&estnov=2&ope=act" title="Revisada">
                                 <i class="fa fa-solid fa-circle-check fa-2x act"></i>

@@ -45,9 +45,13 @@
     $datarea = $mnov->getAllDom(5);
 
     if($ope=='act' && $idnov && $estnov){
+        $mnov->setIdnov($idnov);
+        if ($estnov == 1)
+        $mnov->setEstnov($estnov);
+        $mnov->setFecrev($fecact);
+        $mnov->setIdper($_SESSION['idper']);
         $mnov->editAct();
-        echo "<script>window.location='home.php?pg=".$pg."';</script>";
     } 
 
 ?>
-
+ 
