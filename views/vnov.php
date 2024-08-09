@@ -99,16 +99,18 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 ?>
                     </td>
                     <td style="text-align: left;">
-                        <?php if ($dta['estnov'] == 1) { ?>
-                            <?php if ($_SESSION['idpef'] == 7) { ?>
-                            <span style="font-size: 1px;opacity: 0;">--</span>
-                            <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&estnov=1&ope=act" title="No revisada">
-                                <i class="fa fa-solid fa-circle-xmark fa-2x desact"></i>
+                        <?php if ($dta['estnov'] == 52) { ?>
+                            <span style="font-size: 1px;opacity: 0;">1</span>
+                            <?php if ($_SESSION['idpef'] == 7)
+                            { ?>
+                                <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="<?= $dta['est']; ?>"></i>
+                            <?php } else { ?>
+                            <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&ope=est&estnov=54" onclick="return aceptar('<?= $dta['ndper'] . ' - ' . $dta['nomperg']; ?>');">
+                                <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="<?= $dta['est']; ?>"></i>
                             </a>
                         <?php }} else { ?>
-                            <span style="font-size: 1px;">+</span>
-                            <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&estnov=2&ope=act" title="Revisada">
-                                <i class="fa fa-solid fa-circle-check fa-2x act"></i>
+                            <span style="font-size: 1px;">2</span>
+                                <i class="fa fa-solid fa-circle-check fa-2x act" title="<?= $dta['est']; ?>"></i>
                             </a>
                         <?php } ?>
                     </td>

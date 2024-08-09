@@ -4,21 +4,23 @@ USE artepansas;
 -- Base de datos: `artepansas`
 --
 
--- -- --------------------------------------------------------
--- CREATE TABLE `dotacion` (
---   `iddot` bigint(11) NOT NULL,
---   `botdot` varchar(70) NOT NULL,
---   `guadot` varchar(70) NOT NULL,
---   `pandot` varchar(70) NOT NULL,
---   `camdot` varchar(70) NOT NULL,
---   `chadot` varchar(70) NOT NULL,
---   `talla` varchar(70) DEFAULT NULL,
---   `obsdot` varchar(70) DEFAULT NULL,
 
- 
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `entrega` (
+  `ident` bigint(11) NOT NULL, -- id entrega
+  `idperent` bigint(11) NOT NULL, -- id persona entrega
+  `idperrec` bigint(11) NOT NULL, -- idpersona recibe
+  `fecent` date DEFAULT NULL, -- fecha entrega
+  `observ` varchar(1000) DEFAULT NULL, -- observaciones
+  `firpent` varchar(255) DEFAULT NULL, -- firma per entrega
+  `firprec` varchar(255) DEFAULT NULL, -- firma per recibe
+  `difent` varchar(50) DEFAULT NULL -- este es diferenciar entrega para poder asignarle las dotaciones
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
+CREATE TABLE `dotxent` (
+  `ident` bigint(11) NOT NULL, -- id entrega
+  `idvdot` bigint(11) NOT NULL, -- id valor referente a dotacion (pantalon/camiseta)
+  `idvtal` bigint(11) NOT NULL -- id valor referente a talla (s/m)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Estructura de tabla para la tabla `almuerzo`
@@ -54,7 +56,9 @@ INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (3, 'Tipo de plato'),
 (4, 'Tipo de Novedad'),
 (5, 'Area'),
-(6, 'Estado de factura');
+(6, 'Estado de factura'),
+(7, 'Tallas'),
+(8, 'Dotación');
 
 
 -- --------------------------------------------------------
@@ -145,10 +149,10 @@ INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`, `idpag`) VALUES
 
 CREATE TABLE `novedad` (
   `idnov` bigint(11) NOT NULL,
-  `fecreg` date DEFAULT NULL,
+  `fecreg` datetime DEFAULT NULL,
   `fecinov` date DEFAULT NULL,
   `fecfnov` date DEFAULT NULL,
-  `fecrev` date DEFAULT NULL,
+  `fecrev` datetime DEFAULT NULL,
   `tipnov` bigint(11) NOT NULL,
   `area` bigint(11) NOT NULL,
   `obsnov` varchar(100) DEFAULT NULL,
@@ -458,14 +462,39 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (57, 'En novedad', 6, 606, 1),
 (58, 'Fumigaciones', 2, 211, 1), 
 (59, 'Analisis de laboratorio', 2, 212, 1), 
-(60, 'Compras ocasionales', 2, 213, 1);
+(60, 'Compras ocasionales', 2, 213, 1),
+--camisa,chaqueta
+(61, 'XS', 7, 701, 1),
+(62, 'S', 7, 702, 1),
+(63, 'M', 7, 703, 1),
+(64, 'L', 7, 704, 1),
+(65, 'XL', 7, 705, 1),
+(66, 'XXL', 7, 706, 1),
+--pantalon
+(67, '28', 7, 707, 1),
+(68, '30', 7, 708, 1),
+(69, '32', 7, 709, 1),
+(70, '34', 7, 710, 1),
+(71, '36', 7, 711, 1),
+(72, '38', 7, 712, 1),
+(73, '37', 7, 713, 1),
+(74, '39', 7, 714, 1),
+(75, '40', 7, 715, 1),
+(76, '41', 7, 716, 1),
+(77, '42', 7, 717, 1),
+(78, '43', 7, 718, 1),
+(79, '44', 7, 719, 1);
 
 
+ALTER TABLE `entrega`
+  ADD PRIMARY KEY (`ident`),
+  ADD KEY `idperent` (`idperent`),
+  ADD KEY `idperrec` (`idperrec`);
 
---
--- Índices para tablas volcadas
---
-
+ALTER TABLE `dotxent`
+  ADD KEY `ident` (`ident`),
+  ADD KEY `idvdot` (`idvdot`),
+  ADD KEY `idvtal` (`idvtal`);
 --
 -- Indices de la tabla `almuerzo`
 --
@@ -512,9 +541,10 @@ ALTER TABLE `novedad`
   ADD PRIMARY KEY (`idnov`),
   ADD KEY `tipnov` (`tipnov`),
   ADD KEY `area` (`area`),
+  ADD KEY `estnov` (`estnov`),
   ADD KEY `idperg` (`idperg`),
   ADD KEY `idpercre` (`idpercre`),
-  ADD KEY `idperrev` (`idperrev`);
+  ADD KEY `idperrev` (`idperrev`); 
 
 --
 -- Indices de la tabla `pagina`
@@ -567,6 +597,9 @@ ALTER TABLE `valor`
   ADD PRIMARY KEY (`idval`),
   ADD KEY `iddom` (`iddom`);
 
+
+ALTER TABLE `entrega`
+  MODIFY `ident` bigint(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
@@ -630,8 +663,15 @@ ALTER TABLE `pedido`
 -- Restricciones para tablas volcadas
 --
 
+ALTER TABLE `dotxent`
+  ADD CONSTRAINT `dotxent__ibfk_1` FOREIGN KEY (`ident`) REFERENCES `entrega` (`ident`);
+
 --
--- Filtros para la tabla `almuerzo`
+-- Filtros para la tabla `asignar`
+--
+ALTER TABLE `entrega`
+  ADD CONSTRAINT `entrega_ibfk_1` FOREIGN KEY (`idperent`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `entrega_ibfk_2` FOREIGN KEY (`idperrec`) REFERENCES `persona` (`idper`);
 --
 
 --

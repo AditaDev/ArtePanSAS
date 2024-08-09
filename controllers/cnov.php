@@ -10,7 +10,7 @@
     $fecfnov = isset($_POST['fecfnov']) ? $_POST['fecfnov']:NULL;
     $tipnov = isset($_REQUEST['tipnov']) ? $_REQUEST['tipnov']:NULL;
     $obsnov = isset($_POST['obsnov']) ? $_POST['obsnov']:NULL;
-    $estnov = isset($_REQUEST['estnov']) ? $_REQUEST['estnov']:1;
+    $estnov = isset($_REQUEST['estnov']) ? $_REQUEST['estnov']:52;
     $area = isset($_POST['area']) ? $_POST['area']:NULL;
 
     $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
@@ -44,10 +44,9 @@
     $dattip = $mnov->getAllDom(4);
     $datarea = $mnov->getAllDom(5);
 
-    if($ope=='act' && $idnov && $estnov){
+    if($ope=='est' && $idnov && $estnov){
         $mnov->setIdnov($idnov);
-        if ($estnov == 1)
-        $mnov->setEstnov($estnov);
+        $mnov->setEstnov($estnov); 
         $mnov->setFecha($fecact);
         $mnov->setIdper($_SESSION['idper']);
         $mnov->editAct();
