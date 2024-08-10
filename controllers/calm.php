@@ -17,7 +17,7 @@ $fecped = date("Y-m-d H:i:s");
 
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
-$datOne = NULL;
+$datOne = $malm->getOnePed();
 
 $malm->setIdalm($idalm);
 

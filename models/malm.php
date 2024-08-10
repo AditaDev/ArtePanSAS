@@ -178,38 +178,18 @@ function getAllDatPed(){
     return $res;
 }
 
-// function getOneAlm(){
-//     $sql = "SELECT p.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm, p.fecped, p.idper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm WHERE p.fecped=a.fecalm";
-//     $modelo = new conexion();
-//     $conexion = $modelo->get_conexion();
-//     $result = $conexion->prepare($sql);
-//     $result->execute();
-//     $res = $result->fetchall(PDO::FETCH_ASSOC);
-//     return $res;
-// }esa si se puede eliminar cre
-
-// function getOne(){
-//     $sql = "SELECT p.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm, p.fecped, p.idper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm WHERE p.fecped=a.fecalm";
-//     $modelo = new conexion();
-//     $conexion = $modelo->get_conexion();
-//     $result = $conexion->prepare($sql);
-//     //porahora entons dejemolo asi
-//     $result->execute();
-//     $res = $result->fetchall(PDO::FETCH_ASSOC);
-//     return $res;
-// }
-//para el modal
-public function getAllPer(){
-    $sql = "SELECT count(idper) AS al FROM pedido WHERE idper=:idper";
+function getOnePed(){
+    $sql = "SELECT p.canalm FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm WHERE DATE(p.fecped) = DATE(NOW()) AND p.idper=:idper";
     $modelo = new conexion();
     $conexion = $modelo->get_conexion();
     $result = $conexion->prepare($sql);
-    $idper= $this->getIdper();
-    $result->bindParam(":idper",$idper);
+    $idper= $_SESSION['idper'];
+    $result->bindParam(":idper", $idper);
     $result->execute();
-    $res=$result->fetchAll(PDO::FETCH_ASSOC);
+    $res = $result->fetchall(PDO::FETCH_ASSOC);
     return $res;
 }
+
 function savePed(){
     //try{
         $sql = "INSERT INTO pedido (fecped, idper, idalm, canalm) VALUES (:fecped, :idper, :idalm, :canalm)";

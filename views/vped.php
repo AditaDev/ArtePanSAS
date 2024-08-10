@@ -45,7 +45,9 @@ require_once('controllers/calm.php');
 </style>
 
 
-<?php if ($datOneAlmF) { ?>
+<?php if ($datOne) { ?>
+    ya pidio hueva
+<?php }else{ if ($datOneAlmF) { ?>
     <div>
         <?php foreach ($datOneAlmF as $dta) { ?>
             <form action="home.php?pg=<?= $pg; ?>" method="post" name="pedido">
@@ -79,4 +81,4 @@ require_once('controllers/calm.php');
 
         <?php } ?>
     </div>
-<?php } ?>
+<?php }} ?>
