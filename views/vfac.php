@@ -148,10 +148,8 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         } elseif ($dta["estfac"] == 56) { ?>
                             <span style="font-size: 1px;opacity: 0;">4</span>
                             <i class="fa fa-solid fa-circle-check fa-2x pagada" title="<?= $dta['est']; ?>"></i>
-                        <?php } ?>
-
-                    </td>
-
+                            <?php } ?>
+                        <i class="fa fa-solid fa-file-pdf fa-2x iconi" onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i>
                     <td tyle="text-align: right;">
                         <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi" title="Editar"></i>
@@ -179,3 +177,4 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         </tr>
     </tfoot>
 </table>
+

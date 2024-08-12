@@ -100,6 +100,12 @@ function aceptar(nom){
   return v;
 }
 
+function pdf(pdfPath) {
+  var w = window.innerWidth * 0.8;
+  var h = window.innerHeight * 0.8;
+  window.open(pdfPath, 'Vista Previa', 'width='+w+',height='+h);
+}
+
 
 $('ul li').on('click', function() {
 	$('li').removeClass('active');
