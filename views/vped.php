@@ -42,11 +42,122 @@ require_once('controllers/calm.php');
     #canalm {
         width: 2em;
     }
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    z-index: 1;
+}
+
+.container .card {
+    position: relative;
+    width: 280px;
+    height: 400px;
+    margin: 30px;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.container .card .content {
+    padding: 20px;
+    text-align: center;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: 0.5s;
+    
+}
+
+.container .card:hover .content {
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+.container .card .content h2 {
+    position: absolute;
+    top: -60px;
+    right: 30px;
+    font-size: 8em;
+    color: rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+}
+
+.container .card .content h3 {
+    font-size: 1.8em;
+    color: #000;
+    z-index: 1;
+}
+
+.container .card .content p {
+    font-size: 1em;
+    color: #000;
+    font-weight: 300;
+}
+
+.container .card .content a {
+    position: relative;
+    display: inline-block;
+    padding: 8px 20px;
+    margin-top: 15px;
+    color: #000;
+    /* color: #000; */
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+
+} 
 </style>
 
 
+
+
 <?php if ($datOne) { ?>
-    ya pidio hueva
+    <body>
+        <div class="container">
+            <div class="card">
+                <div class="content">
+                    <h2></h2>
+                    <h3>Holis</h3>
+                    <p>Yo te amo re arto</p>
+                    <a href="#">NO me amas jsjjs click aqui</a>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
+
+    
+
+
 <?php }else{ if ($datOneAlmF) { ?>
     <div>
         <?php foreach ($datOneAlmF as $dta) { ?>

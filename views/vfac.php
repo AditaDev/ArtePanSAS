@@ -5,7 +5,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 ?>
 
 <?php if ($_SESSION['idpef'] == 4) { ?>
-    <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
+    <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="nofac"><strong>N° factura:</strong></label>
@@ -57,11 +57,11 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             </div>
             <div class="form-group col-md-4">
                 <label for="arcpdf"><strong>Pdf:</strong></label>
-                <input class="form-control" type="file" id="arcpdf" name="arcpdf" accept=".pdf">
+                <input class="form-control" type="file" id="arcpdf" name="arcpdf" accept=".pdf" <?php if (!$datOne) echo 'required'; ?>>
             </div>
             <div class="form-group col-md-4">
                 <label for="arcspt"><strong>Soporte:</strong></label>
-                <input class="form-control" type="file" id="arcspt" name="arcspt" accept=".">
+                <input class="form-control" type="file" id="arcspt" name="arcspt" accept=".pdf">
             </div>
 
             <div class="form-group col-md-12" id="boxbtn">

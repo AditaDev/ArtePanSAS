@@ -15,7 +15,10 @@
     $fvfac = isset($_POST['fvfac']) ? $_POST['fvfac']:NULL; // fecha vencimiento
     $forpag = isset($_POST['forpag']) ? $_POST['forpag']:NULL;
     $tipfac = isset($_REQUEST['tipfac']) ? $_REQUEST['tipfac']:NULL;
-  
+    $arcpdf = isset($_FILES['arcpdf']) ? $_FILES['arcpdf']:NULL;
+    $arcspt = isset($_FILES['arcspt']) ? $_FILES['arcspt']:NULL;
+    $rutpdf = NULL;
+    $rutspt = NULL;
     $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
 
     $datOne = NULL;
@@ -24,7 +27,10 @@
     $dattip = $mfac->getAllDom(2);
 
     $mfac->setIdfac($idfac);
-
+    
+    if($arcpdf) $rutpdf = opti($arcpdf, $nofac."_".$confac, "arc/facturas/", "1"); //el id normalmente se guarda lo de la fecha,hora para evitar que los archivos con mismo nombre se uyy como se escribe jjajajj
+    if($arcspt) $rutspt = opti($arcpdf, "nombre", "ruta", "id"); //el id normalmente se guarda lo de la fecha,hora para evitar que los archivos con mismo nombre se uyy como se escribe jjajajj
+    
     //------------Factura-----------
     if($ope=="save"){
         $mfac->setNofac($nofac);
@@ -36,7 +42,9 @@
         $mfac->setFvfac($fvfac);
         $mfac->setTipfac($tipfac);
         $mfac->setForpag($forpag);
-        $mfac->setIdpercre($_SESSION['idper']);
+        $mfac->setRutpdf($rutpdf);
+        $mfac->setRutspt($rutspt);
+        $mfac->setIdpercre($_SESSION['idper']); 
 
         if(!$idfac) $mfac->save();
         else $mfac->edit();

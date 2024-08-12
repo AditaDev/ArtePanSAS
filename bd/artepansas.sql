@@ -10,6 +10,7 @@ CREATE TABLE `entrega` (
   `idperent` bigint(11) NOT NULL, -- id persona entrega
   `idperrec` bigint(11) NOT NULL, -- idpersona recibe
   `fecent` date DEFAULT NULL, -- fecha entrega
+  `fecdev` date DEFAULT NULL, -- fecha devolucion
   `observ` varchar(1000) DEFAULT NULL, -- observaciones
   `firpent` varchar(255) DEFAULT NULL, -- firma per entrega
   `firprec` varchar(255) DEFAULT NULL, -- firma per recibe
