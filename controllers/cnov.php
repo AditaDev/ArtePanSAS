@@ -12,12 +12,17 @@
     $obsnov = isset($_POST['obsnov']) ? $_POST['obsnov']:NULL;
     $estnov = isset($_REQUEST['estnov']) ? $_REQUEST['estnov']:52;
     $area = isset($_POST['area']) ? $_POST['area']:NULL;
+    $arcpdf = isset($_FILES['arcpdf']) ? $_FILES['arcpdf']:NULL;
+    $rutpdf = NULL;
 
     $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
 
     $datOne = NULL;
 
     $mnov->setIdnov($idnov);
+    
+    if($idperg) $infoper = $mnov->getOnePer($idperg); 
+    if($arcpdf && $infoper && $infoper[0]['nomper'] && $infoper[0]['apeper']) $rutpdf = opti($arcpdf, $nofac."_".$confac, "arc/novedades/".$infoper[0]['nomper'].$infoper[0]['apeper'], $nmfl); 
 
     //------------Novedad-----------
     if($ope=="save"){
@@ -31,6 +36,7 @@
         $mnov->setIdpercre($_SESSION['idper']);
         $mnov->setObsnov($obsnov);
         $mnov->setArea($area);
+        $mnov->setRutpdf($rutpdf);
         if(!$idnov) $mnov->save();
         else $mnov->edit();
         echo "<script>window.location='home.php?pg=".$pg."';</script>";

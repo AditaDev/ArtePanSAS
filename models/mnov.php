@@ -16,8 +16,7 @@
         private $idperrev;
         private $area;
         private $fecha;
-    
-
+        private $rutpdf;
 
         //------------GET-----------
         public function getIdnov(){
@@ -62,6 +61,10 @@
         public function getFecha(){
             return $this->fecha;
         }
+        public function getRutpdf(){
+            return $this->rutpdf;
+        }
+    
 
 
         //------------SET-----------
@@ -107,11 +110,14 @@
         public function setFecha($fecha){
             $this->fecha=$fecha;
         }
+        public function setRutpdf($rutpdf){
+            $this->rutpdf=$rutpdf;
+        }
 
 
 
         function getAll(){
-            $sql = "SELECT n.idnov, n.fecreg, n.fecrev, n.fecinov, n.fecfnov, n.obsnov, n.tipnov, n.estnov, n.idperg AS perg, n.idpercre AS pcre, n.idperrev AS prev, CONCAT(rg.nomper,' ',rg.apeper) AS nomperg, CONCAT(rc.nomper,' ',rc.apeper) AS nomperc, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, rg.ndper, vt.nomval AS tip, va.nomval AS area, ve.nomval AS est FROM novedad AS n LEFT JOIN persona AS rg ON n.idperg=rg.idper INNER JOIN persona AS rc ON n.idpercre=rc.idper LEFT JOIN persona AS rr ON n.idperrev=rr.idper INNER JOIN valor AS vt ON n.tipnov=vt.idval INNER JOIN valor AS va ON n.area=va.idval INNER JOIN valor AS ve ON n.estnov=ve.idval";
+            $sql = "SELECT n.idnov, n.fecreg, n.fecrev, n.fecinov, n.fecfnov, n.obsnov, n.tipnov, n.rutpdf, n.estnov, n.idperg AS perg, n.idpercre AS pcre, n.idperrev AS prev, CONCAT(rg.nomper,' ',rg.apeper) AS nomperg, CONCAT(rc.nomper,' ',rc.apeper) AS nomperc, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, rg.ndper, vt.nomval AS tip, va.nomval AS area, ve.nomval AS est FROM novedad AS n LEFT JOIN persona AS rg ON n.idperg=rg.idper INNER JOIN persona AS rc ON n.idpercre=rc.idper LEFT JOIN persona AS rr ON n.idperrev=rr.idper INNER JOIN valor AS vt ON n.tipnov=vt.idval INNER JOIN valor AS va ON n.area=va.idval INNER JOIN valor AS ve ON n.estnov=ve.idval";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -121,7 +127,7 @@
         }
 
         function getOne(){
-            $sql = "SELECT n.idnov, n.fecreg, n.fecrev, n.fecinov, n.fecfnov, n.obsnov, n.tipnov, n.estnov, n.idperg AS perg, n.idpercre AS pcre, n.idperrev AS prev, CONCAT(rg.nomper,' ',rg.apeper) AS nomperg, CONCAT(rc.nomper,' ',rc.apeper) AS nomperc, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, rg.ndper, vt.nomval AS tip, va.nomval AS area, ve.nomval AS est FROM novedad AS n LEFT JOIN persona AS rg ON n.idperg=rg.idper INNER JOIN persona AS rc ON n.idpercre=rc.idper LEFT JOIN persona AS rr ON n.idperrev=rr.idper INNER JOIN valor AS vt ON n.tipnov=vt.idval INNER JOIN valor AS va ON n.area=va.idval INNER JOIN valor AS ve ON n.estnov=ve.idval WHERE idnov=:idnov";
+            $sql = "SELECT n.idnov, n.fecreg, n.fecrev, n.fecinov, n.fecfnov, n.obsnov, n.tipnov, n.rutpdf, n.estnov, n.idperg AS perg, n.idpercre AS pcre, n.idperrev AS prev, CONCAT(rg.nomper,' ',rg.apeper) AS nomperg, CONCAT(rc.nomper,' ',rc.apeper) AS nomperc, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, rg.ndper, vt.nomval AS tip, va.nomval AS area, ve.nomval AS est FROM novedad AS n LEFT JOIN persona AS rg ON n.idperg=rg.idper INNER JOIN persona AS rc ON n.idpercre=rc.idper LEFT JOIN persona AS rr ON n.idperrev=rr.idper INNER JOIN valor AS vt ON n.tipnov=vt.idval INNER JOIN valor AS va ON n.area=va.idval INNER JOIN valor AS ve ON n.estnov=ve.idval WHERE idnov=:idnov";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -134,7 +140,11 @@
 
         function save(){
             // try {
-                $sql = "INSERT INTO novedad (fecreg, idperg, fecinov, fecfnov, tipnov, idpercre, obsnov, estnov, area) VALUES (:fecreg, :idperg, :fecinov, :fecfnov, :tipnov, :idpercre, :obsnov, :estnov, :area)";
+                $sql = "INSERT INTO novedad (fecreg, idperg, fecinov, fecfnov, tipnov, idpercre, obsnov, estnov, area"; 
+                if($this->getRutpdf()) $sql .= ", rutpdf";
+                $sql .= ")VALUES (:fecreg, :idperg, :fecinov, :fecfnov, :tipnov, :idpercre, :obsnov, :estnov, :area";
+                if($this->getRutpdf()) $sql .= ", :rutpdf";
+                $sql .= ")";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -155,7 +165,11 @@
                 $estnov = $this->getEstnov();
                 $result->bindParam(":estnov", $estnov);
                 $area = $this->getArea();
-                $result->bindParam(":area", $area);               
+                $result->bindParam(":area", $area);
+                if($this->getRutpdf()){
+                    $rutpdf = $this->getRutpdf();
+                    $result->bindParam(":rutpdf", $rutpdf);
+                }              
                 $result->execute();
             // } catch (Exception $e) {
             //     ManejoError($e);
@@ -185,7 +199,9 @@
 
         function edit(){
            //try {
-                $sql = "UPDATE novedad  SET fecinov=:fecinov, fecfnov=:fecfnov, tipnov=:tipnov, obsnov=:obsnov, estnov=:estnov, area=:area WHERE idnov=:idnov";
+                $sql = "UPDATE novedad  SET fecinov=:fecinov, fecfnov=:fecfnov, tipnov=:tipnov, obsnov=:obsnov, estnov=:estnov, area=:area";
+                if($this->getRutpdf()) $sql .= ", rutpdf=:rutpdf";
+                $sql .= "WHERE idnov=:idnov";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -201,6 +217,10 @@
                 $result->bindParam(":estnov", $estnov);
                 $area = $this->getArea();
                 $result->bindParam(":area", $area);
+                if($this->getRutpdf()){
+                    $rutpdf = $this->getRutpdf();
+                    $result->bindParam(":rutpdf", $rutpdf);
+                }
                 $result->execute();
             // } catch (Exception $e) {
             //     ManejoError($e);
@@ -238,6 +258,17 @@
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
+        function getOnePer($idper){ 
+            $sql = "SELECT p.nomper, p.apeper FROM persona AS p INNER JOIN novedad AS n ON p.idper=n.idperg WHERE n.idperg=:idper";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->bindParam(":idper", $idper);
             $result->execute();
             $res = $result->fetchall(PDO::FETCH_ASSOC);
             return $res;

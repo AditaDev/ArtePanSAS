@@ -3,7 +3,6 @@
 
     $mfac = new Mfac();
 
-
     //------------Factura-----------
     $fecact = date("Y-m-d H:i:s"); // fecha actual
     $idfac = isset($_REQUEST['idfac']) ? $_REQUEST['idfac']:NULL;
@@ -28,9 +27,10 @@
 
     $mfac->setIdfac($idfac);
     
-    if($arcpdf) $rutpdf = opti($arcpdf, $nofac."_".$confac, "arc/facturas/", "1"); //el id normalmente se guarda lo de la fecha,hora para evitar que los archivos con mismo nombre se uyy como se escribe jjajajj
-    if($arcspt) $rutspt = opti($arcpdf, "nombre", "ruta", "id"); //el id normalmente se guarda lo de la fecha,hora para evitar que los archivos con mismo nombre se uyy como se escribe jjajajj
-    
+    if($idemp) $infoemp = $mfac->getOneEmp($idemp);
+    if($arcpdf && $infoemp && $infoemp[0]['razsoem']) $rutpdf = opti($arcpdf, $nofac."_".$confac, "arc/facturas/".$infoemp[0]['razsoem'], $nmfl); 
+    // if($arcspt) $rutspt = opti($arcpdf, "nombre", "ruta", "id"); 
+
     //------------Factura-----------
     if($ope=="save"){
         $mfac->setNofac($nofac);

@@ -96,6 +96,11 @@ label {
   border-color: #073663;
 }
 
+ ul {
+    list-style: none;
+}
+
+
 .fa {
   padding: 5px;
 }

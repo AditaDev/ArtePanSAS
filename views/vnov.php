@@ -5,7 +5,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 ?>
 
 <?php if ($_SESSION['idpef'] == 7) { ?>
-<form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
+<form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
     <div class="row">
         <div class="form-group col-md-4">
             <label for="idperg"><strong>Persona:</strong></label>
@@ -48,8 +48,8 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 <input class="form-control" type="date" id="fecfnov" name="fecfnov" value="<?php if ($datOne) echo $datOne[0]['fecfnov']; ?>" required>
             </div>
         <div class="form-group col-md-4">
-            <label for="arcimg"><strong>Soporte:</strong></label>
-            <input class="form-control" type="file" id="arcpdf" name="arcpdf">
+            <label for="arcpdf"><strong>Soporte:</strong></label>
+            <input class="form-control" type="file" id="arcpdf" name="arcpdf" accept=".pdf" <?php if (!$datOne) echo 'required'; ?>>
         </div>
         <div class="form-group col-md-12"> 
                 <label for="obsnov"><strong>Observación:</strong></label>
@@ -97,6 +97,10 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 $info = $mnov->getOne();
                                 modalnov("mdetnov", $dta['idnov'], $dta['ndper'] . "-" . $dta['nomperg'], $info);
                                 ?>
+                                <?php
+                                if($dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
+                                    <ul><i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i></ul>
+                                    <?php } ?>
                     </td>
                     <td style="text-align: left;">
                         <?php if ($dta['estnov'] == 52) { ?>

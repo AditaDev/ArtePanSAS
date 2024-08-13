@@ -211,31 +211,65 @@
             // }
         }
 
-        function editAct(){
-            // try{
-                $estfac = $this->getEstfac();
-                $sql = "UPDATE factura SET estfac=:estfac";
-                if($estfac==53) $sql .= " idperrev=:idper, fprfac=:fecha";
-                if($estfac==54) $sql .= " idperapr=:idper, faprfac=:fecha";
-                if($estfac==55) $sql .= " idperent=:idper, fffac=:fecha";
-                if($estfac==56) $sql .= " idperpag=:idper, fpagfac=:fecha";
-                $sql .= " WHERE idfac=:idfac";
-                $modelo = new conexion();
-                $conexion = $modelo->get_conexion();
-                $result = $conexion->prepare($sql);
-                $idfac = $this->getIdfac();
-                $result->bindParam(":idfac",$idfac);
-                $estfac = $this->getEstfac();
-                $result->bindParam(":estfac",$estfac);
+        // function editAct(){
+        //     // try{
+        //         $estfac = $this->getEstfac();
+        //         $sql = "UPDATE factura SET estfac=:estfac";
+        //         if($estfac==53) $sql .= " idperrev=:idper, fprfac=:fecha";
+        //         if($estfac==54) $sql .= " idperapr=:idper, faprfac=:fecha";
+        //         if($estfac==55) $sql .= " idperent=:idper, fffac=:fecha";
+        //         if($estfac==56) $sql .= " idperpag=:idper, fpagfac=:fecha";
+        //         $sql .= " WHERE idfac=:idfac";
+        //         $modelo = new conexion();
+        //         $conexion = $modelo->get_conexion();
+        //         $result = $conexion->prepare($sql);
+        //         $idfac = $this->getIdfac();
+        //         $result->bindParam(":idfac",$idfac);
+        //         $estfac = $this->getEstfac();
+        //         $result->bindParam(":estfac",$estfac);
+        //         $idper = $this->getIdper();
+        //         $result->bindParam(":idper",$idper);
+        //         $fecha = $this->getFecha();
+        //         $result->bindParam(":fecha",$fecha);
+        //         $result->execute();
+        //     // }catch(Exception $e){
+        //     //     ManejoError($e);
+        //     // }
+        // }
+        function editAct() {
+            $estfac = $this->getEstfac();
+            $sql = "UPDATE factura SET estfac=:estfac";
+            
+            // Añadir las columnas y parámetros correspondientes según el valor de $estfac
+            if ($estfac == 53) {$sql .= ", idperrev=:idper, fprfac=:fecha";
+            } elseif ($estfac == 54) {$sql .= ", idperapr=:idper, faprfac=:fecha";
+            } elseif ($estfac == 55) {$sql .= ", idperent=:idper, fffac=:fecha";
+            } elseif ($estfac == 56) {$sql .= ", idperpag=:idper, fpagfac=:fecha";
+            } else {
+                // Manejar el caso en que $estfac no es uno de los valores esperados
+                throw new Exception("Valor de estfac no válido: " . $estfac); 
+            }
+            $sql .= " WHERE idfac=:idfac";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            
+            // Binding de los parámetros
+            $idfac = $this->getIdfac();
+            $result->bindParam(":idfac", $idfac);
+            $result->bindParam(":estfac", $estfac); 
+            // Agregar el binding de los parámetros adicionales según el valor de $estfac
+            if ($estfac == 53 || $estfac == 54 || $estfac == 55 || $estfac == 56) {
                 $idper = $this->getIdper();
-                $result->bindParam(":idper",$idper);
                 $fecha = $this->getFecha();
-                $result->bindParam(":fecha",$fecha);
-                $result->execute();
-            // }catch(Exception $e){
-            //     ManejoError($e);
-            // }
+                $result->bindParam(":idper", $idper);
+                $result->bindParam(":fecha", $fecha);
+            } 
+            $result->execute();
         }
+
+
+
 
         function edit(){
             //try {
@@ -308,6 +342,17 @@
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
+        function getOneEmp($idemp){
+            $sql = "SELECT e.idemp, e.nitemp, e.razsoem FROM empresa AS e INNER JOIN factura AS f ON e.idemp=f.idemp WHERE f.idemp=:idemp";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->bindParam(":idemp", $idemp);
             $result->execute();
             $res = $result->fetchall(PDO::FETCH_ASSOC);
             return $res;

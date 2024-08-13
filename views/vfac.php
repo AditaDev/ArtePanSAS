@@ -105,7 +105,9 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 $mfac->setIdfac($dta['idfac']);
                                 $info = $mfac->getOne();
                                 modalDet("mcbinf", $dta['idfac'], $dta['nofac'] . "-" . $dta['confac'], $info);
-                                ?>
+                                if($dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
+                                <ul><i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i></ul>
+                                <?php } ?>
                             </div>
                     </td>
                     <td tyle="text-align: half;">
@@ -149,7 +151,6 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <span style="font-size: 1px;opacity: 0;">4</span>
                             <i class="fa fa-solid fa-circle-check fa-2x pagada" title="<?= $dta['est']; ?>"></i>
                             <?php } ?>
-                        <i class="fa fa-solid fa-file-pdf fa-2x iconi" onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i>
                     <td tyle="text-align: right;">
                         <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi" title="Editar"></i>
@@ -158,10 +159,6 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
                         </a>
                     </td>
-
-
-
-
                 </tr>
         <?php }
         } ?>
