@@ -12,7 +12,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <select id="idperg" name="idperg" class="form-control form-select" required>
                 <?php if ($datPer) {
                     foreach ($datPer as $dep) { ?>
-                        <option value='<?= $dep['idper']; ?>' <?php if ($datOne && $dep['idper'] == $datOne['idper']) echo " selected "; ?>>
+                        <option value='<?= $dep['idper']; ?>' <?php if ($datOne && $dep['idper'] == $datOne[0]['perg']) echo " selected "; ?>>
                             <?= $dep['ndper'] . " - " . $dep['nomper']; ?>
                         </option>
                 <?php }
@@ -91,16 +91,14 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         </div>
                         <div class="form-group col-md-2" style="text-align: right;">
                             <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mdetnov<?= $dta['idnov']; ?>" title="Detalles"></i> 
-                        </div>
                             <?php
                                 $mnov->setIdnov($dta['idnov']);
                                 $info = $mnov->getOne();
                                 modalnov("mdetnov", $dta['idnov'], $dta['ndper'] . "-" . $dta['nomperg'], $info);
-                                ?>
-                                <?php
                                 if($dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
                                     <ul><i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i></ul>
                                     <?php } ?>
+                        </div>
                     </td>
                     <td style="text-align: left;">
                         <?php if ($dta['estnov'] == 52) { ?>
@@ -131,7 +129,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     </tbody>
     <tfoot>
         <tr>
-            <th>No.</th>
+            <th>Fecha registro</th>
             <th>Datos persona</th>
             <th>Estado</th>
             <th>Acciones</th>

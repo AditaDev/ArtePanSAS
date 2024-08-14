@@ -21,8 +21,8 @@
 
     $mnov->setIdnov($idnov);
     
-    if($idperg) $infoper = $mnov->getOnePer($idperg); 
-    if($arcpdf && $infoper && $infoper[0]['nomper'] && $infoper[0]['apeper']) $rutpdf = opti($arcpdf, $nofac."_".$confac, "arc/novedades/".$infoper[0]['nomper'].$infoper[0]['apeper'], $nmfl); 
+    if($idperg) $infoper = $mnov->getOnePer($idperg);
+    if($arcpdf && $infoper && $infoper[0]['nomper'] && $infoper[0]['apeper'] && $infoper[0]['tip']) $rutpdf = opti($arcpdf, $infoper[0]['tip']."_", "arc/novedades/".$infoper[0]['nomper'].$infoper[0]['apeper'], $nmfl); 
 
     //------------Novedad-----------
     if($ope=="save"){

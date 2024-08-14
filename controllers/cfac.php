@@ -29,7 +29,7 @@
     
     if($idemp) $infoemp = $mfac->getOneEmp($idemp);
     if($arcpdf && $infoemp && $infoemp[0]['razsoem']) $rutpdf = opti($arcpdf, $nofac."_".$confac, "arc/facturas/".$infoemp[0]['razsoem'], $nmfl); 
-    // if($arcspt) $rutspt = opti($arcpdf, "nombre", "ruta", "id"); 
+    if($arcspt) $rutspt = opti($arcpdf, "nombre", "ruta", "id"); 
 
     //------------Factura-----------
     if($ope=="save"){
@@ -67,4 +67,12 @@
         $mfac->editAct(); 
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
+
+    // function diasres($fvfac) {
+    //     $fecact = new DateTime();
+    //     $fvfac = new DateTime($fvfac);
+    //     $intervalo = $fecact->diff($fvfac);
+    //     return $intervalo->days;
+    // }
+
 ?>

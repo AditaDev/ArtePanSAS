@@ -143,17 +143,6 @@
             return $res;
         }
 
-         //Funcion de equipos disponibles
-        // function getAllDis(){
-        //     $sql = "SELECT e.idequ, e.marca, e.modelo, e.serialeq, e.nomred, e.idvtpeq, e.capgb, e.ram, e.procs, e.fecultman, e.fecproman, e.actequ, e.tipcon, e.contrato, e.valrcont, vt.nomval AS tpe, vc.nomval AS tpc FROM equipo AS e LEFT JOIN valor AS vt ON e.idvtpeq=vt.idval LEFT JOIN valor AS vc ON e.tipcon=vc.idval WHERE e.actqu=1";
-        //     $modelo = new conexion();
-        //     $conexion = $modelo->get_conexion();
-        //     $result = $conexion->prepare($sql);
-        //     $result->execute();
-        //     $res = $result->fetchall(PDO::FETCH_ASSOC);
-        //     return $res;
-        // }
-
         function getOne(){
             $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.idpercre AS pcre, f.idperrev AS prev, f.idperapr AS papr, f.idperent AS pent, f.idperpag AS ppag, f.fefac, f.fvfac, f.forpag, f.tipfac, f.faprfac, f.fprfac, f.fpagfac, f.rutpdf, f.rutspt, e.razsoem, e.nitemp, CONCAT(rc.nomper,' ',rc.apeper) AS nompcre, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, CONCAT(ra.nomper,' ',ra.apeper) AS nompapr,CONCAT(re.nomper,' ',re.apeper) AS nompent, CONCAT(rg.nomper,' ',rg.apeper) AS nomppag, ve.nomval AS est, vf.nomval AS fpag, vt.nomval AS tip FROM factura AS f INNER JOIN empresa AS e ON f.idemp=e.idemp INNER JOIN persona AS rc ON f.idpercre=rc.idper LEFT JOIN persona AS rr ON f.idperrev=rr.idper LEFT JOIN persona AS ra ON f.idperapr=ra.idper LEFT JOIN persona AS re ON f.idperent=re.idper LEFT JOIN persona AS rg ON f.idperpag=rg.idper INNER JOIN valor AS ve ON f.estfac=ve.idval INNER JOIN valor AS vf ON f.forpag=vf.idval INNER JOIN valor AS vt ON f.tipfac=vt.idval WHERE idfac=:idfac";
             $modelo = new conexion();
@@ -211,31 +200,6 @@
             // }
         }
 
-        // function editAct(){
-        //     // try{
-        //         $estfac = $this->getEstfac();
-        //         $sql = "UPDATE factura SET estfac=:estfac";
-        //         if($estfac==53) $sql .= " idperrev=:idper, fprfac=:fecha";
-        //         if($estfac==54) $sql .= " idperapr=:idper, faprfac=:fecha";
-        //         if($estfac==55) $sql .= " idperent=:idper, fffac=:fecha";
-        //         if($estfac==56) $sql .= " idperpag=:idper, fpagfac=:fecha";
-        //         $sql .= " WHERE idfac=:idfac";
-        //         $modelo = new conexion();
-        //         $conexion = $modelo->get_conexion();
-        //         $result = $conexion->prepare($sql);
-        //         $idfac = $this->getIdfac();
-        //         $result->bindParam(":idfac",$idfac);
-        //         $estfac = $this->getEstfac();
-        //         $result->bindParam(":estfac",$estfac);
-        //         $idper = $this->getIdper();
-        //         $result->bindParam(":idper",$idper);
-        //         $fecha = $this->getFecha();
-        //         $result->bindParam(":fecha",$fecha);
-        //         $result->execute();
-        //     // }catch(Exception $e){
-        //     //     ManejoError($e);
-        //     // }
-        // }
         function editAct() {
             $estfac = $this->getEstfac();
             $sql = "UPDATE factura SET estfac=:estfac";
@@ -378,6 +342,7 @@
             ManejoError($e);
         }
     }
+       
 
         // function getEqxEp($idequ){
         //     $res = null;

@@ -1,10 +1,10 @@
 <?php
     require_once("models/mdot.php");
-    require ('vendor/autoload.php');
+    // require ('vendor/autoload.php');
 
     $mdot = new Mdot();
 
-    use PhpOffice\PhpSpreadsheet\IOFactory;
+    // use PhpOffice\PhpSpreadsheet\IOFactory;
 
     //------------Asignar-----------
     // $ideqxpr = isset($_REQUEST['ideqxpr']) ? $_REQUEST['ideqxpr']:NULL;
@@ -84,9 +84,8 @@
     
     //------------Traer valores-----------
 
-    $dat = $masg->getAllOpe(9);
+    // $dat = $mdot->getAllOpe(9);
     $datPer = $mdot->getAllPer($ope);
-    $datPer = $masg->getAllPer($ope);
     
     // if($asg=="equ"){
     //     $datAllA = $masg->getAllAsig(52);

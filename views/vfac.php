@@ -3,6 +3,7 @@ require_once('controllers/cfac.php');
 $hoy = date("Y-m-d");
 $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 ?>
+<i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" title="Importar"></i>
 
 <?php if ($_SESSION['idpef'] == 4) { ?>
     <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">

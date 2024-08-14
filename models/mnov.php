@@ -198,13 +198,15 @@
         }
 
         function edit(){
-           //try {
-                $sql = "UPDATE novedad  SET fecinov=:fecinov, fecfnov=:fecfnov, tipnov=:tipnov, obsnov=:obsnov, estnov=:estnov, area=:area";
+           try {
+                $sql = "UPDATE novedad  SET fecinov=:fecinov, fecfnov=:fecfnov, tipnov=:tipnov, obsnov=:obsnov, estnov=:estnov, area=:area"; 
                 if($this->getRutpdf()) $sql .= ", rutpdf=:rutpdf";
-                $sql .= "WHERE idnov=:idnov";
+                $sql .= " WHERE idnov=:idnov";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
+                $idnov = $this->getIdnov();
+                $result->bindParam(":idnov", $idnov);
                 $fecinov = $this->getFecinov();
                 $result->bindParam(":fecinov", $fecinov);
                 $fecfnov = $this->getFecfnov();
@@ -222,9 +224,9 @@
                     $result->bindParam(":rutpdf", $rutpdf);
                 }
                 $result->execute();
-            // } catch (Exception $e) {
-            //     ManejoError($e);
-            // }
+            } catch (Exception $e) {
+                ManejoError($e);
+            }
         }
 
         function del(){
@@ -264,7 +266,7 @@
         }
 
         function getOnePer($idper){ 
-            $sql = "SELECT p.nomper, p.apeper FROM persona AS p INNER JOIN novedad AS n ON p.idper=n.idperg WHERE n.idperg=:idper";
+            $sql = "SELECT p.nomper, p.apeper, vt.nomval AS tip FROM persona AS p INNER JOIN novedad AS n ON p.idper=n.idperg INNER JOIN valor AS vt ON n.tipnov=vt.idval WHERE n.idperg=:idper";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);

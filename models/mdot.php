@@ -85,6 +85,17 @@
         public function setNdper($ndper){
             $this->ndper = $ndper;
         }
+        
+
+        // function getAll(){
+        //     SELECT "d.ident, d.idperent AS pent, d.idperrec AS prec, d.fecent, d.fecdev, d.observ, d.firpent, d.firprec, d.difent CONCAT(pe.nomper,' ',pe.apeper) AS nompent, CONCAT(pr.nomper,' ',pr.apeper) AS nomprec FROM entrega AS d INNER JOIN persona AS pe ON d.idperent=pe.idper LEFT JOIN persona AS pr ON d.idperrec=pr.idper";
+        //             $modelo = new conexion();
+        //             $conexion = $modelo->get_conexion();
+        //             $result = $conexion->prepare($sql);
+        //             $result->execute();
+        //             $res = $result->fetchall(PDO::FETCH_ASSOC);
+        //             return $res;
+        // }
 
 
         function getAllDom($iddom){

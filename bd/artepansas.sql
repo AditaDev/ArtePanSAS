@@ -14,7 +14,7 @@ CREATE TABLE `entrega` (
   `observ` varchar(1000) DEFAULT NULL, -- observaciones
   `firpent` varchar(255) DEFAULT NULL, -- firma per entrega
   `firprec` varchar(255) DEFAULT NULL, -- firma per recibe
-  `difent` varchar(50) DEFAULT NULL -- este es diferenciar entrega para poder asignarle las dotaciones
+  `difent` varchar(50) DEFAULT NULL -- este es diferenciar entrega para poder asignarle las dotaciones      
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `dotxent` (
