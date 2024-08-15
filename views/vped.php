@@ -134,24 +134,16 @@ body {
 
 
 } 
+
 </style>
 
 
 
 
 <?php if ($datOne) { ?>
-    <body>
-        <div class="container">
-            <div class="card">
-                <div class="content">
-                    <h2></h2>
-                    <h3>Holis</h3>
-                    <p>Yo te amo re arto</p>
-                    <a href="#">NO me amas jsjjs click aqui</a>
-                </div>
-            </div>
-        </div>
-    </body>
+
+   YA PEDISTE
+   <img src="img/orders.png">
 
 </html>
 

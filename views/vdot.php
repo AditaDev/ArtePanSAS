@@ -13,9 +13,10 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 
     <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
         <div class="row">
-                <label for="idperrec"><strong>Usuario:</strong></label>
-                <div class="form-group col-md-8">
+            <div class="form-group col-md-8">
+                    <label for="idperrec"><strong>Usuario:</strong></label>
                     <select id="idperrec" name="idperrec" class="form-control form-select" required>
+                    <option value="0"></option>
                     <?php if ($datPer) {
                     foreach ($datPer as $dep) { ?>
                         <option value='<?= $dep['idper']; ?>' <?php if ($datOne && $dep['idper'] == $datOne[0]['prec']) echo " selected "; ?>>
@@ -28,26 +29,41 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <?php ?>
             <div class="form-group col-md-4">
             <label for="fecent"><strong>F. Entrega:</strong></label>
-                <input class="form-control" type="date" id="fecent" name="fecent" max=<?php echo $hoy;?> <?php if ($datOneA) echo 'value="'.$datOneA[0]['fecent'].'" disabled'; else echo 'value="'.$hoy.'" required';?>>
+                <input class="form-control" type="date" id="fecent" name="fecent" max=<?php echo $hoy;?> <?php if ($datOne) echo 'value="'.$datOne[0]['fecent'].'" disabled'; else echo 'value="'.$hoy.'" required';?>>
             </div>
-            <!-- <div class="form-group col-md-12"><br></div>
-            <?php if($datAcc){ foreach($datAcc as $dac){?>
-                <div <?php if($asg=="equ"){ echo 'class="form-group col-md-4"'; } else if($asg=="cel") { echo 'class="form-group col-md-4"'; }?> style="text-align: left !important;">
-                    <input type="checkbox" name="idvacc[]" value="<?= $dac['idval'] ?>" <?php if ($datAxE){ foreach($datAxE as $dae){ if($dac['idval'] == $dae['idvacc']) echo " checked ";}} ?>>
-                    <label for="idvacc"><strong><?= $dac['nomval'];?></strong></label>
-				</div>
-            <?php }} ?> -->
+            <div class="form-group col-md-12"><br></div> 
+            <?php if($datDot && $datTalS && $datTalP && $datTalZ){ foreach($datDot as $ddo){?>
+                    <div class="form-group col-md-6">
+                        <input type="checkbox" name="idvdot[]" value="<?= $ddo['idval'] ?>" <?php if ($datTxD){ foreach($datTxD as $ddt){ if($ddo['idval'] == $ddt['idvdot']) echo " checked ";}} ?>>
+                        <label for="idvdot"><strong><?= $ddo['nomval'];?></strong></label>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <select name="idvtal[]" id="idvtal" class="form-control form-select">
+                            <option value="0"></option>
+                            <?php
+                            if($ddo['idval']==82 OR $ddo['idval']==83) $datTal = $datTalS;
+                            elseif($ddo['idval']==81) $datTal = $datTalP;
+                            elseif($ddo['idval']==84) $datTal = $datTalZ;
+                            elseif($ddo['idval']==85) $datTal = $datTalG;
+                            if($datTal){ foreach ($datTal as $ddt) { ?>
+                            <option value="<?= $ddt ['idval'] ?>" <?php if ($datTxD){ foreach($datTxD as $ddot){ if($ddt['idval'] == $ddot['idvtal']) echo " selected ";}} ?>>
+                                    <?= $ddt['nomval']; ?>
+                            </option> 
+                            <?php }} ?>
+                        </select>
+                    </div>
+                
+            <?php }} ?>    
             <div class="form-group col-md-12">
                 <br>
                 <label for="observ"><strong>Observaciones entrega:</strong></label>
-                <textarea class="form-control" type="text" id="observ" name="observ" <?php if ($datOneA) echo 'required';?>><?php if ($datOneA) echo $datOneA[0]['observ']; ?></textarea>
+                <textarea class="form-control" type="text" id="observ" name="observ" <?php if ($datOne) echo 'required';?>><?php if ($datOne) echo $datOne[0]['observ']; ?></textarea>
             </div>
             <div class="form-group col-md-12" id="boxbtn">
                 <br><br>
                 <input class="btn btn-primary" type="submit" value="Registrar">
                 <input type="hidden" name="ope" value="save">
-                <input type="hidden" name="asg" value="<?php echo $asg?>">
-                <input type="hidden" name="ideqxpr" value="<?php if ($datOneA) echo $datOneA[0]['ideqxpr']; ?>">
+                <input type="hidden" name="ident" value="<?php if ($datOne) echo $datOne[0]['ident']; ?>">
             </div>
         </div>
     </form>
@@ -55,8 +71,8 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     <table id="mytable" class="table table-striped">
     <thead>
         <tr>
-            <th>No.</th>
-            <th>Datos factura</th>
+            <th>Persona</th>
+            <th>Datos dotación</th>
             <th>Estado</th>
             <th></th>
         </tr>
@@ -65,7 +81,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         <?php if ($datAllA) {
             foreach ($datAllA as $dta) { ?>
                 <tr>
-                    <td tyle="text-align: left;"><?= $dta['idfac']; ?></td>
+                    <td tyle="text-align: left;"><?= $dta['nomper']; ?></td>
                     <td>
                         <div class="row">
                             <div class="form-group col-md-10">
@@ -98,8 +114,8 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     </tbody>
     <tfoot>
         <tr>
-            <th>No.</th>
-            <th>Datos factura</th>
+            <th>Persona</th>
+            <th>Datos dotación</th>
             <th>Estado</th>
             <th></th>
 

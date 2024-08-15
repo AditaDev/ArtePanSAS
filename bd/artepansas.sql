@@ -5,13 +5,14 @@ USE artepansas;
 --
 
 
-CREATE TABLE `entrega` (
+CREATE TABLE `dotacion` (
   `ident` bigint(11) NOT NULL, -- id entrega
   `idperent` bigint(11) NOT NULL, -- id persona entrega
   `idperrec` bigint(11) NOT NULL, -- idpersona recibe
   `fecent` date DEFAULT NULL, -- fecha entrega
   `fecdev` date DEFAULT NULL, -- fecha devolucion
   `observ` varchar(1000) DEFAULT NULL, -- observaciones
+  `estent` bigint(11) NOT NULL,
   `firpent` varchar(255) DEFAULT NULL, -- firma per entrega
   `firprec` varchar(255) DEFAULT NULL, -- firma per recibe
   `difent` varchar(50) DEFAULT NULL -- este es diferenciar entrega para poder asignarle las dotaciones      
@@ -32,7 +33,8 @@ CREATE TABLE `almuerzo` (
   `ppalm` varchar(70) NOT NULL,
   `spalm` varchar(70) NOT NULL,
   `jgalm` varchar(70) NOT NULL,
-  `fecalm` date DEFAULT NULL
+  `fecalm` date DEFAULT NULL,
+  `rutpdf` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -61,7 +63,8 @@ INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (7, 'Dotación'),
 (8, 'Talla CC'),
 (9, 'Talla P'),
-(10, 'Talla Z');
+(10, 'Talla Z'),
+(11, 'Talla G');
 
 
 -- --------------------------------------------------------
@@ -258,7 +261,7 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (62, 11),
 (63, 12),
 (62, 12),
-(111, 1),
+(111, 7),
 (111, 4);
 
 
@@ -487,14 +490,30 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (77, '41', 10, 1006, 1),
 (78, '42', 10, 1007, 1),
 (79, '43', 10, 1008, 1),
-(80, '44', 10, 1009, 1);
+(80, '44', 10, 1009, 1),
+
+(81, 'Pantalón', 7, 701, 1),
+(82, 'Camisa', 7, 702, 1),
+(83, 'Chaqueta', 7, 703, 1),
+(84, 'Botas', 7, 704, 1),
+(85, 'Guantes', 7, 705, 1),
+
+(86, '4', 11, 1101, 1),
+(87, '5', 11, 1102, 1),
+(88, '6', 11, 1103, 1),
+(89, '7', 11, 1104, 1),
+(90, '8', 11, 1105, 1),
+(91, '9', 11, 1106, 1),
+(92, '10', 11, 1107, 1),
+(93, '11', 11, 1108, 1);
 
 
 
-ALTER TABLE `entrega`
+ALTER TABLE `dotacion`
   ADD PRIMARY KEY (`ident`),
   ADD KEY `idperent` (`idperent`),
-  ADD KEY `idperrec` (`idperrec`);
+  ADD KEY `idperrec` (`idperrec`),
+  ADD KEY `estent` (`estent`);
 
 ALTER TABLE `dotxent`
   ADD KEY `ident` (`ident`),
@@ -603,7 +622,7 @@ ALTER TABLE `valor`
   ADD KEY `iddom` (`iddom`);
 
 
-ALTER TABLE `entrega`
+ALTER TABLE `dotacion`
   MODIFY `ident` bigint(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -669,14 +688,14 @@ ALTER TABLE `pedido`
 --
 
 ALTER TABLE `dotxent`
-  ADD CONSTRAINT `dotxent__ibfk_1` FOREIGN KEY (`ident`) REFERENCES `entrega` (`ident`);
+  ADD CONSTRAINT `dotxent__ibfk_1` FOREIGN KEY (`ident`) REFERENCES `dotacion` (`ident`);
 
 --
 -- Filtros para la tabla `asignar`
 --
-ALTER TABLE `entrega`
-  ADD CONSTRAINT `entrega_ibfk_1` FOREIGN KEY (`idperent`) REFERENCES `persona` (`idper`),
-  ADD CONSTRAINT `entrega_ibfk_2` FOREIGN KEY (`idperrec`) REFERENCES `persona` (`idper`);
+ALTER TABLE `dotacion`
+  ADD CONSTRAINT `dotacion_ibfk_1` FOREIGN KEY (`idperent`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `dotacion_ibfk_2` FOREIGN KEY (`idperrec`) REFERENCES `persona` (`idper`);
 --
 
 --

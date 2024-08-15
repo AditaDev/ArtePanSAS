@@ -7,7 +7,6 @@
     // use PhpOffice\PhpSpreadsheet\IOFactory;
 
     //------------Asignar-----------
-    // $ideqxpr = isset($_REQUEST['ideqxpr']) ? $_REQUEST['ideqxpr']:NULL;
     $ident = isset($_POST['ident']) ? $_POST['ident']:NULL;
     $idperent = isset($_POST['idperent']) ? $_POST['idperent']:NULL;
     $idperrec = isset($_POST['idperrec']) ? $_POST['idperrec']:NULL;
@@ -15,54 +14,50 @@
     $observ = isset($_POST['observ']) ? $_POST['observ']:NULL;
     $fecdev = isset($_POST['fecdev']) ? $_POST['fecdev']:NULL;
     $observd = isset($_POST['observd']) ? $_POST['observd']:NULL;
+    $estent = isset($_POST['estent']) ? $_POST['estent']:1;
     $firpent = isset($_FILES['firpent']) ? $_FILES['firpent']:NULL;
     $firprec = isset($_FILES['firprec']) ? $_FILES['firprec']:NULL;
    
     $firma = NULL;
 
     
-    //------------Accesorios-----------
-    // $idvacc = isset($_POST['idvacc']) ? $_POST['idvacc']:NULL;
+    //------------Elementos-----------
+    $idvdot = isset($_POST['idvdot']) ? $_POST['idvdot']:NULL;
+    $idvtal = isset($_POST['idvtal']) ? $_POST['idvtal']:NULL;
     
     // $arc = isset($_FILES["arc"]["name"]) ? $_FILES["arc"]["name"] : NULL;
     // $arc = substr($arc, 0, strpos($arc, ".xls"));
     
-    // $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
-    // $asg = isset($_REQUEST['asg']) ? $_REQUEST['asg']:"equ";
+    $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
     
-    $datOneA = NULL;
-    // $datAxE = NULL;
-    // $pg = 51;
+    $datOne = NULL;
+    $datTxD = NULL;
+ 
+    $pg = 111;
     
-    // $masg->setIdeqxpr($ideqxpr);
-    // //------------Asignar-----------
-    // if($ope=="save"){   
-    //     $masg->setIdequ($idequ);
-    //     $masg->setIdperent($idperent);
-    //     $masg->setIdperrec($idperrec);
-    //     $masg->setFecent($fecent);
-    //     $masg->setObserv($observ);
-    //     $masg->setNumcel($numcel);
-    //     $masg->setOpecel($opecel);
-    //     $masg->setEstexp($estexp);    
-    //     $masg->setDifasg($nmfl);    
-    //     if(!$ideqxpr){
-    //         $masg->save($asg);
-    //         $id = $masg->getOneAsg($nmfl);
-    //         $ideqxpr = $id[0]['ideqxpr'];
-    //         $mequ->setIdequ($idequ);
-    //         $mequ->setActequ(2);
-    //         $mequ->editAct();
-    //     }
-    //     else $masg->edit();
-    //     if($ideqxpr) $masg->delAxE();
-    //     if($idvacc && $ideqxpr){ foreach($idvacc AS $ida){
-    //         $masg->setIdeqxpr($ideqxpr);
-    //         $masg->setIdvacc($ida);
-    //         $masg->saveAxE();
-    //     }}
-    //     echo "<script>window.location='home.php?pg=".$pg."&asg=".$asg."';</script>";
-    // }
+    $mdot->setIdEnt($ident);
+    //------------Asignar-----------
+    if($ope=="save"){   
+        $mdot->setIdperent($idperent);
+        $mdot->setIdperrec($idperrec);
+        $mdot->setFecent($fecent);
+        $mdot->setObserv($observ);
+        $mdot->setEstent($estent);    
+        $mdot->setDifent($nmfl);    
+        if(!$ident){
+            $mdot->save();
+            $id = $mdot->getOneAsg($nmfl);
+            $ident = $id[0]['ident'];
+        }
+        if($ident) $mdot->delExD();
+        if($idvdot && $ident){ foreach($idvdot AS $index=>$ida){
+            $mdot->setIdent($ident);
+            $mdot->setIdvdot($ida);
+            $mdot->setIdvtal($idvtal[$index]);
+            $mdot->saveExD();
+        }}
+        // echo "<script>window.location='home.php?pg=".$pg."&asg=".$asg."';</script>";
+    }
 
     // if($ope=="dev" && $ideqxpr && $idequ){
     //     $masg->setIdperentd($idperentd);
@@ -84,18 +79,13 @@
     
     //------------Traer valores-----------
 
-    // $dat = $mdot->getAllOpe(9);
+    $datAllA = NULL;
+    // $datAllA = $mdot->getAllPer($ope);
     $datPer = $mdot->getAllPer($ope);
-    
-    // if($asg=="equ"){
-    //     $datAllA = $masg->getAllAsig(52);
-    //     $datEqu = $masg->getAllEquDis(52, $ope);
-    //     $datAcc = $masg->getAllAcc(3);
-    // }else if($asg=="cel"){
-    //     $datAllA = $masg->getAllAsig(54);
-    //     $datEqu = $masg->getAllEquDis(54, $ope);
-    //     $datAcc = $masg->getAllAcc(5);
-    // }
-
+    $datDot = $mdot->getAllDot(7);
+    $datTalS = $mdot->getAllDot(8); 
+    $datTalP = $mdot->getAllDot(9); 
+    $datTalZ = $mdot->getAllDot(10);
+    $datTalG = $mdot->getAllDot(11);
    
 ?>

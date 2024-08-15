@@ -8,6 +8,7 @@ class Malm
     private $ppalm;
     private $spalm;
     private $jgalm;
+    private $rutpdf;
 
 //--------Pedido-------
     private $idped;
@@ -32,6 +33,9 @@ class Malm
     }
     public function getJgalm(){
         return $this->jgalm;
+    }
+    public function getRutpdf(){
+        return $this->rutpdf;
     }
 
 //--------Pedido-------
@@ -65,6 +69,9 @@ class Malm
     public function setJgalm($jgalm){
         $this->jgalm = $jgalm;
     }
+    public function setRutpdf($rutpdf){
+        $this->rutpdf=$rutpdf;
+    }
 
 //--------Pedido-------
     public function setIdped($idped){
@@ -82,7 +89,7 @@ class Malm
 
 //--------Almuerzo-------
     function getAll(){ 
-        $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm FROM almuerzo";
+        $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm, rutpdf FROM almuerzo";
         // $sql = "SELECT a.idalm, a.fecalm, a.ppalm, a.spalm, a.jgalm, p.idalm, p.idped FROM almuerzo AS a INNER JOIN pedido AS p ON a.idalm=p.idalm";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
@@ -93,7 +100,7 @@ class Malm
     }
 
     function getOne(){
-        $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm FROM almuerzo WHERE idalm=:idalm";
+        $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm, rutpdf FROM almuerzo WHERE idalm=:idalm";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -105,8 +112,12 @@ class Malm
     }
 
     function save(){
-        try {
-            $sql = "INSERT INTO almuerzo (fecalm, ppalm, spalm, jgalm) VALUES (:fecalm, :ppalm, :spalm, :jgalm)";
+        //try {
+            $sql = "INSERT INTO almuerzo (fecalm, ppalm, spalm, jgalm";
+            if($this->getRutpdf()) $sql .= ", rutpdf";
+                $sql .= ") VALUES (:fecalm, :ppalm, :spalm, :jgalm";
+            if($this->getRutpdf()) $sql .= ", :rutpdf";
+                $sql .= ")";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -118,14 +129,20 @@ class Malm
             $result->bindParam(":jgalm", $jgalm);
             $fecalm = $this->getFecalm();
             $result->bindParam(":fecalm", $fecalm);
+            if($this->getRutpdf()){
+                $rutpdf = $this->getRutpdf();
+                $result->bindParam(":rutpdf", $rutpdf);
+            } 
             $result->execute();
-        } catch (Exception $e) {
-            ManejoError($e);
-        }
+        // } catch (Exception $e) {
+        //     ManejoError($e);
+        // }
     }
 
     function edit(){
-        $sql = "UPDATE almuerzo SET ppalm=:ppalm, spalm=:spalm, jgalm=:jgalm WHERE idalm=:idalm";
+        $sql = "UPDATE almuerzo SET ppalm=:ppalm, spalm=:spalm, jgalm=:jgalm";
+        if($this->getRutpdf()) $sql .= ", rutpdf=:rutpdf";
+            $sql .= " WHERE idalm=:idalm";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -137,6 +154,10 @@ class Malm
         $result->bindParam(":spalm", $spalm);
         $jgalm = $this->getJgalm();
         $result->bindParam(":jgalm", $jgalm);
+        if($this->getRutpdf()){
+            $rutpdf = $this->getRutpdf();
+            $result->bindParam(":rutpdf", $rutpdf);
+        }
         $result->execute();
     }
 
