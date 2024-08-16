@@ -335,7 +335,7 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`idper`, `nomper`, `pasper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`, `area`) VALUES
-(1, 'Ada', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada@artepan.com', '3215646857', 'Rodriguez', '1071328321', 1, 45),
+(1, 'Ada', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'ada@artepan.com', '3215646857', 'Rodriguez', '1071328321', 1, 47),
 (2, 'Rita', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'rita@artepan.com', '3215456998', 'Bejarano', '1072749321', 1, 46),
 (3, 'Adriana', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'adriana@artepan.com', '3021845120', 'Montaño', '1004985502', 1, 47),
 (4, 'Amy', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'amy@artepan.com', '3112132208', 'Gavilan', '1076655342', 1, 48),
@@ -346,7 +346,7 @@ INSERT INTO `persona` (`idper`, `nomper`, `pasper`, `emaper`, `telper`, `apeper`
 (9, 'Fabian', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'fabianb@artepan.com', '322894463', 'Bastidas', '1077954332', 1, 49),
 (10, 'Jader', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'jader@artepan.com', '322894463', 'Mendoza', '1077954332', 1, 49),
 (11, 'Mery', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'mery@artepan.com', '322894463', 'Agudelo', '1077954332', 1, 49),
-(12, 'J', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'j@artepan.com', '322894463', 'Pardo', '1077954332', 1, 49);
+(12, 'J', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'j@artepan.com', '322894463', 'Pardo', '1077954332', 1, 51);
 
 -- --------------------------------------------------------
 

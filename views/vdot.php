@@ -54,6 +54,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     </div>
                 
             <?php }} ?>    
+
             <div class="form-group col-md-12">
                 <br>
                 <label for="observ"><strong>Observaciones entrega:</strong></label>
@@ -78,28 +79,28 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         </tr>
     </thead>
     <tbody>
-        <?php if ($datAllA) {
-            foreach ($datAllA as $dta) { ?>
+        <?php if ($datAllD) {
+            foreach ($datAllD as $dta) { ?>
                 <tr>
-                    <td tyle="text-align: left;"><?= $dta['nomper']; ?></td>
+                    <td tyle="text-align: left;"><?= $dta['ident']; ?></td>
                     <td>
                         <div class="row">
                             <div class="form-group col-md-10">
-                                <strong> <?= ($dta['nofac']) .  " - "  . $dta['confac']; ?></strong><br>
+                                <strong> <?= ($dta['nompent']) .  " - "  . $dta['nomprec']; ?></strong><br>
                                 <small>
-                                    <strong>Empresa: </strong> <?= $dta['razsoem']; ?><br>
-                                    <strong>Fecha de vencimiento: </strong><?= $dta['fvfac']; ?><br>
+                                    <strong>Empresa: </strong> <?= $dta['area']; ?><br>
+                                    <strong>Fecha de vencimiento: </strong><?= $dta['observ']; ?><br>
                                 </small>
 
                             </div>
                             <div class="form-group col-md-2" style="text-align: right;">
-                                <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idfac']; ?>" title="Detalles"></i>
+                                <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" title="Detalles"></i>
                             </div>
                     </td>
                     <td tyle="text-align: half;">
                         
-                            <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="<?= $dta['est']; ?>"></i> 
-                               
+                            <!-- <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="<?= $dta['est']; ?>"></i>  -->
+                    </td>        
                     <td tyle="text-align: right;">
                         <!-- <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi"> -->
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi" title="Editar"></i>

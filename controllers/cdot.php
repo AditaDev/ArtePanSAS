@@ -56,7 +56,7 @@
             $mdot->setIdvtal($idvtal[$index]);
             $mdot->saveExD();
         }}
-        // echo "<script>window.location='home.php?pg=".$pg."&asg=".$asg."';</script>";
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
     // if($ope=="dev" && $ideqxpr && $idequ){
@@ -79,8 +79,7 @@
     
     //------------Traer valores-----------
 
-    $datAllA = NULL;
-    // $datAllA = $mdot->getAllPer($ope);
+    $datAllD = $mdot->getAllD();
     $datPer = $mdot->getAllPer($ope);
     $datDot = $mdot->getAllDot(7);
     $datTalS = $mdot->getAllDot(8); 
