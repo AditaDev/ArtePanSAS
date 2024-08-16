@@ -10,6 +10,10 @@
         private $estent;
         private $firpent;
         private $firprec;
+        private $idperentd;
+        private $idperrecd;
+        private $fecdev;
+        private $observd;
         private $difent;
 
         private $firma;
@@ -48,6 +52,18 @@
         }
         public function getEstent(){
             return $this->estent;
+        }
+        public function getIdperentd(){
+            return $this->idperentd;
+        }
+        public function getIdperrecd(){
+            return $this->idperrecd;
+        }
+        public function getFecdev(){
+            return $this->fecdev;
+        }
+        public function getObservd(){
+            return $this->observd;
         }
 
 
@@ -92,6 +108,18 @@
         public function setDifent($difent){
             $this->difent=$difent;
         }
+        public function setIdperentd($idperentd){
+            $this->idperentd=$idperentd;
+        }
+        public function setIdperrecd($idperrecd){
+            $this->idperrecd=$idperrecd;
+        }
+        public function setFecdev($fecdev){
+            $this->fecdev=$fecdev;
+        }
+        public function setObservd($observd){
+            $this->observd=$observd;
+        }
 
         public function setFirma($firma){
             $this->firma=$firma;
@@ -115,10 +143,22 @@
         //------------Dotacion-----------
 
         function getAllD(){
-            $sql = "SELECT d.ident, d.idperent AS pent, d.idperrec AS prec, d.fecent, d.fecdev, d.observ, d.firpent, d.firprec, d.difent, CONCAT(pe.nomper,' ',pe.apeper) AS nompent, CONCAT(pr.nomper,' ',pr.apeper) AS nomprec, pe.area, v.nomval AS area FROM dotacion AS d INNER JOIN persona AS pe ON d.idperent=pe.idper LEFT JOIN persona AS pr ON d.idperrec=pr.idper INNER JOIN valor AS v ON pe.area=v.idval";
+            $sql = "SELECT d.ident, d.idperent AS pent, d.idperrec AS prec, d.idperentd AS pentd, d.idperrecd AS precd, d.fecent, d.fecdev, d.observ, d.observd, d.firpent, d.firprec, d.difent, d.estent, CONCAT(pe.nomper,' ',pe.apeper) AS nompent, CONCAT(pr.nomper,' ',pr.apeper) AS nomprec, CONCAT(ped.nomper,' ',ped.apeper) AS nompentd, CONCAT(prd.nomper,' ',prd.apeper) AS nomprecd, pe.area, v.nomval AS area FROM dotacion AS d INNER JOIN persona AS pe ON d.idperent=pe.idper LEFT JOIN persona AS pr ON d.idperrec=pr.idper INNER JOIN persona AS ped ON d.idperent=ped.idper LEFT JOIN persona AS prd ON d.idperrec=prd.idper INNER JOIN valor AS v ON pe.area=v.idval";
                     $modelo = new conexion();
                     $conexion = $modelo->get_conexion();
                     $result = $conexion->prepare($sql);
+                    $result->execute();
+                    $res = $result->fetchall(PDO::FETCH_ASSOC);
+                    return $res;
+        }
+
+        function getOne(){
+            $sql = "SELECT d.ident, d.idperent AS pent, d.idperrec AS prec, d.idperentd AS pentd, d.idperrecd AS precd, d.fecent, d.fecdev, d.observ, d.observd, d.firpent, d.firprec, d.difent, d.estent, CONCAT(pe.nomper,' ',pe.apeper) AS nompent, CONCAT(pr.nomper,' ',pr.apeper) AS nomprec, CONCAT(ped.nomper,' ',ped.apeper) AS nompentd, CONCAT(prd.nomper,' ',prd.apeper) AS nomprecd, pe.area, v.nomval AS area FROM dotacion AS d INNER JOIN persona AS pe ON d.idperent=pe.idper LEFT JOIN persona AS pr ON d.idperrec=pr.idper INNER JOIN persona AS ped ON d.idperent=ped.idper LEFT JOIN persona AS prd ON d.idperrec=prd.idper INNER JOIN valor AS v ON pe.area=v.idval WHERE d.ident=:ident";
+                    $modelo = new conexion();
+                    $conexion = $modelo->get_conexion();
+                    $result = $conexion->prepare($sql);
+                    $ident = $this->getIdent();
+                    $result->bindParam(":ident",$ident);
                     $result->execute();
                     $res = $result->fetchall(PDO::FETCH_ASSOC);
                     return $res;
@@ -148,10 +188,34 @@
             // }
         }
 
+        function dev(){
+            //try{
+                $sql = "UPDATE dotacion SET idperentd=:idperentd, idperrecd=:idperrecd, fecdev=:fecdev, observd=:observd, estent=:estent WHERE ident=:ident";
+                $modelo = new conexion();
+                $conexion = $modelo->get_conexion();
+                $result = $conexion->prepare($sql);
+                $ident = $this->getIdent();
+                $result->bindParam(":ident", $ident);
+                $idperentd = $this->getIdperentd();
+                $result->bindParam(":idperentd", $idperentd);
+                $idperrecd = $this->getIdperrecd();
+                $result->bindParam(":idperrecd", $idperrecd);
+                $fecdev = $this->getFecdev();
+                $result->bindParam(":fecdev", $fecdev);
+                $observd = $this->getObservd();
+                $result->bindParam(":observd", $observd);
+                $estent = $this->getEstent();
+                $result->bindParam(":estent", $estent);
+                $result->execute();
+            // } catch (Exception $e) {
+            //     ManejoError($e);
+            // }
+        }
+
     //------------Elementos x dotacion-----------
 
         function getAllTxD($ident){
-            $sql = "SELECT de.idvdot, v.nomval, vv.nomval, de.idvtal FROM dotxent AS de INNER JOIN valor AS v ON de.idvdot=v.idval INNER JOIN valor AS vv ON de.idvtal=vv.idval WHERE ident=:ident";
+            $sql = "SELECT de.idvdot, v.nomval AS nomvdot, vv.nomval AS nomvtal, de.idvtal FROM dotxent AS de INNER JOIN valor AS v ON de.idvdot=v.idval INNER JOIN valor AS vv ON de.idvtal=vv.idval WHERE ident=:ident";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);

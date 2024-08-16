@@ -71,6 +71,96 @@ function modalChk($nm, $id, $tit, $mt, $pg, $dms)
 	echo $txt;
 }
 
+//------------Modal vasg, devolucion-----------
+function modalDev($nm, $id, $acc, $det){
+	$hoy = date("Y-m-d");
+	$txt = '';
+	$txt .= '<div class="modal fade" id="'.$nm.$id.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+		$txt .= '<div class="modal-dialog">';
+				$txt .= '<div class="modal-content">';
+					$txt .= '<div class="modal-header">';
+						$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Datos Asignación</strong></h1>';
+						$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
+					$txt .= '</div>';
+					$txt .= '<div class="modal-body" style="margin: 0px 25px; text-align: left;">';
+						$txt .= '<div class="row">';
+							$txt .= '<strong>Entrega:</strong><hr>';
+							$txt .= '<div class="form-group col-md-4"><strong>Persona:</strong></div>';
+							$txt .= '<div class="form-group col-md-8">'.$det[0]['nompentd'].' - '.$det[0]['area'].'</div>';
+							if($acc){
+								$txt .= '<strong><br>Elementos:</strong><hr>';
+								foreach($acc AS $ac){
+									$txt .= '<div class="form-group col-md-6">- '.$ac['nomvdot'].'</div>';
+									$txt .= '<div class="form-group col-md-6">- '.$ac['nomvtal'].'</div>';
+								}}
+							$txt .= '<strong><br>Devolución:</strong><hr>';
+							$txt .= '<div class="form-group col-md-6">';
+								$txt .= '<label for="fecdev" class="titulo"><strong>F. Devolución: </strong></label>';
+								$txt .= '<input class="form-control" max='.$hoy.' type="date" id="fecdev" name="fecdev" value="'.$hoy.'" required>';
+							$txt .= '</div>';
+							$txt .= '<div class="form-group col-md-12">';
+								$txt .= '<label for="observd" class="titulo"><strong>Observaciones: </strong></label>';
+								$txt .= '<textarea class="form-control" type="text" id="observd" name="observd" required></textarea>';
+							$txt .= '</div>';
+						$txt .= '</div>';
+					$txt .= '</div>';
+					$txt .= '<br><div class="modal-footer">';
+						$txt .= '<input type="hidden" value="'.$det[0]['precd'].'" name="idperentd">';
+						$txt .= '<input type="hidden" value="'.$det[0]['ident'].'" name="ident">';
+						$txt .= '<input type="hidden" value="dev" name="ope">';
+						$txt .= '<input type="hidden" value="2" name="estent">';
+						$txt .= '<button type="submit" class="btn btn-primary btnmd">Guardar</button>';	
+						$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
+					$txt .= '</div>';
+				$txt .= '</div>';
+			$txt .= '</form>';
+		$txt .= '</div>';
+	$txt .= '</div>';
+	echo $txt;
+}
+
+//modal info dotacion
+function modalInfAsg($nm, $id, $acc, $det){		
+	$txt = '';
+	$txt .= '<div class="modal fade" id="' . $nm . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+		$txt .= '<div class="modal-dialog">';
+			$txt .= '<div class="modal-content">';
+				$txt .= '<div class="modal-header">';
+					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$det[0]['fecent']." - ".$det[0]['nomprec'].' - '.$det[0]['area'].'</strong></h1>';
+					$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
+				$txt .= '</div>';
+				$txt .= '<div class="modal-body" style="margin: 0px 25px;">';
+					$txt .= '<div class="row">';
+						if($acc){
+							$txt .= '<big><strong>Elementos</strong></big><hr>';
+							foreach($acc AS $ac){
+								$txt .= '<div class="form-group col-md-6"><strong>+</strong> '.$ac['nomvdot'].'</div>';
+								$txt .= '<div class="form-group col-md-6"><strong>+</strong> '.$ac['nomvtal'].'</div>';
+							}}
+						$txt .= '<big><br><strong>Asignación</strong></big><hr>';
+						$txt .= '<div class="form-group col-md-4"><strong>Entrega: </strong></div>';
+						$txt .= '<div class="form-group col-md-8">'.$det[0]["nompent"].'</div>';
+						$txt .= '<div class="form-group col-md-4"><strong>Recibe: </strong></div>';
+						$txt .= '<div class="form-group col-md-8">'.$det[0]["nomprec"].'</div>';
+						if($det[0]["observ"]) $txt .= '<div class="form-group col-md-12"><br><strong>Observación: </strong><br>'.$det[0]["observ"].'</div>';
+						// if($det[0]["pentd"] && $det[0]["precd"]){
+						// 	$txt .= '<big><br><strong>Devolución</strong></big><hr>';
+						// 	$txt .= '<div class="form-group col-md-4"><strong>Entrega: </strong></div>';
+						// 	$txt .= '<div class="form-group col-md-8">'.$det[0]["pentd"].' - '.$det[0]["cpentd"].'</div>';
+						// 	$txt .= '<div class="form-group col-md-4"><strong>Recibe: </strong></div>';
+						// 	$txt .= '<div class="form-group col-md-8">'.$det[0]["precd"].' - '.$det[0]["cprecd"].'</div>';
+						// 	if($det[0]["observd"]) $txt .= '<div class="form-group col-md-12"><br><strong>Observación: </strong><br>'.$det[0]["observd"].'</div>';
+						//}
+					$txt .= '</div>';
+				$txt .= '</div>';
+				$txt .= '<br><div class="modal-footer">';
+					$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
+				$txt .= '</div>';
+			$txt .= '</div>';
+		$txt .= '</div>';
+	$txt .= '</div>';
+	echo $txt;
+}
 
 function modalCmb($nm, $id, $tit, $idmod, $pg, $dms)
 {

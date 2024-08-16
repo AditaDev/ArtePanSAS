@@ -54,7 +54,6 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     </div>
                 
             <?php }} ?>    
-
             <div class="form-group col-md-12">
                 <br>
                 <label for="observ"><strong>Observaciones entrega:</strong></label>
@@ -72,53 +71,75 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     <table id="mytable" class="table table-striped">
     <thead>
         <tr>
-            <th>Persona</th>
-            <th>Datos dotación</th>
+            <th>Datos persona</th>
             <th>Estado</th>
             <th></th>
+            
         </tr>
     </thead>
     <tbody>
         <?php if ($datAllD) {
-            foreach ($datAllD as $dta) { ?>
+            foreach ($datAllD as $dta)  ?>
                 <tr>
-                    <td tyle="text-align: left;"><?= $dta['ident']; ?></td>
-                    <td>
+                    <td tyle="text-align: left;">
                         <div class="row">
                             <div class="form-group col-md-10">
-                                <strong> <?= ($dta['nompent']) .  " - "  . $dta['nomprec']; ?></strong><br>
+                                <strong> <?= ($dta['fecent']) .  " - "  . $dta['nomprec']; ?></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <small><strong>Área: </strong> <?= $dta['area']; ?></small><br>
                                 <small>
-                                    <strong>Empresa: </strong> <?= $dta['area']; ?><br>
-                                    <strong>Fecha de vencimiento: </strong><?= $dta['observ']; ?><br>
+                                    <strong>Observación: </strong><?= $dta['observ']; ?><br>
                                 </small>
-
                             </div>
-                            <div class="form-group col-md-2" style="text-align: right;">
-                                <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" title="Detalles"></i>
+                            <div class="form-group col-md-2">
+                                <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbdet<?= $dta['ident']; ?>" title="Detalles"></i>
+                                <?php
+                                    $mdot->setIdent($dta['ident']);
+                                    $acc = $mdot->getAllTxD($dta['ident']);
+                                    $det = $mdot->getOne();
+                                    modalInfAsg("mcbdet", $dta['ident'], $acc, $det);
+                                ?>
+                                <i class="fa fa-solid fa-pen-clip iconi" class="btn btn-primary" data-bs-toggle="modal"  title="Firmar"></i>
+                                <!-- <i class="fa fa-solid fa-envelopes-bulk iconi"></i> -->
+                                <i class="fa fa-solid fa-file-pdf iconi"></i>
                             </div>
+                        </div>
+                            
+                    </td>
+                    <td style="text-align: left;">
+                        <?php if ($dta['estent'] == 1) { ?>
+                            <span style="font-size: 1px;opacity: 0;">1</span>
+                            <i class="fa fa-solid fa-circle-check fa-2x act" title="Asignado"></i>
+                        <?php } else if ($dta['estent'] == 2) { ?>
+                            <span style="font-size: 1px;">2</span>
+                            <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="Devuelto"></i>
+                        <?php } ?>
                     </td>
                     <td tyle="text-align: half;">
-                        
-                            <!-- <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="<?= $dta['est']; ?>"></i>  -->
+                        <<span style="font-size: 1px;opacity: 0;"><?= $dta['fecdev']; ?></span>
+                            <?php if ($dta['estent'] != 2) { ?>
+                                <i class="fa fa-solid fa-arrows-turn-to-dots fa-2x iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbdev<?= $dta['ident']; ?>" title="Devolver"></i>
+                                <?php
+                                    $mdot->setIdent($dta['ident']);
+                                    $acc = $mdot->getAllTxD($dta['ident']);
+                                    $det = $mdot->getOne();
+                                    modalDev("mcbdev", $dta['ident'], $acc, $det);
+                                ?>
+                                <!-- <a href="home.php?pg=<?= $pg; ?>&ident=<?= $dta['ident']; ?>&ope=edi&asg=<?= $asg; ?>" title="Editar"> -->
+                                    <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
+                                </a>
+                            <?php } ?>
                     </td>        
-                    <td tyle="text-align: right;">
-                        <!-- <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi"> -->
-                            <i class="fa fa-solid fa-pen-to-square fa-2x iconi" title="Editar"></i>
-                        </a>
-                        <!-- <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=eli" onclick="return eliminar('<?= $dta['idfac']; ?>');"> -->
-                            <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
-                        </a>
-                    </td>
+                    
                 </tr>
-        <?php }
+        <?php 
         } ?>
     </tbody>
     <tfoot>
         <tr>
-            <th>Persona</th>
-            <th>Datos dotación</th>
+            <th>Datos persona</th>
             <th>Estado</th>
             <th></th>
+            
 
 
         </tr>

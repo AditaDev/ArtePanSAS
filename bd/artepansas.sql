@@ -10,11 +10,14 @@ CREATE TABLE `dotacion` (
   `idperent` bigint(11) NOT NULL, -- id persona entrega
   `idperrec` bigint(11) NOT NULL, -- idpersona recibe
   `fecent` date DEFAULT NULL, -- fecha entrega
-  `fecdev` date DEFAULT NULL, -- fecha devolucion
   `observ` varchar(1000) DEFAULT NULL, -- observaciones
   `estent` bigint(11) NOT NULL,
   `firpent` varchar(255) DEFAULT NULL, -- firma per entrega
   `firprec` varchar(255) DEFAULT NULL, -- firma per recibe
+  `fecdev` date DEFAULT NULL, -- fecha devolucion
+  `idperentd` bigint(11) DEFAULT NULL, -- id persona entrega devolucion
+  `idperrecd` bigint(11) DEFAULT NULL, -- idpersona recibe devolucion
+  `observd` varchar(1000) DEFAULT NULL, -- observaciones
   `difent` varchar(50) DEFAULT NULL -- este es diferenciar entrega para poder asignarle las dotaciones      
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -513,6 +516,8 @@ ALTER TABLE `dotacion`
   ADD PRIMARY KEY (`ident`),
   ADD KEY `idperent` (`idperent`),
   ADD KEY `idperrec` (`idperrec`),
+  ADD KEY `idperentd` (`idperentd`),
+  ADD KEY `idperrecd` (`idperrecd`),
   ADD KEY `estent` (`estent`);
 
 ALTER TABLE `dotxent`
@@ -695,7 +700,9 @@ ALTER TABLE `dotxent`
 --
 ALTER TABLE `dotacion`
   ADD CONSTRAINT `dotacion_ibfk_1` FOREIGN KEY (`idperent`) REFERENCES `persona` (`idper`),
-  ADD CONSTRAINT `dotacion_ibfk_2` FOREIGN KEY (`idperrec`) REFERENCES `persona` (`idper`);
+  ADD CONSTRAINT `dotacion_ibfk_2` FOREIGN KEY (`idperrec`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `dotacion_ibfk_3` FOREIGN KEY (`idperentd`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `dotacion_ibfk_4` FOREIGN KEY (`idperrecd`) REFERENCES `persona` (`idper`);
 --
 
 --

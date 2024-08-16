@@ -49,6 +49,7 @@
             $id = $mdot->getOneAsg($nmfl);
             $ident = $id[0]['ident'];
         }
+    
         if($ident) $mdot->delExD();
         if($idvdot && $ident){ foreach($idvdot AS $index=>$ida){
             $mdot->setIdent($ident);
@@ -59,18 +60,15 @@
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
-    // if($ope=="dev" && $ideqxpr && $idequ){
-    //     $masg->setIdperentd($idperentd);
-    //     $masg->setIdperrecd($idperrecd);
-    //     $masg->setFecdev($fecdev);
-    //     $masg->setObservd($observd);
-    //     $masg->setEstexp($estexp);
-    //     $masg->dev();
-    //     $mequ->setIdequ($idequ);
-    //     $mequ->setActequ(1);
-    //     $mequ->editAct();
-    //     echo "<script>window.location='home.php?pg=".$pg."&asg=".$asg."';</script>";
-    // }
+    if($ope=="dev" && $ident && $ident){
+        $mdot->setIdperentd($idperentd);
+        $mdot->setIdperrecd($idperrecd);
+        $mdot->setFecdev($fecdev);
+        $mdot->setObservd($observd);
+        $mdot->setEstent($estent);
+        $mdot->dev();
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
+    }
 
     // if($ope=="edi" && $ideqxpr) {
     //     $datOneA = $masg->getOne();
