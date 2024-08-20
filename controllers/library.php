@@ -72,11 +72,12 @@ function modalChk($nm, $id, $tit, $mt, $pg, $dms)
 }
 
 //------------Modal vasg, devolucion-----------
-function modalDev($nm, $id, $acc, $det){
+function modalDev($nm, $id, $acc, $det, $pg){
 	$hoy = date("Y-m-d");
 	$txt = '';
 	$txt .= '<div class="modal fade" id="'.$nm.$id.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
 		$txt .= '<div class="modal-dialog">';
+			$txt .= '<form action="home.php?pg=' . $pg . '" method="POST">';
 				$txt .= '<div class="modal-content">';
 					$txt .= '<div class="modal-header">';
 						$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Datos Asignación</strong></h1>';
@@ -86,7 +87,7 @@ function modalDev($nm, $id, $acc, $det){
 						$txt .= '<div class="row">';
 							$txt .= '<strong>Entrega:</strong><hr>';
 							$txt .= '<div class="form-group col-md-4"><strong>Persona:</strong></div>';
-							$txt .= '<div class="form-group col-md-8">'.$det[0]['nompentd'].' - '.$det[0]['area'].'</div>';
+							$txt .= '<div class="form-group col-md-8">'.$det[0]['nompent'].' - '.$det[0]['area'].'</div>';
 							if($acc){
 								$txt .= '<strong><br>Elementos:</strong><hr>';
 								foreach($acc AS $ac){
@@ -105,7 +106,7 @@ function modalDev($nm, $id, $acc, $det){
 						$txt .= '</div>';
 					$txt .= '</div>';
 					$txt .= '<br><div class="modal-footer">';
-						$txt .= '<input type="hidden" value="'.$det[0]['precd'].'" name="idperentd">';
+						$txt .= '<input type="hidden" value="'.$det[0]['prec'].'" name="idperentd">';
 						$txt .= '<input type="hidden" value="'.$det[0]['ident'].'" name="ident">';
 						$txt .= '<input type="hidden" value="dev" name="ope">';
 						$txt .= '<input type="hidden" value="2" name="estent">';
@@ -143,14 +144,14 @@ function modalInfAsg($nm, $id, $acc, $det){
 						$txt .= '<div class="form-group col-md-4"><strong>Recibe: </strong></div>';
 						$txt .= '<div class="form-group col-md-8">'.$det[0]["nomprec"].'</div>';
 						if($det[0]["observ"]) $txt .= '<div class="form-group col-md-12"><br><strong>Observación: </strong><br>'.$det[0]["observ"].'</div>';
-						// if($det[0]["pentd"] && $det[0]["precd"]){
-						// 	$txt .= '<big><br><strong>Devolución</strong></big><hr>';
-						// 	$txt .= '<div class="form-group col-md-4"><strong>Entrega: </strong></div>';
-						// 	$txt .= '<div class="form-group col-md-8">'.$det[0]["pentd"].' - '.$det[0]["cpentd"].'</div>';
-						// 	$txt .= '<div class="form-group col-md-4"><strong>Recibe: </strong></div>';
-						// 	$txt .= '<div class="form-group col-md-8">'.$det[0]["precd"].' - '.$det[0]["cprecd"].'</div>';
-						// 	if($det[0]["observd"]) $txt .= '<div class="form-group col-md-12"><br><strong>Observación: </strong><br>'.$det[0]["observd"].'</div>';
-						//}
+						if($det[0]["pentd"] && $det[0]["precd"]){
+							$txt .= '<big><br><strong>Devolución</strong></big><hr>';
+							$txt .= '<div class="form-group col-md-4"><strong>Entrega: </strong></div>';
+							$txt .= '<div class="form-group col-md-8">'.$det[0]["nompentd"].'</div>';
+							$txt .= '<div class="form-group col-md-4"><strong>Recibe: </strong></div>';
+							$txt .= '<div class="form-group col-md-8">'.$det[0]["nomprecd"].'</div>';
+							if($det[0]["observd"]) $txt .= '<div class="form-group col-md-12"><br><strong>Observación: </strong><br>'.$det[0]["observd"].'</div>';
+						}
 					$txt .= '</div>';
 				$txt .= '</div>';
 				$txt .= '<br><div class="modal-footer">';

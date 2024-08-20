@@ -79,7 +79,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     </thead>
     <tbody>
         <?php if ($datAllD) {
-            foreach ($datAllD as $dta)  ?>
+            foreach ($datAllD as $dta){ ?>
                 <tr>
                     <td tyle="text-align: left;">
                         <div class="row">
@@ -115,14 +115,14 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         <?php } ?>
                     </td>
                     <td tyle="text-align: half;">
-                        <<span style="font-size: 1px;opacity: 0;"><?= $dta['fecdev']; ?></span>
+                        <span style="font-size: 1px;opacity: 0;"><?= $dta['fecdev']; ?></span>
                             <?php if ($dta['estent'] != 2) { ?>
                                 <i class="fa fa-solid fa-arrows-turn-to-dots fa-2x iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbdev<?= $dta['ident']; ?>" title="Devolver"></i>
                                 <?php
                                     $mdot->setIdent($dta['ident']);
                                     $acc = $mdot->getAllTxD($dta['ident']);
                                     $det = $mdot->getOne();
-                                    modalDev("mcbdev", $dta['ident'], $acc, $det);
+                                    modalDev("mcbdev", $dta['ident'], $acc, $det, $pg);
                                 ?>
                                 <!-- <a href="home.php?pg=<?= $pg; ?>&ident=<?= $dta['ident']; ?>&ope=edi&asg=<?= $asg; ?>" title="Editar"> -->
                                     <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
@@ -132,7 +132,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     
                 </tr>
         <?php 
-        } ?>
+        }} ?>
     </tbody>
     <tfoot>
         <tr>

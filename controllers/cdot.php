@@ -12,6 +12,8 @@
     $idperrec = isset($_POST['idperrec']) ? $_POST['idperrec']:NULL;
     $fecent = isset($_POST['fecent']) ? $_POST['fecent']:NULL;
     $observ = isset($_POST['observ']) ? $_POST['observ']:NULL;
+    $idperentd = isset($_POST['idperentd']) ? $_POST['idperentd']:NULL;
+    $idperrecd = isset($_POST['idperrecd']) ? $_POST['idperrecd']:$_SESSION['idper'];
     $fecdev = isset($_POST['fecdev']) ? $_POST['fecdev']:NULL;
     $observd = isset($_POST['observd']) ? $_POST['observd']:NULL;
     $estent = isset($_POST['estent']) ? $_POST['estent']:1;
@@ -60,7 +62,7 @@
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
-    if($ope=="dev" && $ident && $ident){
+    if($ope=="dev" && $ident){
         $mdot->setIdperentd($idperentd);
         $mdot->setIdperrecd($idperrecd);
         $mdot->setFecdev($fecdev);

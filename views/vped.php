@@ -99,51 +99,35 @@ body {
     opacity: 1;
 }
 
-.container .card .content h2 {
-    position: absolute;
-    top: -60px;
-    right: 30px;
-    font-size: 8em;
-    color: rgba(255, 255, 255, 0.05);
-    pointer-events: none;
-}
-
-.container .card .content h3 {
-    font-size: 1.8em;
-    color: #000;
-    z-index: 1;
-}
-
-.container .card .content p {
-    font-size: 1em;
-    color: #000;
-    font-weight: 300;
-}
-
 .container .card .content a {
     position: relative;
     display: inline-block;
     padding: 8px 20px;
     margin-top: 15px;
     color: #000;
-    /* color: #000; */
     border-radius: 20px;
     text-decoration: none;
     font-weight: 500;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-
-
 } 
-
+.pedido img {
+  width: 40px;
+  height: 40px;
+}
+.pedido {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
 </style>
 
 
 
 
 <?php if ($datOne) { ?>
-
-   YA PEDISTE
-   <img src="img/orders.png">
+   
+   <img src="img/orders.png" class="pedido" >
 
 </html>
 
