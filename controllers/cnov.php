@@ -11,7 +11,6 @@
     $tipnov = isset($_REQUEST['tipnov']) ? $_REQUEST['tipnov']:NULL;
     $obsnov = isset($_POST['obsnov']) ? $_POST['obsnov']:NULL;
     $estnov = isset($_REQUEST['estnov']) ? $_REQUEST['estnov']:52;
-    $area = isset($_POST['area']) ? $_POST['area']:NULL;
     $arcpdf = isset($_FILES['arcpdf']) ? $_FILES['arcpdf']:NULL;
     $rutpdf = NULL;
 
@@ -35,7 +34,6 @@
         $mnov->setEstnov($estnov);
         $mnov->setIdpercre($_SESSION['idper']);
         $mnov->setObsnov($obsnov);
-        $mnov->setArea($area);
         $mnov->setRutpdf($rutpdf);
         if(!$idnov) $mnov->save();
         else $mnov->edit();

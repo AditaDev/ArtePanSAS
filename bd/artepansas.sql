@@ -147,8 +147,7 @@ INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`, `idpag`) VALUES
 (1, 'Facturas', 'img/mod_facturas.png', 1, 63),
 (2, 'Configuración', 'img/mod_configuracion.png', 1, 101),
 (3, 'Almuerzos', 'img/mod_almuerzos.png', 1, 62),
-(4, 'Novedades', 'img/mod_novedades.png', 1, 110),
-(5, 'Dotación', 'img/mod_dotacion.png', 1, 111);
+(4, 'Talento Humano', 'img/mod_novedades.png', 1, 110);
 
 -- --------------------------------------------------------
 
@@ -163,13 +162,19 @@ CREATE TABLE `novedad` (
   `fecfnov` date DEFAULT NULL,
   `fecrev` datetime DEFAULT NULL,
   `tipnov` bigint(11) NOT NULL,
-  `area` bigint(11) NOT NULL,
+  `area` bigint(11) DEFAULT NULL,
   `obsnov` varchar(100) DEFAULT NULL,
   `estnov` varchar(100) NOT NULL,
   `idpercre` bigint(11) NOT NULL,
   `idperrev` bigint(11) DEFAULT NULL,
   `idperg` bigint(11) DEFAULT NULL,
-  `rutpdf` varchar(255) DEFAULT NULL
+  `rutpdf` varchar(255) DEFAULT NULL,
+
+  `nov` bigint(11) DEFAULT NULL,
+
+  `tini` time DEFAULT NULL,
+  `tfin` time DEFAULT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -208,7 +213,7 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 2),
 (109, 'fa fa-solid fa-building', 'Empresas', 'views/vemp.php', 11, 'home.php', 1, 1),
 (110, 'fa fa-solid fa-solid fa-lightbulb', 'Novedades', 'views/vnov.php', 16, 'home.php', 1, 4),
-(111, 'fa fa-solid fa-solid fa-lightbulb', 'Dotación', 'views/vdot.php', 17, 'home.php', 1, 5);
+(111, 'fa fa-solid fa-solid fa-lightbulb', 'Dotación', 'views/vdot.php', 17, 'home.php', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -266,6 +271,7 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (62, 12),
 (111, 7),
 (111, 4);
+
 
 
 
