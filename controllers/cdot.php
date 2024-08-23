@@ -34,6 +34,7 @@
     
     $datOne = NULL;
     $datTxD = NULL;
+    $datCxD = NULL;
  
     $pg = 111;
     
@@ -81,6 +82,7 @@
 
     $datAllD = $mdot->getAllD();
     $datPer = $mdot->getAllPer($ope);
+    $datCol = $mdot->getAllOpe(12);
     $datDot = $mdot->getAllDot(7);
     $datTalS = $mdot->getAllDot(8); 
     $datTalP = $mdot->getAllDot(9); 
