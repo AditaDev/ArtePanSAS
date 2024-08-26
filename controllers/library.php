@@ -71,6 +71,64 @@ function modalChk($nm, $id, $tit, $mt, $pg, $dms)
 	echo $txt;
 }
 
+//-------------Modal estado novedad-----------
+function modalNov($nm, $id, $pg, $info){
+	$hoy = date("Y-m-d");
+	$txt = '';
+	$txt .= '<div class="modal fade" id="'.$nm.$id.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+		$txt .= '<div class="modal-dialog">';
+			$txt .= '<form action="home.php?pg=' . $pg . '" method="POST">';
+				$txt .= '<div class="modal-content">';
+					$txt .= '<div class="modal-header">';
+						$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Datos Asignación</strong></h1>';
+						$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
+					$txt .= '</div>';
+					$txt .= '<div class="modal-body" style="margin: 0px 25px; text-align: left;">';
+						$txt .= '<div class="row">';
+						$txt .= '<div class="modal-body" style="margin: 0px 25px;">';
+						$txt .= '<div class="row"';
+							$txt .= '<div">';
+								$txt .= '<table>';
+									$txt .= '<tr><td><strong>Empresa: </strong></td><td class="inffac">'.$info[0]['razsoem'].'</td></tr>';	
+									$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$info[0]['fefac'].'</td></tr>';
+									$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$info[0]['fvfac'].'</td></tr>';
+									$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$info[0]['fpag'].'</td></tr>';
+									$txt .= '<tr><td><strong>Tipo: </strong></td><td class="inffac">'.$info[0]['tip'].'</td></tr>';
+									$txt .= '<tr><td><strong><hr>Registro: </strong></td><td class="inffac"><br><hr>'.$info[0]['nompcre'].'<br>' .$info[0]['fifac'].'</td></tr>';
+									if($info[0]['prev'])$txt .= '<tr><td><strong>Primer revisión: </strong></td><td class="inffac">'.$info[0]['nomprev'].'<br>'.$info[0]['fprfac'].'</td></tr>';
+									if($info[0]['papr'])$txt .= '<tr><td><strong>Aprobada: </strong></td><td class="inffac">'.$info[0]['nompapr'].'<br>'.$info[0]['faprfac'].'</td></tr>';
+									if($info[0]['pent'])$txt .= '<tr><td><strong>Entregada: </strong></td><td class="inffac">'.$info[0]['nompent'].'<br>'.$info[0]['fffac'].'</td></tr>';
+									if($info[0]['ppag'])$txt .= '<tr><td><strong>Pagada: </strong></td><td class="inffac">'.$info[0]['nomppag'].'<br>'.$info[0]['fpagfac'].'</td></tr>';
+								$txt .= '</table>';
+								$txt .= '<strong><br>Novedad:</strong><hr>';
+							$txt .= '<div class="form-group col-md-6">';
+								$txt .= '<label for="fecdev" class="titulo"><strong>F. Devolución: </strong></label>';
+								$txt .= '<input class="form-control" max='.$hoy.' type="date" id="fecdev" name="fecdev" value="'.$hoy.'" required>';
+							$txt .= '</div>';
+							$txt .= '<div class="form-group col-md-12">';
+								$txt .= '<label for="observd" class="titulo"><strong>Observaciones: </strong></label>';
+								$txt .= '<textarea class="form-control" type="text" id="observd" name="observd" required></textarea>';
+							$txt .= '</div>';
+						$txt .= '</div>';
+					$txt .= '</div>';
+							$txt .= '</div>';
+						$txt .= '</div>';
+					$txt .= '<br><div class="modal-footer">';
+						$txt .= '<input type="hidden" value="'.$info[0]['prev'].'" name="idperrev">';
+						$txt .= '<input type="hidden" value="'.$info[0]['idfac'].'" name="idfac">';
+						$txt .= '<input type="hidden" value="dev" name="ope">';
+						$txt .= '<input type="hidden" value="57" name="estfac">';
+						$txt .= '<button type="submit" class="btn btn-primary btnmd">Guardar</button>';	
+						$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
+					$txt .= '</div>';
+				$txt .= '</div>';
+			$txt .= '</form>';
+		$txt .= '</div>';
+	$txt .= '</div>';
+	echo $txt;
+}
+
+
 //------------Modal vasg, devolucion-----------
 function modalDev($nm, $id, $acc, $det, $pg){
 	$hoy = date("Y-m-d");
@@ -272,7 +330,7 @@ function modalnper($nom, $id, $titulo, $info){
 
 //modal info novedad
 
-function modalnov($nom, $id, $titulo, $info){
+function modalinfonov($nom, $id, $titulo, $info){
 	$txt = '';
 	$txt .= '<div class="modal fade" id="' . $nom . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
 		$txt .= '<div class="modal-dialog">';

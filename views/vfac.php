@@ -10,7 +10,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="nofac"><strong>N° factura:</strong></label>
-                <input class="form-control" type="text" id="nofac" name="nofac" value="<?php if ($datOne) echo $datOne[0]['nofac']; ?>" required>
+                <input class="form-control" type="text" id="nofac" name="nofac" value="<?php if ($datOne) echo $datOne[0]['nofac']; ?>" required onkeypress="return solonum(event);">
             </div>
             <div class="form-group col-md-4">
                 <label for="confac"><strong>Concepto:</strong></label>
@@ -76,6 +76,17 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     </form>
 <?php } ?>
 
+<!-- <style>
+   .table table-striped{
+    background-color: #fff;
+   }
+   bgcolor="red"
+</style> -->
+<!-- class=" <?php echo ($row['estfac']==57)?'color-verde':'sin-color' ?>" -->
+
+
+
+
 <table id="mytable" class="table table-striped">
     <thead>
         <tr>
@@ -100,15 +111,22 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 </small>
 
                             </div>
-                            <div class="form-group col-md-2" style="text-align: right;">
+                            <div class="form-group col-md-2" style="text-align: left;">
                                 <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idfac']; ?>" title="Detalles"></i>
                                 <?php
                                 $mfac->setIdfac($dta['idfac']);
                                 $info = $mfac->getOne();
                                 modalDet("mcbinf", $dta['idfac'], $dta['nofac'] . "-" . $dta['confac'], $info);
                                 if($dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
-                                <ul><i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i></ul>
+                                <i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i>
                                 <?php } ?>
+
+                                <i class="fa-solid fa-circle-exclamation iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbnov<?= $dta['idfac']; ?>" title="NOVEDAD"></i>
+                                <?php
+                                    $mfac->setIdfac($dta['idfac']);
+                                    $info = $mfac->getOne();
+                                    modalNov("mcbnov", $dta['idfac'], $pg, $info);
+                                ?>
                             </div>
                     </td>
                     <td tyle="text-align: half;">
@@ -152,9 +170,9 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <span style="font-size: 1px;opacity: 0;">4</span>
                             <i class="fa fa-solid fa-circle-check fa-2x pagada" title="<?= $dta['est']; ?>"></i>
                             <?php } ?>
-                    <td tyle="text-align: right;">
-                    <?php if ($_SESSION['idpef'] == 4) { ?>
-                        
+                    <td class="form-group col-md-1" tyle="text-align: right;">
+                        <?php if ($_SESSION['idpef'] == 4) { ?>
+                                                
                         <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi" title="Editar"></i>
                         </a>

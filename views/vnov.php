@@ -109,7 +109,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 <?php
                                 $mnov->setIdnov($dta['idnov']);
                                 $info = $mnov->getOne();
-                                modalnov("mdetnov", $dta['idnov'], $dta['ndper'] . "-" . $dta['nomperg'], $info);
+                                modalinfonov("mdetnov", $dta['idnov'], $dta['ndper'] . "-" . $dta['nomperg'], $info);
                                 if ($dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
                                     <ul><i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i></ul>
                                 <?php } ?>

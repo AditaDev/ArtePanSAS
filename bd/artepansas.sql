@@ -123,7 +123,8 @@ CREATE TABLE `factura` (
   `idperpag` bigint(11) DEFAULT NULL, 
   `fpagfac` datetime DEFAULT NULL,
   `rutpdf` varchar(255) DEFAULT NULL,
-  `rutspt` varchar(255) DEFAULT NULL
+  `rutspt` varchar(255) DEFAULT NULL,
+  `obsnov` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
