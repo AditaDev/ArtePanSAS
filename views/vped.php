@@ -120,6 +120,11 @@ body {
   margin-right: auto;
   width: 40%;
 }
+body{
+    flex-direction: row-reverse;
+    align-content: flex-start;
+}
+
 </style>
 
 

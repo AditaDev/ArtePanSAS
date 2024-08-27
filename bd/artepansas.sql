@@ -124,7 +124,8 @@ CREATE TABLE `factura` (
   `fpagfac` datetime DEFAULT NULL,
   `rutpdf` varchar(255) DEFAULT NULL,
   `rutspt` varchar(255) DEFAULT NULL,
-  `obsnov` varchar(255) DEFAULT NULL
+  `obsnov` varchar(255) DEFAULT NULL,
+  `fnov` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

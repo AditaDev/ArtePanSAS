@@ -80,7 +80,7 @@ function modalNov($nm, $id, $pg, $info){
 			$txt .= '<form action="home.php?pg=' . $pg . '" method="POST">';
 				$txt .= '<div class="modal-content">';
 					$txt .= '<div class="modal-header">';
-						$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Datos Asignación</strong></h1>';
+						$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Factura en novedad</strong></h1>';
 						$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
 					$txt .= '</div>';
 					$txt .= '<div class="modal-body" style="margin: 0px 25px; text-align: left;">';
@@ -102,7 +102,7 @@ function modalNov($nm, $id, $pg, $info){
 								$txt .= '</table>';
 								$txt .= '<strong><br>Novedad:</strong><hr>';
 							$txt .= '<div class="form-group col-md-6">';
-								$txt .= '<label for="fecdev" class="titulo"><strong>F. Devolución: </strong></label>';
+								$txt .= '<label for="fecdev" class="titulo"><strong>Fecha aviso: </strong></label>';
 								$txt .= '<input class="form-control" max='.$hoy.' type="date" id="fecdev" name="fecdev" value="'.$hoy.'" required>';
 							$txt .= '</div>';
 							$txt .= '<div class="form-group col-md-12">';
