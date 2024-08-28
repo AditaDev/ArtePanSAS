@@ -124,6 +124,7 @@ CREATE TABLE `factura` (
   `fpagfac` datetime DEFAULT NULL,
   `rutpdf` varchar(255) DEFAULT NULL,
   `rutspt` varchar(255) DEFAULT NULL,
+  `idpernov` bigint(11) DEFAULT NULL, 
   `obsnov` varchar(255) DEFAULT NULL,
   `fnov` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -575,7 +576,8 @@ ALTER TABLE `factura`
   ADD KEY `idperrev` (`idperrev`),
   ADD KEY `idperapr` (`idperapr`), 
   ADD KEY `idperent` (`idperent`), 
-  ADD KEY `idperpag` (`idperpag`); 
+  ADD KEY `idperpag` (`idperpag`),
+  ADD KEY `idpernov` (`idpernov`);
 
 --
 -- Indices de la tabla `modulo`                                        
@@ -734,7 +736,8 @@ ALTER TABLE `factura`
   ADD CONSTRAINT `factura_ibfk_3` FOREIGN KEY (`idperrev`) REFERENCES `persona` (`idper`),
   ADD CONSTRAINT `factura_ibfk_4` FOREIGN KEY (`idperapr`) REFERENCES `persona` (`idper`),
   ADD CONSTRAINT `factura_ibfk_5` FOREIGN KEY (`idperent`) REFERENCES `persona` (`idper`),
-  ADD CONSTRAINT `factura_ibfk_6` FOREIGN KEY (`idperpag`) REFERENCES `persona` (`idper`);
+  ADD CONSTRAINT `factura_ibfk_6` FOREIGN KEY (`idperpag`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `factura_ibfk_7` FOREIGN KEY (`idpernov`) REFERENCES `persona` (`idper`);
 
 
 ALTER TABLE `novedad`

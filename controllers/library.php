@@ -71,7 +71,7 @@ function modalChk($nm, $id, $tit, $mt, $pg, $dms)
 	echo $txt;
 }
 
-//-------------Modal estado novedad-----------
+//-------------Modal estado de novedad y factura-----------
 function modalNov($nm, $id, $pg, $info){
 	$hoy = date("Y-m-d");
 	$txt = '';
@@ -102,22 +102,21 @@ function modalNov($nm, $id, $pg, $info){
 								$txt .= '</table>';
 								$txt .= '<strong><br>Novedad:</strong><hr>';
 							$txt .= '<div class="form-group col-md-6">';
-								$txt .= '<label for="fecdev" class="titulo"><strong>Fecha aviso: </strong></label>';
-								$txt .= '<input class="form-control" max='.$hoy.' type="date" id="fecdev" name="fecdev" value="'.$hoy.'" required>';
+								$txt .= '<label for="fnov" class="titulo"><strong>Fecha aviso: </strong></label>';
+								$txt .= '<input class="form-control" max='.$hoy.' type="date" id="fnov" name="fnov" value="'.$hoy.'" required>';
 							$txt .= '</div>';
 							$txt .= '<div class="form-group col-md-12">';
-								$txt .= '<label for="observd" class="titulo"><strong>Observaciones: </strong></label>';
-								$txt .= '<textarea class="form-control" type="text" id="observd" name="observd" required></textarea>';
+								$txt .= '<label for="obsnov" class="titulo"><strong>Observaciones: </strong></label>';
+								$txt .= '<textarea class="form-control" type="text" id="obsnov" name="obsnov" required></textarea>';
 							$txt .= '</div>';
 						$txt .= '</div>';
 					$txt .= '</div>';
 							$txt .= '</div>';
 						$txt .= '</div>';
 					$txt .= '<br><div class="modal-footer">';
-						$txt .= '<input type="hidden" value="'.$info[0]['prev'].'" name="idperrev">';
+						$txt .= '<input type="hidden" value="'.$info[0]['pnov'].'">';
 						$txt .= '<input type="hidden" value="'.$info[0]['idfac'].'" name="idfac">';
-						$txt .= '<input type="hidden" value="dev" name="ope">';
-						$txt .= '<input type="hidden" value="57" name="estfac">';
+						$txt .= '<input type="hidden" value="nov" name="ope">';
 						$txt .= '<button type="submit" class="btn btn-primary btnmd">Guardar</button>';	
 						$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
 					$txt .= '</div>';
