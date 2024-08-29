@@ -33,6 +33,36 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                                                                                         else echo 'value="' . $hoy . '" required'; ?>>
         </div>
         <div class="form-group col-md-12"><br></div>
+
+        <?php if ($datDia && $datCol ) {
+            foreach ($datDia as $ddo) { ?>
+                <div class="form-group col-md-6">
+                    <?php if ($datCxD) {
+                                            foreach ($datCxD as $ddt) {
+                                                if ($ddo['idval'] == $ddt['idvdot']);
+                                                }
+                                            } ?>
+                    <label for="idvdot"><strong><?= $ddo['nomval']; ?></strong></label>
+                </div>
+                <div class="form-group col-md-6">
+                    <select name="idvtal[]" id="idvtal" class="form-control form-select">
+                        <option value="0"></option>
+                        <?php if ($datCol) {
+                            foreach ($datCol as $ddt) { ?>
+                                <option value="<?= $ddt['idval'] ?>" <?php if ($datCxD) {
+                                        foreach ($datCxD as $ddot) {
+                                            if ($ddt['idval'] == $ddot['idvtal']) echo " selected ";
+                                            }
+                                        } ?>>
+                                    <?= $ddt['nomval']; ?>
+                                </option>
+                        <?php }
+                        } ?>
+                    </select>
+                </div>
+
+        <?php }
+        } ?>
         <?php if ($datDot && $datTalS && $datTalP && $datTalZ) {
             foreach ($datDot as $ddo) { ?>
                 <div class="form-group col-md-6">

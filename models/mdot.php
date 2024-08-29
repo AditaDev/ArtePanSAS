@@ -260,16 +260,6 @@
         }
 
         //------------Traer valores-----------
-        function getAllOpe($iddom){
-            $sql = "SELECT idval, nomval FROM valor WHERE iddom=:iddom";
-            $modelo = new conexion();
-            $conexion = $modelo->get_conexion();
-            $result = $conexion->prepare($sql);
-            $result->bindParam(":iddom", $iddom);
-            $result->execute();
-            $res = $result->fetchall(PDO::FETCH_ASSOC);
-            return $res;
-        }
 
         function getAllAcc($iddom){
             $sql = "SELECT idval, nomval FROM valor WHERE iddom=:iddom";

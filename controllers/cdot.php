@@ -82,11 +82,12 @@
 
     $datAllD = $mdot->getAllD();
     $datPer = $mdot->getAllPer($ope);
-    $datCol = $mdot->getAllOpe(12);
     $datDot = $mdot->getAllDot(7);
     $datTalS = $mdot->getAllDot(8); 
     $datTalP = $mdot->getAllDot(9); 
     $datTalZ = $mdot->getAllDot(10);
     $datTalG = $mdot->getAllDot(11);
+    $datCol = $mdot->getAllDot(12);
+    $datDia = $mdot->getAllDot(13);
    
 ?>

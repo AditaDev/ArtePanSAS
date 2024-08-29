@@ -68,7 +68,9 @@ INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (9, 'Talla P'),
 (10, 'Talla Z'),
 (11, 'Talla G'),
-(12, 'Colores');
+(12, 'Colores'),
+(13, 'Días');
+
 
 
 -- --------------------------------------------------------
@@ -526,8 +528,14 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (96, 'Vino tinto', 12, 1203, 1),
 (97, 'Azul oscuro', 12, 1204, 1),
 (98, 'Azul rey', 12, 1205, 1),
-(99, 'Beige', 12, 1206, 1);
--- (100, '', 12, 1207, 1),
+(99, 'Beige', 12, 1206, 1),
+
+(100, 'Lunes', 13, 1301, 1),
+(101, 'Martes', 13, 1302, 1),
+(102, 'Miércoles', 13, 1303, 1),
+(103, 'Jueves', 13, 1304, 1),
+(104, 'Viernes', 13, 1305, 1),
+(105, 'Sábado', 13, 1306, 1);
 
 
 
