@@ -149,7 +149,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 ?>
                                 <i class="fa fa-solid fa-pen-clip iconi" class="btn btn-primary" data-bs-toggle="modal" title="Firmar"></i>
                                 <!-- <i class="fa fa-solid fa-envelopes-bulk iconi"></i> -->
-                                <i class="fa fa-solid fa-file-pdf iconi"></i>
+                                
                             </div>
                         </div>
 
@@ -171,7 +171,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             $mdot->setIdent($dta['ident']);
                             $acc = $mdot->getAllTxD($dta['ident']);
                             $det = $mdot->getOne();
-                            modalDev("mcbdev", $dta['ident'], $acc, $det, $pg);
+                            modalDev("mcbdev", $dta['ident'], $acc, $det, $pg, $nmfl);
                             ?>
                             <!-- <a href="home.php?pg=<?= $pg; ?>&ident=<?= $dta['ident']; ?>&ope=edi&asg=<?= $asg; ?>" title="Editar"> -->
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>

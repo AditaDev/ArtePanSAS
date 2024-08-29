@@ -72,7 +72,7 @@ function modalChk($nm, $id, $tit, $mt, $pg, $dms)
 }
 
 //-------------Modal estado de novedad y factura-----------
-function modalNov($nm, $id, $pg, $info){
+function modalNov($nm, $id, $pg, $info, $nmfl){
 	$hoy = date("Y-m-d");
 	$txt = '';
 	$txt .= '<div class="modal fade" id="'.$nm.$id.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
@@ -103,7 +103,7 @@ function modalNov($nm, $id, $pg, $info){
 								$txt .= '<strong><br>Novedad:</strong><hr>';
 							$txt .= '<div class="form-group col-md-6">';
 								$txt .= '<label for="fnov" class="titulo"><strong>Fecha aviso: </strong></label>';
-								$txt .= '<input class="form-control" max='.$hoy.' type="date" id="fnov" name="fnov" value="'.$hoy.'" required>';
+								$txt .= '<input class="form-control" max='.$nmfl.' type="datetime-local" id="fnov" name="fnov" value="'.$nmfl.'" required>';
 							$txt .= '</div>';
 							$txt .= '<div class="form-group col-md-12">';
 								$txt .= '<label for="obsnov" class="titulo"><strong>Observaciones: </strong></label>';
@@ -129,7 +129,7 @@ function modalNov($nm, $id, $pg, $info){
 
 
 //------------Modal vasg, devolucion-----------
-function modalDev($nm, $id, $acc, $det, $pg){
+function modalDev($nm, $id, $acc, $det, $pg, $nmfl){
 	$hoy = date("Y-m-d");
 	$txt = '';
 	$txt .= '<div class="modal fade" id="'.$nm.$id.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
@@ -154,7 +154,7 @@ function modalDev($nm, $id, $acc, $det, $pg){
 							$txt .= '<strong><br>Devolución:</strong><hr>';
 							$txt .= '<div class="form-group col-md-6">';
 								$txt .= '<label for="fecdev" class="titulo"><strong>F. Devolución: </strong></label>';
-								$txt .= '<input class="form-control" max='.$hoy.' type="date" id="fecdev" name="fecdev" value="'.$hoy.'" required>';
+								$txt .= '<input class="form-control" max='.$nmfl.' type="datetime-local" id="fecdev" name="fecdev" value="'.$nmfl.'" required>';
 							$txt .= '</div>';
 							$txt .= '<div class="form-group col-md-12">';
 								$txt .= '<label for="observd" class="titulo"><strong>Observaciones: </strong></label>';
@@ -291,6 +291,13 @@ function modalDet($nom, $id, $titulo, $info){
 							if($info[0]['papr'])$txt .= '<tr><td><strong>Aprobada: </strong></td><td class="inffac">'.$info[0]['nompapr'].'<br>'.$info[0]['faprfac'].'</td></tr>';
 							if($info[0]['pent'])$txt .= '<tr><td><strong>Entregada: </strong></td><td class="inffac">'.$info[0]['nompent'].'<br>'.$info[0]['fffac'].'</td></tr>';
 							if($info[0]['ppag'])$txt .= '<tr><td><strong>Pagada: </strong></td><td class="inffac">'.$info[0]['nomppag'].'<br>'.$info[0]['fpagfac'].'</td></tr>';
+							$txt .= '<tr><td><hr></td><td><hr>';
+							if($info[0]['pnov']){
+							$txt .= '<tr><td style="text-align: right;"><strong>Novedad</strong></td><td><br><br>';
+							$txt .= '<tr><td><strong>Aviso:</strong></td><td class="inffac">'.$info[0]['nompnov'].'</td></tr>';
+							$txt .= '<tr><td><strong>Fecha:</strong></td><td class="inffac">'.$info[0]['fnov'].'</td></tr>';
+							$txt .= '<tr><td><strong>Observación: </td><td class="inffac">'.$info[0]['obsnov'].'</td><td class="inffac"></td></tr>';
+							}
 						$txt .= '</table>';
 					$txt .= '</div>';
 				$txt .= '</div>';

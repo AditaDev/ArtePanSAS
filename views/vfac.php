@@ -120,13 +120,13 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 if($dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
                                 <i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i>
                                 <?php } ?>
-
+                                <?php if ($dta['pnov'] == NULL) { ?>
                                 <i class="fa-solid fa-circle-exclamation iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbnov<?= $dta['idfac']; ?>" title="NOVEDAD"></i>
                                 <?php
                                     $mfac->setIdfac($dta['idfac']);
                                     $info = $mfac->getOne();
-                                    modalNov("mcbnov", $dta['idfac'], $pg, $info);
-                                ?>
+                                    modalNov("mcbnov", $dta['idfac'], $pg, $info, $nmfl);
+                                }?>
                             </div>
                     </td>
                     <td tyle="text-align: half;">
