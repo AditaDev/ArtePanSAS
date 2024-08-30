@@ -37,21 +37,21 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         <?php if ($datDia && $datCol ) {
             foreach ($datDia as $ddo) { ?>
                 <div class="form-group col-md-6">
-                    <?php if ($datCxD) {
+                <input type="checkbox" name="idvdia[]" value="<?= $ddo['idval'] ?>" <?php if ($datCxD) {
                                             foreach ($datCxD as $ddt) {
-                                                if ($ddo['idval'] == $ddt['idvdot']);
+                                                if ($ddo['idval'] == $ddt['idvdia'])echo " selected ";
                                                 }
                                             } ?>
-                    <label for="idvdot"><strong><?= $ddo['nomval']; ?></strong></label>
+                    <label for="idvdia"><strong><?= $ddo['nomval']; ?></strong></label>
                 </div>
                 <div class="form-group col-md-6">
-                    <select name="idvtal[]" id="idvtal" class="form-control form-select">
+                    <select name="idvcol[]" id="idvcol" class="form-control form-select">
                         <option value="0"></option>
                         <?php if ($datCol) {
                             foreach ($datCol as $ddt) { ?>
                                 <option value="<?= $ddt['idval'] ?>" <?php if ($datCxD) {
                                         foreach ($datCxD as $ddot) {
-                                            if ($ddt['idval'] == $ddot['idvtal']) echo " selected ";
+                                            if ($ddt['idval'] == $ddot['idvcol']);
                                             }
                                         } ?>>
                                     <?= $ddt['nomval']; ?>
@@ -85,7 +85,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             foreach ($datTal as $ddt) { ?>
                                 <option value="<?= $ddt['idval'] ?>" <?php if ($datTxD) {
                                         foreach ($datTxD as $ddot) {
-                                            if ($ddt['idval'] == $ddot['idvtal']) echo " selected ";
+                                            if ($ddt['idval'] == $ddot['idvtal']) ;
                                             }
                                         } ?>>
                                     <?= $ddt['nomval']; ?>
@@ -107,43 +107,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             <input class="btn btn-primary" type="submit" value="Registrar">
             <input type="hidden" name="ope" value="save">
             <input type="hidden" name="ident" value="<?php if ($datOne) echo $datOne[0]['ident']; ?>">
-        </div>
-
-
-
-
-
-        <select name="color" id="color" class="form-control form-select">
-            
-            
-            <?php foreach ($datCol as $dte) { ?>
-                <option value="<?= $dte['idval']; ?>" <?php if ($datCxD){
-                foreach ($datCxD as $ddot) {
-                    if  ($dte['idval'] == $ddot[0]['color']) echo " selected "
-                            
-                         ?>>
-                            <?= $dte['nomval']; ?>
-                        </option>
-                    <?php }} }?>
-                </select>
-            
-                <select name="color[]" id="color" class="form-control form-select">
-                        <option value="0"></option>
-                        <?php
-                        if ($datCol) {
-                            foreach ($datCol as $ddt) { ?>
-                                <option value="<?= $ddt['idval'] ?>" <?php if ($datCxD) {
-                                        foreach ($datCxD as $ddot) {
-                                            if ($ddt['idval'] == $ddot['color']) echo " selected ";
-                                            }
-                                        } ?>>
-                                    <?= $ddt['nomval']; ?>
-                                </option>
-                        <?php }
-                        } ?>
-                    </select>
-                
-
+        </div>         
     </div>
 </form>
 
@@ -174,8 +138,9 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 <?php
                                 $mdot->setIdent($dta['ident']);
                                 $acc = $mdot->getAllTxD($dta['ident']);
+                                $cxc = $mdot->getAllCxc($dta['ident']);
                                 $det = $mdot->getOne();
-                                modalInfAsg("mcbdet", $dta['ident'], $acc, $det);
+                                modalInfAsg("mcbdet", $dta['ident'], $acc, $det, $cxc);
                                 ?>
                                 <i class="fa fa-solid fa-pen-clip iconi" class="btn btn-primary" data-bs-toggle="modal" title="Firmar"></i>
                                 <!-- <i class="fa fa-solid fa-envelopes-bulk iconi"></i> -->

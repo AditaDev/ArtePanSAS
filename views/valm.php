@@ -11,11 +11,11 @@
         </div>
         <div class="form-group col-md-3">
             <label for="spalm"><strong>Sopa:</strong></label>
-            <input class="form-control" type="text" id="spalm" name="spalm" value="<?php if ($datOne) echo $datOne[0]['spalm']; ?>" required>
+            <input class="form-control" type="text" id="spalm" name="spalm" value="<?php if ($datOne) echo $datOne[0]['spalm']; ?>">
         </div>
         <div class="form-group col-md-3">
             <label for="jgalm"><strong>Jugo:</strong></label>
-            <input type="text" name="jgalm" id="jgalm" class="form-control" value="<?php if ($datOne) echo $datOne[0]['jgalm']; ?>" required>
+            <input type="text" name="jgalm" id="jgalm" class="form-control" value="<?php if ($datOne) echo $datOne[0]['jgalm']; ?>">
         </div>
         <div class="form-group col-md-3">
             <label for="arcpdf"><strong>Factura:</strong></label>

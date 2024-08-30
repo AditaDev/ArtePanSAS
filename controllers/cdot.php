@@ -27,6 +27,10 @@
     $idvdot = isset($_POST['idvdot']) ? $_POST['idvdot']:NULL;
     $idvtal = isset($_POST['idvtal']) ? $_POST['idvtal']:NULL;
     
+    //------------ColorxCamisa-----------
+    $idvdia = isset($_POST['idvdia']) ? $_POST['idvdia']:NULL;
+    $idvcol = isset($_POST['idvcol']) ? $_POST['idvcol']:NULL;
+
     // $arc = isset($_FILES["arc"]["name"]) ? $_FILES["arc"]["name"] : NULL;
     // $arc = substr($arc, 0, strpos($arc, ".xls"));
     
@@ -39,6 +43,7 @@
     $pg = 111;
     
     $mdot->setIdEnt($ident);
+    var_dump($idvcol, $idvdia);
     //------------Asignar-----------
     if($ope=="save"){   
         $mdot->setIdperent($idperent);
@@ -54,13 +59,22 @@
         }
     
         if($ident) $mdot->delExD();
+        if($ident) $mdot->delCxc();
         if($idvdot && $ident){ foreach($idvdot AS $index=>$ida){
             $mdot->setIdent($ident);
             $mdot->setIdvdot($ida);
             $mdot->setIdvtal($idvtal[$index]);
             $mdot->saveExD();
         }}
-        echo "<script>window.location='home.php?pg=".$pg."';</script>";
+        if($idvdia && $ident){ foreach($idvdia AS $ind=>$id){ 
+            $mdot->setIdent($ident);
+            $mdot->setIdvdia($id);
+            $mdot->setIdvcol($idvcol[$ind]);
+            $mdot->saveCxc();
+        }}
+    
+        // echo "<script>window.location='home.php?pg=".$pg."';</script>";
+
     }
 
     if($ope=="dev" && $ident){
@@ -82,12 +96,12 @@
 
     $datAllD = $mdot->getAllD();
     $datPer = $mdot->getAllPer($ope);
-    $datDot = $mdot->getAllDot(7);
-    $datTalS = $mdot->getAllDot(8); 
-    $datTalP = $mdot->getAllDot(9); 
-    $datTalZ = $mdot->getAllDot(10);
-    $datTalG = $mdot->getAllDot(11);
-    $datCol = $mdot->getAllDot(12);
-    $datDia = $mdot->getAllDot(13);
+    $datDot = $mdot->getAllDom(7);
+    $datTalS = $mdot->getAllDom(8); 
+    $datTalP = $mdot->getAllDom(9); 
+    $datTalZ = $mdot->getAllDom(10);
+    $datTalG = $mdot->getAllDom(11);
+    $datCol = $mdot->getAllDom(12);
+    $datDia = $mdot->getAllDom(13);
    
 ?>

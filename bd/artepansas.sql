@@ -27,6 +27,14 @@ CREATE TABLE `dotxent` (
   `idvtal` bigint(11) NOT NULL -- id valor referente a talla (s/m)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+CREATE TABLE `ccxent` (
+  `ident` bigint(11) NOT NULL, -- id entrega
+  `idvdia` bigint(11) NOT NULL, -- id valor referente a 
+  `idvcol` bigint(11) NOT NULL -- id valor referente a talla (s/m)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+
 --
 -- Estructura de tabla para la tabla `almuerzo`
 --
@@ -553,6 +561,12 @@ ALTER TABLE `dotxent`
   ADD KEY `ident` (`ident`),
   ADD KEY `idvdot` (`idvdot`),
   ADD KEY `idvtal` (`idvtal`);
+
+ALTER TABLE `ccxent`
+  ADD KEY `ident` (`ident`),
+  ADD KEY `idvdia` (`idvdia`),
+  ADD KEY `idvcol` (`idvcol`);
+
 --
 -- Indices de la tabla `almuerzo`
 --
@@ -724,6 +738,9 @@ ALTER TABLE `pedido`
 
 ALTER TABLE `dotxent`
   ADD CONSTRAINT `dotxent__ibfk_1` FOREIGN KEY (`ident`) REFERENCES `dotacion` (`ident`);
+
+ALTER TABLE `ccxent`
+  ADD CONSTRAINT `ccxent__ibfk_1` FOREIGN KEY (`ident`) REFERENCES `dotacion` (`ident`);
 
 --
 -- Filtros para la tabla `asignar`

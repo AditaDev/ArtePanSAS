@@ -178,7 +178,7 @@ function modalDev($nm, $id, $acc, $det, $pg, $nmfl){
 }
 
 //modal info dotacion
-function modalInfAsg($nm, $id, $acc, $det){		
+function modalInfAsg($nm, $id, $acc, $det, $cxc){		
 	$txt = '';
 	$txt .= '<div class="modal fade" id="' . $nm . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
 		$txt .= '<div class="modal-dialog">';
@@ -195,6 +195,14 @@ function modalInfAsg($nm, $id, $acc, $det){
 								$txt .= '<div class="form-group col-md-6"><strong>+</strong> '.$ac['nomvdot'].'</div>';
 								$txt .= '<div class="form-group col-md-6"><strong>+</strong> '.$ac['nomvtal'].'</div>';
 							}}
+
+						if($cxc){
+							$txt .= '<big><strong>Horario de camiseta: </strong></big><hr>';
+							foreach($cxc AS $cc){
+								$txt .= '<div class="form-group col-md-6"><strong></strong> '.$cc['nomvdia'].'</div>';
+								$txt .= '<div class="form-group col-md-6"><strong>-</strong> '.$cc['nomvcol'].'</div>';
+								}}
+
 						$txt .= '<big><br><strong>Asignación</strong></big><hr>';
 						$txt .= '<div class="form-group col-md-4"><strong>Entrega: </strong></div>';
 						$txt .= '<div class="form-group col-md-8">'.$det[0]["nompent"].'</div>';

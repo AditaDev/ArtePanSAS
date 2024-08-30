@@ -130,15 +130,8 @@ body{
 
 
 
-<?php if ($datOne) { ?>
-   
+<?php if ($datPed) { ?>
    <img src="img/orders.png" class="pedido" >
-
-</html>
-
-    
-
-
 <?php }else{ if ($datOneAlmF) { ?>
     <div>
         <?php foreach ($datOneAlmF as $dta) { ?>

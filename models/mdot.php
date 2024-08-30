@@ -25,6 +25,11 @@
         private $idvdot; 
         private $idvtal;
 
+         //------------CCxEnt-----------
+
+         private $idvdia; 
+         private $idvcol;
+
         //------------Dotacion-----------
          public function getIdent(){
             return $this->ident;
@@ -83,6 +88,14 @@
             return $this->idvtal;
         }
 
+         //------------CCxEnt-----------
+         public function getIdvdia(){
+            return $this->idvdia;
+        }
+        public function getIdvcol(){
+            return $this->idvcol;
+        }
+
         //---------Dotacion---------------
         public function setIdent($ident){
             $this->ident=$ident;
@@ -138,6 +151,14 @@
         }
         public function setIdvtal($idvtal){
             $this->idvtal = $idvtal;
+        }
+
+        //------------CCxEnt-----------
+        public function setIdvdia($idvdia){
+            $this->idvdia = $idvdia;
+        }
+        public function setIdvcol($idvcol){
+            $this->idvcol = $idvcol;
         }
         
         //------------Dotacion-----------
@@ -259,9 +280,58 @@
             }
         }
 
+
+         //------------Color x Camisa-----------
+
+         function getAllCxc($ident){
+            $sql = "SELECT de.idvdia, v.nomval AS nomvdia, vv.nomval AS nomvcol, de.idvcol FROM ccxent AS de INNER JOIN valor AS v ON de.idvdia=v.idval INNER JOIN valor AS vv ON de.idvcol=vv.idval WHERE ident=:ident";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->bindParam(":ident", $ident);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
+        function saveCxc() 
+        {
+            // try{
+                $sql = "INSERT INTO ccxent (ident, idvdia, idvcol) VALUES (:ident, :idvdia, :idvcol)";
+                $modelo = new conexion();
+                $conexion = $modelo->get_conexion();
+                $result = $conexion->prepare($sql);
+                $ident = $this->getIdent();
+                $result->bindParam(":ident", $ident);
+                $idvdia = $this->getIdvdia();
+                $result->bindParam(":idvdia", $idvdia);
+                $idvcol = $this->getIdvcol();
+                $result->bindParam(":idvcol", $idvcol);
+                $result->execute();
+            // } catch (Exception $e) {
+            //     ManejoError($e);
+            // }
+        }
+
+        function delCxc()
+        {
+            try{
+                $sql = "DELETE FROM ccxent WHERE ident=:ident";
+                $modelo = new conexion();
+                $conexion = $modelo->get_conexion();
+                $result = $conexion->prepare($sql);
+                $ident = $this->getIdent();
+                $result->bindParam(":ident", $ident);
+                $result->execute();
+            } catch (Exception $e) {
+                ManejoError($e);
+            }
+        }
+
+
         //------------Traer valores-----------
 
-        function getAllAcc($iddom){
+        function getAllDom($iddom){
             $sql = "SELECT idval, nomval FROM valor WHERE iddom=:iddom";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
@@ -297,16 +367,7 @@
                     return $res;
                  }
 
-        function getAllDot($iddom){
-                    $sql = "SELECT idval, nomval FROM valor WHERE iddom=:iddom";
-                    $modelo = new conexion();
-                    $conexion = $modelo->get_conexion();
-                    $result = $conexion->prepare($sql);
-                    $result->bindParam(":iddom", $iddom);
-                    $result->execute();
-                    $res = $result->fetchall(PDO::FETCH_ASSOC);
-                    return $res;
-                }
+    
         
 
     }

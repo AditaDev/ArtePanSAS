@@ -22,10 +22,11 @@ $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
 if($arcpdf) $rutpdf = opti($arcpdf, $ppalm."_".$spalm, "arc/almuerzos/", $nmfl);
 
-$datOne = $malm->getOnePed();
+$datOne = NULL;
 
 $malm->setIdalm($idalm);
 
+$datPed = $malm->getOnePed();
 
 if ($ope == "save") {
     $malm->setPpalm($ppalm);
