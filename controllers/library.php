@@ -71,6 +71,166 @@ function modalChk($nm, $id, $tit, $mt, $pg, $dms)
 	echo $txt;
 }
 
+//------------Modal vdot, firma-----------
+function modalFir($nm, $id, $det, $pg) {
+    $prs = NULL;
+    $est = NULL;
+    $txt = '';
+    $txt .= '<div class="modal fade" id="' . $nm . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+        $txt .= '<div class="modal-dialog">';
+            $txt .= '<form id="signature-form' . $id . '" action="home.php?pg=' . $pg .'" method="POST">';
+                $txt .= '<div class="modal-content">';
+                    $txt .= '<div class="modal-header">';
+                        $txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>';
+                        if (!$det[0]['firpent']) {
+                            $txt .= $det[0]['nomprec'];
+                            $est = 1;
+                            $prs = "asg";
+                        } elseif ($det[0]['firpent']) {
+                            $txt .= $det[0]['nompentd'];
+                            $est = "2";
+                            $prs = "dev";
+                        }
+                        $txt .= '</strong></h1>';
+                        $txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+                    $txt .= '</div>';
+                    $txt .= '<div class="modal-body" style="text-align: left;">';
+                        $txt .= '<div class="fir" style="text-align: center;">';
+                            $txt .= '<canvas id="signature-pad' . $id . '"></canvas>';
+                        $txt .= '</div>';
+                        $txt .= '<div style="text-align: left;">';
+                            $txt .= '<small><small><br>*Al firmar, acepto la entrega de la dotación anteriormente detallada. Me comprometo a su correcto uso y a seguir las políticas de la empresa en cuanto al cuidado del mismo. Reconozco que soy responsable de esta dotación.</small></small>';
+                        $txt .= '</div>';
+                    $txt .= '</div>';
+                    $txt .= '<div class="modal-footer">';
+                        $txt .= '<input type="hidden" name="ident" value="' . $det[0]['ident'] . '">';
+                        $txt .= '<input type="hidden" name="nomfir" value="' . ($det[0]['firpent'] ? $det[0]['nompentd'] : $det[0]['nomprec']) . '">';
+                        $txt .= '<input type="hidden" name="prs" value="' . $prs . '">';
+                        $txt .= '<input type="hidden" name="est" value="' . $est . '">';
+                        $txt .= '<input type="hidden" name="ope" value="firmar">';
+                        $txt .= '<input type="hidden" name="firma" id="firma-input' . $id . '">';
+                        $txt .= '<button type="button" id="save-button' . $id . '" class="btn btn-primary btnmd">Guardar</button>';
+                        $txt .= '<button type="button" id="clear-button' . $id . '" class="btn btn-primary btnmd">Limpiar</button>';
+                        $txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
+                    $txt .= '</div>';
+                $txt .= '</div>';
+            $txt .= '</form>';
+        $txt .= '</div>';
+    $txt .= '</div>';
+    $txt .= '<style>
+                .fir {
+                    border: 1px solid #4F4F4F;
+                    border-radius: 3px;
+                    width: 100%;
+                    height: 200px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                #signature-pad' . $id . ' {
+                    border-bottom: 1px solid #000;
+                    width: 80%;
+                    height: 170px;
+                }
+            </style>';
+    $txt .= '<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            $("#' . $nm . $id . '").on("shown.bs.modal", function () {
+                const canvas = document.getElementById("signature-pad' . $id . '");
+                const context = canvas.getContext("2d");
+				context.lineWidth = 2;
+                const signatureInput = document.getElementById("firma-input' . $id . '");
+                const clearButton = document.getElementById("clear-button' . $id . '");
+                const saveButton = document.getElementById("save-button' . $id . '");
+                let drawing = false;
+
+                const getMousePos = (canvas, evt) => {
+                    const rect = canvas.getBoundingClientRect();
+                    return {
+                        x: (evt.clientX - rect.left) * (canvas.width / rect.width),
+                        y: (evt.clientY - rect.top) * (canvas.height / rect.height)
+                    };
+                };
+
+                const getTouchPos = (canvas, evt) => {
+                    const rect = canvas.getBoundingClientRect();
+                    return {
+                        x: (evt.touches[0].clientX - rect.left) * (canvas.width / rect.width),
+                        y: (evt.touches[0].clientY - rect.top) * (canvas.height / rect.height)
+                    };
+                };
+
+                const draw = (pos) => {
+                    if (drawing) {
+                        context.lineTo(pos.x, pos.y);
+                        context.stroke();
+                    }
+                };
+
+                const startDrawing = (pos) => {
+                    drawing = true;
+                    context.beginPath();
+                    context.moveTo(pos.x, pos.y);
+                };
+
+                const stopDrawing = () => {
+                    drawing = false;
+                    context.closePath();
+                };
+
+                canvas.addEventListener("mousedown", function(e) {
+                    startDrawing(getMousePos(canvas, e));
+                });
+
+                canvas.addEventListener("mousemove", function(e) {
+                    if (drawing) {
+                        draw(getMousePos(canvas, e));
+                    }
+                });
+
+                canvas.addEventListener("mouseup", stopDrawing);
+                document.addEventListener("mouseup", stopDrawing);
+
+                canvas.addEventListener("touchstart", function(e) {
+                    e.preventDefault();
+                    startDrawing(getTouchPos(canvas, e));
+                });
+
+                canvas.addEventListener("touchmove", function(e) {
+                    e.preventDefault();
+                    draw(getTouchPos(canvas, e));
+                });
+
+                canvas.addEventListener("touchend", stopDrawing);
+                canvas.addEventListener("touchcancel", stopDrawing);
+
+                clearButton.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                });
+
+                saveButton.addEventListener("click", function(event) {
+                    if (context.getImageData(0, 0, canvas.width, canvas.height).data.every(pixel => pixel === 0)) {
+                        alert("Por favor, dibuja tu firma.");
+                        event.preventDefault();
+                    } else {
+                        const dataURL = canvas.toDataURL("image/png");
+                        signatureInput.value = dataURL;
+                        document.getElementById("signature-form' . $id . '").submit();
+                    }
+                });
+
+                $("#' . $nm . $id . '").on("hidden.bs.modal", function () {
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                });
+            });
+        });
+    </script>';
+    echo $txt;
+}
+
+
+
 //-------------Modal estado de novedad y factura-----------
 function modalNov($nm, $id, $pg, $info, $nmfl){
 	$hoy = date("Y-m-d");

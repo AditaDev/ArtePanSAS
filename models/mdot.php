@@ -209,6 +209,25 @@
             // }
         }
 
+        function saveFir($fir){
+            // try{
+                $sql = "UPDATE dotacion SET";
+                if($fir==1) $sql .= " firpent=:firma";
+                if($fir==2) $sql .= " firprec=:firma";
+                $sql .= " WHERE ident=:ident";
+                $modelo = new conexion();
+                $conexion = $modelo->get_conexion();
+                $result = $conexion->prepare($sql);
+                $ident = $this->getIdent();
+                $result->bindParam(":ident",$ident);
+                $firma = $this->getFirma();
+                $result->bindParam(":firma", $firma);
+                $result->execute();
+            // } catch (Exception $e) {
+            //     ManejoError($e);
+            // }
+        }
+
         function dev(){
             //try{
                 $sql = "UPDATE dotacion SET idperentd=:idperentd, idperrecd=:idperrecd, fecdev=:fecdev, observd=:observd, estent=:estent WHERE ident=:ident";

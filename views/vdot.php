@@ -30,7 +30,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         <div class="form-group col-md-4">
             <label for="fecent"><strong>F. Entrega:</strong></label>
             <input class="form-control" type="date" id="fecent" name="fecent" max=<?php echo $hoy; ?> <?php if ($datOne) echo 'value="' . $datOne[0]['fecent'] . '" disabled';
-                                                                                                        else echo 'value="' . $hoy . '" required'; ?>>
+                else echo 'value="' . $hoy . '" required'; ?>>
         </div>
         <div class="form-group col-md-12"><br></div>
 
@@ -126,7 +126,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 <tr>
                     <td tyle="text-align: left;">
                         <div class="row">
-                            <div class="form-group col-md-10">
+                            <div class="form-group col-md-8">
                                 <strong> <?= ($dta['fecent']) .  " - "  . $dta['nomprec']; ?></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <small><strong>Área: </strong> <?= $dta['area']; ?></small><br>
                                 <small>
@@ -136,15 +136,19 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <div class="form-group col-md-2">
                                 <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbdet<?= $dta['ident']; ?>" title="Detalles"></i>
                                 <?php
-                                $mdot->setIdent($dta['ident']);
-                                $acc = $mdot->getAllTxD($dta['ident']);
-                                $cxc = $mdot->getAllCxc($dta['ident']);
-                                $det = $mdot->getOne();
-                                modalInfAsg("mcbdet", $dta['ident'], $acc, $det, $cxc);
+                                    $mdot->setIdent($dta['ident']);
+                                    $acc = $mdot->getAllTxD($dta['ident']);
+                                    $cxc = $mdot->getAllCxc($dta['ident']);
+                                    $det = $mdot->getOne();
+                                    modalInfAsg("mcbdet", $dta['ident'], $acc, $det, $cxc);
                                 ?>
-                                <i class="fa fa-solid fa-pen-clip iconi" class="btn btn-primary" data-bs-toggle="modal" title="Firmar"></i>
-                                <!-- <i class="fa fa-solid fa-envelopes-bulk iconi"></i> -->
-                                
+                                <i class="fa fa-solid fa-pen-clip iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbfir<?= $dta['ident']; ?>" title="Firmar"></i>
+                                <?php  
+                                    $mdot->setIdent($dta['ident']);
+                                    $det = $mdot->getOne();
+                                    modalFir("mcbfir", $dta['ident'], $det, $pg);
+                                   if(($dta['firpent'] && !$dta['firprec'] && !$dta['fecdev']) OR ($dta['firpent'] && $dta['firprec']))
+                                ?>
                             </div>
                         </div>
 
@@ -169,8 +173,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             modalDev("mcbdev", $dta['ident'], $acc, $det, $pg, $nmfl);
                             ?>
                             <!-- <a href="home.php?pg=<?= $pg; ?>&ident=<?= $dta['ident']; ?>&ope=edi&asg=<?= $asg; ?>" title="Editar"> -->
-                            <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
-                            </a>
+                            
                         <?php } ?>
                     </td>
 

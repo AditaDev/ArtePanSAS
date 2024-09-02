@@ -19,6 +19,10 @@
     $estent = isset($_POST['estent']) ? $_POST['estent']:1;
     $firpent = isset($_FILES['firpent']) ? $_FILES['firpent']:NULL;
     $firprec = isset($_FILES['firprec']) ? $_FILES['firprec']:NULL;
+    
+    $urlfir = isset($_POST['firma']) ? $_POST['firma']:NULL;
+    $nomfir = isset($_POST['nomfir']) ? $_POST['nomfir']:NULL;
+    $prs = isset($_POST['prs']) ? $_POST['prs']:NULL;
    
     $firma = NULL;
 
@@ -43,7 +47,7 @@
     $pg = 111;
     
     $mdot->setIdEnt($ident);
-    var_dump($idvcol, $idvdia);
+    var_dump($idvcol, $idvdia, $idperrec);
     //------------Asignar-----------
     if($ope=="save"){   
         $mdot->setIdperent($idperent);
@@ -75,6 +79,37 @@
     
         // echo "<script>window.location='home.php?pg=".$pg."';</script>";
 
+    }
+
+
+    if ($urlfir) {
+        // Separar los datos base64 del encabezado
+        list($type, $data) = explode(';', $urlfir);
+        list(, $data) = explode(',', $data);
+
+        // Decodificar los datos base64
+        $data = base64_decode($data);
+
+        // Determinar la extensión del archivo basado en el tipo MIME
+        $ext = '';
+        if (strpos($type, 'image/png') !== false) $ext = 'png';
+        elseif (strpos($type, 'image/jpeg') !== false) $ext = 'jpeg';
+        else die('Tipo de archivo no soportado');
+
+        // Definir la ruta donde se guardará la imagen
+
+        $fold = 'img/fir/' . $nomfir;
+        $nom = "fir_" . $prs . "_" . $nomarc . ".png"; // Guardar como PNG
+        $firma = $fold.'/'.$nom;
+
+        if (!file_exists($fold)) mkdir($fold, 0755, true);
+        file_put_contents($firma, $data);
+    }
+
+    if($ope=="firmar" && $firma){
+        $mdot->setFirma($firma);
+        $mdot->saveFir($estent);
+        // echo "<script>window.location='home.php?pg=".$pg."&asg=".$asg."';</script>";
     }
 
     if($ope=="dev" && $ident){
