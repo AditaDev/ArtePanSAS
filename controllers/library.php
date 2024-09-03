@@ -288,7 +288,7 @@ function modalNov($nm, $id, $pg, $info, $nmfl){
 }
 
 
-//------------Modal vasg, devolucion-----------
+//------------Modal vdot, devolucion-----------
 function modalDev($nm, $id, $acc, $det, $pg, $nmfl){
 	$hoy = date("Y-m-d");
 	$txt = '';
@@ -349,20 +349,18 @@ function modalInfAsg($nm, $id, $acc, $det, $cxc){
 				$txt .= '</div>';
 				$txt .= '<div class="modal-body" style="margin: 0px 25px;">';
 					$txt .= '<div class="row">';
+						if($cxc){
+						$txt .= '<big><strong>Horario de camiseta: </strong></big><hr>';
+							foreach($cxc AS $cc){
+								$txt .= '<div class="form-group col-md-6"><strong></strong> '.$cc['nomvdia'].'</div>';
+								$txt .= '<div class="form-group col-md-6"><strong>-</strong> '.$cc['nomvcol'].'</div>';
+							}}
 						if($acc){
-							$txt .= '<big><strong>Elementos</strong></big><hr>';
+							$txt .= '<big><br><strong>Elementos</strong></big><hr>';
 							foreach($acc AS $ac){
 								$txt .= '<div class="form-group col-md-6"><strong>+</strong> '.$ac['nomvdot'].'</div>';
 								$txt .= '<div class="form-group col-md-6"><strong>+</strong> '.$ac['nomvtal'].'</div>';
 							}}
-
-						if($cxc){
-							$txt .= '<big><strong>Horario de camiseta: </strong></big><hr>';
-							foreach($cxc AS $cc){
-								$txt .= '<div class="form-group col-md-6"><strong></strong> '.$cc['nomvdia'].'</div>';
-								$txt .= '<div class="form-group col-md-6"><strong>-</strong> '.$cc['nomvcol'].'</div>';
-								}}
-
 						$txt .= '<big><br><strong>Asignación</strong></big><hr>';
 						$txt .= '<div class="form-group col-md-4"><strong>Entrega: </strong></div>';
 						$txt .= '<div class="form-group col-md-8">'.$det[0]["nompent"].'</div>';

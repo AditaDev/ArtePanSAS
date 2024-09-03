@@ -300,7 +300,8 @@ CREATE TABLE `pedido` (
   `idalm` bigint(11) NOT NULL,
   `idper` bigint(11) NOT NULL,
   `fecped` datetime DEFAULT NULL,
-  `canalm` tinyint(1) NOT NULL DEFAULT 1
+  `canalm` tinyint(1) NOT NULL DEFAULT 1,
+  `sopa` boolean DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 

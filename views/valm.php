@@ -2,6 +2,14 @@
  require_once ('controllers/calm.php'); ?>
 
 
+<?php
+    function lleno($label, $value) {
+        if (!empty($value)) {
+            echo "<strong>$label</strong> $value";
+        }
+    }
+?>
+
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
     <div class="row">
         <div class="form-group col-md-3">
@@ -30,6 +38,7 @@
     </div> 
 </form> 
 
+
 <table id="mytable" class="table table-striped" tyle="width:100%">
     <thead>
         <tr>
@@ -45,11 +54,11 @@
                 <tr>
                     <td tyle="text-align: left;">
                         <small>
-                            <strong><?= $dta['fecalm']; ?> </strong><br>
-                            <strong>Plato principal: </strong><?= $dta['ppalm']; ?> &nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong>Sopa: </strong> <?= $dta['spalm']; ?> &nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong>Jugo: </strong> <?= $dta['jgalm']; ?><br>
-
+                        
+                        <strong><?= $dta['fecalm']; ?> </strong><br>
+                        <?php lleno('Plato principal: ', $dta['ppalm']); ?> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <?php lleno('Sopa: ', $dta['spalm']); ?> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <?php lleno('Jugo: ', $dta['jgalm']); ?>
                         </small>
                     </td>
                     <td tyle="text-align: half;">

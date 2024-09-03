@@ -126,7 +126,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 <tr>
                     <td tyle="text-align: left;">
                         <div class="row">
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-10">
                                 <strong> <?= ($dta['fecent']) .  " - "  . $dta['nomprec']; ?></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <small><strong>Área: </strong> <?= $dta['area']; ?></small><br>
                                 <small>
