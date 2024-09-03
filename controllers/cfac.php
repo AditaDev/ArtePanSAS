@@ -31,7 +31,6 @@
     $dattip = $mfac->getAllDom(2);
 
     $mfac->setIdfac($idfac);
-    
     if($idemp) $infoemp = $mfac->getOneEmp($idemp);
     if($arcpdf && $infoemp && $infoemp[0]['razsoem']) $rutpdf = opti($arcpdf, $nofac."_".$confac, "arc/facturas/".$infoemp[0]['razsoem'], $nmfl); 
     if($arcspt) $rutspt = opti($arcpdf, "nombre", "ruta", "id"); 

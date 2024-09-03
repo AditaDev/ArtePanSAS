@@ -19,7 +19,8 @@
     $estent = isset($_POST['estent']) ? $_POST['estent']:1;
     $firpent = isset($_FILES['firpent']) ? $_FILES['firpent']:NULL;
     $firprec = isset($_FILES['firprec']) ? $_FILES['firprec']:NULL;
-    
+
+    $lol = isset($_POST['lol']) ? $_POST['lol']:NULL;
     $urlfir = isset($_POST['firma']) ? $_POST['firma']:NULL;
     $nomfir = isset($_POST['nomfir']) ? $_POST['nomfir']:NULL;
     $prs = isset($_POST['prs']) ? $_POST['prs']:NULL;
@@ -45,11 +46,13 @@
     $datCxD = NULL;
  
     $pg = 111;
-    
-    $mdot->setIdEnt($ident);
-    var_dump($idvcol, $idvdia, $idperrec);
+
+    $mdot->setIdent($ident);
+    // var_dump($idvdot, $idvtal);
+    // var_dump($idvcol, $idvdia);
+
     //------------Asignar-----------
-    if($ope=="save"){   
+    if($ope=="save"){
         $mdot->setIdperent($idperent);
         $mdot->setIdperrec($idperrec);
         $mdot->setFecent($fecent);
@@ -60,25 +63,32 @@
             $mdot->save();
             $id = $mdot->getOneAsg($nmfl);
             $ident = $id[0]['ident'];
+            $mdot->setIdent($ident);
         }
-    
-        if($ident) $mdot->delExD();
-        if($ident) $mdot->delCxc();
-        if($idvdot && $ident){ foreach($idvdot AS $index=>$ida){
-            $mdot->setIdent($ident);
-            $mdot->setIdvdot($ida);
-            $mdot->setIdvtal($idvtal[$index]);
-            $mdot->saveExD();
+        if($ident){
+            $mdot->delExD();
+            $mdot->delCxc();
+        } if($idvtal && $idvdot && $ident){
+            $i = 0;
+            foreach($idvtal AS $id){
+                if($id!="0"){
+                    $mdot->setIdvtal($id);
+                    $mdot->setIdvdot($idvdot[$i]);
+                    $mdot->saveExD();
+                    $i++;
+                }
+            }}
+        if($idvdia && $idvcol && $ident){
+            $i = 0;
+            foreach($idvcol AS $id){
+                if($id!="0"){
+                    $mdot->setIdvcol($id);
+                    $mdot->setIdvdia($idvdia[$i]);
+                    $mdot->saveCxc();
+                    $i++;
+                }
         }}
-        if($idvdia && $ident){ foreach($idvdia AS $ind=>$id){ 
-            $mdot->setIdent($ident);
-            $mdot->setIdvdia($id);
-            $mdot->setIdvcol($idvcol[$ind]);
-            $mdot->saveCxc();
-        }}
-    
-        // echo "<script>window.location='home.php?pg=".$pg."';</script>";
-
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
 
@@ -108,8 +118,8 @@
 
     if($ope=="firmar" && $firma){
         $mdot->setFirma($firma);
-        $mdot->saveFir($estent);
-        // echo "<script>window.location='home.php?pg=".$pg."&asg=".$asg."';</script>";
+        $mdot->saveFir($lol);
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
     if($ope=="dev" && $ident){

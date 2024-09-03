@@ -74,7 +74,7 @@ function modalChk($nm, $id, $tit, $mt, $pg, $dms)
 //------------Modal vdot, firma-----------
 function modalFir($nm, $id, $det, $pg) {
     $prs = NULL;
-    $est = NULL;
+    $lol = NULL;
     $txt = '';
     $txt .= '<div class="modal fade" id="' . $nm . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
         $txt .= '<div class="modal-dialog">';
@@ -84,11 +84,11 @@ function modalFir($nm, $id, $det, $pg) {
                         $txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>';
                         if (!$det[0]['firpent']) {
                             $txt .= $det[0]['nomprec'];
-                            $est = 1;
+                            $lol = 1;
                             $prs = "asg";
                         } elseif ($det[0]['firpent']) {
                             $txt .= $det[0]['nompentd'];
-                            $est = "2";
+                            $lol = "2";
                             $prs = "dev";
                         }
                         $txt .= '</strong></h1>';
@@ -106,7 +106,7 @@ function modalFir($nm, $id, $det, $pg) {
                         $txt .= '<input type="hidden" name="ident" value="' . $det[0]['ident'] . '">';
                         $txt .= '<input type="hidden" name="nomfir" value="' . ($det[0]['firpent'] ? $det[0]['nompentd'] : $det[0]['nomprec']) . '">';
                         $txt .= '<input type="hidden" name="prs" value="' . $prs . '">';
-                        $txt .= '<input type="hidden" name="est" value="' . $est . '">';
+                        $txt .= '<input type="hidden" name="lol" value="' . $lol . '">';
                         $txt .= '<input type="hidden" name="ope" value="firmar">';
                         $txt .= '<input type="hidden" name="firma" id="firma-input' . $id . '">';
                         $txt .= '<button type="button" id="save-button' . $id . '" class="btn btn-primary btnmd">Guardar</button>';
