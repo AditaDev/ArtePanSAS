@@ -8,7 +8,7 @@ require_once('controllers/calm.php');
         flex-direction: column;
         justify-content: space-between;
         width: 500px;
-        text-align: left;
+        text-align: center;
         border: 1px solid lightgray;
         box-shadow: 2px 2px 8px 4px #d3d3d3d1;
         border-radius: 15px;
@@ -17,6 +17,7 @@ require_once('controllers/calm.php');
     .titulo {
         font-size: 28px;
         padding: 10px 20px 0 20px;
+        text-align: center;
     }
 
     .cuerpo {
@@ -130,7 +131,7 @@ body{
 <?php
     function lleno($label, $value) {
         if (!empty($value)) {
-            echo "<strong>$label</strong> $value";
+            echo "<strong>$label</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $value";
         }
     }
 ?>
@@ -138,50 +139,66 @@ body{
 
 <?php if ($datPed) { ?>
    <img src="img/orders.png" class="pedido" >
-<?php }else{ if ($datOneAlmF) { ?>
+   <a href="home.php?pg=<?= $pg; ?>&idped=<?= $datPed['idped']; ?>&ope=eli" onclick="return eliminar ('<?= $datPed['idped']; ?>');">
+        <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
+    </a>
+
+
+
+
+   <!-- <?php if ($datEli) { ?>
+    <a href="home.php?pg=<?= $pg; ?>&idped=<?= $datEli['idped']; ?>&ope=eli" onclick="return eliminar ('<?= $datEli['idped']; ?>');">
+        <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
+    </a> -->
+    
+
+
+<?php }}else{ if ($datOneAlmF) { ?>
     <div>
         <?php foreach ($datOneAlmF as $dta) { ?>
             <form action="home.php?pg=<?= $pg; ?>" method="post" name="pedido">
                 <div class="tarjeta" tyle="text-align: center;">
-                    <div class="titulo">Almuerzo del día</div>
-                        <div class="cuerpo">
-                            <div>
-                                <strong>Fecha: </strong><?= $dta['fecalm']; ?>
+                    <div class="row">
+                        <div  class="titulo">Almuerzo del día</div>
+                            <div class="cuerpo">
+                                <div class="form-group col-md-11">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php lleno('Plato principal: ',  $dta['ppalm']); ?>
+                                </div>
+                                <div class="form-group col-md-12">
+                                &nbsp;&nbsp;&nbsp;<?php lleno('Sopa: ', $dta['spalm']); ?>
+                                </div>
+                                <div class="form-group col-md-11">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php lleno('Jugo: ', $dta['jgalm']); ?>
+                                </div>
+                                <div class="form-group col-md-10">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="canalm"><strong>Cantidad:</strong></label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" value="<?php if ($datOne) echo $datOne[0]['canalm']; ?>" id="canalm" name="canalm" min="1" max="10" placeholder=" #" required>
+                                
+                                </div>
+                                <div class="form-group col-md-12">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="sopa"><strong>Sopa:</strong></label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="sopa" id="sopa_yes" value="1" <?php if ($datOne && $datOne[0]['sopa'] == 1) echo " checked "; ?>>
+                                    <label class="form-check-label" class="form-group col-md-2" for="sopa_yes">
+                                    Sí
+                                </label>
+                                    <input type="radio" name="sopa" id="sopa_no" value="2" <?php if ($datOne && $datOne[0]['sopa'] == 2) echo " checked "; ?>>
+                                <label class="form-check-label" class="form-group col-md-2" for="sopa_no">
+                                    No
+                                </label>
+                                </div>
+                                <br>
+                                <div class="form-group col-md-12">
+                                    <strong>Fecha: <?= $dta['fecalm']; ?></strong>
+                                </div>
                             </div>
-                            <div>
-                                <?php lleno('Plato principal: ', $dta['ppalm']); ?>
-                            </div>
-                            <div>
-                                <?php lleno('Sopa: ', $dta['spalm']); ?>
-                            </div>
-                            <div>
-                                <?php lleno('Jugo: ', $dta['jgalm']); ?>
-                            </div>
-                            <div>
-                                <label for="canalm"><strong>Cantidad:</strong></label>
-                                <input type="number" value="<?php if ($datOne) echo $datOne[0]['canalm']; ?>" id="canalm" name="canalm" min="1" max="10" placeholder=" #" required>
-                            </div>
-                            <div>
-                            <label for="sopa"><strong>Sopa:</strong></label>
-                                <input type="radio" name="sopa" id="sopa_yes" value="1" <?php if ($datOne && $datOne[0]['sopa'] == 1) echo " checked "; ?>>
-                            <label class="form-check-label" for="sopa_yes">
-                                Sí
-                            </label>
-                                <input type="radio" name="sopa" id="sopa_no" value="2" <?php if ($datOne && $datOne[0]['sopa'] == 2) echo " checked "; ?>>
-                            <label class="form-check-label" for="sopa_no">
-                                No
-                            </label>
-                            </div>
-                        </div>
-                    
-                        <div class="pie" id="boxbtn">
-                            <input class="btn btn-primary" type="submit" value="Pedir">
-                            <input type="hidden" name="idalm" value="<?= $dta['idalm'] ?>">
-                            <input type="hidden" name="idped" value="<?php if ($datOne) echo $datOne[0]['idped']; ?>">
-                            <input type="hidden" name="ope" value="savePed">
                     </div>
-            
-        </div>
+                            <div class="pie" id="boxbtn">
+                                <input class="btn btn-primary" type="submit" value="Pedir">
+                                <input type="hidden" name="idalm" value="<?= $dta['idalm'] ?>">
+                                <input type="hidden" name="idped" value="<?php if ($datOne) echo $datOne[0]['idped']; ?>">
+                                <input type="hidden" name="ope" value="savePed">
+                            </div>
+                </div>
             </form>
 
         <?php } ?>

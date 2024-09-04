@@ -15,6 +15,7 @@ $rutpdf = NULL;
 //--------Pedido-------
 $idped = isset($_REQUEST['idped']) ? $_REQUEST['idped'] :NULL;
 $canalm = isset($_POST['canalm']) ? $_POST['canalm']:1;
+$sopa = isset($_POST['sopa']) ? $_POST['sopa']:NULL;
 $fecped = date("Y-m-d H:i:s");
 
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
@@ -27,6 +28,7 @@ $datOne = NULL;
 $malm->setIdalm($idalm);
 
 $datPed = $malm->getOnePed();
+$datEli = $malm->getAllDatPed();
 
 if ($ope == "save") {
     $malm->setPpalm($ppalm);
@@ -37,12 +39,13 @@ if ($ope == "save") {
     if(!$idalm) $malm->save();
     else $malm->edit();
     echo "<script>window.location='home.php?pg=".$pg."';</script>";
-}//lasno usamos si amor pero ahorita jajaja
+}
 
 if($ope=="savePed"){
     $malm->setIdalm($idalm);
     $malm->setFecped($fecped);
     $malm->setCanalm($canalm);
+    $malm->setSopa($sopa);
     $malm->setIdper($_SESSION['idper']);
     $malm->savePed(); 
     echo "<script>alert('Has pedido ".$canalm." almuerzos exitosamente!!!');window.location='home.php?pg=".$pg."';</script>";
@@ -50,6 +53,8 @@ if($ope=="savePed"){
 
 if ($ope == "edi" && $idalm) $datOne = $malm->getOne();
 if ($ope == "eli" && $idalm) $malm->del();
+
+if ($ope == "eli" && $idped) $malm->delped();
 
 $datAll = $malm->getAll();
 $datOneAlmF = $malm->getOneAlmF();
