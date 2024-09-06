@@ -14,7 +14,7 @@ CREATE TABLE `dotacion` (
   `estent` bigint(11) NOT NULL,
   `firpent` varchar(255) DEFAULT NULL, -- firma per entrega
   `firprec` varchar(255) DEFAULT NULL, -- firma per recibe
-  `fecdev` date DEFAULT NULL, -- fecha devolucion
+  `fecdev` datetime DEFAULT NULL, -- fecha devolucion
   `idperentd` bigint(11) DEFAULT NULL, -- id persona entrega devolucion
   `idperrecd` bigint(11) DEFAULT NULL, -- idpersona recibe devolucion
   `observd` varchar(1000) DEFAULT NULL, -- observaciones
@@ -176,16 +176,12 @@ CREATE TABLE `novedad` (
   `fecfnov` date DEFAULT NULL,
   `fecrev` datetime DEFAULT NULL,
   `tipnov` bigint(11) NOT NULL,
-  `area` bigint(11) DEFAULT NULL,
   `obsnov` varchar(100) DEFAULT NULL,
   `estnov` varchar(100) NOT NULL,
   `idpercre` bigint(11) NOT NULL,
   `idperrev` bigint(11) DEFAULT NULL,
   `idperg` bigint(11) DEFAULT NULL,
   `rutpdf` varchar(255) DEFAULT NULL,
-
-  `nov` bigint(11) DEFAULT NULL,
-
   `tini` time DEFAULT NULL,
   `tfin` time DEFAULT NULL
 
@@ -614,7 +610,6 @@ ALTER TABLE `modulo`
 ALTER TABLE `novedad`
   ADD PRIMARY KEY (`idnov`),
   ADD KEY `tipnov` (`tipnov`),
-  ADD KEY `area` (`area`),
   ADD KEY `estnov` (`estnov`),
   ADD KEY `idperg` (`idperg`),
   ADD KEY `idpercre` (`idpercre`),

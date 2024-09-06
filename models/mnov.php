@@ -17,7 +17,6 @@
         private $fecha;
         private $rutpdf;
 
-        private $nov;
         private $tini;
         private $tfin;
 
@@ -64,9 +63,7 @@
         public function getRutpdf(){
             return $this->rutpdf;
         }
-        public function getNov(){
-            return $this->nov;
-        }
+       
         public function getTini(){
             return $this->tini;
         }
@@ -117,9 +114,7 @@
         public function setRutpdf($rutpdf){
             $this->rutpdf=$rutpdf;
         }
-        public function setNov($nov){
-            $this->nov=$nov;
-        }
+        
         public function setTini($tini){
             $this->tini=$tini;
         }
@@ -127,8 +122,10 @@
             $this->tfin=$tfin;
         }
 
-        function getAll(){
-            $sql = "SELECT n.idnov, n.fecreg, n.fecrev, n.fecinov, n.fecfnov, n.obsnov, n.tipnov, n.rutpdf, n.estnov, n.idperg AS perg, n.idpercre AS pcre, n.idperrev AS prev, CONCAT(rg.nomper,' ',rg.apeper) AS nomperg, CONCAT(rc.nomper,' ',rc.apeper) AS nomperc, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, rg.ndper, vt.nomval AS tip, va.nomval AS area, ve.nomval AS est FROM novedad AS n LEFT JOIN persona AS rg ON n.idperg=rg.idper INNER JOIN persona AS rc ON n.idpercre=rc.idper LEFT JOIN persona AS rr ON n.idperrev=rr.idper INNER JOIN valor AS vt ON n.tipnov=vt.idval INNER JOIN valor AS va ON rg.area=va.idval INNER JOIN valor AS ve ON n.estnov=ve.idval";
+        function getAll($nov){
+            $sql = "SELECT n.idnov, n.fecreg, n.fecrev, n.fecinov, n.fecfnov, n.obsnov, n.tipnov, n.rutpdf, n.estnov, n.tini, n.tfin, n.idperg AS perg, n.idpercre AS pcre, n.idperrev AS prev, CONCAT(rg.nomper,' ',rg.apeper) AS nomperg, CONCAT(rc.nomper,' ',rc.apeper) AS nomperc, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, rg.ndper, vt.nomval AS tip, va.nomval AS area, ve.nomval AS est FROM novedad AS n LEFT JOIN persona AS rg ON n.idperg=rg.idper INNER JOIN persona AS rc ON n.idpercre=rc.idper LEFT JOIN persona AS rr ON n.idperrev=rr.idper INNER JOIN valor AS vt ON n.tipnov=vt.idval INNER JOIN valor AS va ON rg.area=va.idval INNER JOIN valor AS ve ON n.estnov=ve.idval";
+            if($nov=="late") $sql .= " WHERE n.tipnov=32";
+            if($nov=="news") $sql .= " WHERE n.tipnov!=32";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -138,7 +135,7 @@
         }
 
         function getOne(){
-            $sql = "SELECT n.idnov, n.fecreg, n.fecrev, n.fecinov, n.fecfnov, n.obsnov, n.tipnov, n.rutpdf, n.estnov, n.idperg AS perg, n.idpercre AS pcre, n.idperrev AS prev, CONCAT(rg.nomper,' ',rg.apeper) AS nomperg, CONCAT(rc.nomper,' ',rc.apeper) AS nomperc, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, rg.ndper, vt.nomval AS tip, va.nomval AS area, ve.nomval AS est FROM novedad AS n LEFT JOIN persona AS rg ON n.idperg=rg.idper INNER JOIN persona AS rc ON n.idpercre=rc.idper LEFT JOIN persona AS rr ON n.idperrev=rr.idper INNER JOIN valor AS vt ON n.tipnov=vt.idval INNER JOIN valor AS va ON rg.area=va.idval INNER JOIN valor AS ve ON n.estnov=ve.idval WHERE idnov=:idnov";
+            $sql = "SELECT n.idnov, n.fecreg, n.fecrev, n.fecinov, n.fecfnov, n.obsnov, n.tipnov, n.rutpdf, n.estnov, n.tini, n.tfin, n.idperg AS perg, n.idpercre AS pcre, n.idperrev AS prev, CONCAT(rg.nomper,' ',rg.apeper) AS nomperg, CONCAT(rc.nomper,' ',rc.apeper) AS nomperc, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, rg.ndper, vt.nomval AS tip, va.nomval AS area, ve.nomval AS est FROM novedad AS n LEFT JOIN persona AS rg ON n.idperg=rg.idper INNER JOIN persona AS rc ON n.idpercre=rc.idper LEFT JOIN persona AS rr ON n.idperrev=rr.idper INNER JOIN valor AS vt ON n.tipnov=vt.idval INNER JOIN valor AS va ON rg.area=va.idval INNER JOIN valor AS ve ON n.estnov=ve.idval WHERE idnov=:idnov";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -149,37 +146,49 @@
             return $res;
         }
 
-        function save(){
+        function save($nov){
             // try {
-                $sql = "INSERT INTO novedad (fecreg, idperg, fecinov, fecfnov, tipnov, idpercre, obsnov, estnov"; 
-                if($this->getRutpdf()) $sql .= ", rutpdf";
-                $sql .= ")VALUES (:fecreg, :idperg, :fecinov, :fecfnov, :tipnov, :idpercre, :obsnov, :estnov";
-                if($this->getRutpdf()) $sql .= ", :rutpdf";
-                $sql .= ")";
-                $modelo = new conexion();
-                $conexion = $modelo->get_conexion();
-                $result = $conexion->prepare($sql);
-                $fecreg = $this->getFecreg();
-                $result->bindParam(":fecreg", $fecreg);
-                $idperg = $this->getIdperg();
-                $result->bindParam(":idperg", $idperg);
-                $fecinov = $this->getFecinov();
-                $result->bindParam(":fecinov", $fecinov);
-                $fecfnov = $this->getFecfnov();
-                $result->bindParam(":fecfnov", $fecfnov);
-                $tipnov = $this->getTipnov();
-                $result->bindParam(":tipnov", $tipnov);
-                $idpercre = $this->getIdpercre();
-                $result->bindParam(":idpercre", $idpercre);
-                $obsnov = $this->getObsnov();
-                $result->bindParam(":obsnov", $obsnov);
-                $estnov = $this->getEstnov();
-                $result->bindParam(":estnov", $estnov);
-                if($this->getRutpdf()){
-                    $rutpdf = $this->getRutpdf();
-                    $result->bindParam(":rutpdf", $rutpdf);
-                }              
-                $result->execute();
+                    $sql = "INSERT INTO novedad (fecreg, idperg, idpercre, estnov"; 
+                    if($this->getRutpdf()) $sql .= ", rutpdf";
+                    if($nov=="news") $sql .= ", fecinov, fecfnov, tipnov, obsnov";
+                    if($nov=="late") $sql .=", tini , tfin";
+                    $sql .= ") VALUES (:fecreg, :idperg, :idpercre, :estnov";
+                    if($this->getRutpdf()) $sql .= ", :rutpdf";
+                    if($nov=="news") $sql .= ", :fecinov, :fecfnov, :tipnov , :obsnov";
+                    if($nov=="late") $sql .=", :tini , :tfin";
+                    $sql .= ")";
+                    $modelo = new conexion();
+                    $conexion = $modelo->get_conexion();
+                    $result = $conexion->prepare($sql);
+                    $fecreg = $this->getFecreg();
+                    $result->bindParam(":fecreg", $fecreg);
+                    $idperg = $this->getIdperg();
+                    $result->bindParam(":idperg", $idperg);
+                    $idpercre = $this->getIdpercre();
+                    $result->bindParam(":idpercre", $idpercre);
+                    $estnov = $this->getEstnov();
+                    $result->bindParam(":estnov", $estnov);
+                    if($nov=="news"){
+                    $fecinov = $this->getFecinov();
+                    $result->bindParam(":fecinov", $fecinov);
+                    $fecfnov = $this->getFecfnov();
+                    $result->bindParam(":fecfnov", $fecfnov);
+                    $tipnov = $this->getTipnov();
+                    $result->bindParam(":tipnov", $tipnov);
+                    $obsnov = $this->getObsnov();
+                    $result->bindParam(":obsnov", $obsnov);
+                    }
+                    if($nov=="late"){
+                    $tini = $this->getTini();
+                    $result->bindParam(":tini", $tini);
+                    $tfin = $this->getTfin();
+                    $result->bindParam(":tfin", $tfin);
+                    }
+                    if($this->getRutpdf()){
+                        $rutpdf = $this->getRutpdf();
+                        $result->bindParam(":rutpdf", $rutpdf);
+                    }              
+                    $result->execute();
             // } catch (Exception $e) {
             //     ManejoError($e);
             // }
@@ -208,7 +217,13 @@
 
         function edit(){
            try {
-                $sql = "UPDATE novedad  SET fecinov=:fecinov, fecfnov=:fecfnov, tipnov=:tipnov, obsnov=:obsnov, estnov=:estnov"; 
+                $tini = $this->getTini();
+                $tfin = $this->getTfin();
+                $sql = "UPDATE novedad  SET ";
+                if($tini) $sql .= "tini=:tini, ";
+                if($tfin) $sql .= "tfin=:tfin, ";
+
+                $sql .= "fecinov=:fecinov, fecfnov=:fecfnov, tipnov=:tipnov, obsnov=:obsnov, estnov=:estnov"; 
                 if($this->getRutpdf()) $sql .= ", rutpdf=:rutpdf";
                 $sql .= " WHERE idnov=:idnov";
                 $modelo = new conexion();
@@ -251,12 +266,14 @@
         }
         
         //------------Traer valores-----------
-        function getAllDom($iddom){
-            $sql = "SELECT idval, nomval FROM valor WHERE iddom=:iddom";
+        function getAllDom($id){
+            $sql = "SELECT idval, nomval FROM valor WHERE ";
+            if($id==4) $sql .= "iddom=:id";
+            else $sql .= "idval=:id";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
-            $result->bindParam(":iddom", $iddom);
+            $result->bindParam(":id", $id);
             $result->execute();
             $res = $result->fetchall(PDO::FETCH_ASSOC);
             return $res;
@@ -282,7 +299,6 @@
             $res = $result->fetchall(PDO::FETCH_ASSOC);
             return $res;
         }
-
         
         function editEst()
     {

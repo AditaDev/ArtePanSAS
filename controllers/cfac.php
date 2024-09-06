@@ -31,6 +31,7 @@
     $dattip = $mfac->getAllDom(2);
 
     $mfac->setIdfac($idfac);
+
     if($idemp) $infoemp = $mfac->getOneEmp($idemp);
     if($arcpdf && $infoemp && $infoemp[0]['razsoem']) $rutpdf = opti($arcpdf, $nofac."_".$confac, "arc/facturas/".$infoemp[0]['razsoem'], $nmfl); 
     if($arcspt) $rutspt = opti($arcpdf, "nombre", "ruta", "id"); 
@@ -49,7 +50,6 @@
         $mfac->setRutpdf($rutpdf);
         $mfac->setRutspt($rutspt);
         $mfac->setIdpercre($_SESSION['idper']); 
-
         if(!$idfac) $mfac->save();
         else $mfac->edit();
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
