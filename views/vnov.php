@@ -16,28 +16,20 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 <?php if($nov){ if ($_SESSION['idpef'] == 7) { ?>
     <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
         <div class="row">
-            <div class="form-group col-md-3">
+                <div class="form-group col-md-3">
                 <label for="idperg"><strong>Persona:</strong></label>
                     <select id="idperg" name="idperg" class="form-control form-select" required>
                         <?php if ($datPer) {
                             foreach ($datPer as $dep) { ?>
                                 <option value='<?= $dep['idper']; ?>' <?php if ($datOne && $dep['idper'] == $datOne[0]['perg']) echo " selected "; ?>>
-                                    <?= $dep['ndper'] . " - " . $dep['nomper']; ?>
+                                    <?= $dep['ndper'] . " - " . $dep['nomper']. " " . $dep['apeper']; ?>
                                 </option>
                         <?php }
                         } ?>
                     </select>
                 </div>
                 <?php if ($nov=="news") { ?>
-                <div class="form-group col-md-3">
-                    <label for="fecinov"><strong>Fecha inicial:</strong></label>
-                    <input class="form-control" type="date" id="fecinov" name="fecinov" value="<?php if ($datOne) echo $datOne[0]['fecinov']; ?>" required>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="fecfnov"><strong>Fecha final:</strong></label>
-                    <input class="form-control" type="date" id="fecfnov" name="fecfnov" value="<?php if ($datOne) echo $datOne[0]['fecfnov']; ?>" required>
-                </div>
-                <div class="form-group col-md-3">
+                    <div class="form-group col-md-3">
                     <label for="tipnov"><strong>Tipo novedad:</strong></label>
                     <select name="tipnov" id="tipnov" class="form-control form-select" required>
                         <?php foreach ($dattip as $dte) { ?>
@@ -51,18 +43,26 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <label for="obsnov"><strong>Observación:</strong></label>
                     <textarea class="form-control" type="text" id="obsnov" name="obsnov" <?php if ($datOne) echo 'required'; ?>><?php if ($datOne) echo $datOne[0]['obsnov']; ?></textarea>
                 </div>
+                <div class="form-group col-md-3">
+                    <label for="fecinov"><strong>Fecha inicial:</strong></label>
+                    <input class="form-control" type="date" id="fecinov" name="fecinov" value="<?php if ($datOne) echo $datOne[0]['fecinov']; ?>" required>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="fecfnov"><strong>Fecha final:</strong></label>
+                    <input class="form-control" type="date" id="fecfnov" name="fecfnov" value="<?php if ($datOne) echo $datOne[0]['fecfnov']; ?>" required>
+                </div>
+                
                 <div class="form-group col-md-6">
                     <label for="arcpdf"><strong>Soporte:</strong></label>
                     <input class="form-control" type="file" id="arcpdf" name="arcpdf" accept=".pdf" <?php if (!$datOne) echo 'required'; ?>>
                 </div>
                 <?php } ?>
-
                 <?php if ($nov=="late") { ?>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="tini"><strong>Hora estipulada:</strong></label>
                     <input class="form-control" type="time" id="tini" name="tini" value="<?php if ($datOne) echo $datOne[0]['tini']; ?>" required>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="tfin"><strong>Hora de llegada:</strong></label>
                     <input class="form-control" type="time" id="tfin" name="tfin" value="<?php if ($datOne) echo $datOne[0]['tfin']; ?>" required>
                 </div>
@@ -72,6 +72,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <!-- <br><br> -->
                     <input class="btn btn-primary" type="submit" value="Registrar">
                     <input type="hidden" name="ope" value="save">
+                    <input type="hidden" name="nov" value="<?= $nov?>">
                     <input type="hidden" name="idnov" value="<?php if ($datOne) echo $datOne[0]['idnov']; ?>">
                 </div>
         </div>

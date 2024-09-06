@@ -171,7 +171,7 @@ INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`, `idpag`) VALUES
 
 CREATE TABLE `novedad` (
   `idnov` bigint(11) NOT NULL,
-  `fecreg` datetime DEFAULT NULL,
+  `fecreg` date DEFAULT NULL,
   `fecinov` date DEFAULT NULL,
   `fecfnov` date DEFAULT NULL,
   `fecrev` datetime DEFAULT NULL,

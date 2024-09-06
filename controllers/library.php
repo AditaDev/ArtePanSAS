@@ -522,12 +522,20 @@ function modalinfonov($nom, $id, $titulo, $info){
 				$txt .= '<div class="row"';
 					$txt .= '<div">';
 						$txt .= '<table>';
+
+						if($info[0]['fecfnov'])
+
+						if($info[0]['prev'])$txt .= '<tr><td><strong>Primer revisión: </strong></td><td class="inffac">'.$info[0]['nomprev'].'<br>'.$info[0]['fprfac'].'</td></tr>';
+
+
 							$txt .= '<tr><td><strong>Fecha de permiso: </strong></td><td class="innov">'.$info[0]['fecinov'].'<strong> al </strong>'.$info[0]['fecfnov'].'</td></tr>';
 							$txt .= '<tr><td><strong>Tipo: </strong></td><td class="innov">'.$info[0]['tip'].'</td></tr>';	
 							$txt .= '<tr><td><strong>Area: </strong></td><td class="innov">'.$info[0]['area'].'</td></tr>';
 							$txt .= '<tr><td><strong>Observación: </strong></td><td class="innov">'.$info[0]['obsnov'].'</td></tr>';
 							$txt .= '<tr><td><strong><hr>Registro: </strong></td><td class="innov"><hr>'.$info[0]['nomperc'].'</td></tr>';
 							if($info[0]['prev'])$txt .= '<tr><td><strong>Revisada: </strong></td><td class="innov">'.$info[0]['nomprev'].' <br> '.$info[0]['fecrev'].'</td></tr>';
+
+
 							
 
 							// if($info[0]['papr'])$txt .= '<tr><td><strong>Aprobada: </strong></td><td class="innov">'.$info[0]['nompapr'].'<br>'.$info[0]['faprfac'].'</td></tr>';

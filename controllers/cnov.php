@@ -8,7 +8,7 @@
     $fecinov = isset($_POST['fecinov']) ? $_POST['fecinov']:NULL;
     $idperg = isset($_POST['idperg']) ? $_POST['idperg']:NULL;
     $fecfnov = isset($_POST['fecfnov']) ? $_POST['fecfnov']:NULL;
-    $tipnov = isset($_REQUEST['tipnov']) ? $_REQUEST['tipnov']:32;
+    $tipnov = isset($_POST['tipnov']) ? $_POST['tipnov']:32;
     $obsnov = isset($_POST['obsnov']) ? $_POST['obsnov']:NULL;
     $tini = isset($_POST['tini']) ? $_POST['tini']:NULL;
     $tfin = isset($_POST['tfin']) ? $_POST['tfin']:NULL;
@@ -21,7 +21,6 @@
 
     $datOne = NULL;
     $pg = 110;
-
     $mnov->setIdnov($idnov);
     
     if($idperg) $infoper = $mnov->getOnePer($idperg);
@@ -29,8 +28,9 @@
     if($arcpdf && $infoper && $infoper[0]['nomper'] && $infoper[0]['apeper'] && $tnov[0]['nomval']) $rutpdf = opti($arcpdf, $tnov[0]['nomval']."_", "arc/novedades/".$infoper[0]['nomper'].$infoper[0]['apeper'], $nmfl); 
 
     //------------Novedad-----------
+
+    // var_dump($tini, $tfin, $nov);
     if($ope=="save"){
-        $mnov->setIdnov($idnov);
         $mnov->setIdperg($idperg);
         $mnov->setFecreg($fecact);
         $mnov->setFecinov($fecinov);

@@ -148,13 +148,13 @@
 
         function save($nov){
             // try {
-                    $sql = "INSERT INTO novedad (fecreg, idperg, idpercre, estnov"; 
+                    $sql = "INSERT INTO novedad (fecreg, idperg, idpercre, estnov, tipnov"; 
                     if($this->getRutpdf()) $sql .= ", rutpdf";
-                    if($nov=="news") $sql .= ", fecinov, fecfnov, tipnov, obsnov";
+                    if($nov=="news") $sql .= ", fecinov, fecfnov, obsnov";
                     if($nov=="late") $sql .=", tini , tfin";
-                    $sql .= ") VALUES (:fecreg, :idperg, :idpercre, :estnov";
+                    $sql .= ") VALUES (:fecreg, :idperg, :idpercre, :estnov, :tipnov";
                     if($this->getRutpdf()) $sql .= ", :rutpdf";
-                    if($nov=="news") $sql .= ", :fecinov, :fecfnov, :tipnov , :obsnov";
+                    if($nov=="news") $sql .= ", :fecinov, :fecfnov, :obsnov";
                     if($nov=="late") $sql .=", :tini , :tfin";
                     $sql .= ")";
                     $modelo = new conexion();
@@ -168,26 +168,26 @@
                     $result->bindParam(":idpercre", $idpercre);
                     $estnov = $this->getEstnov();
                     $result->bindParam(":estnov", $estnov);
+                    $tipnov = $this->getTipnov();
+                    $result->bindParam(":tipnov", $tipnov);
                     if($nov=="news"){
                     $fecinov = $this->getFecinov();
                     $result->bindParam(":fecinov", $fecinov);
                     $fecfnov = $this->getFecfnov();
                     $result->bindParam(":fecfnov", $fecfnov);
-                    $tipnov = $this->getTipnov();
-                    $result->bindParam(":tipnov", $tipnov);
                     $obsnov = $this->getObsnov();
                     $result->bindParam(":obsnov", $obsnov);
                     }
                     if($nov=="late"){
-                    $tini = $this->getTini();
-                    $result->bindParam(":tini", $tini);
-                    $tfin = $this->getTfin();
-                    $result->bindParam(":tfin", $tfin);
-                    }
+                        $tini = $this->getTini();
+                        $result->bindParam(":tini", $tini);
+                        $tfin = $this->getTfin();
+                        $result->bindParam(":tfin", $tfin);
+                        } 
                     if($this->getRutpdf()){
                         $rutpdf = $this->getRutpdf();
                         $result->bindParam(":rutpdf", $rutpdf);
-                    }              
+                    }             
                     $result->execute();
             // } catch (Exception $e) {
             //     ManejoError($e);
