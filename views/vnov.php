@@ -100,10 +100,13 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         <div class="row">
                             <div class="form-group col-md-10">
                                 <strong> <?= ($dta['ndper']) .  " - "  . $dta['nomperg']; ?></strong><br>
+
+                                <?php if ($nov=="late") { ?>
                                 <?php
                                     $dathora = $mnov->getOneSum($dta['idnov']);
                                     if ($dathora) ?>
                                     <strong>Tiempo Total:</strong> <?=($dathora[0]['tot']) ?>
+                                 <?php } ?>
                                 <small>
                                 <?php if ($nov=="news") {?><strong>Tipo novedad: </strong> <?= $dta['tip']; ?><br> <?php } ?>
                                 </small>

@@ -523,7 +523,9 @@ function modalinfonov($nom, $id, $titulo, $info, $nov){
 					$txt .= '<div">';
 						$txt .= '<table>';
 						if($info[0]['fecinov'] AND $info[0]['fecfnov'])$txt .= '<tr><td><strong>Rango de fechas: </strong></td><td class="innov">'.$info[0]['fecinov'].'<strong> al </strong>'.$info[0]['fecfnov'].'</td></tr>';
-						if($info[0]['tini'] AND $info[0]['tfin'])$txt .= '<tr><td><strong>Rango de hora: </strong></td><td class="innov">'.$info[0]['tini'].'<strong> a </strong>'.$info[0]['tfin'].'</td></tr>';
+						if($info[0]['tini'])$txt .= '<tr><td><strong>Hora estipulada: </strong></td><td class="innov">'.$info[0]['tini'].'</td></tr>';
+						if($info[0]['tfin'])$txt .= '<tr><td><strong>Hora de llegada: </strong></td><td class="innov">'.$info[0]['tfin'].'</td></tr>';
+						if($info[0]['tini'] AND $info[0]['tfin'])$txt .= '<tr><td><strong>Diferencia: </strong></td><td class="innov">'.$info[0]['tot'].'</td></tr>';
 						if ($nov=="news")$txt .= '<tr><td><strong>Tipo: </strong></td><td class="innov">'.$info[0]['tip'].'</td></tr>';
 						$txt .= '<tr><td><strong>Area: </strong></td><td class="innov">'.$info[0]['area'].'</td></tr>';
 						if($info[0]['obsnov'])$txt .= '<tr><td><strong>Observación: </strong></td><td class="innov">'.$info[0]['obsnov'].'</td></tr>';
