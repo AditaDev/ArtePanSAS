@@ -135,11 +135,22 @@
         }
 
         function getOne(){
-            $sql = "SELECT n.idnov, n.fecreg, n.fecrev, n.fecinov, n.fecfnov, n.obsnov, n.tipnov, n.rutpdf, n.estnov, n.tini, n.tfin, n.idperg AS perg, n.idpercre AS pcre, n.idperrev AS prev, CONCAT(rg.nomper,' ',rg.apeper) AS nomperg, CONCAT(rc.nomper,' ',rc.apeper) AS nomperc, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, rg.ndper, vt.nomval AS tip, va.nomval AS area, ve.nomval AS est FROM novedad AS n LEFT JOIN persona AS rg ON n.idperg=rg.idper INNER JOIN persona AS rc ON n.idpercre=rc.idper LEFT JOIN persona AS rr ON n.idperrev=rr.idper INNER JOIN valor AS vt ON n.tipnov=vt.idval INNER JOIN valor AS va ON rg.area=va.idval INNER JOIN valor AS ve ON n.estnov=ve.idval WHERE idnov=:idnov";
+            $sql = "SELECT n.idnov, n.fecreg, n.fecrev, n.fecinov, n.fecfnov, n.obsnov, n.tipnov, n.rutpdf, n.estnov, n.tini, n.tfin, n.idperg AS perg, n.idpercre AS pcre, n.idperrev AS prev, CONCAT(rg.nomper,' ',rg.apeper) AS nomperg, CONCAT(rc.nomper,' ',rc.apeper) AS nomperc, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, rg.ndper, vt.nomval AS tip, va.nomval AS area, ve.nomval AS est, SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(tfin, tini)))) AS tot FROM novedad AS n LEFT JOIN persona AS rg ON n.idperg=rg.idper INNER JOIN persona AS rc ON n.idpercre=rc.idper LEFT JOIN persona AS rr ON n.idperrev=rr.idper INNER JOIN valor AS vt ON n.tipnov=vt.idval INNER JOIN valor AS va ON rg.area=va.idval INNER JOIN valor AS ve ON n.estnov=ve.idval WHERE idnov=:idnov GROUP BY idnov";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
             $idnov = $this->getIdnov();
+            $result->bindParam(":idnov",$idnov);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
+        function getOneSum($idnov){
+            $sql = "SELECT idnov, SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(tfin, tini)))) AS tot FROM novedad WHERE idnov=:idnov GROUP BY idnov";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
             $result->bindParam(":idnov",$idnov);
             $result->execute();
             $res = $result->fetchall(PDO::FETCH_ASSOC);

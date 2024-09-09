@@ -29,7 +29,8 @@
 
     //------------Novedad-----------
 
-    // var_dump($tini, $tfin, $nov);
+
+   
     if($ope=="save"){
         $mnov->setIdperg($idperg);
         $mnov->setFecreg($fecact);
@@ -62,6 +63,10 @@
         $mnov->editAct();
         echo "<script>window.location='home.php?pg=".$pg."&nov=".$nov."';</script>";
     } 
+
+   
+
+        
 
 ?>
  

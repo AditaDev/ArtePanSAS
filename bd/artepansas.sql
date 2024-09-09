@@ -184,7 +184,6 @@ CREATE TABLE `novedad` (
   `rutpdf` varchar(255) DEFAULT NULL,
   `tini` time DEFAULT NULL,
   `tfin` time DEFAULT NULL
-
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

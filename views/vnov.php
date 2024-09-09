@@ -100,9 +100,12 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         <div class="row">
                             <div class="form-group col-md-10">
                                 <strong> <?= ($dta['ndper']) .  " - "  . $dta['nomperg']; ?></strong><br>
+                                <?php
+                                    $dathora = $mnov->getOneSum($dta['idnov']);
+                                    if ($dathora) ?>
+                                    <strong>Tiempo Total:</strong> <?=($dathora[0]['tot']) ?>
                                 <small>
-                                    <strong>Tipo novedad: </strong> <?= $dta['tip']; ?><br>
-                                    <!-- <strong>: </strong><?= $dta['']; ?><br>                       -->
+                                <?php if ($nov=="news") {?><strong>Tipo novedad: </strong> <?= $dta['tip']; ?><br> <?php } ?>
                                 </small>
                             </div>
                             <div class="form-group col-md-2" style="text-align: right;">
@@ -110,7 +113,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 <?php
                                 $mnov->setIdnov($dta['idnov']);
                                 $info = $mnov->getOne();
-                                modalinfonov("mdetnov", $dta['idnov'], $dta['ndper'] . "-" . $dta['nomperg'], $info);
+                                modalinfonov("mdetnov", $dta['idnov'], $dta['ndper'] . " - " . $dta['nomperg'], $info, $nov);
                                 if ($dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
                                     <ul><i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i></ul>
                                 <?php } ?>
@@ -133,6 +136,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         <?php } ?>
                     </td>
                     <td tyle="text-align: right;">
+                    <?php if ($_SESSION['idpef'] == 7) { ?>
                         <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&ope=edi&nov=<?= $nov?>">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi" title="Editar"></i>
                         </a>
@@ -141,7 +145,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         </a>
                     </td>
                 </tr>
-        <?php }
+        <?php }}
         } ?>
     </tbody>
     <tfoot>
