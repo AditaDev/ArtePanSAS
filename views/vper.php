@@ -105,8 +105,8 @@ require_once('controllers/cper.php');
                         <?php
                         $mper->setIdper($dta['idper']);
                         $dga = $mper->getOnePxF();
-                        $dm = arrstr($dga);
-                        modalCmb("mcb", $dta['idper'], $dta['nomper']." ".$dta['apeper'], $idmod, $pg, $dm);
+                        $pef = $mper->getPef();
+                        modalCmb("mcb", $dta['idper'], $dta['nomper']." ".$dta['apeper'], $pef, $dga, $pg);
                         // $pe = $mper->getExPE($dta['idper']);
                         // $pr = $mper->getExPR($dta['idper']);
                         $pf = $mper->getPFxP($dta['idper']);

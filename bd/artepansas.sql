@@ -149,19 +149,48 @@ CREATE TABLE `modulo` (
   `idmod` int(5) NOT NULL,
   `nommod` varchar(100) NOT NULL,
   `imgmod` varchar(255) DEFAULT NULL,
-  `actmod` tinyint(1) NOT NULL DEFAULT 1,
-  `idpag` bigint(11) DEFAULT NULL
+  `actmod` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `modulo`
 --
 
-INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`, `idpag`) VALUES
-(1, 'Facturas', 'img/mod_facturas.png', 1, 63),
-(2, 'Configuración', 'img/mod_configuracion.png', 1, 101),
-(3, 'Almuerzos', 'img/mod_almuerzos.png', 1, 62),
-(4, 'Talento Humano', 'img/mod_novedades.png', 1, 110);
+INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`) VALUES
+(1, 'Facturas', 'img/mod_facturas.png', 1),
+(2, 'Configuración', 'img/mod_configuracion.png', 1),
+(3, 'Almuerzos', 'img/mod_almuerzos.png', 1),
+(4, 'Talento Humano', 'img/mod_novedades.png', 1);
+
+
+
+CREATE TABLE `pefxmod` (
+  `idmod` int(5) NOT NULL,
+  `idpef` bigint(11) NOT NULL,
+  `idpag` bigint(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `pefxmod` (`idmod`, `idpef`, `idpag`) VALUES
+(1, 1, 60),
+(1, 2, 63),
+(1, 3, 63),
+(1, 4, 60),
+(1, 7, 63),
+(1, 8, 63),
+(1, 9, 63),
+(1, 10, 63),
+(1, 11, 63),
+(1, 12, 63),
+
+(2, 1, 104),
+
+(3, 1, 61),
+(3, 5, 61),
+(3, 6, 62),
+
+(4, 1, 110),
+(4, 4, 110),
+(4, 7, 111);
 
 -- --------------------------------------------------------
 
@@ -309,27 +338,26 @@ CREATE TABLE `pedido` (
 CREATE TABLE `perfil` (
   `idpef` bigint(11) NOT NULL,
   `nompef` varchar(100) NOT NULL,
-  `idmod` int(5) NOT NULL,
-  `idpag` bigint(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `perfil`
 --
 
-INSERT INTO `perfil` (`idpef`, `nompef`, `idmod`, `idpag`) VALUES
-(1, 'SuperAdmin', 2, 101),
-(2, 'Control interno', 1, 63),
-(3, 'Gerencia', 1, 63),
-(4, 'Contabilidad', 1, 60),
-(5, 'Colaborador', 3, 62),
-(6, 'Servicios generales', 3, 61),
-(7, 'Talento humano', 4, 110),
-(8, 'Coordinador exportaciones', 1, 63),
-(9, 'Mantenimiento', 1, 63),
-(10, 'Coordinador logistica', 1, 63),
-(11, 'Coordinador calidad', 1, 63),
-(12, 'Tesoreria', 1, 63);
+INSERT INTO `perfil` (`idpef`, `nompef`) VALUES
+(1, 'SuperAdmin'),
+(2, 'Control interno'),
+(3, 'Gerencia'),
+(4, 'Contabilidad'),
+(5, 'Colaborador'),
+(6, 'Servicios generales'),
+(7, 'Talento humano'),
+(8, 'Coordinador exportaciones'),
+(9, 'Mantenimiento'),
+(10, 'Coordinador logistica'),
+(11, 'Coordinador calidad'),
+(12, 'Tesoreria');
+
 
 -- --------------------------------------------------------
 
@@ -640,9 +668,7 @@ ALTER TABLE `pedido`
 -- Indices de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-  ADD PRIMARY KEY (`idpef`),
-  ADD KEY `idmod` (`idmod`),
-  ADD KEY `idpag` (`idpag`);
+  ADD PRIMARY KEY (`idpef`);
 
 --
 -- Indices de la tabla `persona`
@@ -658,6 +684,11 @@ ALTER TABLE `perxpef`
   ADD KEY `idper` (`idper`),
   ADD KEY `idpef` (`idpef`);
 
+
+ALTER TABLE `pefxmod`
+  ADD KEY `idmod` (`idmod`),
+  ADD KEY `idpef` (`idpef`),
+  ADD KEY `idpag` (`idpag`);
 --
 -- Indices de la tabla `valor`
 --
@@ -784,11 +815,6 @@ ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`),
   ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`idalm`) REFERENCES `almuerzo` (`idalm`);
 
---
--- Filtros para la tabla `perfil`
---
-ALTER TABLE `perfil`
-  ADD CONSTRAINT `perfil_ibfk_1` FOREIGN KEY (`idmod`) REFERENCES `modulo` (`idmod`);
 
 --
 -- Filtros para la tabla `perxpef`
@@ -797,6 +823,10 @@ ALTER TABLE `perxpef`
   ADD CONSTRAINT `perxpef_ibfk_1` FOREIGN KEY (`idpef`) REFERENCES `perfil` (`idpef`),
   ADD CONSTRAINT `perxpef_ibfk_2` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`);
 
+
+ALTER TABLE `pefxmod`
+  ADD CONSTRAINT `pefxmod_ibfk_1` FOREIGN KEY (`idmod`) REFERENCES `modulo` (`idmod`),
+  ADD CONSTRAINT `pefxmod_ibfk_2` FOREIGN KEY (`idpef`) REFERENCES `perfil` (`idpef`);
 
 --
 -- Filtros para la tabla `valor`
