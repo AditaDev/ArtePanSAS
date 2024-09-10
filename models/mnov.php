@@ -159,13 +159,13 @@
 
         function save($nov){
             // try {
-                    $sql = "INSERT INTO novedad (fecreg, idperg, idpercre, estnov, tipnov"; 
+                    $sql = "INSERT INTO novedad (fecreg, idperg, idpercre, estnov, tipnov, obsnov"; 
                     if($this->getRutpdf()) $sql .= ", rutpdf";
-                    if($nov=="news") $sql .= ", fecinov, fecfnov, obsnov";
+                    if($nov=="news") $sql .= ", fecinov, fecfnov";
                     if($nov=="late") $sql .=", tini , tfin";
-                    $sql .= ") VALUES (:fecreg, :idperg, :idpercre, :estnov, :tipnov";
+                    $sql .= ") VALUES (:fecreg, :idperg, :idpercre, :estnov, :tipnov, :obsnov";
                     if($this->getRutpdf()) $sql .= ", :rutpdf";
-                    if($nov=="news") $sql .= ", :fecinov, :fecfnov, :obsnov";
+                    if($nov=="news") $sql .= ", :fecinov, :fecfnov";
                     if($nov=="late") $sql .=", :tini , :tfin";
                     $sql .= ")";
                     $modelo = new conexion();
@@ -181,13 +181,13 @@
                     $result->bindParam(":estnov", $estnov);
                     $tipnov = $this->getTipnov();
                     $result->bindParam(":tipnov", $tipnov);
+                    $obsnov = $this->getObsnov();
+                    $result->bindParam(":obsnov", $obsnov);
                     if($nov=="news"){
                     $fecinov = $this->getFecinov();
                     $result->bindParam(":fecinov", $fecinov);
                     $fecfnov = $this->getFecfnov();
                     $result->bindParam(":fecfnov", $fecfnov);
-                    $obsnov = $this->getObsnov();
-                    $result->bindParam(":obsnov", $obsnov);
                     }
                     if($nov=="late"){
                         $tini = $this->getTini();

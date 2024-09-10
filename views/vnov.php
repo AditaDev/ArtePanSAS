@@ -12,7 +12,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <i class="fa-solid fa-clock iconi"></i>
                 </a>
             </div>
-
+       
 <?php if($nov){ if ($_SESSION['idpef'] == 7) { ?>
     <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
         <div class="row">
@@ -39,10 +39,12 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         <?php } ?>
                     </select>
                 </div>
+                <?php } ?>
                 <div class="form-group col-md-6">
                     <label for="obsnov"><strong>Observación:</strong></label>
                     <textarea class="form-control" type="text" id="obsnov" name="obsnov" <?php if ($datOne) echo 'required'; ?>><?php if ($datOne) echo $datOne[0]['obsnov']; ?></textarea>
                 </div>
+                <?php if ($nov=="news") { ?>
                 <div class="form-group col-md-3">
                     <label for="fecinov"><strong>Fecha inicial:</strong></label>
                     <input class="form-control" type="date" id="fecinov" name="fecinov" value="<?php if ($datOne) echo $datOne[0]['fecinov']; ?>" required>
@@ -51,10 +53,9 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <label for="fecfnov"><strong>Fecha final:</strong></label>
                     <input class="form-control" type="date" id="fecfnov" name="fecfnov" value="<?php if ($datOne) echo $datOne[0]['fecfnov']; ?>" required>
                 </div>
-                
                 <div class="form-group col-md-6">
                     <label for="arcpdf"><strong>Soporte:</strong></label>
-                    <input class="form-control" type="file" id="arcpdf" name="arcpdf" accept=".pdf" <?php if (!$datOne) echo 'required'; ?>>
+                    <input class="form-control" type="file" id="arcpdf" name="arcpdf" accept=".pdf" <?php if (!$datOne); ?>>
                 </div>
                 <?php } ?>
                 <?php if ($nov=="late") { ?>
@@ -67,6 +68,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <input class="form-control" type="time" id="tfin" name="tfin" value="<?php if ($datOne) echo $datOne[0]['tfin']; ?>" required>
                 </div>
                 <?php } ?>
+                
                 
                 <div class="form-group col-md-12" id="boxbtn">
                     <!-- <br><br> -->
@@ -100,13 +102,9 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         <div class="row">
                             <div class="form-group col-md-10">
                                 <strong> <?= ($dta['ndper']) .  " - "  . $dta['nomperg']; ?></strong><br>
-
-                                <?php if ($nov=="late") { ?>
-                                <?php
-                                    $dathora = $mnov->getOneSum($dta['idnov']);
-                                    if ($dathora) ?>
-                                    <strong>Tiempo Total:</strong> <?=($dathora[0]['tot']) ?>
-                                 <?php } ?>
+                                <small>
+                                <?php if ($nov=="late") {?><strong>Observación: </strong> <?= $dta['obsnov']; ?><br> <?php } ?>
+                                </small>
                                 <small>
                                 <?php if ($nov=="news") {?><strong>Tipo novedad: </strong> <?= $dta['tip']; ?><br> <?php } ?>
                                 </small>

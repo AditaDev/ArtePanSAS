@@ -527,8 +527,8 @@ function modalinfonov($nom, $id, $titulo, $info, $nov){
 						if($info[0]['tfin'])$txt .= '<tr><td><strong>Hora de llegada: </strong></td><td class="innov">'.$info[0]['tfin'].'</td></tr>';
 						if($info[0]['tini'] AND $info[0]['tfin'])$txt .= '<tr><td><strong>Diferencia: </strong></td><td class="innov">'.$info[0]['tot'].'</td></tr>';
 						if ($nov=="news")$txt .= '<tr><td><strong>Tipo: </strong></td><td class="innov">'.$info[0]['tip'].'</td></tr>';
+						if ($nov=="news")$txt .= '<tr><td><strong>Observación: </strong></td><td class="innov">'.$info[0]['obsnov'].'</td></tr>';
 						$txt .= '<tr><td><strong>Area: </strong></td><td class="innov">'.$info[0]['area'].'</td></tr>';
-						if($info[0]['obsnov'])$txt .= '<tr><td><strong>Observación: </strong></td><td class="innov">'.$info[0]['obsnov'].'</td></tr>';
 						$txt .= '<tr><td><strong><hr>Registro: </strong></td><td class="innov"><hr>'.$info[0]['nomperc'].'</td></tr>';
 						if($info[0]['prev'])$txt .= '<tr><td><strong>Revisada: </strong></td><td class="innov">'.$info[0]['nomprev'].' <br> '.$info[0]['fecrev'].'</td></tr>';
 						$txt .= '</table>';
