@@ -4,10 +4,12 @@
 	<?php if ($datAll) { foreach ($datAll as $dt) {
 			$modact = "No";
 			if ($datPfPr) {
-				if ($dt['idmod'] == $dtfp['idmod']){
-					$modact = "Si";
-					$idpef = $dtfp['idpef'];
+				foreach ($datPfPr as $dtfp) {
+					if ($dt['idmod'] == $dtfp['idmod']){
+						$modact = "Si";
+						$idpef = $dtfp['idpef'];
 					}
+				}
 			}
 			if ($modact == "Si") { ?>
 				<form action="pmod.php" method="POST">

@@ -337,7 +337,7 @@ CREATE TABLE `pedido` (
 
 CREATE TABLE `perfil` (
   `idpef` bigint(11) NOT NULL,
-  `nompef` varchar(100) NOT NULL,
+  `nompef` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -412,7 +412,6 @@ CREATE TABLE `perxpef` (
 
 INSERT INTO `perxpef` (`idper`, `idpef`) VALUES
 (1, 1),
-(1, 4),
 (1, 6),
 (1, 7),
 (2, 2),
