@@ -147,8 +147,14 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                     $mdot->setIdent($dta['ident']);
                                     $det = $mdot->getOne();
                                     modalFir("mcbfir", $dta['ident'], $det, $pg);
-                                   if(($dta['firpent'] && !$dta['firprec'] && !$dta['fecdev']) OR ($dta['firpent'] && $dta['firprec']))
+                                   if(($dta['firpent'] && !$dta['firprec'] && !$dta['fecdev']) OR ($dta['firpent'] && $dta['firprec'])){
                                 ?>
+                                <a href="views/pdfdot.php?ident=<?=$dta['ident'];?>" title="Enviar confirmación" target="_blank">
+                                    <i class="fa fa-solid fa-envelopes-bulk iconi"></i>
+                                </a>
+                                <?php } if($dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
+                                    <i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?= $dta['rutpdf'] ?>')"></i>
+                                <?php } ?>
                             </div>
                         </div>
 

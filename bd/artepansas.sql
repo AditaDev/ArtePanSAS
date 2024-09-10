@@ -18,7 +18,8 @@ CREATE TABLE `dotacion` (
   `idperentd` bigint(11) DEFAULT NULL, -- id persona entrega devolucion
   `idperrecd` bigint(11) DEFAULT NULL, -- idpersona recibe devolucion
   `observd` varchar(1000) DEFAULT NULL, -- observaciones
-  `difent` varchar(50) DEFAULT NULL -- este es diferenciar entrega para poder asignarle las dotaciones      
+  `difent` varchar(50) DEFAULT NULL, -- este es diferenciar entrega para poder asignarle las dotaciones 
+  `rutpdf` varchar(255) DEFAULT NULL     
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `dotxent` (
@@ -163,7 +164,6 @@ INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`) VALUES
 (4, 'Talento Humano', 'img/mod_novedades.png', 1);
 
 
-
 CREATE TABLE `pefxmod` (
   `idmod` int(5) NOT NULL,
   `idpef` bigint(11) NOT NULL,
@@ -185,11 +185,21 @@ INSERT INTO `pefxmod` (`idmod`, `idpef`, `idpag`) VALUES
 (2, 1, 104),
 
 (3, 1, 61),
-(3, 5, 61),
-(3, 6, 62),
+(3, 2, 62),
+(3, 3, 62),
+(3, 4, 62),
+(3, 5, 62),
+(3, 6, 61),
+(3, 7, 62),
+(3, 8, 62),
+(3, 9, 62),
+(3, 10, 62),
+(3, 11, 62),
+(3, 12, 62),
 
 (4, 1, 110),
 (4, 4, 110),
+(4, 7, 110),
 (4, 7, 111);
 
 -- --------------------------------------------------------
@@ -279,6 +289,7 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (108, 1),
 (109, 1),
 (110, 1),
+(111, 1),
 (60, 1),
 (61, 1), 
 (62, 1),
@@ -295,6 +306,7 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (61, 6),
 (62, 6),
 (110, 7),
+(111, 7),
 (62, 7),
 (63, 7),
 (63, 8),
@@ -306,12 +318,7 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (63, 11),
 (62, 11),
 (63, 12),
-(62, 12),
-(111, 7),
-(111, 4);
-
-
-
+(62, 12);
 
 -- --------------------------------------------------------
 
@@ -412,27 +419,36 @@ CREATE TABLE `perxpef` (
 
 INSERT INTO `perxpef` (`idper`, `idpef`) VALUES
 (1, 1),
-(1, 6),
-(1, 7),
+
 (2, 2),
 (2, 5),
+
 (3, 3),
 (3, 5),
+
 (4, 4),
 (4, 5),
+
 (5, 5),
+
 (6, 6),
 (6, 5),
+
 (7, 7),
 (7, 5),
+
 (8, 8),
 (8, 5),
+
 (9, 9),
 (9, 5),
+
 (10, 10),
 (10, 5),
+
 (11, 11),
 (11, 5),
+
 (12, 12),
 (12, 5);
 

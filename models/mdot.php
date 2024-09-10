@@ -15,6 +15,7 @@
         private $fecdev;
         private $observd;
         private $difent;
+        private $rutpdf;
 
         private $firma;
 
@@ -69,6 +70,9 @@
         }
         public function getObservd(){
             return $this->observd;
+        }
+        public function getRutpdf(){
+            return $this->rutpdf;
         }
 
 
@@ -133,6 +137,9 @@
         public function setObservd($observd){
             $this->observd=$observd;
         }
+        public function setRutpdf($rutpdf){
+            $this->rutpdf=$rutpdf;
+        }
 
         public function setFirma($firma){
             $this->firma=$firma;
@@ -164,7 +171,7 @@
         //------------Dotacion-----------
 
         function getAllD(){
-            $sql = "SELECT d.ident, d.idperent AS pent, d.idperrec AS prec, d.idperentd AS pentd, d.idperrecd AS precd, d.fecent, d.fecdev, d.observ, d.observd, d.firpent, d.firprec, d.difent, d.estent, CONCAT(pe.nomper,' ',pe.apeper) AS nompent, CONCAT(pr.nomper,' ',pr.apeper) AS nomprec, CONCAT(ped.nomper,' ',ped.apeper) AS nompentd, CONCAT(prd.nomper,' ',prd.apeper) AS nomprecd, v.nomval AS area FROM dotacion AS d LEFT JOIN persona AS pe ON d.idperent=pe.idper LEFT JOIN persona AS pr ON d.idperrec=pr.idper LEFT JOIN persona AS ped ON d.idperentd=ped.idper LEFT JOIN persona AS prd ON d.idperrecd=prd.idper INNER JOIN valor AS v ON pr.area=v.idval";
+            $sql = "SELECT d.ident, d.idperent AS pent, d.idperrec AS prec, d.idperentd AS pentd, d.idperrecd AS precd, d.fecent, d.fecdev, d.observ, d.observd, d.firpent, d.firprec, d.difent, d.estent, d.rutpdf, CONCAT(pe.nomper,' ',pe.apeper) AS nompent, CONCAT(pr.nomper,' ',pr.apeper) AS nomprec, CONCAT(ped.nomper,' ',ped.apeper) AS nompentd, CONCAT(prd.nomper,' ',prd.apeper) AS nomprecd, v.nomval AS area FROM dotacion AS d LEFT JOIN persona AS pe ON d.idperent=pe.idper LEFT JOIN persona AS pr ON d.idperrec=pr.idper LEFT JOIN persona AS ped ON d.idperentd=ped.idper LEFT JOIN persona AS prd ON d.idperrecd=prd.idper INNER JOIN valor AS v ON pr.area=v.idval";
                     $modelo = new conexion();
                     $conexion = $modelo->get_conexion();
                     $result = $conexion->prepare($sql);
@@ -174,7 +181,7 @@
         }
 
         function getOne(){
-            $sql = "SELECT d.ident, d.idperent AS pent, d.idperrec AS prec, d.idperentd AS pentd, d.idperrecd AS precd, d.fecent, d.fecdev, d.observ, d.observd, d.firpent, d.firprec, d.difent, d.estent, CONCAT(pe.nomper,' ',pe.apeper) AS nompent, CONCAT(pr.nomper,' ',pr.apeper) AS nomprec, CONCAT(ped.nomper,' ',ped.apeper) AS nompentd, CONCAT(prd.nomper,' ',prd.apeper) AS nomprecd, v.nomval AS area FROM dotacion AS d LEFT JOIN persona AS pe ON d.idperent=pe.idper LEFT JOIN persona AS pr ON d.idperrec=pr.idper LEFT JOIN persona AS ped ON d.idperentd=ped.idper LEFT JOIN persona AS prd ON d.idperrecd=prd.idper INNER JOIN valor AS v ON pr.area=v.idval WHERE d.ident=:ident";
+            $sql = "SELECT d.ident, d.idperent AS pent, d.idperrec AS prec, d.idperentd AS pentd, d.idperrecd AS precd, d.fecent, d.fecdev, d.observ, d.observd, d.firpent, d.firprec, d.difent, d.estent, d.rutpdf, CONCAT(pe.nomper,' ',pe.apeper) AS nompent, CONCAT(pr.nomper,' ',pr.apeper) AS nomprec, CONCAT(ped.nomper,' ',ped.apeper) AS nompentd, CONCAT(prd.nomper,' ',prd.apeper) AS nomprecd, v.nomval AS area FROM dotacion AS d LEFT JOIN persona AS pe ON d.idperent=pe.idper LEFT JOIN persona AS pr ON d.idperrec=pr.idper LEFT JOIN persona AS ped ON d.idperentd=ped.idper LEFT JOIN persona AS prd ON d.idperrecd=prd.idper INNER JOIN valor AS v ON pr.area=v.idval WHERE d.ident=:ident";
                     $modelo = new conexion();
                     $conexion = $modelo->get_conexion();
                     $result = $conexion->prepare($sql);
@@ -210,7 +217,7 @@
         }
 
         function saveFir($fir){
-            // try{
+            try{
                 $sql = "UPDATE dotacion SET";
                 if($fir==1) $sql .= " firpent=:firma";
                 if($fir==2) $sql .= " firprec=:firma";
@@ -223,9 +230,25 @@
                 $firma = $this->getFirma();
                 $result->bindParam(":firma", $firma);
                 $result->execute();
-            // } catch (Exception $e) {
-            //     ManejoError($e);
-            // }
+            } catch (Exception $e) {
+                ManejoError($e);
+            }
+        }
+
+        function savePdf(){
+            try{
+                $sql = "UPDATE dotacion SET rutpdf=:rutpdf WHERE ident=:ident";
+                $modelo = new conexion();
+                $conexion = $modelo->get_conexion();
+                $result = $conexion->prepare($sql);
+                $ident = $this->getIdent();
+                $result->bindParam(":ident",$ident);
+                $rutpdf = $this->getRutpdf();
+                $result->bindParam(":rutpdf", $rutpdf);
+                $result->execute();
+            } catch (Exception $e) {
+                ManejoError($e);
+            }
         }
 
         function dev(){
