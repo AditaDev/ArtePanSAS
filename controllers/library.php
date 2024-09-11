@@ -380,7 +380,7 @@ function modalDev($nm, $id, $acc, $det, $pg, $nmfl){
 						$txt .= '<div class="row">';
 							$txt .= '<strong>Entrega:</strong><hr>';
 							$txt .= '<div class="form-group col-md-4"><strong>Persona:</strong></div>';
-							$txt .= '<div class="form-group col-md-8">'.$det[0]['nompent'].' - '.$det[0]['area'].'</div>';
+							$txt .= '<div class="form-group col-md-8">'.$det[0]['nompent'].' - '.$det[0]['apent'].'</div>';
 							if($acc){
 								$txt .= '<strong><br>Elementos:</strong><hr>';
 								foreach($acc AS $ac){
@@ -420,7 +420,7 @@ function modalInfAsg($nm, $id, $acc, $det, $cxc){
 		$txt .= '<div class="modal-dialog">';
 			$txt .= '<div class="modal-content">';
 				$txt .= '<div class="modal-header">';
-					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$det[0]['fecent']." - ".$det[0]['nomprec'].' - '.$det[0]['area'].'</strong></h1>';
+					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$det[0]['fecent']." - ".$det[0]['nomprec'].' - '.$det[0]['aprec'].'</strong></h1>';
 					$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
 				$txt .= '</div>';
 				$txt .= '<div class="modal-body" style="margin: 0px 25px;">';

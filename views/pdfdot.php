@@ -1,5 +1,5 @@
 <?php
-echo "<script>window.close();</script>";
+// echo "<script>window.close();</script>";
 require_once ("../models/seguridad.php");
 require_once ('../models/conexion.php');
 require_once ('../models/mdot.php');
@@ -21,26 +21,34 @@ $mdot = new Mdot();
 
 $ident = isset($_REQUEST['ident']) ? $_REQUEST['ident']:NULL;
 
-$logo = "../img/logoynombre.png";
+
+$logo = "../img/logoartepan_sinfondo.png";
 $logob64 = "data:image/png;base64,".base64_encode(file_get_contents($logo));
 
 if($ident){
     $mdot->setIdent($ident);
     $datDet = $mdot->getOne();
     $det = $datDet[0];
-        $datAcc = $mdot->getAllDom(7);
-        $prgs = $mequ->getOnePxE();
+        $datDot = $mdot->getAllDom(7);
+        $datTalS = $mdot->getAllDom(8); 
+        $datTalP = $mdot->getAllDom(9); 
+        $datTalZ = $mdot->getAllDom(10);
+        $datTalG = $mdot->getAllDom(11);
+        $datCol = $mdot->getAllDom(12);
+        $datDia = $mdot->getAllDom(13);
+     
 
-    $datAxE = $masg->getAllAxE($datDet[0]["ideqxpr"]);
+    $datCxC = $mdot->getAllCxc($datDet[0]["ident"]);
+    $datTxD = $mdot->getAllTxD($datDet[0]["ident"]);
 }
 
 
 if($det['firpent']){
-    $fent = "../".$det['firent'];
-    $fentb64 = "data:image/png;base64,".base64_encode(file_get_contents($fecent));
+    $fent = "../".$det['firpent'];
+    $fentb64 = "data:image/png;base64,".base64_encode(file_get_contents($fent));
 }if($det['firprec']){
-    $fdev = "../".$det['firdev'];
-    $fdevb64 = "data:image/png;base64,".base64_encode(file_get_contents($fecdev));
+    $fdev = "../".$det['firprec'];
+    $fdevb64 = "data:image/png;base64,".base64_encode(file_get_contents($fdev));
 }
 
 $anctbla = 750;
@@ -52,8 +60,8 @@ $html .= '
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GALQUI SAS</title>
-    <link rel="icon" href="../img/logoartepan.jpg">
+    <title>ARTEPAN SAS</title>
+    <link rel="icon" href="../img/logoartepan_sinfondo.png">
     <style>
         table, tbody, tr, td{
             border-collapse: collapse;
@@ -68,7 +76,7 @@ $html .= '
             text-align: center;
         }
         .fond{
-            background-color: #D9D9D9;
+            background-color: #a5cdfa;
         }
         .sep{
             height: 16px;
@@ -102,7 +110,7 @@ $html .= '
             <td class="pie fond" colspan="4"><strong>Página: 1 de 1</strong></td>
         </tr>
         <tr>
-            <td class="tit sec fond" colspan="14"><strong>DATOS DEL TRABAJADOR</strong></td>
+            <td class="tit sec fond" colspan="14"><strong>DATOS DEL FUNCIONARIO</strong></td>
         </tr>
         <tr>
             <td colspan="3"><strong>NOMBRE:</strong></td>
@@ -113,116 +121,96 @@ $html .= '
             <td colspan="11">'.$det['dprec'].'</td>
         </tr>
         <tr>
-            <td colspan="3"><strong>CARGO:</strong></td>
-            <td colspan="11">'.$det['cprec'].'</td>
+            <td colspan="3"><strong>AREA:</strong></td>
+            <td colspan="11">'.$det['aprec'].'</td>
         </tr>
         <tr>
             <td colspan="3"><strong>CORREO CORPORATIVO:</strong></td>
             <td colspan="11">';
                 if($det['eprec']) $html .= $det['eprec'];
                 else $html .= 'N/A';
+
+
+
+
+
 $html .= '
-            </td>
-        </tr>';
-        if($pg==52){
-$html .= '
+        </td>
+        </tr>
             <tr>
-                <td class="tit sec fond" colspan="14"><strong>DATOS DEL EQUIPO</strong></td>
+                <td class="tit sec fond" colspan="14"><strong>HORARIO DE CAMISA</strong></td>
             </tr>
-            <tr>
-                <td colspan="1"><strong>MARCA:</strong></td>
-                <td colspan="5">'.$det['marca'].'</td>
-                <td colspan="1"><strong>MODELO:</strong></td>
-                <td colspan="7">'.$det['modelo'].'</td>
-            </tr>
-            <tr>
-                <td colspan="1"><strong>SERIAL:</strong></td>
-                <td colspan="13">'.$det['serialeq'].'</td>
-            </tr>
-            <tr>
-                <td colspan="1"><strong>OFFICE:</strong></td>
-                <td colspan="5">'.$prgs[0]['nomval'].' '.$prgs[0]['verprg'].'</td>
-                <td colspan="1"><strong>WINDOWS:</strong></td>
-                <td colspan="7">'.$prgs[1]['nomval'].' '.$prgs[1]['verprg'].
-                '</td>
-            </tr>
-            <tr>
-                <td colspan="6"><strong>IDENTIFICACION EQUIPO EN LA RED:</strong></td>
-                <td colspan="8">'.$det['nomred'].'</td>
-            </tr>
-            <tr>
-                <td class="sep" colspan="14"> </td>
-            </tr>
-            <tr>
-                <td colspan="2" rowspan="2"><strong>ACCESORIOS:</strong></td>';
-                if ($datAcc && $datAxE) {
-                    foreach ($datAcc as $dac) {
-                        $marcadorEncontrado = false;
-                        $html .= '<td colspan="3"><strong>'.strtoupper($dac['nomval']).'</strong></td>';
-                        foreach ($datAxE as $dae) {
-                            if ($dac['idval'] == $dae['idvacc']) {
-                                $html .= '<td colspan="1">X</td>';
-                                $marcadorEncontrado = true;
-                                break;
-                            }
-                        }
-                        if (!$marcadorEncontrado) $html .= '<td colspan="1"></td>';
-                        $cont++;
-                        if($cont==3) $html .= '</tr><tr>';
-                    }
-                }
-$html .= '
-                <td colspan="4"></td>
-            </tr>';
-        }elseif($pg==54){
-$html .= '
-            <tr>
-                <td class="tit sec fond" colspan="14"><strong>DATOS DEL CELULAR</strong></td>
-            </tr>
-            <tr>
-                <td colspan="2"><strong>MARCA:</strong></td>
-                <td colspan="5">'.$det['marca'].'</td>
-                <td colspan="2"><strong>IMEI:</strong></td>
-                <td colspan="5">'.$det['serialeq'].'</td>
-            </tr>
-            <tr>
-                <td colspan="2"><strong>NUMERO:</strong></td>
-                <td colspan="5">';
-                    if($det['numcel']!=0) $html .= $det['numcel'];
-                    else $html .= 'N/A';
-$html .= '
-                </td>
-                <td colspan="2"><strong>OPERADOR:</strong></td>
-                <td colspan="5">'.$det['operador'].'</td>
-            </tr>
-            <tr>
-                <td class="sep" colspan="14"> </td>
-            </tr>
-            <tr>
-                <td colspan="2" rowspan="2"><strong>ACCESORIOS:</strong></td>';
-                if ($datAcc) {
-                    foreach ($datAcc as $dac) {
+        <tr>';
+        
+        if ($datDia) {
+                    foreach ($datDia as $dac) {
                         $marcadorEncontrado = false;
                         $html .= '<td colspan="2"><strong>'.strtoupper($dac['nomval']).'</strong></td>';
-                        if ($datAxE) {
-                            foreach ($datAxE as $dae) {
-                                if ($dac['idval'] == $dae['idvacc']) {
-                                    $html .= '<td colspan="1" style="text-align: center">X</td>';
-                                    $marcadorEncontrado = true;
-                                    break;
-                                }
-                            }
-                        }
-                        if ($marcadorEncontrado==false) $html .= '<td colspan="1"></td>';
-                        $cont++;
-                        if($cont==4) $html .= '</tr><tr>';
+                      
+                    
                     }
                 }
 $html .= '
-                <td colspan="3"></td>
-            </tr>';
+            <td colspan="4"></td>
+        </tr>';
+        if ($datCol) {
+            foreach ($datCol as $dac) {
+                $marcadorEncontrado = false;
+                $html .= '<td colspan="2"><strong>'.strtoupper($dac['nomval']).'</strong></td>';
+                if ($datCxC) {
+                    foreach ($datCxC as $dae) {
+                        if ($dac['idval'] == $dae['idvcol']) {
+                            $html .= '<td colspan="1" style="text-align: center">X</td>';
+                            $marcadorEncontrado = true;
+                            break;
+                        }
+                    }
+                }
+                if ($marcadorEncontrado==false) $html .= '<td colspan="1"></td>';
+                $cont++;
+                if($cont==4) $html .= '</tr><tr>';
+            }
         }
+          
+        
 $html .= '
+        </td>
+        </tr>
+            <td class="tit sec fond" colspan="14"><strong>DOTACIÓN</strong></td>    
+        </tr>';
+                if ($datDot) {
+                    foreach ($datDot as $dac) {
+                        $marcadorEncontrado = false;
+                        $html .= '<td colspan="2"><strong>'.strtoupper($dac['nomval']).'</strong></td>';
+                    }
+                }
+        
+$html .= '
+    <td colspan="4"></td>
+        </tr>';
+                // if ($datTalS)
+                // foreach ($datTal as $dac) {
+                //     $marcadorEncontrado = false;
+                //     $html .= '<td colspan="2"><strong>'.strtoupper($dac['nomval']).'</strong></td>';
+                //     if ($datCxC) {
+                //         foreach ($datTxD as $dae) {
+                //             if ($dac['idval'] == $dae['idvtal']) {
+                //                 $html .= '<td colspan="1" style="text-align: center">X</td>';
+                //                 $marcadorEncontrado = true;
+                //                 break;
+                //             }
+                //         }
+                //     }
+                //     if ($marcadorEncontrado==false) $html .= '<td colspan="1"></td>';
+                //     $cont++;
+                //     if($cont==4) $html .= '</tr><tr>';
+                // }
+            
+                
+
+$html .= '
+            </td>
+        </tr>
         <tr>
             <td class="sep" colspan="14"> </td>
         </tr>        
@@ -235,20 +223,20 @@ $html .= '
         </tr>
         <tr>
             <td colspan="3"><strong>NOMBRE DE QUIEN ENTREGA:</strong></td>
-            <td colspan="3">'.$det['pent'].'</td>
-            <td colspan="1"><strong>CARGO:</strong></td>
-            <td colspan="3">'.$det['cpent'].'</td>
+            <td colspan="3">'.$det['nompent'].'</td>
+            <td colspan="1"><strong>Area:</strong></td>
+            <td colspan="3">'.$det['apent'].'</td>
             <td colspan="1"><strong>FIRMA:</strong></td>
             <td colspan="3">'.(function($name) { return explode(" ", $name)[0]; })($_SESSION["nomper"]) . " " . (function($surname) { return explode(" ", $surname)[0]; })($_SESSION["apeper"]).'</td>
         </tr>
         <tr>
             <td colspan="3"><strong>NOMBRE DE QUIEN RECIBE:</strong></td>
-            <td colspan="3">'.$det['prec'].'</td>
-            <td colspan="1"><strong>CARGO:</strong></td>
-            <td colspan="3">'.$det['cprec'].'</td>
+            <td colspan="3">'.$det['nomprec'].'</td>
+            <td colspan="1"><strong>Area:</strong></td>
+            <td colspan="3">'.$det['aprec'].'</td>
             <td colspan="1"><strong>FIRMA:</strong></td>
             <td colspan="3">';
-            if ($det['firent']) $html .= '<img style="height: 30px;" src="'.$fentb64.'">';
+            if ($det['firpent']) $html .= '<img style="height: 30px;" src="'.$fentb64.'">';
 $html .= '
             </td>
         </tr>
@@ -268,23 +256,23 @@ $html .= '
         </tr>
         <tr>
             <td colspan="3"><strong>NOMBRE DE QUIEN ENTREGA:</strong></td>
-            <td colspan="3">'.$det['pentd'].'</td>
-            <td colspan="1"><strong>CARGO:</strong></td>
-            <td colspan="3">'.$det['cpentd'].'</td>
+            <td colspan="3">'.$det['nompentd'].'</td>
+            <td colspan="1"><strong>Area:</strong></td>
+            <td colspan="3">'.$det['apentd'].'</td>
             <td colspan="1"><strong>FIRMA:</strong></td>
             <td colspan="3">';
-            if ($det['firdev']) $html .= '<img style="height: 30px;" src="'.$fdevb64.'">';
+            if ($det['firprec']) $html .= '<img style="height: 30px;" src="'.$fdevb64.'">';
 $html .= '
             </td>
         </tr>
         <tr>
             <td colspan="3"><strong>NOMBRE DE QUIEN RECIBE:</strong></td>
-            <td colspan="3">'.$det['precd'].'</td>
-            <td colspan="1"><strong>CARGO:</strong></td>
-            <td colspan="3">'.$det['cprecd'].'</td>
+            <td colspan="3">'.$det['nomprecd'].'</td>
+            <td colspan="1"><strong>AREA:</strong></td>
+            <td colspan="3">'.$det['aprecd'].'</td>
             <td colspan="1"><strong>FIRMA:</strong></td>
             <td colspan="3">';
-            if ($det['firdev']) $html .= (function($name) { return explode(" ", $name)[0]; })($_SESSION["nomper"]) . " " . (function($surname) { return explode(" ", $surname)[0]; })($_SESSION["apeper"]);
+            if ($det['firprec']) $html .= (function($name) { return explode(" ", $name)[0]; })($_SESSION["nomper"]) . " " . (function($surname) { return explode(" ", $surname)[0]; })($_SESSION["apeper"]);
 $html .= '
             </td>
         </tr>
@@ -295,78 +283,88 @@ $html .= '
         <tr>
             <td class="sep" colspan="14"> </td>
         </tr>
-        <tr>
-            <td class="pie" colspan="14">
-                <p><strong>NOTA: </strong>A partir de la fecha en la que se le haya asignado el (los) equipo (s), tarjetas, accesorios y demás elementos para la correcta ejecución de sus funciones y responsabilidades, usted es responsable por el buen estado y funcionamiento del (los) equipo (s), tarjetas, accesorios y demás elementos suministrados.<br>
-                Está prohibido la descarga e instalación de software y aplicativos que puedan perjudicar el equipo y que no sean necesarias para la realización de sus funciones, si es necesario debe comunicarse con el área soporte IT.<br>
-                En caso de daño o pérdida es su deber comunicarlo por escrito o por correo al departamento administrativo y a su jefe inmediato, si se comprueba un uso inadecuado, usted asumirá la reposición y/o reparación correspondiente.<br>
-                En el momento de retirarse de GALQUI SAS o traslado a otro cargo, deberá devolver el equipo junto con los implementos entregados al departamento administrativo o a su jefe inmediato dejando constancia a través del formato GAL-RH-FR-39.</p>
-            </td>
-        </tr>
+        
     </tbody>
 </table>
 </body>
 </html>';
 
-if($ideqxpr){
-    $fold = 'arc/pdf/'.$det['prec'].'_'.$det['dprec'].'/';
-    $name = $n.$det['serialeq']."_".$det['prec'].".pdf";
 
-    $dompdf->loadHtml($html);
-    $dompdf->setPaper('Letter', 'portrait');
-    $dompdf->render();
-    if (!file_exists('../'.$fold)) mkdir('../'.$fold, 0755, true);
-    $file_path = '../'.$fold.$name;
-    $masg->setRutpdf($fold.$name);
-    $masg->savePdf();
-    file_put_contents($file_path, $dompdf->output());
-
-    //-------Datos destinatario--------
-    if($det['fecent'] && !$det['fecdev']){
-        $perd = $det['prec'];
-        $maild = $det['eprec'];
-    }elseif($det['fecent'] && $det['fecdev']){
-        $perd = $det['prec']; 
-        $maild = $det['epentd'];
-    }
-    $partes = explode(" ", $perd);
-    $aped = ucfirst(strtolower($partes[0]));
-    $nomd = ucfirst(strtolower($partes[count($partes) > 2 ? 2 : 1]));
-    $nomperd = $nomd." ".$aped;
+if($ident){
+    //-------PDF--------
     
-    //-------Datos remitente--------
-    if($det['fecent'] && !$det['fecdev']){
-        $perm = $det['pent'];
-        $mail = $det['epent'];
-        $car = $det['cpent'];
-    }elseif($det['fecent'] && $det['fecdev']){
-        $perm = $det['precd']; 
-        $mail = $det['eprecd'];
-        $car = $det['cprecd'];
-    }
-    $partesm = explode(" ", $perm);
-    $ape1 = ucfirst(strtolower($partesm[0]));
-    $ini_ape2 = isset($partesm[1]) ? ucfirst($partesm[1][0]) . '.' : '';
-    $nom1 = isset($partesm[2]) ? ucfirst(strtolower($partesm[2])) : '';
-    $ini_nom2 = isset($partesm[3]) ? ucfirst($partesm[3][0]) . '.' : '';
-    $nomperm = trim("$nom1 $ini_nom2 $ape1 $ini_ape2");
-    $cargom = ucfirst(strtolower($car));
+    //-------Prueba--------
+    echo $html;
+    echo "<script type='text/javascript'>window.print();</script>";
 
-    $template="../tempmail.html";
-    $txt_mess = "";
-    $txt_mess = "Adjunto a este correo se encuentra el acta de ";
-    if($det['fecent'] && !$det['fecdev']) $txt_mess .= "entrega";
-    elseif($det['fecent'] && $det['fecdev']) $txt_mess .= "devolución"; 
-    $txt_mess .= " firmada del equipo asignado.<br><br>
-    Le solicitamos revisar el documento adjunto y conservar una copia para sus registros. Si tiene alguna pregunta o necesita asistencia adicional, no dude en ponerse en contacto con nuestro departamento de soporte.<br><br>
-    Agradecemos su colaboración y compromiso con el correcto uso y mantenimiento del equipo.<br><br>
-    Atentamente,<br><br>";
-	$mail_asun = "Confirmación ";
-    if($det['fecent'] && !$det['fecdev']) $mail_asun .= "Entrega";
-    elseif($det['fecent'] && $det['fecdev']) $mail_asun .= "Devolución"; 
-    $mail_asun .= " de Equipo";
-    $fir_mail = '<strong>'.$nomperm.'</strong><br>'.$cargom.' | '.$mail.'<br>Cra 1 Nº 4 - 02 Bdg 2 Parque Industrial K2<br>Chía - Cund<br>www.galqui.com';
-    sendemail($ema, $psem, $maild, $nomperd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template);
+    //-------Generarlo--------
+    //-------Nombre y destino del pdf--------
+    // $fold = 'arc/pdf/'.$det['nomprec'].'_'.$det['dprec'].'/';
+    // $name = $det['aprec']."_".$det['nomprec'].".pdf";
+
+    // //-------Carga informacion y lo crea--------
+    // $dompdf->loadHtml($html);
+    // $dompdf->setPaper('Letter', 'portrait');
+    // $dompdf->render();
+
+    // //-------Crea la carpeta si no existe y lo guarda en la carpeta y en la bd--------
+    // if (!file_exists('../'.$fold)) mkdir('../'.$fold, 0755, true);
+    // $file_path = '../'.$fold.$name;
+    // $mdot->setRutpdf($fold.$name);
+    // $mdot->savePdf();
+    // file_put_contents($file_path, $dompdf->output());
+
+    // //-------EMAIL--------
+
+    // //-------Datos destinatario--------
+    // if($det['fecent'] && !$det['fecdev']){
+    //     $perd = $det['nomprec'];
+    //     $maild = $det['eprec'];
+    // }elseif($det['fecent'] && $det['fecdev']){
+    //     $perd = $det['nomprec']; 
+    //     $maild = $det['epentd'];
+    // }
+    // $partes = explode(" ", $perd);
+    // $aped = ucfirst(strtolower($partes[0]));
+    // $nomd = ucfirst(strtolower($partes[count($partes) > 2 ? 2 : 1]));
+    // $nomperd = $nomd." ".$aped;
+    
+    // //-------Datos remitente--------
+    // if($det['fecent'] && !$det['fecdev']){
+    //     $perm = $det['nompent'];
+    //     $mail = $det['epent'];
+    //     $area = $det['apent'];
+    // }elseif($det['fecent'] && $det['fecdev']){
+    //     $perm = $det['precd']; 
+    //     $mail = $det['eprecd'];
+    //     $area = $det['aprecd'];
+    // }
+    // //-------Le da un formato a los nombres--------
+    // $partesm = explode(" ", $perm);
+    // $ape1 = ucfirst(strtolower($partesm[0]));
+    // $ini_ape2 = isset($partesm[1]) ? ucfirst($partesm[1][0]) . '.' : '';
+    // $nom1 = isset($partesm[2]) ? ucfirst(strtolower($partesm[2])) : '';
+    // $ini_nom2 = isset($partesm[3]) ? ucfirst($partesm[3][0]) . '.' : '';
+    // $nomperm = trim("$nom1 $ini_nom2 $ape1 $ini_ape2");
+
+    // //-------Contenido del correo--------
+    // $template="../tempmail.html"; //Plantilla
+    // $txt_mess = "";
+    // $txt_mess = "Adjunto a este correo se encuentra el acta de ";
+    // if($det['fecent'] && !$det['fecdev']) $txt_mess .= "entrega";
+    // elseif($det['fecent'] && $det['fecdev']) $txt_mess .= "devolución"; 
+    // $txt_mess .= " firmada del equipo asignado.<br><br>
+    // Le solicitamos revisar el documento adjunto y conservar una copia para sus registros. Si tiene alguna pregunta o necesita asistencia adicional, no dude en ponerse en contacto con nuestro departamento de soporte.<br><br>
+    // Agradecemos su colaboración y compromiso con el correcto uso y mantenimiento del equipo.<br><br>
+    // Atentamente,<br><br>";
+	// $mail_asun = "Confirmación ";
+    // if($det['fecent'] && !$det['fecdev']) $mail_asun .= "Entrega";
+    // elseif($det['fecent'] && $det['fecdev']) $mail_asun .= "Devolución"; 
+    // $mail_asun .= " de Dotación";
+    // $fir_mail = '<strong>'.$nomperm.'</strong><br>'.' | '.$mail.'<br>Cra 34a 3 63, Puente Aranda <br>Bogotá D.C.<br>www.artepan.com.co';
+
+    // //-------Llama la función que crea y envía el correo--------
+    // sendemail($ema, $psem, $maild, $nomperd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template);
 }
 
 ?>

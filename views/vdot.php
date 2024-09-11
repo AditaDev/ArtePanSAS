@@ -128,7 +128,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         <div class="row">
                             <div class="form-group col-md-10">
                                 <strong> <?= ($dta['fecent']) .  " - "  . $dta['nomprec']; ?></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <small><strong>Área: </strong> <?= $dta['area']; ?></small><br>
+                                <small><strong>Área: </strong> <?= $dta['aprec']; ?></small><br>
                                 <small>
                                     <strong>Observación: </strong><?= $dta['observ']; ?><br>
                                 </small>
@@ -155,6 +155,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 <?php } if($dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
                                     <i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?= $dta['rutpdf'] ?>')"></i>
                                 <?php } ?>
+                                
                             </div>
                         </div>
 
