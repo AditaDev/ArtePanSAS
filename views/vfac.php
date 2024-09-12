@@ -3,9 +3,21 @@ require_once('controllers/cfac.php');
 $hoy = date("Y-m-d");
 $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 ?>
-<i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" title="Importar"></i>
 
-<?php if ($_SESSION['idpef'] == 4) { ?>
+    <div style="text-align: right;">
+    <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>cargmt" title="Importar Tarjetas"></i>
+
+    
+        
+
+
+        <a href="excel/xfac.php" title="Exportar Tarjetas">
+    <i class="fa fa-solid fa-file-export fa-2x exp"></i>
+        </a>
+    </div>
+
+
+<?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 1) { ?>
     <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
         <div class="row">
             <div class="form-group col-md-4">

@@ -41,12 +41,32 @@ label {
   cursor: pointer;
 
 }
-.act {
+.act{
   color: #008000;
 }
 
 .act:hover {
   text-shadow: 0px 0px 2px #008000;
+  cursor: pointer;
+
+}
+
+.exp{
+  color: #008000;
+}
+
+.exp:hover {
+  text-shadow: 0px 0px 2px #008000;
+  cursor: pointer;
+
+}
+
+.imp{
+  color: #800000;
+}
+
+.imp:hover {
+  text-shadow: 0px 0px 2px #800000;
   cursor: pointer;
 
 }
