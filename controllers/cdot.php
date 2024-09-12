@@ -33,7 +33,7 @@
     $idvtal = isset($_POST['idvtal']) ? $_POST['idvtal']:NULL;
     
     //------------ColorxCamisa-----------
-    $idvdia = isset($_POST['idvdia']) ? $_POST['idvdia']:NULL;
+    $idvdia = $mdot->getAllDom(13);
     $idvcol = isset($_POST['idvcol']) ? $_POST['idvcol']:NULL;
 
     // $arc = isset($_FILES["arc"]["name"]) ? $_FILES["arc"]["name"] : NULL;
@@ -78,15 +78,10 @@
                     $i++;
                 }
             }}
-        if($idvdia && $idvcol && $ident){
-            $i = 0;
-            foreach($idvcol AS $id){
-                if($id!="0"){
-                    $mdot->setIdvcol($id);
-                    $mdot->setIdvdia($idvdia[$i]);
-                    $mdot->saveCxc();
-                    $i++;
-                }
+        if($idvdia && $idvcol && $ident){ foreach($idvdia AS $index=>$id){
+                $mdot->setIdvdia($id['idval']);
+                $mdot->setIdvcol($idvcol[$index]);
+                $mdot->saveCxc();
         }}
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }

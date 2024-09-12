@@ -13,9 +13,9 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
     <div class="row">
-        <div class="form-group col-md-8">
+        <div class="form-group col-md-8 ui-widget">
             <label for="idperrec"><strong>Usuario:</strong></label>
-            <select id="idperrec" name="idperrec" class="form-control form-select" required>
+            <select id="combobox1" name="idperrec" class="form-control form-select" <?php if ($datOne) echo 'disabled'; else echo 'required';?>>
                 <option value="0"></option>
                 <?php if ($datPer) {
                     foreach ($datPer as $dep) { ?>
@@ -33,39 +33,31 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 else echo 'value="' . $hoy . '" required'; ?>>
         </div>
         <div class="form-group col-md-12"><br></div>
-
-        <?php if ($datDia && $datCol ) {
-            foreach ($datDia as $ddo) { ?>
-                <div class="form-group col-md-6">
-                <input type="checkbox" name="idvdia[]" value="<?= $ddo['idval'] ?>" <?php if ($datCxD) {
-                                            foreach ($datCxD as $ddt) {
-                                                if ($ddo['idval'] == $ddt['idvdia'])echo " selected ";
-                                                }
-                                            } ?>
-                    <label for="idvdia"><strong><?= $ddo['nomval']; ?></strong></label>
-                </div>
-                <div class="form-group col-md-6">
-                    <select name="idvcol[]" id="idvcol" class="form-control form-select">
-                        <option value="0"></option>
-                        <?php if ($datCol) {
-                            foreach ($datCol as $ddt) { ?>
-                                <option value="<?= $ddt['idval'] ?>" <?php if ($datCxD) {
-                                        foreach ($datCxD as $ddot) {
-                                            if ($ddt['idval'] == $ddot['idvcol']);
-                                            }
-                                        } ?>>
+        <div class="form-group col-md-4">
+            <div class="row">
+            <?php if ($datDia && $datCol ) {
+                foreach ($datDia as $ddo) { ?>
+                    <div class="form-group col-sm-6">
+                        <label for="idvdia"><strong><?= $ddo['nomval']; ?></strong></label>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <select name="idvcol[]" id="idvcol" class="form-control form-select">
+                            <option value="0"></option>
+                            <?php if ($datCol) { foreach ($datCol as $ddt) { ?>
+                                <option value="<?= $ddt['idval'] ?>" <?php if ($datCxD){ foreach ($datCxD as $ddot){ if ($ddt['idval'] == $ddot['idvcol']);}}?>>
                                     <?= $ddt['nomval']; ?>
                                 </option>
-                        <?php }
-                        } ?>
-                    </select>
-                </div>
-
-        <?php }
-        } ?>
+                            <?php }} ?>
+                        </select>
+                    </div>      
+            <?php }} ?>
+            </div>
+        </div>
+        <div class="form-group col-md-8">
+            <div class="row">
         <?php if ($datDot && $datTalS && $datTalP && $datTalZ) {
             foreach ($datDot as $ddo) { ?>
-                <div class="form-group col-md-6">
+                <div class="form-group col-6">
                     <input type="checkbox" name="idvdot[]" value="<?= $ddo['idval'] ?>" <?php if ($datTxD) {
                                             foreach ($datTxD as $ddt) {
                                                 if ($ddo['idval'] == $ddt['idvdot']) echo " checked ";
@@ -73,7 +65,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                             } ?>>
                     <label for="idvdot"><strong><?= $ddo['nomval']; ?></strong></label>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-sm-6">
                     <select name="idvtal[]" id="idvtal" class="form-control form-select">
                         <option value="0"></option>
                         <?php
@@ -97,6 +89,8 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 
         <?php }
         } ?>
+            </div>
+        </div>
         <div class="form-group col-md-12">
             <br>
             <label for="observ"><strong>Observaciones entrega:</strong></label>
