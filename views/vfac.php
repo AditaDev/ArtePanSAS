@@ -183,7 +183,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <i class="fa fa-solid fa-circle-check fa-2x pagada" title="<?= $dta['est']; ?>"></i>
                             <?php } ?>
                     <td class="form-group col-md-1" tyle="text-align: right;">
-                        <?php if ($_SESSION['idpef'] == 4) { ?>
+                        <?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 1 ) { ?>
                                                 
                         <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi" title="Editar"></i>

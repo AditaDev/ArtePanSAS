@@ -42,6 +42,7 @@
                     <?php } ?>
                     <a href="#" title="Ver Módulos" data-bs-toggle="modal" data-bs-target="#mdlpxm<?= $d['idpef']; ?>" title="Asignar módulos">
                         <i class="fa fa-solid fa-cubes fa-2x iconi"></i>
+                    </a>
                     <a href="home.php?pg=<?= $pg; ?>&idpef=<?= $d['idpef']; ?>&ope=edi" title="Editar">
                         <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
                     </a>
