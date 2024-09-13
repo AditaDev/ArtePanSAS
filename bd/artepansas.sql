@@ -515,7 +515,9 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (42, 'Licencias', 4, 411, 1),
 (43, 'Incapacidad Arl', 4, 412, 1),
 (44, 'Incapacidad Eps', 4, 413, 1),
-(45, 'Por si falta alguna jiji', 4, 414, 1),
+
+(45, 'Talento humano', 5, 500, 1),
+
 (46, 'Contabilidad', 5, 501, 1),
 (47, 'Logistica', 5, 502, 1),
 (48, 'Tesoreria', 5, 503, 1),

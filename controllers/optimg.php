@@ -10,6 +10,7 @@ function opti($pict, $nomimg, $rut, $pre){
 			$medidasimagen = getimagesize($pict['tmp_name']);
 			//echo $medidasimagen[0]."-".$pict['size'];
 			if($medidasimagen[0]<=$max_ancho && $pict['size']<1048576){
+                if (!file_exists($rut)) mkdir($rut, 0755, true);
 				$nombre = $rut.'/'.$nomimg."_".$pre.".".$docext;
 				move_uploaded_file($pict['tmp_name'], $nombre);
 			}else{
@@ -48,14 +49,16 @@ function opti($pict, $nomimg, $rut, $pre){
 			}
 		}elseif ($docext=="mp4" or $docext=="mov" or $docext=="avi") {
 			if($pict['size']<100741824){
+                if (!file_exists($rut)) mkdir($rut, 0755, true);
 				$nombre = $rut.'/'."Vid_".$nomimg."_".$pre.".".$docext;
 				move_uploaded_file($pict['tmp_name'], $nombre);
 			}else{
 				echo "<script>alert('Los archivos de video debe tener un peso maximo de 97Mb');</script>";
 			}	
-		}elseif ($docext=="csv") { //$docext=="xls" or $docext=="xlsx") {
+		}elseif ($docext=="xls" or $docext=="xlsx") {
 			if($pict['size']<1048576){
-				$nombre = $rut.'/'."fic_".$nomimg."_".$pre.".".$docext;
+                if (!file_exists($rut)) mkdir($rut, 0755, true);
+				$nombre = $rut.'/'.$nomimg."_".$pre.".".$docext;
 				move_uploaded_file($pict['tmp_name'], $nombre);
 			}else{
 				echo "<script>alert('Los archivos de Excel debe tener un peso maximo de 97Mb');</script>";
@@ -67,29 +70,12 @@ function opti($pict, $nomimg, $rut, $pre){
 				move_uploaded_file($pict['tmp_name'], $nombre);
 			}else{
 				echo "<script>alert('Los archivos PDF deben tener un peso maximo de 97Mb');</script>";
-			}
+			}	
 		}else{
 			echo "<script>alert('Solo se permiten archivos de extensiones: png, jpg, jpeg, mp4, mov, avi, csv.');</script>";
 		}
 	}
 	return $nombre;
-}
-
-function titulo2($tx="Sin titulo",$mos=1){
-	$txt = "<div class='tit'>";
-		$txt .= "<h1>";
-			if($mos==1){
-	            //$txt .= '<div class="titaju">';
-	                $tx .= '<i class="fa-solid fa-circle-plus" id="mas" onclick="ocul('.$mos.',1);" style="margin-left: 20px;color: #ffffff;text-shadow: 0px 0px 5px #117f09, 0px 0px 5px #117f09, 0px 0px 5px #117f09;"></i>';
-	                $tx .= '<i class="fa-solid fa-circle-minus" id="menos" onclick="ocul('.$mos.');" style="margin-left: 20px;color: #ffffff;text-shadow: 0px 0px 5px #117f09, 0px 0px 5px #117f09, 0px 0px 5px #117f09;"></i>';
-	            //$txt .= '</div>';
-	        }
-	        $txt .= $tx;
-		$txt .= "</h1>";
-		$txt .= "<hr class='lintit'>";
-		
-	$txt .= "</div>";
-	return $txt;
 }
 
 /*function titulo($tx="Sin titulo"){

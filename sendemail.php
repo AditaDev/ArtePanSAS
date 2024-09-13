@@ -28,7 +28,7 @@ function sendemail($mail_ema, $mail_upa, $mail_sfe, $mail_name, $file_path, $txt
 	$message = str_replace('{{first_name}}', $mail_name, $message);
 	$message = str_replace('{{message}}', $txt_mess, $message);
 	$message = str_replace('{{fir}}', $fir_mail, $message);
-	$mail->addEmbeddedImage('../img/frisano.png', 'firma_cid');
+	$mail->addEmbeddedImage('../img/firma.png', 'firma_cid');
 	$mail->isHTML(true);
 	$mail->Subject = $mail_asun;
 	$mail->CharSet = 'UTF-8';

@@ -4,7 +4,10 @@
     $user = "root";
     $pass = "";
 
-    $ema = "ada@artepan.com";
-	$psem = "wyxg lhim mfwg mpod";
+    $ema = "rodriada24@gmail.com";
+	$psem = "iifx fywg drwn jnjf";
 
+
+    // $ema = "sgsstartepan@gmail.com";
+	// $psem = "krhc gqti kvhd bzlp";
 ?>

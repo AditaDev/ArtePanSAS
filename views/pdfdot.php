@@ -299,72 +299,73 @@ if($ident){
 
     //-------Generarlo--------
     //-------Nombre y destino del pdf--------
-    // $fold = 'arc/pdf/'.$det['nomprec'].'_'.$det['dprec'].'/';
-    // $name = $det['aprec']."_".$det['nomprec'].".pdf";
+    $fold = 'arc/pdf/'.$det['nomprec'].'_'.$det['dprec'].'/';
+    $name = $det['aprec']."_".$det['nomprec'].".pdf";
 
     // //-------Carga informacion y lo crea--------
-    // $dompdf->loadHtml($html);
-    // $dompdf->setPaper('Letter', 'portrait');
-    // $dompdf->render();
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('Letter', 'portrait');
+    $dompdf->render();
 
     // //-------Crea la carpeta si no existe y lo guarda en la carpeta y en la bd--------
-    // if (!file_exists('../'.$fold)) mkdir('../'.$fold, 0755, true);
-    // $file_path = '../'.$fold.$name;
-    // $mdot->setRutpdf($fold.$name);
-    // $mdot->savePdf();
-    // file_put_contents($file_path, $dompdf->output());
+    if (!file_exists('../'.$fold)) mkdir('../'.$fold, 0755, true);
+    $file_path = '../'.$fold.$name;
+    $mdot->setRutpdf($fold.$name);
+    $mdot->savePdf();
+    file_put_contents($file_path, $dompdf->output());
 
     // //-------EMAIL--------
 
     // //-------Datos destinatario--------
-    // if($det['fecent'] && !$det['fecdev']){
-    //     $perd = $det['nomprec'];
-    //     $maild = $det['eprec'];
-    // }elseif($det['fecent'] && $det['fecdev']){
-    //     $perd = $det['nomprec']; 
-    //     $maild = $det['epentd'];
-    // }
-    // $partes = explode(" ", $perd);
-    // $aped = ucfirst(strtolower($partes[0]));
-    // $nomd = ucfirst(strtolower($partes[count($partes) > 2 ? 2 : 1]));
-    // $nomperd = $nomd." ".$aped;
+    if($det['fecent'] && !$det['fecdev']){
+        $perd = $det['nomprec'];
+        $maild = $det['eprec'];
+    }elseif($det['fecent'] && $det['fecdev']){
+        $perd = $det['nomprec']; 
+        $maild = $det['epentd'];
+    }
+    $partes = explode(" ", $perd);
+    $aped = ucfirst(strtolower($partes[0]));
+    $nomd = ucfirst(strtolower($partes[count($partes) > 2 ? 2 : 1]));
+    $nomperd = $nomd." ".$aped;
     
     // //-------Datos remitente--------
-    // if($det['fecent'] && !$det['fecdev']){
-    //     $perm = $det['nompent'];
-    //     $mail = $det['epent'];
-    //     $area = $det['apent'];
-    // }elseif($det['fecent'] && $det['fecdev']){
-    //     $perm = $det['precd']; 
-    //     $mail = $det['eprecd'];
-    //     $area = $det['aprecd'];
-    // }
+    if($det['fecent'] && !$det['fecdev']){
+        $perm = $det['nompent'];
+        $mail = $det['epent'];
+        $area = $det['apent'];
+    }elseif($det['fecent'] && $det['fecdev']){
+        $perm = $det['nompentd']; 
+        $mail = $det['eprecd'];
+        $area = $det['aprecd'];
+    }
     // //-------Le da un formato a los nombres--------
-    // $partesm = explode(" ", $perm);
-    // $ape1 = ucfirst(strtolower($partesm[0]));
-    // $ini_ape2 = isset($partesm[1]) ? ucfirst($partesm[1][0]) . '.' : '';
-    // $nom1 = isset($partesm[2]) ? ucfirst(strtolower($partesm[2])) : '';
-    // $ini_nom2 = isset($partesm[3]) ? ucfirst($partesm[3][0]) . '.' : '';
-    // $nomperm = trim("$nom1 $ini_nom2 $ape1 $ini_ape2");
+    $partesm = explode(" ", $perm);
+    $ape1 = ucfirst(strtolower($partesm[0]));
+    $ini_ape2 = isset($partesm[1]) ? ucfirst($partesm[1][0]) . '.' : '';
+    $nom1 = isset($partesm[2]) ? ucfirst(strtolower($partesm[2])) : '';
+    $ini_nom2 = isset($partesm[3]) ? ucfirst($partesm[3][0]) . '.' : '';
+    $nomperm = trim("$nom1 $ini_nom2 $ape1 $ini_ape2");
+    $a = ucfirst(strtolower($area));
 
     // //-------Contenido del correo--------
-    // $template="../tempmail.html"; //Plantilla
-    // $txt_mess = "";
-    // $txt_mess = "Adjunto a este correo se encuentra el acta de ";
-    // if($det['fecent'] && !$det['fecdev']) $txt_mess .= "entrega";
-    // elseif($det['fecent'] && $det['fecdev']) $txt_mess .= "devolución"; 
-    // $txt_mess .= " firmada del equipo asignado.<br><br>
-    // Le solicitamos revisar el documento adjunto y conservar una copia para sus registros. Si tiene alguna pregunta o necesita asistencia adicional, no dude en ponerse en contacto con nuestro departamento de soporte.<br><br>
-    // Agradecemos su colaboración y compromiso con el correcto uso y mantenimiento del equipo.<br><br>
-    // Atentamente,<br><br>";
-	// $mail_asun = "Confirmación ";
-    // if($det['fecent'] && !$det['fecdev']) $mail_asun .= "Entrega";
-    // elseif($det['fecent'] && $det['fecdev']) $mail_asun .= "Devolución"; 
-    // $mail_asun .= " de Dotación";
-    // $fir_mail = '<strong>'.$nomperm.'</strong><br>'.' | '.$mail.'<br>Cra 34a 3 63, Puente Aranda <br>Bogotá D.C.<br>www.artepan.com.co';
+    $template="../tempmail.html"; //Plantilla
+    $txt_mess = "";
+    $txt_mess = "Adjunto a este correo se encuentra el acta de ";
+    if($det['fecent'] && !$det['fecdev']) $txt_mess .= "entrega";
+    elseif($det['fecent'] && $det['fecdev']) $txt_mess .= "devolución"; 
+    $txt_mess .= " firmada de la dotación asignada.<br><br>
+    Le solicitamos revisar el documento adjunto y conservar una copia para sus registros. Si tiene alguna pregunta o necesita asistencia adicional, no dude en ponerse en contacto con nuestra area de Talento Humano.<br><br>
+    Agradecemos su colaboración y compromiso con el correcto uso de la dotación.<br><br>
+    Atentamente,<br><br>";
+	$mail_asun = "Confirmación ";
+    if($det['fecent'] && !$det['fecdev']) $mail_asun .= "Entrega";
+    elseif($det['fecent'] && $det['fecdev']) $mail_asun .= "Devolución"; 
+    $mail_asun .= " de Dotación";
+    $fir_mail = '<strong>'.$nomperm.'</strong><br>'.$a.' | '.$mail.'<br>Cra 34a 3 63, Puente Aranda <br>Bogotá D.C.<br>www.artepan.com.co';
 
-    // //-------Llama la función que crea y envía el correo--------
-    // sendemail($ema, $psem, $maild, $nomperd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template);
+    //-------Llama la función que crea y envía el correo--------
+    sendemail($ema, $psem, $maild, $nomperd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template);
 }
 
 ?>

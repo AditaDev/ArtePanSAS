@@ -5,9 +5,8 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 ?>
 
     <div style="text-align: right;">
-    <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>cargmt" title="Importar Tarjetas"></i>
-
-    
+    <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>carfac" title="Importar Facturas"></i>
+    <?php modalImp("mod", $pg, "Facturas", "carfac", ""); ?>
         
 
 

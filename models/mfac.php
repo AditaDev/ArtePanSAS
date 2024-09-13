@@ -221,6 +221,35 @@
             // }
         }
 
+        function saveFacXls()
+    {
+        // try{
+            $sql = "INSERT INTO factura (nofac, confac, idemp, fefac, fvfac, forpag, tipfac, estfac) VALUES (:nofac, :confac, :idemp, :fefac, :fvfac, :forpag, :tipfac, :estfac)";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $nofac = $this->getnofac();
+                $result->bindParam(":nofac", $nofac);
+                $confac = $this->getConfac();
+                $result->bindParam(":confac", $confac);
+                $idemp = $this->getIdemp();
+                $result->bindParam(":idemp", $idemp);
+                $fefac = $this->getFefac();
+                $result->bindParam(":fefac", $fefac);
+                $fvfac = $this->getFvfac();
+                $result->bindParam(":fvfac", $fvfac); 
+                $forpag = $this->getForpag();
+                $result->bindParam(":forpag", $forpag);   
+                $tipfac = $this->getTipfac();
+                $result->bindParam(":tipfac", $tipfac);
+                $estfac = $this->getEstfac();
+                $result->bindParam(":estfac", $estfac);
+            $result->execute();
+        // } catch (Exception $e) {
+        //     ManejoError($e);
+        // }
+    }
+
         function nov(){
             //try{
                 $sql = "UPDATE factura SET idpernov=:idpernov, fnov=:fnov, obsnov=:obsnov WHERE idfac=:idfac";
@@ -349,6 +378,16 @@
             $result = $conexion->prepare($sql);
             $result->execute();
             $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
+        function selectEmp(){
+            $sql = "SELECT f.idemp, e.nitemp, COUNT(*) AS sum FROM factura AS f LEFT JOIN empresa AS e ON e.idemp = f.idemp WHERE nitemp=:nitemp";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
             return $res;
         }
 
@@ -493,18 +532,8 @@
         //     return $res;
         // }
 
-        // function getAllDom($iddomo, $iddomw)
-        // {
-        //     $sql = "SELECT iddom, nomdom FROM dominio WHERE iddom=:iddomo OR iddom=:iddomw";
-        //     $modelo = new conexion();
-        //     $conexion = $modelo->get_conexion();
-        //     $result = $conexion->prepare($sql);
-        //     $result->bindParam(":iddomo", $iddomo);
-        //     $result->bindParam(":iddomw", $iddomw);
-        //     $result->execute();
-        //     $res = $result->fetchall(PDO::FETCH_ASSOC);
-        //     return $res;
-        // }
+
     }
+
 
 ?>
