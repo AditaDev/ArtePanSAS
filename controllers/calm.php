@@ -26,9 +26,13 @@ if($arcpdf) $rutpdf = opti($arcpdf, $ppalm."_".$spalm, "arc/almuerzos/", $nmfl);
 $datOne = NULL;
 
 $malm->setIdalm($idalm);
+$malm->setIdped($idped);
 
 $datPed = $malm->getOnePed();
-$datEli = $malm->getAllDatPed();
+if ($ope == "eli" && $idped){
+    $malm->delped();
+echo "<script>window.location='home.php?pg=".$pg."';</script>";
+}
 
 if ($ope == "save") {
     $malm->setPpalm($ppalm);
@@ -48,14 +52,14 @@ if($ope=="savePed"){
     $malm->setSopa($sopa);
     $malm->setIdper($_SESSION['idper']);
     $malm->savePed(); 
-    echo "<script>alert('Has pedido ".$canalm." almuerzos exitosamente!!!');window.location='home.php?pg=".$pg."';</script>";
+    echo "<script>alert('Has pedido ".$canalm." almuerzo(s) exitosamente!!!');window.location='home.php?pg=".$pg."';</script>";
 }
 
 if ($ope == "edi" && $idalm) $datOne = $malm->getOne();
 if ($ope == "eli" && $idalm) $malm->del();
 
-if ($ope == "eli" && $idped) $malm->delped();
-
 $datAll = $malm->getAll();
 $datOneAlmF = $malm->getOneAlmF();
+$datAllPed = $malm->getAllPed();
+
 ?>

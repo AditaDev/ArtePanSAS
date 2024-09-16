@@ -128,29 +128,23 @@ body{
 
 </style>
 
-<?php
-    function lleno($label, $value) {
-        if (!empty($value)) {
-            echo "<strong>$label</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $value";
-        }
-    }
-?>
+
+<?php if ($datPed){ ?>
 
 
-<?php if ($datPed) { ?>
-   <img src="img/orders.png" class="pedido" >
-   <a href="home.php?pg=<?= $pg; ?>&idped=<?= $datPed['idped']; ?>&ope=eli" onclick="return eliminar ('<?= $datPed['idped']; ?>');">
-        <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
-    </a>
-
-
-
-
-   <!-- <?php if ($datEli) { ?>
-    <a href="home.php?pg=<?= $pg; ?>&idped=<?= $datEli['idped']; ?>&ope=eli" onclick="return eliminar ('<?= $datEli['idped']; ?>');">
-        <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
-    </a> -->
+    <img src="img/orders.png" class="pedido">
     
+    <?php if ($datAllPed){ ?>
+    <?php foreach ($datAllPed as $dta){ ?>
+        <div>
+            <a href="home.php?pg=<?= ($pg); ?>&idped=<?= ($dta['idped']); ?>&ope=eli" 
+               onclick="return confirmarEliminar('<?= ($dta['idped']); ?>');">
+                <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
+            </a>
+        </div>
+    <?php }?>
+
+
 
 
 <?php }}else{ if ($datOneAlmF) { ?>
@@ -162,22 +156,26 @@ body{
                         <div  class="titulo">Almuerzo del día</div>
                             <div class="cuerpo">
                                 <div class="form-group col-md-11">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php lleno('Plato principal: ',  $dta['ppalm']); ?>
+                                <strong>Plato principal: </strong> <?= $dta['ppalm']; ?><br>
                                 </div>
                                 <div class="form-group col-md-12">
-                                &nbsp;&nbsp;&nbsp;<?php lleno('Sopa: ', $dta['spalm']); ?>
+                                <?php if (!empty($dta['spalm'])): ?>
+                                <strong>Sopa: </strong> <?= $dta['spalm']; ?><br>
+                                <?php endif; ?>
                                 </div>
                                 <div class="form-group col-md-11">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php lleno('Jugo: ', $dta['jgalm']); ?>
+                                <?php if (!empty($dta['jgalm'])): ?>
+                                <strong>Jugo: </strong> <?= $dta['jgalm']; ?><br>
+                                <?php endif; ?>
                                 </div>
                                 <div class="form-group col-md-10">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="canalm"><strong>Cantidad:</strong></label>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" value="<?php if ($datOne) echo $datOne[0]['canalm']; ?>" id="canalm" name="canalm" min="1" max="10" placeholder=" #" required>
+                                <label for="canalm"><strong>Cantidad:</strong></label>
+                                <input type="number" value="<?php if ($datOne) echo $datOne[0]['canalm']; ?>" id="canalm" name="canalm" min="1" max="10" placeholder=" #" required>
                                 
                                 </div>
                                 <div class="form-group col-md-12">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="sopa"><strong>Sopa:</strong></label>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="sopa" id="sopa_yes" value="1" <?php if ($datOne && $datOne[0]['sopa'] == 1) echo " checked "; ?>>
+                                <label for="sopa"><strong>Sopa:</strong></label>
+                                <input type="radio" name="sopa" id="sopa_yes" value="1" <?php if ($datOne && $datOne[0]['sopa'] == 1) echo " checked "; ?>>
                                     <label class="form-check-label" class="form-group col-md-2" for="sopa_yes">
                                     Sí
                                 </label>

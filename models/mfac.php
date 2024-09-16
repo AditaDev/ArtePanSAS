@@ -21,6 +21,8 @@
         private $idpernov;
         private $fnov;
         private $obsnov;
+        private $nitemp;
+
 
         
         //------------GET-----------
@@ -81,6 +83,10 @@
         public function getObsnov(){
             return $this->obsnov;
         }
+        public function getNitemp(){
+            return $this->nitemp;
+        }
+
 
         //------------SET-----------
         public function setIdfac($idfac){
@@ -139,6 +145,9 @@
         }
         public function setObsnov($obsnov){
             $this->obsnov=$obsnov;
+        }
+        public function setNitemp($nitemp){
+            $this->nitemp=$nitemp;
         }
        
       
@@ -228,7 +237,7 @@
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
-            $nofac = $this->getnofac();
+                $nofac = $this->getnofac();
                 $result->bindParam(":nofac", $nofac);
                 $confac = $this->getConfac();
                 $result->bindParam(":confac", $confac);
@@ -244,6 +253,39 @@
                 $result->bindParam(":tipfac", $tipfac);
                 $estfac = $this->getEstfac();
                 $result->bindParam(":estfac", $estfac);
+                // $fifac = $this->getFifac();
+                // $result->bindParam(":fifac", $fifac);
+            $result->execute();
+        // } catch (Exception $e) {
+        //     ManejoError($e);
+        // }
+    }
+
+    function EditFacXls()
+    {
+        // try{
+            $sql = "UPDATE factura SET (nofac=:nofac, confac=:confac, idemp=:idemp, fefac=:fefac, fvfac=:fvfac, forpag=:forpag, tipfac=:tipfac, estfac=:estfac) WHERE idfac=:idfac";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $nofac = $this->getnofac();
+            $result->bindParam(":nofac", $nofac);
+            $confac = $this->getConfac();
+            $result->bindParam(":confac", $confac);
+            $idemp = $this->getIdemp();
+            $result->bindParam(":idemp", $idemp);
+            $fefac = $this->getFefac();
+            $result->bindParam(":fefac", $fefac);
+            $fvfac = $this->getFvfac();
+            $result->bindParam(":fvfac", $fvfac); 
+            $forpag = $this->getForpag();
+            $result->bindParam(":forpag", $forpag);   
+            $tipfac = $this->getTipfac();
+            $result->bindParam(":tipfac", $tipfac);
+            $estfac = $this->getEstfac();
+            $result->bindParam(":estfac", $estfac);
+            // $fifac = $this->getFifac();
+            // $result->bindParam(":fifac", $fifac);
             $result->execute();
         // } catch (Exception $e) {
         //     ManejoError($e);
@@ -381,15 +423,16 @@
             return $res;
         }
 
-        function selectEmp(){
-            $sql = "SELECT f.idemp, e.nitemp, COUNT(*) AS sum FROM factura AS f LEFT JOIN empresa AS e ON e.idemp = f.idemp WHERE nitemp=:nitemp";
-            $modelo = new conexion();
-            $conexion = $modelo->get_conexion();
-            $result = $conexion->prepare($sql);
-            $result->execute();
-            $res = $result->fetchAll(PDO::FETCH_ASSOC);
-            return $res;
-        }
+        // function getSelectEmp($idemp){
+        //     $sql = "SELECT idemp, nitemp FROM empresa WHERE idemp=:idemp";
+        //     $modelo = new conexion();
+        //     $conexion = $modelo->get_conexion();
+        //     $result = $conexion->prepare($sql);
+        //     $result->bindParam(":idemp", $idemp);
+        //     $result->execute();
+        //     $res = $result->fetchall(PDO::FETCH_ASSOC);
+        //     return $res;
+        // }
 
         function getOneEmp($idemp){
             $sql = "SELECT e.idemp, e.nitemp, e.razsoem FROM empresa AS e INNER JOIN factura AS f ON e.idemp=f.idemp WHERE f.idemp=:idemp";

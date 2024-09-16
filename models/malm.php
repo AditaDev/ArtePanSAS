@@ -183,6 +183,15 @@ class Malm
     }
 
 //--------Pedido-------
+    function getAllPed(){ 
+        $sql = "SELECT idped, idalm, fecped FROM pedido WHERE DATE(fecped) >= DATE(NOW())";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->execute();
+        $res = $result->fetchall(PDO::FETCH_ASSOC);
+        return $res; 
+    }
 
     function getOneAlmF(){
             $sql = "SELECT idalm, ppalm, spalm, jgalm, fecalm FROM almuerzo WHERE DATE(fecalm) >= DATE(NOW())";
@@ -195,7 +204,7 @@ class Malm
         }   
     
     function getAllDatPed(){
-            $sql = "SELECT p.idped, a.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm, p.fecped, p.idper, p.canalm, p.sopa, CONCAT(l.nomper,' ',l.apeper) AS nomper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm INNER JOIN persona AS l ON p.idper=l.idper WHERE p.idalm=:idalm";
+            $sql = "SELECT p.idped, a.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm, p.fecped, p.idper, p.canalm, p.sopa, CONCAT(l.nomper,' ',l.apeper) AS nomper, l.ndper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm INNER JOIN persona AS l ON p.idper=l.idper WHERE p.idalm=:idalm";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -252,7 +261,6 @@ class Malm
         //     ManejoError($e);
         // }
         }
-
     
     }
 ?>

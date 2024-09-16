@@ -1,14 +1,12 @@
 <?php
  require_once ('controllers/calm.php'); ?>
 
+    <div style="text-align: right;">
+        <a href="excel/xfac.php" title="Exportar Almuerzos">
+            <i class="fa fa-solid fa-file-export fa-2x exp"></i>
+        </a>
+    </div>
 
-<?php
-    function lleno($label, $value) {
-        if (!empty($value)) {
-            echo "<strong>$label</strong> $value";
-        }
-    }
-?>
 
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
     <div class="row">
@@ -56,9 +54,14 @@
                         <small>
                         
                         <strong><?= $dta['fecalm']; ?> </strong><br>
-                        <?php lleno('Plato principal: ', $dta['ppalm']); ?> &nbsp;&nbsp;&nbsp;&nbsp;
-                        <?php lleno('Sopa: ', $dta['spalm']); ?> &nbsp;&nbsp;&nbsp;&nbsp;
-                        <?php lleno('Jugo: ', $dta['jgalm']); ?>
+
+                        <strong>Plato principal: </strong> <?= $dta['ppalm']; ?>&#160;
+                        <?php if (!empty($dta['spalm'])): ?>
+                        <strong>Sopa:</strong> <?=($dta['spalm']); ?>&#160;
+                        <?php endif; ?>
+                        <?php if (!empty($dta['jgalm'])): ?>
+                        <strong>Jugo: </strong> <?= $dta['jgalm']; ?>
+                        <?php endif; ?>
                         </small>
                     </td>
                     <td tyle="text-align: half;">
