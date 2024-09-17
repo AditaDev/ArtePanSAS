@@ -216,7 +216,10 @@
             // $mfac->setIdpercre($idpercre);
     		$nofac = $sheet->getCell("B" . $row)->getValue();
     		$confac = $sheet->getCell("C" . $row)->getValue();
-    		$idemp = $sheet->getCell("D" . $row)->getValue();
+    		$nitemp = $sheet->getCell("D" . $row)->getValue();
+            $mfac->setNitemp($nitemp);
+            $comemp = $mfac->CompEmp();
+            $idemp = $comemp[0]['idemp'];
             $fefac = $sheet->getCell("E" . $row)->getValue();
             $fvfac = $sheet->getCell("F" . $row)->getValue();
             $forpag = $sheet->getCell("G" . $row)->getValue();

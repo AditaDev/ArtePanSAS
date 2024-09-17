@@ -63,15 +63,73 @@ $style->getFont()->setBold(true);
 //información
 $datos = [];
 
-if ($datfec) {
-    foreach ($datfec as $dat) {
 
+if ($datper) {
+     foreach ($datper as $dat) {
+        $filaDatos = [$dat['ndper'], $dat['nomper'],];
 
-        $filaDatos = [$dat['ndper'], $dat['nomper'], $dat['fifac'], $dat['nofac'], $dat['fefac'], $dat['fvfac'], $dat['tip'], $dat['est']];
-            
-        $datos[] = $filaDatos;
+//         if ($asg == "equ") $filaDatos[] = $dat['tpe'];
+
+//         $filaDatos = array_merge($filaDatos, [ $dat['marca'], $dat['modelo'], $dat['serialeq'],]);
+
+//         if ($asg == "equ") {
+//             $filaDatos[] = $dat['nomred'];
+//             // Obtener y agregar datos adicionales de $mequ
+//             $mequ->setIdequ($dat["idequ"]);
+//             $prgs = $mequ->getOnePxE();
+//             if ($prgs) {
+//                 foreach ($prgs as $pr) {
+//                     $filaDatos[] = $pr['nomval'].' '.$pr['verprg'];
+//                 }
+//             } else $filaDatos = array_merge($filaDatos, [ '', '',]);
+//         } elseif ($asg == "cel") {
+//             $filaDatos = array_merge($filaDatos, [ $dat['numcel'], $dat['operador'],]);
+//         }
+
+//         // Agregar marcadores 'X' según la condición
+//         $datAxE = $masg->getAllAxE($dat["ideqxpr"]);
+//         if ($datAcc) {
+//             foreach ($datAcc as $dac) {
+//                 $marcadorEncontrado = false;
+//                 if ($datAxE){    
+//                     foreach ($datAxE as $dae) {
+//                         if ($dac['idval'] == $dae['idvacc']) {
+//                             $filaDatos[] = 'X';
+//                             $marcadorEncontrado = true;
+//                             break; // Terminar el bucle interno si se encuentra el marcador
+//                         }
+//                     }
+//                 } if (!$marcadorEncontrado) {
+//                     $filaDatos[] = ''; // Opcional: dejar en blanco si no hay coincidencia
+//                 }
+//             }
+//         }
+
+//         // Agregar datos finales
+//         $filaDatos = array_merge($filaDatos, [ $dat['fecent'], $dat['pent'], $dat['cpent'], $dat['prec'], $dat['cprec'], $dat['observ'], $dat['fecdev'], $dat['pentd'], $dat['cpentd'], $dat['precd'], $dat['cprecd'], $dat['observd'],
+//         ]);
+
+//         // Agregar la fila completa al array $datos
+//         $datos[] = $filaDatos;
     }
 }
+
+
+
+$fechas = $malm->getAllDatPed();
+                if ($fechas) {
+                    foreach ($fechas as $fc) {
+                        $filaDatos[] = $fc['fecalm'];
+                    }
+                } else $filaDatos = '';
+
+
+
+
+
+ $datos[] = $filaDatos;
+
+
     
 // Agregar datos dinámicos
 $fila = 4; // Comienza en la fila 3 porque la fila 1 y 2 tiene encabezados

@@ -3,6 +3,7 @@ require_once 'models/malm.php';
 
 $malm = new Malm();
 
+
 //--------Almuerzo-------
 $idalm = isset($_REQUEST['idalm']) ? $_REQUEST['idalm'] : NULL;
 $ppalm = isset($_POST['ppalm']) ? $_POST['ppalm'] : NULL;
@@ -29,7 +30,8 @@ $malm->setIdalm($idalm);
 $malm->setIdped($idped);
 
 $datPed = $malm->getOnePed();
-if ($ope == "eli" && $idped){
+
+if ($ope == "eli" && $idped){ 
     $malm->delped();
 echo "<script>window.location='home.php?pg=".$pg."';</script>";
 }
@@ -55,11 +57,12 @@ if($ope=="savePed"){
     echo "<script>alert('Has pedido ".$canalm." almuerzo(s) exitosamente!!!');window.location='home.php?pg=".$pg."';</script>";
 }
 
-if ($ope == "edi" && $idalm) $datOne = $malm->getOne();
+if ($ope == "edi" && $idalm) $datOne = $malm->getOne($idalm);
 if ($ope == "eli" && $idalm) $malm->del();
 
 $datAll = $malm->getAll();
 $datOneAlmF = $malm->getOneAlmF();
-$datAllPed = $malm->getAllPed();
+
+$datAllPed = $malm->getOnePed();
 
 ?>

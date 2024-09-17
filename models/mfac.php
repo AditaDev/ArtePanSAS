@@ -465,6 +465,18 @@
             ManejoError($e);
         }
     }
+
+    function CompEmp(){
+		$sql = "SELECT idemp, COUNT(*) AS sum FROM empresa WHERE nitemp=:nitemp";
+		$modelo = new conexion();
+		$conexion = $modelo->get_conexion();
+		$result = $conexion->prepare($sql);
+        $nitemp = $this->getNitemp();
+        $result->bindParam(":nitemp", $nitemp);
+		$result->execute();
+		$res = $result->fetchAll(PDO::FETCH_ASSOC);
+		return $res;
+	}
        
 
         // function getEqxEp($idequ){

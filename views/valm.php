@@ -2,7 +2,7 @@
  require_once ('controllers/calm.php'); ?>
 
     <div style="text-align: right;">
-        <a href="excel/xfac.php" title="Exportar Almuerzos">
+        <a href="excel/xalm.php" title="Exportar Almuerzos">
             <i class="fa fa-solid fa-file-export fa-2x exp"></i>
         </a>
     </div>
