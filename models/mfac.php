@@ -22,6 +22,7 @@
         private $fnov;
         private $obsnov;
         private $nitemp;
+        private $idval;
 
 
         
@@ -86,6 +87,9 @@
         public function getNitemp(){
             return $this->nitemp;
         }
+        public function getIdval(){
+            return $this->idval;
+        }
 
 
         //------------SET-----------
@@ -148,6 +152,9 @@
         }
         public function setNitemp($nitemp){
             $this->nitemp=$nitemp;
+        }
+        public function setIdval($idval){
+            $this->idval=$idval;
         }
        
       
@@ -233,7 +240,7 @@
         function saveFacXls()
     {
         // try{
-            $sql = "INSERT INTO factura (nofac, confac, idemp, fefac, fvfac, forpag, tipfac, estfac) VALUES (:nofac, :confac, :idemp, :fefac, :fvfac, :forpag, :tipfac, :estfac)";
+            $sql = "INSERT INTO factura (nofac, confac, idemp, fefac, fvfac, forpag, tipfac, estfac, idpercre) VALUES (:nofac, :confac, :idemp, :fefac, :fvfac, :forpag, :tipfac, :estfac, :idpercre)";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -253,8 +260,8 @@
                 $result->bindParam(":tipfac", $tipfac);
                 $estfac = $this->getEstfac();
                 $result->bindParam(":estfac", $estfac);
-                // $fifac = $this->getFifac();
-                // $result->bindParam(":fifac", $fifac);
+                $idpercre = $this->getIdpercre();
+                $result->bindParam(":idpercre", $idpercre);
             $result->execute();
         // } catch (Exception $e) {
         //     ManejoError($e);
@@ -264,10 +271,12 @@
     function EditFacXls()
     {
         // try{
-            $sql = "UPDATE factura SET (nofac=:nofac, confac=:confac, idemp=:idemp, fefac=:fefac, fvfac=:fvfac, forpag=:forpag, tipfac=:tipfac, estfac=:estfac) WHERE idfac=:idfac";
+            $sql = "UPDATE factura SET nofac=:nofac, confac=:confac, idemp=:idemp, fefac=:fefac, fvfac=:fvfac, forpag=:forpag, tipfac=:tipfac, estfac=:estfac WHERE idfac=:idfac";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
+            $idfac = $this->getIdfac();
+            $result->bindParam(":idfac", $idfac);
             $nofac = $this->getnofac();
             $result->bindParam(":nofac", $nofac);
             $confac = $this->getConfac();
@@ -477,6 +486,48 @@
 		$res = $result->fetchAll(PDO::FETCH_ASSOC);
 		return $res;
 	}
+
+    function CompVal(){
+		$sql = "SELECT idval, COUNT(*) AS sum FROM valor WHERE idval=:idval";
+		$modelo = new conexion();
+		$conexion = $modelo->get_conexion();
+		$result = $conexion->prepare($sql);
+        $idval = $this->getIdval();
+        $result->bindParam(":idval", $idval);
+		$result->execute();
+		$res = $result->fetchAll(PDO::FETCH_ASSOC);
+		return $res;
+	}
+
+    function selectUsu(){
+        $sql = "SELECT idper, COUNT(*) AS sum FROM persona WHERE idper=:idper";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $idper=$this->getIdper();
+        $result->bindParam(":idper",$idper);
+        $result->execute();
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
+    function selectFac(){ //Con esta funcion se comprueba si la factura ya existe, se comparan datos que pueden ser "unicos" o que es dificil que se repitan
+        $sql = "SELECT idfac, COUNT(*) AS sum FROM factura WHERE nofac=:nofac AND fefac=:fefac AND fvfac=:fvfac";
+        // creo yo que esos valores es un poco difícil que se repitan en 2 facturas
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $nofac=$this->getNofac();
+        $result->bindParam(":nofac",$nofac);
+        $fefac=$this->getFefac();
+        $result->bindParam(":fefac",$fefac);
+        $fvfac=$this->getFvfac();
+        $result->bindParam(":fvfac",$fvfac);
+        $result->execute();
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
        
 
         // function getEqxEp($idequ){

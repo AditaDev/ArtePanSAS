@@ -217,21 +217,36 @@
     		$nofac = $sheet->getCell("B" . $row)->getValue();
     		$confac = $sheet->getCell("C" . $row)->getValue();
     		$nitemp = $sheet->getCell("D" . $row)->getValue();
+
             $mfac->setNitemp($nitemp);
             $comemp = $mfac->CompEmp();
             $idemp = $comemp[0]['idemp'];
+
             $fefac = $sheet->getCell("E" . $row)->getValue();
             $fvfac = $sheet->getCell("F" . $row)->getValue();
             $forpag = $sheet->getCell("G" . $row)->getValue();
+
+            $mfac->setIdval($forpag);
+            $comfp = $mfac->CompVal();
+            $forpag = $comfp[0]['idval'];
+
     		$tipfac = $sheet->getCell("H" . $row)->getValue();
-    		$esfac = $sheet->getCell("I" . $row)->getValue();
+
+            $mfac->setIdval($tipfac);
+            $comtp = $mfac->CompVal();
+            $tipfac = $comtp[0]['idval'];
+
+    		$esfac = $sheet->getCell("I" . $row)->getValue(); //este es el valor que obtines, lo guardas en estfac
+
+            $mfac->setIdval($estfac); //aca envias el valor que obtuviste en el excel//entonces el que debes enviar aca es estfac
+            $comes = $mfac->CompVal(); //comprubas que ese valor exista, 
+            $estfac = $comes[0]['idval']; //Luego de comprobar guardas ese nuevo valor en la variable//si existe trae el id y si no queda en NULL
 
             // $fifac = $sheet->getCell("J" . $row)->getValue();
 
             if (is_numeric($fefac)) $fefac = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($fefac)->format('Y-m-d');
             if (is_numeric($fvfac)) $fvfac = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($fvfac)->format('Y-m-d');
             // if (is_numeric($fifac)) $fifac = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($fifac)->format('Y-m-d');
-    
             $mfac->setNofac($nofac);
             $mfac->setConfac($confac);
             $mfac->setIdemp($idemp);
@@ -239,23 +254,25 @@
             $mfac->setFvfac($fvfac);
             $mfac->setForpag($forpag);
             $mfac->setTipfac($tipfac);
+
             // $mfac->setFifac($fifac);
             $mfac->setEstfac($estfac);
-    		$existingData = $mfac->getAll();
+            $mfac->setIdpercre($_SESSION['idper']);
+    		$existingData = $mfac->selectFac();
             $idfac = $existingData[0]['idfac'];
             $mfac->setIdfac($idfac);
-    			if ($idfac == 0) $mfac->saveFacXls();
+            if($idemp AND $forpag AND $tipfac AND $estfac){ //solo si despues de comprobar que los valores del excel existan y todos estan llenos...
+    			if ($existingData[0]['sum'] == 0) $mfac->saveFacXls(); //Si al hacer el conteo de las facturas que cumplen con las condiciones que se colocaron en el modelo, el conteo es 0, la factura no existe y la crea, si es diferente a 0 la edita
     			else $mfac->EditFacXls();
-    		
-                $reg = $row;
-                $row = $highestRow+5;
-
-                
+            }else{ //Si alguno de los datos del excel que va a comprobar en ese registro esta vacio
+                $reg = $row; // Iguala reg al valor de la ultima fila hasta donde guardo antes de dar error
+                $row = $highestRow+5; //coloca el valor de row como el de la utlima columna en la que hay registros + 5 para así forzar a que se corte el ciclo, creo que se puede hacer con break pero no toma el condicional del mensaje
+            }
     	}
-        if($row>$highestRow+5) die;
-        // if($row>$highestRow+5) echo '<script>err("Ooops... Algo esta mal en la fila #'.$reg.', corrígelo y vuelve a subir el archivo");</script>';
+        // if($row>$highestRow+5) die;
+        if($row>$highestRow+5) echo '<script>err("Ooops... Algo esta mal en la fila #'.$reg.', corrígelo y vuelve a subir el archivo");</script>';
         else echo '<script>satf("Todos los datos han sido registrados con exito, por favor espere un momento");</script>';
-        // echo "<script>setTimeout(function(){ window.location='home.php?pg=".$pg."';}, 7000);</script>";
+        echo "<script>setTimeout(function(){ window.location='home.php?pg=".$pg."';}, 7000);</script>";
     }
 ?>
 

@@ -209,6 +209,18 @@ function err(mess=""){
 
 }
 
+function satf(mess=""){
+  if(mess){
+      mess = "¡"+mess+"!";
+      document.getElementById("satf").innerHTML = mess;
+      document.getElementById("satf").style.display = "inline-block";
+  }else{
+      document.getElementById("satf").innerHTML = "";
+      document.getElementById("satf").style.display = "none";
+  }
+
+}
+
 // combobox1 JQeuryUI
 $( function() {
     $.widget( "custom.combobox1", {
