@@ -10,7 +10,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         
 
 
-        <a href="excel/xfac.php" title="Exportar Tarjetas">
+        <a href="excel/xfac.php" title="Exportar Facturas">
     <i class="fa fa-solid fa-file-export fa-2x exp"></i>
         </a>
     </div>

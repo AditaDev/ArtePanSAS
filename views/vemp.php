@@ -2,6 +2,17 @@
 include('controllers/cemp.php');
 ?>
 
+    <div style="text-align: right;">
+   
+        
+
+
+        <a href="excel/xemp.php" title="Exportar Empresas">
+    <i class="fa fa-solid fa-file-export fa-2x exp"></i>
+        </a>
+    </div>
+
+
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
     <div class="row">
         <div class="form-group col-md-6">
