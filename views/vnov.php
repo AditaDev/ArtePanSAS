@@ -13,7 +13,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 </a>
             </div>
        
-<?php if($nov){ if ($_SESSION['idpef'] == 7) { ?>
+<?php if($nov){ if ($_SESSION['idpef'] == 7  OR $_SESSION['idpef'] == 1) { ?>
     <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
         <div class="row">
                 <div class="form-group col-md-3">

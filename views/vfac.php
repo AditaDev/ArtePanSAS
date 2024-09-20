@@ -8,8 +8,6 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>carfac" title="Importar Facturas"></i>
     <?php modalImp("mod", $pg, "Facturas", "carfac", ""); ?>
         
-
-
         <a href="excel/xfac.php" title="Exportar Facturas">
     <i class="fa fa-solid fa-file-export fa-2x exp"></i>
         </a>

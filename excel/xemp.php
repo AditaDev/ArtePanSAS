@@ -2,7 +2,6 @@
 require_once ("../models/seguridad.php");
 require_once ('../models/conexion.php');
 require_once ('../models/memp.php');
-
 require ('../vendor/autoload.php');
 
 ini_set('memory_limit', '4096M');
@@ -70,7 +69,7 @@ if ($datAll) {
 $fila = 4; // Comienza en la fila 3 porque la fila 1 y 2 tiene encabezados
 foreach ($datos as $dato) {
     $sheet->fromArray($dato, NULL, 'A' . $fila);
-    $sheet->getStyle('A'.$fila.':C'.$fila)->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_NUMBER);
+    $sheet->getStyle('B'.$fila.':C'.$fila)->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_NUMBER);
     $fila++;
 }
 

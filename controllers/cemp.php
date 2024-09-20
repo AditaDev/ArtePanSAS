@@ -1,5 +1,6 @@
 <?php
-require_once("models/memp.php");
+    require_once("models/memp.php");
+    require ('vendor/autoload.php');
 
     use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -25,19 +26,24 @@ require_once("models/memp.php");
     if ($ope == "save") {
         $memp->setNitemp($nitemp);
         $memp->setRazsoem($razsoem);
-          
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
+        
     $memp->setActemp($actemp);
     if (!$idemp) $memp->save();
     else $memp->edit();
 
-}
+    }
+   
 
 if ($ope == "act" && $idemp && $actemp) {
     $memp->setActemp($actemp);
     $memp->editActEmp();
     echo "<script>window.location='home.php?pg=".$pg."';</script>";
 }
-if ($ope == "eli" && $idemp) $memp->del();
+if ($ope == "eli" && $idemp) {
+    $memp->del();
+    echo "<script>window.location='home.php?pg=".$pg."';</script>";}
+
 if ($ope == "edi" && $idemp) $datOne = $memp->getOne();
 
 
@@ -57,12 +63,6 @@ if ($ope=="caremp" && $arc) {
     
         
         $nitemp = $sheet->getCell("B" . $row)->getValue();
-
-        // Se comprueba que el id de la empresa exista
-        $memp->setNitemp($nitemp);
-        $comemp = $memp->CompEmp();
-        $idemp = $comemp[0]['idemp'];
-
         $razsoem = $sheet->getCell("C" . $row)->getValue();
         $actemp = $sheet->getCell("D" . $row)->getValue();
 
@@ -74,17 +74,10 @@ if ($ope=="caremp" && $arc) {
         $existingData = $memp->CompEmp();
         $idemp = $existingData[0]['idemp'];
         $memp->setIdemp($idemp);
-        if($idemp){
-            if ($existingData[0]['sum'] == 0) $memp->saveEmpXls();
-            else $memp->EditEmpXls();
-        }else{ //Si alguno de los datos del excel que va a comprobar en ese registro esta vacio
-            $reg = $row; // Iguala reg al valor de la ultima fila hasta donde guardo antes de dar error
-            $row = $highestRow+5; //coloca el valor de row como el de la utlima columna en la que hay registros + 5 para así forzar a que se corte el ciclo, creo que se puede hacer con break pero no toma el condicional del mensaje
-        }
+        if ($existingData[0]['sum'] == 0) $memp->saveEmpXls();
+        else $memp->EditEmpXls();
     }
-    // if($row>$highestRow+5) die;
-    if($row>$highestRow+5) echo '<script>err("Ooops... Algo esta mal en la fila #'.$reg.', corrígelo y vuelve a subir el archivo");</script>';
-    else echo '<script>satf("Todos los datos han sido registrados con exito, por favor espere un momento");</script>';
+    echo '<script>satf("Todos los datos han sido registrados con exito, por favor espere un momento");</script>';
     echo "<script>setTimeout(function(){ window.location='home.php?pg=".$pg."';}, 7000);</script>";
 }
  
