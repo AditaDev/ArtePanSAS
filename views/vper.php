@@ -16,7 +16,7 @@ require_once('controllers/cper.php');
             <label for="ndper"><strong>N° Documento:</strong></label>
             <input class="form-control" type="text" id="ndper" name="ndper" value="<?php if ($datOne) echo $datOne[0]['ndper']; ?>" onkeypress="return solonum(event);" required>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
             <label for="area"><strong>Area:</strong></label>
             <select name="area" id="area" class="form-control form-select" required>
                     <?php foreach ($datarea as $dte) { ?>
@@ -26,28 +26,24 @@ require_once('controllers/cper.php');
                     <?php } ?>
             </select>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
             <label for="apeper"><strong>Correo Electrónico:</strong></label>
             <input class="form-control" type="email" id="emaper" name="emaper" value="<?php if ($datOne) echo $datOne[0]['emaper']; ?>" required>
         </div>
-        <div class="form-group col-md-3">
-            <label for="apeper"><strong>N° telefono:</strong></label>
-            <input class="form-control" type="text" id="telper" name="telper" value="<?php if ($datOne) echo $datOne[0]['telper']; ?>" onkeypress="return solonum(event);" required>
-        </div>
         <?php if ($_SESSION['idpef'] != 3) { ?>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-4">
                 <label for="actper" class="titulo"><strong>Activo:</strong></label>
                 <select name="actper" id="actper" class="form-control form-select" required>
                     <option value="1" <?php if ($datOne && $datOne[0]['actper'] == 1) echo " selected "; ?>>Si</option>
                     <option value="2" <?php if ($datOne && $datOne[0]['actper'] == 2) echo " selected "; ?>>No</option>
                 </select>
             </div>
-        <?php } if (!$datOne && $_SESSION['idpef'] == 5) { ?>
+        <!-- <?php } if (!$datOne && $_SESSION['idpef'] == 1) { ?>
                 <div class="form-group col-md-4">
                     <label for="pasper"><strong>Contraseña:</strong></label>
                     <input class="form-control" type="password" id="pasper" name="pasper" required>
                 </div>
-        <?php } ?>
+        <?php } ?> -->
         <div class="form-group col-md-12" id="boxbtn">
             <br><br>
             <input class="btn btn-primary" type="submit" value="Registrar">
@@ -97,7 +93,7 @@ require_once('controllers/cper.php');
                         <?php } ?>
                 <?php } ?>
                 <td style="text-align: right;">
-                    <a href="home.php?pg=<?= $pg; ?>&idper=<?= $dta['idper']; ?>&ope=edi" title="Editar">
+                <a href="home.php?pg=<?= $pg; ?>&idper=<?= $dta['idper']; ?>&ope=edi" title="Editar">
                         <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
                     </a>
                     <?php if ($_SESSION['idpef'] != 3) { ?>

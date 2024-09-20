@@ -93,7 +93,7 @@ class Mper
     //------------Persona-----------
     function getAll()
     {
-        $sql = "SELECT idper, nomper, apeper, ndper, area, emaper, pasper, actper FROM persona WHERE idper";
+        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.pasper, p.area, p.actper, pf.idpef, v.nomval FROM persona AS p INNER JOIN valor AS v ON p.area=v.idval LEFT JOIN perxpef AS pf ON p.idper=pf.idper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -104,7 +104,7 @@ class Mper
 
     function getOne()
     {
-        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.area p.emaper, p.pasper, p.actper, pf.idpef FROM persona AS p INNER JOIN perxpef AS pf ON p.idper=pf.idper WHERE p.idper=pf.idper";
+        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.pasper, p.area, p.actper, pf.idpef, v.nomval FROM persona AS p INNER JOIN valor AS v ON p.area=v.idval LEFT JOIN perxpef AS pf ON p.idper=pf.idper WHERE p.idper=:idper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);

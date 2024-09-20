@@ -144,8 +144,12 @@ function modalPxM($nm, $id, $tit, $mods, $pfxmd, $pg){
 						$txt .= '<input type="submit" class="btn btn-primary btnmd" value="Guardar">';
 						$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
 					$txt .= '</div>';
-				
-						}
+				$txt .= '</form>';
+			$txt .= '</div>';
+		$txt .= '</div>';
+	$txt .= '</div>';
+	echo $txt;
+}
 
 //------------Modal vdot, firma-----------
 function modalFir($nm, $id, $det, $pg) {
