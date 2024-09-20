@@ -70,7 +70,7 @@ if ($datAll) {
 $fila = 4; // Comienza en la fila 3 porque la fila 1 y 2 tiene encabezados
 foreach ($datos as $dato) {
     $sheet->fromArray($dato, NULL, 'A' . $fila);
-    $sheet->getStyle('D'.$fila.':E'.$fila)->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_NUMBER);
+    $sheet->getStyle('A'.$fila.':C'.$fila)->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_NUMBER);
     $fila++;
 }
 

@@ -616,7 +616,7 @@ function modalImp($nm, $pg, $tit, $ope){
 	$txt = '';
 	$txt .= '<div class="modal fade" id="' . $nm . $pg . $ope.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
 		$txt .= '<div class="modal-dialog">';
-			$txt .= '<form action="home.php?pg=60';
+			$txt .= '<form action="home.php?pg='.$pg.'"';
 			$txt .= '" method="POST" enctype="multipart/form-data">';
 				$txt .= '<div class="modal-content">';
 					$txt .= '<div class="modal-header">';

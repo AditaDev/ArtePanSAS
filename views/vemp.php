@@ -3,9 +3,8 @@ include('controllers/cemp.php');
 ?>
 
     <div style="text-align: right;">
-   
-        
-
+        <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>caremp" title="Importar Empresas"></i>
+        <?php modalImp("mod", $pg, "Empresas", "caremp", ""); ?>
 
         <a href="excel/xemp.php" title="Exportar Empresas">
     <i class="fa fa-solid fa-file-export fa-2x exp"></i>

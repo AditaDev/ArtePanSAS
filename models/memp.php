@@ -71,6 +71,46 @@
                 ManejoError($e);
             }
         }
+
+        function saveEmpXls()
+    {
+        // try{
+            $sql = "INSERT INTO empresa ( nitemp, razsoem, actemp) VALUES (:nitemp, :razsoem, :actemp)";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $nitemp = $this->getNitemp();
+            $result->bindParam(":nitemp", $nitemp);
+            $razsoem = $this->getRazsoem();
+            $result->bindParam(":razsoem",$razsoem);
+            $actemp = $this->getActemp();
+            $result->bindParam(":actemp",$actemp);
+            $result->execute();
+        // } catch (Exception $e) {
+        //     ManejoError($e);
+        // }
+    }
+
+    function EditEmpXls()
+    {
+        // try{
+            $sql = "UPDATE empresa SET nitemp=:nitemp, razsoem=:razsoem, actemp=:actemp WHERE idemp=:idemp";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $idemp = $this->getIdemp();
+            $result->bindParam(":idemp", $idemp);
+            $nitemp = $this->getNitemp();
+            $result->bindParam(":nitemp", $nitemp);
+            $razsoem = $this->getRazsoem();
+            $result->bindParam(":razsoem",$razsoem);
+            $actemp = $this->getActemp();
+            $result->bindParam(":actemp",$actemp);
+            $result->execute();
+        // } catch (Exception $e) {
+        //     ManejoError($e);
+        // }
+    }
         function editActemp(){
             try{
                 $sql = "UPDATE empresa SET actemp=:actemp WHERE idemp=:idemp";
@@ -124,6 +164,18 @@
             $result->bindParam(':idemp',$idemp);
             $result->execute();
             $res = $result-> fetchall(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
+        function CompEmp(){
+            $sql = "SELECT idemp, COUNT(*) AS sum FROM empresa WHERE nitemp=:nitemp";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $nitemp = $this->getNitemp();
+            $result->bindParam(":nitemp", $nitemp);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
             return $res;
         }
 
