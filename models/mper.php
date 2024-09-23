@@ -94,6 +94,7 @@ class Mper
     function getAll()
     {
         $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.pasper, p.area, p.actper, pf.idpef, v.nomval FROM persona AS p INNER JOIN valor AS v ON p.area=v.idval LEFT JOIN perxpef AS pf ON p.idper=pf.idper";
+        $sql .= " GROUP BY p.idper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -117,10 +118,10 @@ class Mper
 
     function save()
     {
-        try {
+        //try {
             $sql = "INSERT INTO persona(nomper, apeper, ndper, area, emaper, actper";
             if ($this->getPasper()) $sql .= ", pasper";
-            $sql .= ") VALUES (:nomper, :apeper, :ndper, :emaper, :actper";
+            $sql .= ") VALUES (:nomper, :apeper, :ndper, :area, :emaper, :actper";
             if ($this->getPasper()) $sql .= ", :pasper";
             $sql .= ")";
             $modelo = new conexion();
@@ -132,21 +133,21 @@ class Mper
             $result->bindParam(":apeper", $apeper);
             $ndper = $this->getNdper();
             $result->bindParam(":ndper", $ndper);
+            $area = $this->getArea();
+            $result->bindParam(":area", $area);
             $emaper = $this->getEmaper();
             $result->bindParam(":emaper", $emaper);
             $actper = $this->getActper();
             $result->bindParam(":actper", $actper);
-            $area = $this->getArea();
-            $result->bindParam(":area", $area);
             if ($this->getPasper()) {
                 $pasper = $this->getPasper();
                 $pasper = sha1(md5($pasper)) . "Xg5%";
                 $result->bindParam(":pasper", $pasper);
             }
             $result->execute();
-        } catch (Exception $e) {
-            ManejoError($e);
-        }
+        // } catch (Exception $e) {
+        //     ManejoError($e);
+        // }
     }
 
     function editAct()
@@ -306,6 +307,9 @@ class Mper
             ManejoError($e);
         }
     }
+    
+
+     //------------Traer valores-----------
 
       function getAllDom($iddom)
     {

@@ -15,7 +15,7 @@
     $pasper = strtoupper(substr($nomper, 0, 1)).strtolower(substr($apeper, 0, 1)).$ndper;
     
     //------------Perfil-----------
-    $idpef = isset($_POST['idpef']) ? $_POST['idpef']:3;
+    $idpef = isset($_POST['idpef']) ? $_POST['idpef']:5;
     $datOne = NULL;
     $pg = 106;
 

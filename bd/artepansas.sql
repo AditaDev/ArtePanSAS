@@ -181,6 +181,7 @@ INSERT INTO `pefxmod` (`idmod`, `idpef`, `idpag`) VALUES
 (1, 10, 63),
 (1, 11, 63),
 (1, 12, 63),
+(1, 13, 63),
 
 (2, 1, 104),
 
@@ -316,7 +317,9 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 
 (63, 11),
 
-(63, 12);
+(63, 12),
+
+(63, 13);
 
 
 -- --------------------------------------------------------
@@ -362,7 +365,8 @@ INSERT INTO `perfil` (`idpef`, `nompef`) VALUES
 (9, 'Mantenimiento'),
 (10, 'Coordinador logistica'),
 (11, 'Coordinador calidad'),
-(12, 'Tesoreria');
+(12, 'Tesoreria'),
+(13, 'Jefe producción');
 
 
 -- --------------------------------------------------------
@@ -399,7 +403,8 @@ INSERT INTO `persona` (`idper`, `nomper`, `pasper`, `emaper`, `telper`, `apeper`
 (9, 'Fabian', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'fabianb@artepan.com', '322894463', 'Bastidas', '1077954332', 1, 49),
 (10, 'Jader', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'jader@artepan.com', '322894463', 'Mendoza', '1077954332', 1, 49),
 (11, 'Mery', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'mery@artepan.com', '322894463', 'Agudelo', '1077954332', 1, 49),
-(12, 'J', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'j@artepan.com', '322894463', 'Pardo', '1077954332', 1, 51);
+(12, 'J', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'j@artepan.com', '322894463', 'Pardo', '1077954332', 1, 51),
+(13, 'Conchita', '10470c3b4b1fed12c3baac014be15fac67c6e815', 'conchita@artepan.com', '322894463', 'Perez', '1077954332', 1, 46);
 
 -- --------------------------------------------------------
 
@@ -449,7 +454,10 @@ INSERT INTO `perxpef` (`idper`, `idpef`) VALUES
 (11, 5),
 
 (12, 12),
-(12, 5);
+(12, 5),
+
+(13, 13),
+(13, 5);
 
 -- --------------------------------------------------------
 

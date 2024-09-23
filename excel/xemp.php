@@ -112,6 +112,8 @@ $drawing->setHeight(50); // Altura de la imagen
 $drawing->setCoordinates('A1'); // Celda donde se ubicará la imagen
 $drawing->setWorksheet($sheet);
 
+var_dump($titulo, $datos);
+die;
 
 $filename = "EMPRESAS ARTEPAN ";
 

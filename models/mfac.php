@@ -171,6 +171,8 @@
                 $sql .= " WHERE f.tipfac = 25 AND (f.estfac = 52 OR f.estfac = 53)"; 
             }if ($idpef == 11 ) {
                 $sql .= " WHERE (f.tipfac = 58 OR f.tipfac = 59 OR f.tipfac = 60) AND (f.estfac = 52 OR f.estfac = 53)"; 
+            }if ($idpef == 13 ) {
+                $sql .= " WHERE (f.tipfac = 14 OR f.tipfac = 15 OR f.tipfac = 16) AND (f.estfac = 52 OR f.estfac = 54)"; 
             }
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
@@ -431,17 +433,6 @@
             $res = $result->fetchall(PDO::FETCH_ASSOC);
             return $res;
         }
-
-        // function getSelectEmp($idemp){
-        //     $sql = "SELECT idemp, nitemp FROM empresa WHERE idemp=:idemp";
-        //     $modelo = new conexion();
-        //     $conexion = $modelo->get_conexion();
-        //     $result = $conexion->prepare($sql);
-        //     $result->bindParam(":idemp", $idemp);
-        //     $result->execute();
-        //     $res = $result->fetchall(PDO::FETCH_ASSOC);
-        //     return $res;
-        // }
 
         function getOneEmp($idemp){
             $sql = "SELECT e.idemp, e.nitemp, e.razsoem FROM empresa AS e INNER JOIN factura AS f ON e.idemp=f.idemp WHERE f.idemp=:idemp";

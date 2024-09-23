@@ -5,6 +5,7 @@
         private $nommod;
         private $imgmod;
         private $actmod;
+        
         private $idpef;
 
         public function getIdmod(){
