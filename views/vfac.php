@@ -25,9 +25,11 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 <label for="confac"><strong>Concepto:</strong></label>
                 <input class="form-control" type="text" id="confac" name="confac" value="<?php if ($datOne) echo $datOne[0]['confac']; ?>" required>
             </div>
+
             <div class="form-group col-md-4">
-                <label for=""><strong>Empresa:</strong></label>
-                <select id="idempresa" name="idemp" class="form-control form-select" required>
+                <label for="idemp"><strong>Provedores:</strong></label>
+                <select id="combobox1" name="idemp" class="form-control form-select" <?php if ($datOne) echo 'disabled'; else echo 'required';?>>
+                <option value="0"></option>
                     <?php if ($datEmp) {
                         foreach ($datEmp as $dep) { ?>
                             <option value='<?= $dep['idemp']; ?>' <?php if ($datOne && $dep['idemp'] == $datOne[0]['idemp']) echo " selected "; ?>>
@@ -115,7 +117,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <div class="form-group col-md-10">
                                 <strong> <?= ($dta['nofac']) .  " - "  . $dta['confac']; ?></strong><br>
                                 <small>
-                                    <strong>Empresa: </strong> <?= $dta['razsoem']; ?><br>
+                                    <strong>provedores: </strong> <?= $dta['razsoem']; ?><br>
                                     <strong>Fecha de vencimiento: </strong><?= $dta['fvfac']; ?><br>
                                 </small>
 
@@ -207,4 +209,33 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         </tr>
     </tfoot>
 </table>
+<style>
+    .custom-combobox1,
+    .custom-combobox2-input {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .custom-combobox1-toggle,
+    .custom-combobox2-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+    }
+
+    .custom-combobox1-input,
+    .custom-combobox2-input {
+        margin: 0;
+        padding: 5px 10px;
+        width: 100%;
+        text-align: left;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        background-color: #fff;
+    }
+</style>
 

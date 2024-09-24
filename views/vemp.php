@@ -3,19 +3,26 @@ include('controllers/cemp.php');
 ?>
 
     <div style="text-align: right;">
-        <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>caremp" title="Importar Empresas"></i>
-        <?php modalImp("mod", $pg, "Empresas", "caremp", ""); ?>
+        <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>caremp" title="Importar provedoress"></i>
+        <?php modalImp("mod", $pg, "provedoress", "caremp", ""); ?>
 
-        <a href="excel/xemp.php" title="Exportar Empresas">
+        <a href="excel/xemp.php" title="Exportar provedoress">
     <i class="fa fa-solid fa-file-export fa-2x exp"></i>
         </a>
     </div>
 
 
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
-    <div class="row">
+    <div class="row">   
+    <div class="form-group col-md-6">
+            <label for="tipemp"><strong>T. Documento:</strong></label>
+            <select name="tipemp" id="tipemp" class="form-control form-select">
+                <option value="1" <?php if ($datOne && $datOne[0]['tipemp'] == 1) echo " selected "; ?>>Nit</option>
+                <option value="2" <?php if ($datOne && $datOne[0]['tipemp'] == 2) echo " selected "; ?>>CC</option>
+            </select>
+        </div>
         <div class="form-group col-md-6">
-            <label for="nitemp"><strong>NIT:</strong></label>
+            <label for="nitemp"><strong>Número:</strong></label>
             <input type="text" name="nitemp" id="nitemp" class="form-control" value="<?php if ($datOne) echo $datOne[0]['nitemp']; ?>" <?php if ($datOne) echo $datOne[0]['nitemp']; ?> onkeypress="return solonum(event);" required>
         </div>
         <div class="form-group col-md-6">
@@ -53,8 +60,10 @@ include('controllers/cemp.php');
                 <tr>
                     <td>
                         <small>
-                            <strong><?= $dta['razsoem']; ?> </strong>
-                            <br> NIT: <?= $dta['nitemp']; ?>              
+                            <strong><?= $dta['razsoem']; ?> </strong><br> 
+                            <?php if ($dta['tipemp']) { ?>
+                            <strong><?php echo ($dta['tipemp'] == 1) ? 'NIT' : 'CC'; ?></strong>
+                            <?php } ?> - <?= $dta['nitemp']; ?>         
                         </small>
                     </td>
                     <td style="text-align: left;">

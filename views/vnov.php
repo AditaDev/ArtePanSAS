@@ -18,7 +18,8 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         <div class="row">
                 <div class="form-group col-md-3">
                 <label for="idperg"><strong>Persona:</strong></label>
-                    <select id="idperg" name="idperg" class="form-control form-select" required>
+                <select id="combobox1" name="idperg" class="form-control form-select" <?php if ($datOne) echo 'disabled'; else echo 'required';?>>
+                <option value="0"></option>
                         <?php if ($datPer) {
                             foreach ($datPer as $dep) { ?>
                                 <option value='<?= $dep['idper']; ?>' <?php if ($datOne && $dep['idper'] == $datOne[0]['perg']) echo " selected "; ?>>
@@ -161,3 +162,32 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     </tfoot>
 </table>
 <?php } ?>
+<style>
+    .custom-combobox1,
+    .custom-combobox2-input {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .custom-combobox1-toggle,
+    .custom-combobox2-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+    }
+
+    .custom-combobox1-input,
+    .custom-combobox2-input {
+        margin: 0;
+        padding: 5px 10px;
+        width: 100%;
+        text-align: left;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        background-color: #fff;
+    }
+</style>

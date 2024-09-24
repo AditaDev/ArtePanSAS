@@ -2,6 +2,12 @@
 require_once('controllers/cper.php');
 ?>
 
+    <div style="text-align: right;">
+    <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>carper" title="Importar Personas"></i>
+    <?php modalImp("mod", $pg, "Personas", "carper", ""); ?>
+        
+    </div>
+
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
     <div class="row">
         <div class="form-group col-md-4">

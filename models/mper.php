@@ -10,42 +10,38 @@ class Mper
     private $emaper;
     private $pasper;
     private $actper;
+    private $idval;
 
     //------------Perfil-----------
     private $idpef;
 
     //------------Persona-----------
-    public function getIdper()
-    {
+    public function getIdper(){
         return $this->idper;
     }
-    public function getNomper()
-    {
+    public function getNomper(){
         return $this->nomper;
     }
-    public function getApeper()
-    {
+    public function getApeper(){
         return $this->apeper;
     }
-    public function getNdper()
-    {
+    public function getNdper(){
         return $this->ndper;
     }
-    public function getArea()
-    {
+    public function getArea(){
         return $this->area;
     }
-    public function getEmaper()
-    {
+    public function getEmaper(){
         return $this->emaper;
     }
-    public function getPasper()
-    {
+    public function getPasper(){
         return $this->pasper;
     }
-    public function getActper()
-    {
+    public function getActper(){
         return $this->actper;
+    }
+    public function getIdval(){
+        return $this->idval;
     }
     //------------Perfil-----------
     public function getIdpef()
@@ -53,37 +49,32 @@ class Mper
         return $this->idpef;
     }
     //------------Persona-----------
-    public function setIdper($idper)
-    {
+    public function setIdper($idper){
         $this->idper = $idper;
     }
-    public function setNomper($nomper)
-    {
+    public function setNomper($nomper){
         $this->nomper = $nomper;
     }
-    public function setApeper($apeper)
-    {
+    public function setApeper($apeper){
         $this->apeper = $apeper;
     }
-    public function setNdper($ndper)
-    {
+    public function setNdper($ndper){
         $this->ndper = $ndper;
     }
-    public function setArea($area)
-    {
+    public function setArea($area){
         $this->area = $area;
     }
-    public function setEmaper($emaper)
-    {
+    public function setEmaper($emaper){
         $this->emaper = $emaper;
     }
-    public function setPasper($pasper)
-    {
+    public function setPasper($pasper){
         $this->pasper = $pasper;
     }
-    public function setActper($actper)
-    {
+    public function setActper($actper){
         $this->actper = $actper;
+    }
+    public function setIdval($idval){
+        $this->idval = $idval;
     }
     //------------Perfil-----------
     public function setIdpef($idpef)
@@ -141,9 +132,67 @@ class Mper
             $result->bindParam(":actper", $actper);
             if ($this->getPasper()) {
                 $pasper = $this->getPasper();
-                $pasper = sha1(md5($pasper)) . "Xg5%";
+                $pasper = sha1(md5($pasper));
                 $result->bindParam(":pasper", $pasper);
             }
+            $result->execute();
+        // } catch (Exception $e) {
+        //     ManejoError($e);
+        // }
+    }
+
+    function savePerXls()
+    {
+        // try{
+            $sql = "INSERT INTO persona (nomper, apeper, ndper, emaper, area, actper, pasper) VALUES (:nomper, :apeper, :ndper, :emaper, :area, :actper, :pasper)";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+                $nomper = $this->getNomper();
+                $result->bindParam(":nomper", $nomper);
+                $apeper = $this->getApeper();
+                $result->bindParam(":apeper", $apeper);
+                $ndper = $this->getNdper();
+                $result->bindParam(":ndper", $ndper);
+                $emaper = $this->getEmaper();
+                $result->bindParam(":emaper", $emaper);
+                $area = $this->getArea();
+                $result->bindParam(":area", $area);
+                $actper = $this->getActper();
+                $result->bindParam(":actper", $actper);
+                $pasper = $this->getPasper();
+                $pasper = sha1(md5($pasper));
+                $result->bindParam(":pasper", $pasper);
+                $result->execute();
+        // } catch (Exception $e) {
+        //     ManejoError($e);
+        // }
+    }
+
+    function EditPerXls()
+    {
+        // try{
+            $sql = "UPDATE persona SET nomper=:nomper, apeper=:apeper, ndper=:ndper, emaper=:emaper, area=:area,  actper=:actper, pasper=:pasper WHERE idper=:idper";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+                $idper = $this->getIdper();
+                $result->bindParam(":idper", $idper);
+                $nomper = $this->getNomper();
+                $result->bindParam(":nomper", $nomper);
+                $apeper = $this->getApeper();
+                $result->bindParam(":apeper", $apeper);
+                $ndper = $this->getNdper();
+                $result->bindParam(":ndper", $ndper);
+                $emaper = $this->getEmaper();
+                $result->bindParam(":emaper", $emaper);
+                $area = $this->getArea();
+                $result->bindParam(":area", $area);
+                $actper = $this->getActper();
+                $result->bindParam(":actper", $actper);
+                $pasper = $this->getPasper();
+                $pasper = sha1(md5($pasper));
+                $result->bindParam(":pasper", $pasper);
             $result->execute();
         // } catch (Exception $e) {
         //     ManejoError($e);
@@ -333,4 +382,27 @@ class Mper
         $res = $result->fetchall(PDO::FETCH_ASSOC);
         return $res;
     }
+
+    function CompVal(){
+		$sql = "SELECT idval, COUNT(*) AS sum FROM valor WHERE idval=:idval";
+		$modelo = new conexion();
+		$conexion = $modelo->get_conexion();
+		$result = $conexion->prepare($sql);
+        $idval = $this->getIdval();
+        $result->bindParam(":idval", $idval);
+		$result->execute();
+		$res = $result->fetchAll(PDO::FETCH_ASSOC);
+		return $res;
+	}
+    function selectUsu(){
+		$sql = "SELECT idper, COUNT(*) AS sum FROM persona WHERE ndper=:ndper";
+		$modelo = new conexion();
+		$conexion = $modelo->get_conexion();
+		$result = $conexion->prepare($sql);
+		$ndper=$this->getNdper();
+		$result->bindParam(":ndper",$ndper);
+		$result->execute();
+		$res = $result->fetchAll(PDO::FETCH_ASSOC);
+		return $res;
+	}
 }

@@ -85,27 +85,28 @@ INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empresa`
+-- Estructura de tabla para la tabla `provedores`
 --
 
-CREATE TABLE `empresa` (
+CREATE TABLE `provedores` (
   `idemp` bigint(11) NOT NULL,
   `nitemp` bigint(11) DEFAULT NULL,
   `razsoem` varchar(100) DEFAULT NULL,
-  `actemp` tinyint(1) NOT NULL DEFAULT 1
+  `actemp` tinyint(1) NOT NULL DEFAULT 1,
+  `tipemp` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `empresa`
+-- Volcado de datos para la tabla `provedores`
 --
 
-INSERT INTO `empresa` (`idemp`, `nitemp`, `razsoem`, `actemp`) VALUES
-(1, 12345698, 'Cartones America', 1),
-(2, 98756485, 'Tracto Carga', 1),
-(3, 78516362, 'Palnorte', 1),
-(4, 95463198, 'Cimpa', 1),
-(5, 84521098, 'Quimerco', 1),
-(6, 4511255, 'te amo', 1);
+-- INSERT INTO `provedores` (`idemp`, `nitemp`, `razsoem`, `actemp`, `tipemp`) VALUES
+-- (1, 12345698, 'Cartones America', 1, 1),
+-- (2, 98756485, 'Tracto Carga', 1, 1),
+-- (3, 78516362, 'Palnorte', 1, 1),
+-- (4, 95463198, 'Cimpa', 1, 1),
+-- (5, 84521098, 'Quimerco', 1, 1),
+-- (6, 4511255, 'te amo', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -259,7 +260,7 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (106, 'fa fa-solid fa-user', 'Personas', 'views/vper.php', 6, 'home.php', 1, 2),
 (107, 'fa fa-solid fa-boxes-stacked', 'Dominio', 'views/vdom.php', 7, 'home.php', 1, 2),
 (108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 2),
-(109, 'fa fa-solid fa-building', 'Empresas', 'views/vemp.php', 11, 'home.php', 1, 1),
+(109, 'fa fa-solid fa-building', 'Provedores', 'views/vemp.php', 11, 'home.php', 1, 1),
 (110, 'fa fa-solid fa-solid fa-lightbulb', 'Novedades', 'views/vnov.php', 16, 'home.php', 1, 4),
 (111, 'fa fa-solid fa-solid fa-lightbulb', 'Dotación', 'views/vdot.php', 17, 'home.php', 1, 4);
 
@@ -628,9 +629,9 @@ ALTER TABLE `dominio`
   ADD PRIMARY KEY (`iddom`);
 
 --
--- Indices de la tabla `empresa`
+-- Indices de la tabla `provedores`
 --
-ALTER TABLE `empresa`
+ALTER TABLE `provedores`
   ADD PRIMARY KEY (`idemp`);
 
 --
@@ -734,7 +735,7 @@ ALTER TABLE `almuerzo`
 ALTER TABLE `dominio`
   MODIFY `iddom` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
-ALTER TABLE `empresa`
+ALTER TABLE `provedores`
   MODIFY `idemp` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -806,7 +807,7 @@ ALTER TABLE `dotacion`
 -- Filtros para la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`idemp`) REFERENCES `empresa` (`idemp`),
+  ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`idemp`) REFERENCES `provedores` (`idemp`),
   ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`idpercre`) REFERENCES `persona` (`idper`),
   ADD CONSTRAINT `factura_ibfk_3` FOREIGN KEY (`idperrev`) REFERENCES `persona` (`idper`),
   ADD CONSTRAINT `factura_ibfk_4` FOREIGN KEY (`idperapr`) REFERENCES `persona` (`idper`),

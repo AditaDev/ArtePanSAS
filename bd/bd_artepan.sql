@@ -19,7 +19,7 @@ INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (2, 'Bye');
 
 
-CREATE TABLE `empresa` (
+CREATE TABLE `provedores` (
   `idemp` bigint(11) NOT NULL,
   `nitemp` bigint(11) DEFAULT NULL,
   `razsoem` varchar(100) DEFAULT NULL
@@ -69,7 +69,7 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (106, 'fa fa-solid fa-user', 'Personas', 'views/vper.php', 6, 'home.php', 1, 2),
 (107, 'fa fa-solid fa-boxes-stacked', 'Dominio', 'views/vdom.php', 7, 'home.php', 1, 2),
 (108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 2),
-(109, 'fa fa-solid fa-building', 'Empresas', 'views/vemp.php', 11, 'home.php', 1, 1),
+(109, 'fa fa-solid fa-building', 'provedoress', 'views/vemp.php', 11, 'home.php', 1, 1),
 (60, 'fa-duotone fa-file-invoice', 'Facturas', 'views/vfac.php', 12, 'home.php', 1, 1),
 (61, 'fa-duotone fa-plate-utensils', 'Almuerzos', 'views/valm.php', 13, 'home.php', 1, 3),
 (62, 'fa fa-solid fa-file-invoice-dollar', 'Pedidos', 'views/vdtfac.php', 14, 'home.php', 1, 3);
@@ -167,7 +167,7 @@ ALTER TABLE `almuerzo`
 ALTER TABLE `dominio`
   ADD PRIMARY KEY (`iddom`);
 
-ALTER TABLE `empresa`
+ALTER TABLE `provedores`
   ADD PRIMARY KEY (`idemp`);
 
 ALTER TABLE `factura`
@@ -224,7 +224,7 @@ ALTER TABLE `almuerzo`
   ADD CONSTRAINT `almuerzo_ibfk_1` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`);
 
 ALTER TABLE `factura`
-  ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`idemp`) REFERENCES `empresa` (`idemp`),
+  ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`idemp`) REFERENCES `provedores` (`idemp`),
   ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`);
 
 ALTER TABLE `pagina`

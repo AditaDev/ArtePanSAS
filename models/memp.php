@@ -4,6 +4,7 @@
         private $nitemp;
         private $razsoem;
         private $actemp;
+        private $tipemp;
 
         public function getIdemp(){
             return $this->idemp;
@@ -16,6 +17,9 @@
         }
         public function getActemp(){
             return $this->actemp;
+        }
+        public function getTipemp(){
+            return $this->tipemp;
         }
 
         public function setIdemp($idemp){
@@ -30,10 +34,12 @@
         public function setActemp($actemp){
             $this->actemp=$actemp;
         }
-
+        public function setTipemp($tipemp){
+            $this->tipemp=$tipemp;
+        }
 
         function getAll(){
-            $sql = "SELECT idemp, nitemp, razsoem, actemp FROM empresa";
+            $sql = "SELECT idemp, nitemp, razsoem, actemp, tipemp FROM provedores";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -43,7 +49,7 @@
         }
 
         function getOne(){
-            $sql = "SELECT idemp, nitemp, razsoem, actemp FROM empresa WHERE idemp=:idemp";
+            $sql = "SELECT idemp, nitemp, razsoem, actemp, tipemp FROM provedores WHERE idemp=:idemp";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -56,7 +62,7 @@
 
         function save(){
             try{
-                $sql = "INSERT INTO empresa(nitemp, razsoem, actemp) VALUES (:nitemp, :razsoem, :actemp)";
+                $sql = "INSERT INTO provedores(nitemp, razsoem, actemp, tipemp) VALUES (:nitemp, :razsoem, :actemp, :tipemp)";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -66,6 +72,8 @@
                 $result->bindParam(":razsoem",$razsoem);
                 $actemp = $this->getActemp();
                 $result->bindParam(":actemp",$actemp);
+                $tipemp = $this->getTipemp();
+                $result->bindParam(":tipemp",$tipemp);
                 $result->execute();
             }catch(Exception $e){
                 ManejoError($e);
@@ -75,7 +83,7 @@
         function saveEmpXls()
     {
         // try{
-            $sql = "INSERT INTO empresa ( nitemp, razsoem, actemp) VALUES (:nitemp, :razsoem, :actemp)";
+            $sql = "INSERT INTO provedores ( nitemp, razsoem, actemp, tipemp) VALUES (:nitemp, :razsoem, :actemp, :tipemp)";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -85,6 +93,8 @@
             $result->bindParam(":razsoem",$razsoem);
             $actemp = $this->getActemp();
             $result->bindParam(":actemp",$actemp);
+            $tipemp = $this->getTipemp();
+            $result->bindParam(":tipemp",$tipemp);
             $result->execute();
         // } catch (Exception $e) {
         //     ManejoError($e);
@@ -94,7 +104,7 @@
     function EditEmpXls()
     {
         // try{
-            $sql = "UPDATE empresa SET nitemp=:nitemp, razsoem=:razsoem, actemp=:actemp WHERE idemp=:idemp";
+            $sql = "UPDATE provedores SET nitemp=:nitemp, razsoem=:razsoem, actemp=:actemp, tipemp=:tipemp WHERE idemp=:idemp";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -106,6 +116,8 @@
             $result->bindParam(":razsoem",$razsoem);
             $actemp = $this->getActemp();
             $result->bindParam(":actemp",$actemp);
+            $tipemp = $this->getTipemp();
+            $result->bindParam(":tipemp",$tipemp);
             $result->execute();
         // } catch (Exception $e) {
         //     ManejoError($e);
@@ -113,7 +125,7 @@
     }
         function editActemp(){
             try{
-                $sql = "UPDATE empresa SET actemp=:actemp WHERE idemp=:idemp";
+                $sql = "UPDATE provedores SET actemp=:actemp WHERE idemp=:idemp";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -128,7 +140,7 @@
         }
         function edit(){
             try{
-                $sql = "UPDATE empresa SET nitemp=:nitemp, razsoem=:razsoem, actemp=:actemp WHERE idemp=:idemp";
+                $sql = "UPDATE provedores SET nitemp=:nitemp, razsoem=:razsoem, actemp=:actemp, tipemp=:tipemp WHERE idemp=:idemp";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -140,13 +152,15 @@
                 $result->bindParam(":razsoem",$razsoem);
                 $actemp = $this->getActemp();
                 $result->bindParam(":actemp",$actemp);
+                $tipemp = $this->getTipemp();
+                $result->bindParam(":tipemp",$tipemp);
                 $result->execute();
             }catch(Exception $e){
                 ManejoError($e);
             }
         }
         function del(){
-            $sql = "DELETE FROM empresa WHERE idemp=:idemp";
+            $sql = "DELETE FROM provedores WHERE idemp=:idemp";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion-> prepare($sql);
@@ -155,7 +169,7 @@
             $result->execute();
         }
 
-        //Funcion para validar si la empresa ya esta relacionada con el registro de otra tabla
+        //Funcion para validar si la provedores ya esta relacionada con el registro de otra tabla
         function getExF($idemp){
             $sql = "SELECT COUNT(idemp) AS can FROM factura WHERE idemp=:idemp";
             $modelo = new conexion();
@@ -168,7 +182,7 @@
         }
 
         function CompEmp(){
-            $sql = "SELECT idemp, COUNT(*) AS sum FROM empresa WHERE nitemp=:nitemp";
+            $sql = "SELECT idemp, COUNT(*) AS sum FROM provedores WHERE nitemp=:nitemp";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);

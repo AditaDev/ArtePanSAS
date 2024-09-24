@@ -179,7 +179,7 @@ function modalFir($nm, $id, $det, $pg) {
                             $txt .= '<canvas id="signature-pad' . $id . '"></canvas>';
                         $txt .= '</div>';
                         $txt .= '<div style="text-align: left;">';
-                            $txt .= '<small><small><br>*Al firmar, acepto la entrega de la dotación anteriormente detallada. Me comprometo a su correcto uso y a seguir las políticas de la empresa en cuanto al cuidado del mismo. Reconozco que soy responsable de esta dotación.</small></small>';
+                            $txt .= '<small><small><br>*Al firmar, acepto la entrega de la dotación anteriormente detallada. Me comprometo a su correcto uso y a seguir las políticas de la provedores en cuanto al cuidado del mismo. Reconozco que soy responsable de esta dotación.</small></small>';
                         $txt .= '</div>';
                     $txt .= '</div>';
                     $txt .= '<div class="modal-footer">';
@@ -329,7 +329,7 @@ function modalNov($nm, $id, $pg, $info, $nmfl){
 						$txt .= '<div class="row"';
 							$txt .= '<div">';
 								$txt .= '<table>';
-									$txt .= '<tr><td><strong>Empresa: </strong></td><td class="inffac">'.$info[0]['razsoem'].'</td></tr>';	
+									$txt .= '<tr><td><strong>provedores: </strong></td><td class="inffac">'.$info[0]['razsoem'].'</td></tr>';	
 									$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$info[0]['fefac'].'</td></tr>';
 									$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$info[0]['fvfac'].'</td></tr>';
 									$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$info[0]['fpag'].'</td></tr>';
@@ -519,7 +519,7 @@ function modalDet($nom, $id, $titulo, $info){
 				$txt .= '<div class="row"';
 					$txt .= '<div">';
 						$txt .= '<table>';
-							$txt .= '<tr><td><strong>Empresa: </strong></td><td class="inffac">'.$info[0]['razsoem'].'</td></tr>';	
+							$txt .= '<tr><td><strong>provedores: </strong></td><td class="inffac">'.$info[0]['razsoem'].'</td></tr>';	
 							$txt .= '<tr><td><strong>Fecha de emisión: </strong></td><td class="inffac">'.$info[0]['fefac'].'</td></tr>';
 							$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$info[0]['fvfac'].'</td></tr>';
 							$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$info[0]['fpag'].'</td></tr>';

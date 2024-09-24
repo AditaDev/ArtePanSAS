@@ -13,6 +13,7 @@
     $nitemp = isset($_POST['nitemp']) ? $_POST['nitemp'] : NULL;
     $razsoem = isset($_POST['razsoem']) ? $_POST['razsoem'] : NULL;
     $actemp = isset($_REQUEST['actemp']) ? $_REQUEST['actemp'] : 1;
+    $tipemp = isset($_REQUEST['tipemp']) ? $_REQUEST['tipemp'] : 1;
 
     $arc = isset($_FILES["arc"]["name"]) ? $_FILES["arc"]["name"] : NULL;
     $arc = substr($arc, 0, strpos($arc, ".xls"));
@@ -47,7 +48,7 @@ if ($ope == "eli" && $idemp) {
 if ($ope == "edi" && $idemp) $datOne = $memp->getOne();
 
 
-//------------Importar Empresas-----------
+//------------Importar provedoress-----------
 
 if ($ope=="caremp" && $arc) {
     $dat = opti($_FILES["arc"], $arc, "arc/xls", $nomarc);
@@ -65,11 +66,13 @@ if ($ope=="caremp" && $arc) {
         $nitemp = $sheet->getCell("B" . $row)->getValue();
         $razsoem = $sheet->getCell("C" . $row)->getValue();
         $actemp = $sheet->getCell("D" . $row)->getValue();
+        $tipemp = $sheet->getCell("E" . $row)->getValue();
 
         // Se capturan las variables para enviarlas al modelo
         $memp->setNitemp($nitemp);
         $memp->setRazsoem($razsoem);
         $memp->setActemp($actemp);
+        $memp->setTipemp($tipemp);
      
         $existingData = $memp->CompEmp();
         $idemp = $existingData[0]['idemp'];

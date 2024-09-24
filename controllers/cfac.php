@@ -104,7 +104,7 @@
     		$confac = $sheet->getCell("C" . $row)->getValue();
     		$nitemp = $sheet->getCell("D" . $row)->getValue();
 
-            // Se comprueba que el id de la empresa exista
+            // Se comprueba que el id de la provedores exista
             $mfac->setNitemp($nitemp);
             $comemp = $mfac->CompEmp();
             $idemp = $comemp[0]['idemp'];
