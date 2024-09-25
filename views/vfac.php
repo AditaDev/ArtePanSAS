@@ -26,9 +26,9 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 <input class="form-control" type="text" id="confac" name="confac" value="<?php if ($datOne) echo $datOne[0]['confac']; ?>" required>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 ui-widget">
                 <label for="idemp"><strong>Provedores:</strong></label>
-                <select id="combobox1" name="idemp" class="form-control form-select" <?php if ($datOne) echo 'disabled'; else echo 'required';?>>
+                <select id="combobox1" name="idemp" class="form-control form-select" required>
                 <option value="0"></option>
                     <?php if ($datEmp) {
                         foreach ($datEmp as $dep) { ?>
@@ -117,7 +117,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <div class="form-group col-md-10">
                                 <strong> <?= ($dta['nofac']) .  " - "  . $dta['confac']; ?></strong><br>
                                 <small>
-                                    <strong>provedores: </strong> <?= $dta['razsoem']; ?><br>
+                                    <strong>Provedor: </strong> <?= $dta['razsoem']; ?><br>
                                     <strong>Fecha de vencimiento: </strong><?= $dta['fvfac']; ?><br>
                                 </small>
 
@@ -173,7 +173,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <?php }
                         } elseif ($dta["estfac"] == 55) { ?>
                             <span style="font-size: 1px;opacity: 0;">4</span>
-                            <?php if ($_SESSION[' idpef'] == 4 OR $_SESSION['idpef'] == 3 OR $_SESSION['idpef'] == 2 OR $_SESSION['idpef'] == 13) { ?>
+                            <?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 3 OR $_SESSION['idpef'] == 2 OR $_SESSION['idpef'] == 13) { ?>
                             <i class="fa fa-solid fa-circle-check fa-2x chulo" title="<?= $dta['est']; ?>"></i>
                         <?php } else { ?>
                                 <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=est&estfac=56" onclick="return confirmar('<?= $dta['nofac'] . ' - ' . $dta['confac']; ?>');">

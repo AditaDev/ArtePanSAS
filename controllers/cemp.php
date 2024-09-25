@@ -27,12 +27,11 @@
     if ($ope == "save") {
         $memp->setNitemp($nitemp);
         $memp->setRazsoem($razsoem);
+        $memp->setTipemp($tipemp);
+        $memp->setActemp($actemp);
+        if (!$idemp) $memp->save();
+        else $memp->edit();
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
-        
-    $memp->setActemp($actemp);
-    if (!$idemp) $memp->save();
-    else $memp->edit();
-
     }
    
 
