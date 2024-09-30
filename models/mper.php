@@ -405,4 +405,15 @@ class Mper
 		$res = $result->fetchAll(PDO::FETCH_ASSOC);
 		return $res;
 	}
+    function CompPef(){
+		$sql = "SELECT idpef, COUNT(*) AS sum FROM perfil WHERE idpef=:idpef";
+		$modelo = new conexion();
+		$conexion = $modelo->get_conexion();
+		$result = $conexion->prepare($sql);
+        $idpef = $this->getIdpef();
+        $result->bindParam(":idpef", $idpef);
+		$result->execute();
+		$res = $result->fetchAll(PDO::FETCH_ASSOC);
+		return $res;
+	}
 }

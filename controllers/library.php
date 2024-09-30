@@ -334,6 +334,7 @@ function modalNov($nm, $id, $pg, $info, $nmfl){
 									$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$info[0]['fvfac'].'</td></tr>';
 									$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$info[0]['fpag'].'</td></tr>';
 									$txt .= '<tr><td><strong>Tipo: </strong></td><td class="inffac">'.$info[0]['tip'].'</td></tr>';
+									if($info[0]['numegr'])$txt .= '<tr><td><strong>Número Egreso: </strong></td><td class="inffac">'.$info[0]['numegr'].'</td></tr>';
 									$txt .= '<tr><td><strong><hr>Registro: </strong></td><td class="inffac"><br><hr>'.$info[0]['nompcre'].'<br>' .$info[0]['fifac'].'</td></tr>';
 									if($info[0]['prev'])$txt .= '<tr><td><strong>Primer revisión: </strong></td><td class="inffac">'.$info[0]['nomprev'].'<br>'.$info[0]['fprfac'].'</td></tr>';
 									if($info[0]['papr'])$txt .= '<tr><td><strong>Aprobada: </strong></td><td class="inffac">'.$info[0]['nompapr'].'<br>'.$info[0]['faprfac'].'</td></tr>';
@@ -524,6 +525,7 @@ function modalDet($nom, $id, $titulo, $info){
 							$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$info[0]['fvfac'].'</td></tr>';
 							$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$info[0]['fpag'].'</td></tr>';
 							$txt .= '<tr><td><strong>Tipo: </strong></td><td class="inffac">'.$info[0]['tip'].'</td></tr>';
+							if($info[0]['numegr'])$txt .= '<tr><td><strong>Número Egreso: </strong></td><td class="inffac">'.$info[0]['numegr'].'</td></tr>';
 							$txt .= '<tr><td><strong><hr>Registro: </strong></td><td class="inffac"><br><hr>'.$info[0]['nompcre'].'<br>' .$info[0]['fifac'].'</td></tr>';
 							if($info[0]['prev'])$txt .= '<tr><td><strong>Primer revisión: </strong></td><td class="inffac">'.$info[0]['nomprev'].'<br>'.$info[0]['fprfac'].'</td></tr>';
 							if($info[0]['papr'])$txt .= '<tr><td><strong>Aprobada: </strong></td><td class="inffac">'.$info[0]['nompapr'].'<br>'.$info[0]['faprfac'].'</td></tr>';
@@ -644,7 +646,44 @@ function modalImp($nm, $pg, $tit, $ope){
 	echo $txt;
 }
 
-
+//modal numero de egreso vfac
+function modalegre($nm, $id, $pg, $info){
+	$hoy = date("Y-m-d");
+	$txt = '';
+	$txt .= '<div class="modal fade" id="'.$nm.$id.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+		$txt .= '<div class="modal-dialog">';
+			$txt .= '<form action="home.php?pg=' . $pg . '" method="POST">';
+				$txt .= '<div class="modal-content">';
+					$txt .= '<div class="modal-header">';
+						$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$info[0]['nofac'].'-'.$info[0]['razsoem'].'</strong></h1>';
+						$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
+					$txt .= '</div>';
+					$txt .= '<div class="modal-body" style="margin: 0px 25px; text-align: left;">';
+						$txt .= '<div class="row">';
+						$txt .= '<div class="modal-body" style="margin: 0px 25px;">';
+						$txt .= '<div class="row"';
+							$txt .= '<div">';
+							$txt .= '<div class="form-group col-md-12">';
+								$txt .= '<label for="numegr" class="titulo"><strong>Número Egreso: </strong></label>';
+								$txt .= '<input class="form-control" type="text" id="numegr" name="numegr" required></input>';
+							$txt .= '</div>';
+						$txt .= '</div>';
+					$txt .= '</div>';
+							$txt .= '</div>';
+						$txt .= '</div>';
+					$txt .= '<br><div class="modal-footer">';
+						$txt .= '<input type="hidden" value="'.$info[0]['numegr'].'">';
+						$txt .= '<input type="hidden" value="'.$info[0]['idfac'].'" name="idfac">';
+						$txt .= '<input type="hidden" value="egreso" name="ope">';
+						$txt .= '<button type="submit" class="btn btn-primary btnmd">Guardar</button>';	
+						$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
+					$txt .= '</div>';
+				$txt .= '</div>';
+			$txt .= '</form>';
+		$txt .= '</div>';
+	$txt .= '</div>';
+	echo $txt;
+}
 // ------------Modal vequ, prgxequi-----------
 // function modalPxE($nm, $id, $tit, $dom, $pg, $dms, $dga)
 // {

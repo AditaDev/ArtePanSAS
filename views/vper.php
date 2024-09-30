@@ -78,8 +78,11 @@ require_once('controllers/cper.php');
                     <small>
                         <div class="row">
                             <?php if ($dta['emaper']) { ?>
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-8">
                                     <strong>Email: </strong> <?= $dta['emaper']; }?>
+                                </div> 
+                                <div class="form-group col-md-4">
+                                <strong>Area: </strong> <?= $dta['nomval']; ?>
                                 </div> 
                         </div>
                     </small>

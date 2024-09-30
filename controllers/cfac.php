@@ -20,6 +20,7 @@
     $arcpdf = isset($_FILES['arcpdf']) ? $_FILES['arcpdf']:NULL;
     $arcspt = isset($_FILES['arcspt']) ? $_FILES['arcspt']:NULL;
     $idpernov = isset($_POST['idpernov']) ? $_POST['idpernov']:$_SESSION['idper'];
+    $numegr = isset($_POST['numegr']) ? $_POST['numegr']:NULL;
     $fnov = isset($_POST['fnov']) ? $_POST['fnov']:NULL;
     $obsnov = isset($_POST['obsnov']) ? $_POST['obsnov']:NULL;
     $rutpdf = NULL;
@@ -48,6 +49,7 @@
     //------------Factura-----------
     if($ope=="save"){
         $mfac->setNofac($nofac);
+        
         $mfac->setFifac($fecact);
         $mfac->setConfac($confac);
         $mfac->setEstfac($estfac);
@@ -85,6 +87,12 @@
         $mfac->setFnov($fnov);
         $mfac->setObsnov($obsnov);
         $mfac->nov();
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
+    }
+
+    if($ope=="egreso" && $idfac){
+        $mfac->setNumegr($numegr);
+        $mfac->egreso();
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
@@ -148,10 +156,9 @@
             $mfac->setFvfac($fvfac);
             $mfac->setForpag($forpag);
             $mfac->setTipfac($tipfac);
-
             $mfac->setEstfac($estfac);
-            // $mfac->setFifac($fifac);
             $mfac->setIdpercre($_SESSION['idper']);
+            $mfac->setFifac($nmfl);
     		$existingData = $mfac->selectFac();
             $idfac = $existingData[0]['idfac'];
             $mfac->setIdfac($idfac);
