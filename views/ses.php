@@ -34,7 +34,7 @@
 	<div class="contenedor-login">
 		<div class="contenido-login">
 			<form class="form-login" autocomplete="off" method="POST" role="form" action="models/control.php">
-				<img class="img2" src="img/Logo_TUMMY.png" alt="Logo Artepan">
+				<img class="img2" src="img/Logo_con_fondo_TUMMY.png" alt="Logo Tummy">
 				<h2 class="h2login">INICIO DE SESIÓN</h2>
 				<div class="input-div nit">
 					<div class="i">

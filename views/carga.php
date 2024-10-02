@@ -3,21 +3,19 @@
     <head>
     	<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-    	<title>ARTEPAN SAS</title>
-        <link rel="icon" href="../img/logoartepan_sinfondo.png">
+    	<title>TUMMY</title>
+        <link rel="icon" href="../img/Icono_TUMMY.png">
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 	    <script type="text/javascript" src="../js/bootstrap.js"></script>
 
     </head>
     <body>
         <div class="contenedor">
-            <span class="char1">A</span>
-            <span class="char2">R</span>
-            <span class="char3">T</span>
-            <span class="char4">E</span>
-            <span class="char5">P</span>
-            <span class="char6">A</span>
-            <span class="char6">N</span>
+            <span class="char1">T</span>
+            <span class="char2">U</span>
+            <span class="char3">M</span>
+            <span class="char4">M</span>
+            <span class="char5">Y</span>
         </div>
 
         <div class="carga">

@@ -170,17 +170,17 @@
             $idpef = $_SESSION['idpef'];
             $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.obsnov, f.idpercre AS pcre, f.idperrev AS prev, f.idperapr AS papr, f.idperent AS pent, f.idperpag AS ppag, f.idpernov AS pnov, f.fefac, f.fvfac, f.forpag, f.tipfac, f.faprfac, f.fprfac, f.fpagfac, f.fnov, f.rutpdf, f.rutspt, e.razsoem, e.nitemp, CONCAT(rc.nomper,' ',rc.apeper) AS nompcre, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, CONCAT(ra.nomper,' ',ra.apeper) AS nompapr,CONCAT(re.nomper,' ',re.apeper) AS nompent, CONCAT(rg.nomper,' ',rg.apeper) AS nomppag, CONCAT(rn.nomper,' ',rn.apeper) AS nompnov, ve.nomval AS est, vf.nomval AS fpag, vt.nomval AS tip, f.numegr FROM factura AS f INNER JOIN provedores AS e ON f.idemp=e.idemp INNER JOIN persona AS rc ON f.idpercre=rc.idper LEFT JOIN persona AS rr ON f.idperrev=rr.idper LEFT JOIN persona AS ra ON f.idperapr=ra.idper LEFT JOIN persona AS re ON f.idperent=re.idper LEFT JOIN persona AS rg ON f.idperpag=rg.idper LEFT JOIN persona AS rn ON f.idpernov=rn.idper INNER JOIN valor AS ve ON f.estfac=ve.idval INNER JOIN valor AS vf ON f.forpag=vf.idval INNER JOIN valor AS vt ON f.tipfac=vt.idval";
             if ($idpef == 7 ) {
-                $sql .= " WHERE (f.tipfac = 22 OR f.tipfac = 23 OR f.tipfac = 24) AND (f.estfac = 52 OR f.estfac = 53)"; 
+                $sql .= " WHERE (f.tipfac = 22 OR f.tipfac = 23 OR f.tipfac = 24) AND (f.estfac = 48 OR f.estfac = 49)"; 
             }if ($idpef == 8 ) { 
-                $sql .= " WHERE (f.tipfac = 19 OR f.tipfac = 20) AND (f.estfac = 52 OR f.estfac = 53)"; 
+                $sql .= " WHERE (f.tipfac = 19 OR f.tipfac = 20) AND (f.estfac = 48 OR f.estfac = 49)"; 
             }if ($idpef == 9 ) {
-                $sql .= " WHERE f.tipfac = 21 AND (f.estfac = 52 OR f.estfac = 53)"; 
+                $sql .= " WHERE f.tipfac = 21 AND (f.estfac = 48 OR f.estfac = 49)"; 
             }if ($idpef == 10 ) {
-                $sql .= " WHERE f.tipfac = 25 AND (f.estfac = 52 OR f.estfac = 53)"; 
+                $sql .= " WHERE f.tipfac = 25 AND (f.estfac = 48 OR f.estfac = 49)"; 
             }if ($idpef == 11 ) {
-                $sql .= " WHERE (f.tipfac = 58 OR f.tipfac = 59 OR f.tipfac = 60) AND (f.estfac = 52 OR f.estfac = 53)"; 
+                $sql .= " WHERE (f.tipfac = 58 OR f.tipfac = 59 OR f.tipfac = 60) AND (f.estfac = 48 OR f.estfac = 49)"; 
             }if ($idpef == 13 ) {
-                $sql .= " WHERE (f.tipfac = 14 OR f.tipfac = 15 OR f.tipfac = 16) AND (f.estfac = 52 OR f.estfac = 54)"; 
+                $sql .= " WHERE (f.tipfac = 14 OR f.tipfac = 15 OR f.tipfac = 16) AND (f.estfac = 48 OR f.estfac = 50)"; 
             }
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
@@ -354,10 +354,10 @@
             $sql = "UPDATE factura SET estfac=:estfac";
             
             // Añadir las columnas y parámetros correspondientes según el valor de $estfac
-            if ($estfac == 53) {$sql .= ", idperrev=:idper, fprfac=:fecha";
-            } elseif ($estfac == 54) {$sql .= ", idperapr=:idper, faprfac=:fecha";
-            } elseif ($estfac == 55) {$sql .= ", idperent=:idper, fffac=:fecha";
-            } elseif ($estfac == 56) {$sql .= ", idperpag=:idper, fpagfac=:fecha";
+            if ($estfac == 49) {$sql .= ", idperrev=:idper, fprfac=:fecha";
+            } elseif ($estfac == 50) {$sql .= ", idperapr=:idper, faprfac=:fecha";
+            } elseif ($estfac == 51) {$sql .= ", idperent=:idper, fffac=:fecha";
+            } elseif ($estfac == 52) {$sql .= ", idperpag=:idper, fpagfac=:fecha";
             } else {
                 // Manejar el caso en que $estfac no es uno de los valores esperados
                 throw new Exception("Valor de estfac no válido: " . $estfac); 
@@ -372,7 +372,7 @@
             $result->bindParam(":idfac", $idfac);
             $result->bindParam(":estfac", $estfac); 
             // Agregar el binding de los parámetros adicionales según el valor de $estfac
-            if ($estfac == 53 || $estfac == 54 || $estfac == 55 || $estfac == 56) {
+            if ($estfac == 49 || $estfac == 50 || $estfac == 51 || $estfac == 52) {
                 $idper = $this->getIdper();
                 $fecha = $this->getFecha();
                 $result->bindParam(":idper", $idper);

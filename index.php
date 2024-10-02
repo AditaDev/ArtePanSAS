@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ARTEPAN SAS</title>
-    <link rel="icon" href="img/Logo_TUMMY.png">
+    <title>TUMMY</title>
+    <link rel="icon" href="img/Icono_TUMMY.png">
 
     <script type="text/javascript" src="js/bootstrap.js"></script>
 

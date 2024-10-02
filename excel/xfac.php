@@ -34,7 +34,7 @@ $sheet->setTitle('FACTURAS');
 
 // Agregar titulo
 $sheet->setCellValue('A1', 'BASE DE DATOS');
-$sheet->mergeCells('A1:O1');
+$sheet->mergeCells('A1:P1');
 $style = $sheet->getStyle('A1');
 $style->getFont()->setBold(true)->setSize(30);
 $style->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('B8CCE4');
@@ -45,18 +45,18 @@ $sheet->mergeCells('A2:B2');
 $sheet->setCellValue('C2', 'DATOS DE FACTURAS');
 $sheet->mergeCells('C2:H2');
 $sheet->setCellValue('I2', 'DATOS REVISION Y APROBACION');
-$sheet->mergeCells('I2:O2');
-$style = $sheet->getStyle('A2:O2');
+$sheet->mergeCells('I2:P2');
+$style = $sheet->getStyle('A2:P2');
 $style->getFont()->setBold(true)->setSize(18);
 $style->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('B7DEE8');
 
 // Agregar titulos
 
-$titulo = [ 'NIT' ,'NOMBRE', 'FECHA REGISTRO', 'NUMERO FACTURA', 'FECHA EMISION', 'FECHA VENCIMIENTO', 'TIPO FACTURA', 'ESTADO', 'REGISTRO', 'PRIMERA REVISION', 'REVISADA', 'ENTREGADA', 'PAGADA', 'NOVEDAD', 'OBSERVACION'];
+$titulo = [ 'NIT' ,'NOMBRE', 'FECHA REGISTRO', 'NUMERO FACTURA', 'FECHA EMISION', 'FECHA VENCIMIENTO', 'TIPO FACTURA', 'ESTADO', 'REGISTRO', 'PRIMERA REVISION', 'REVISADA', 'ENTREGADA', 'PAGADA', 'NOVEDAD', 'OBSERVACION', '# EGRESO'];
 
 
 $sheet->fromArray([$titulo], NULL, 'A3');
-$style = $sheet->getStyle('A3:O3');
+$style = $sheet->getStyle('A3:P3');
 $style->getFont()->setBold(true);
 
 //información
@@ -71,7 +71,8 @@ if ($datAll) {
             !empty($dat['nompent']) ? $dat['nompent'] . " - " . $dat['fffac'] : '',
             !empty($dat['nomppag']) ? $dat['nomppag'] . " - " . $dat['fpagfac'] : '',
             !empty($dat['nompnov']) ? $dat['nompnov'] . " - " . $dat['fnov'] : '',
-            !empty($dat['obsnov']) ? $dat['obsnov'] : ''
+            !empty($dat['obsnov']) ? $dat['obsnov'] : '',
+            !empty($dat['numegr']) ? $dat['numegr'] : ''
         ];
         $datos[] = $filaDatos;
     }
@@ -105,12 +106,12 @@ $alignmentStyle = [
 
 
 // Aplicar estilo de borde y alineación a todo el rango de datos
-$range = 'A1:O'.($fila - 1); // Rango que cubre todos los datos
+$range = 'A1:P'.($fila - 1); // Rango que cubre todos los datos
 $sheet->getStyle($range)->applyFromArray($styleArray);
 $sheet->getStyle($range)->applyFromArray($alignmentStyle);
 
 // Ajustar la altura de las filas y el ancho de las columnas
-foreach (range('A','O') as $columnID) $sheet->getColumnDimension($columnID)->setAutoSize(true);
+foreach (range('A','P') as $columnID) $sheet->getColumnDimension($columnID)->setAutoSize(true);
 
 foreach (range(1, $fila - 1) as $rowID) $sheet->getRowDimension($rowID)->setRowHeight(-1);
      
