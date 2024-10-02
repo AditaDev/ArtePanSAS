@@ -63,7 +63,7 @@
         $mfac->setIdpercre($_SESSION['idper']); 
         if(!$idfac) $mfac->save();
         else $mfac->edit();
-        //echo "<script>window.location='home.php?pg=".$pg."';</script>";
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
     if($ope=="edi" && $idfac) $datOne = $mfac->getOne();

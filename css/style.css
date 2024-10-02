@@ -1,4 +1,9 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url("https://fonts.googleapis.com/css?family=Titan+One");
+
+
+
+/* "https://fonts.google.com/specimen/Titan+One?query=titan"
+"https://fonts.googleapis.com/css?family=Open+Sans" */
 
 * {
   padding: 0;
@@ -276,7 +281,7 @@ label {
 /*--------------------------------------Menu----------------------------------------*/
 
 
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Titan+One:wght@400;600;700&display=swap");
 
 :root {
   --header-height: 3rem;

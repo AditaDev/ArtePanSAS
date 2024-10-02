@@ -4,7 +4,6 @@ USE artepansas;
 -- Base de datos: `artepansas`
 --
 
-
 CREATE TABLE `dotacion` (
   `ident` bigint(11) NOT NULL, -- id entrega
   `idperent` bigint(11) NOT NULL, -- id persona entrega
@@ -33,8 +32,6 @@ CREATE TABLE `ccxent` (
   `idvdia` bigint(11) NOT NULL, -- id valor referente a 
   `idvcol` bigint(11) NOT NULL -- id valor referente a talla (s/m)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
 
 --
 -- Estructura de tabla para la tabla `almuerzo`
@@ -516,11 +513,6 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (99, 'Jueves', 13, 1304, 1),
 (100, 'Viernes', 13, 1305, 1),
 (101, 'Sábado', 13, 1306, 1);
-
-
-
-
-
 
 ALTER TABLE `dotacion`
   ADD PRIMARY KEY (`ident`),

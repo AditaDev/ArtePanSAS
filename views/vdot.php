@@ -69,10 +69,10 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <select name="idvtal[]" id="idvtal" class="form-control form-select">
                         <option value="0"></option>
                         <?php
-                        if ($ddo['idval'] == 82 or $ddo['idval'] == 83) $datTal = $datTalS;
-                        elseif ($ddo['idval'] == 81) $datTal = $datTalP;
-                        elseif ($ddo['idval'] == 84) $datTal = $datTalZ;
-                        elseif ($ddo['idval'] == 85) $datTal = $datTalG;
+                        if ($ddo['idval'] == 78 or $ddo['idval'] == 79) $datTal = $datTalS;
+                        elseif ($ddo['idval'] == 77) $datTal = $datTalP;
+                        elseif ($ddo['idval'] == 80) $datTal = $datTalZ;
+                        elseif ($ddo['idval'] == 81) $datTal = $datTalG;
                         if ($datTal) {
                             foreach ($datTal as $ddt) { ?>
                                 <option value="<?= $ddt['idval'] ?>" <?php if ($datTxD) {
