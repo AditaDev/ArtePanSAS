@@ -1,9 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Titan+One");
-
-
-
-/* "https://fonts.google.com/specimen/Titan+One?query=titan"
-"https://fonts.googleapis.com/css?family=Open+Sans" */
 
 * {
   padding: 0;
@@ -13,6 +7,8 @@
 
 body {
   background-color: #f7f2ef;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: normal;
 }
 
 label { 
@@ -289,7 +285,8 @@ label {
   --first-color: #000000;
   --first-color-light: #c2c2c29d;
   --white-color: #f7f6fb;
-  --body-font: 'Nunito', sans-serif;
+  --body-font: "Plus Jakarta Sans", sans-serif;
+
   --normal-font-size: 1rem;
   --z-fixed: 100
 }
@@ -590,7 +587,7 @@ a {
 .contenido-login .input-div {
   position: relative;
   display: grid;
-  grid-template-columns: 7% 50% 7%;
+  grid-template-columns: 7% 86% 7%;
   margin: 25px 0;
   padding: 5px 0;
   border-bottom: 2px solid #073663;
@@ -930,4 +927,9 @@ a:hover {
   .card {
     width: 100%;
   }
+}
+
+
+body{
+  font-family: "Plus Jakarta Sans", sans-serif;
 }

@@ -3,7 +3,7 @@ require_once('controllers/cfac.php');
 $hoy = date("Y-m-d");
 $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 ?>
-
+<?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 1 OR $_SESSION['idpef'] == 12 OR $_SESSION['idpef'] == 13 OR $_SESSION['idpef'] == 2 OR $_SESSION['idpef'] == 3) { ?>
     <div style="text-align: right;">
     <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>carfac" title="Importar Facturas"></i>
     <?php modalImp("mod", $pg, "Facturas", "carfac", ""); ?>
@@ -12,7 +12,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     <i class="fa fa-solid fa-file-export fa-2x exp"></i>
         </a>
     </div>
-
+<?php } ?>
 
 <?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 1) { ?>
     <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">

@@ -132,7 +132,7 @@ class Mper
             $result->bindParam(":actper", $actper);
             if ($this->getPasper()) {
                 $pasper = $this->getPasper();
-                $pasper = sha1(md5($pasper));
+                $pasper = sha1($pasper);
                 $result->bindParam(":pasper", $pasper);
             }
             $result->execute();
@@ -161,7 +161,7 @@ class Mper
                 $actper = $this->getActper();
                 $result->bindParam(":actper", $actper);
                 $pasper = $this->getPasper();
-                $pasper = sha1(md5($pasper));
+                $pasper = sha1($pasper);
                 $result->bindParam(":pasper", $pasper);
                 $result->execute();
         // } catch (Exception $e) {
@@ -191,7 +191,7 @@ class Mper
                 $actper = $this->getActper();
                 $result->bindParam(":actper", $actper);
                 $pasper = $this->getPasper();
-                $pasper = sha1(md5($pasper));
+                $pasper = sha1($pasper);
                 $result->bindParam(":pasper", $pasper);
             $result->execute();
         // } catch (Exception $e) {
@@ -236,7 +236,7 @@ class Mper
             $result->bindParam(":actper", $actper);
             if ($this->getPasper()) {
                 $pasper = $this->getPasper();
-                $pasper = sha1(md5($pasper));
+                $pasper = sha1($pasper);
                 $result->bindParam(":pasper", $pasper);
             }
             $result->execute();
