@@ -16,7 +16,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 <?php if($nov){ if ($_SESSION['idpef'] == 7  OR $_SESSION['idpef'] == 1) { ?>
     <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
         <div class="row">
-                <div class="form-group col-md-3">
+            <div <?php if($nov=="news") echo 'class="form-group col-md-3"'; else if($nov=="late") echo 'class="form-group col-md-4"';?>>
                 <label for="idperg"><strong>Persona:</strong></label>
                 <select id="combobox1" name="idperg" class="form-control form-select" <?php if ($datOne) echo 'disabled'; else echo 'required';?>>
                 <option value="0"></option>
@@ -29,6 +29,16 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         } ?>
                     </select>
                 </div>
+                <?php if ($nov=="late") { ?>
+                <div class="form-group col-md-4">
+                    <label for="tini"><strong>Hora estipulada:</strong></label>
+                    <input class="form-control" type="time" id="tini" name="tini" value="<?php if ($datOne) echo $datOne[0]['tini']; ?>" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="tfin"><strong>Hora de llegada:</strong></label>
+                    <input class="form-control" type="time" id="tfin" name="tfin" value="<?php if ($datOne) echo $datOne[0]['tfin']; ?>" required>
+                </div>
+                <?php } ?>
                 <?php if ($nov=="news") { ?>
                     <div class="form-group col-md-3">
                     <label for="tipnov"><strong>Tipo novedad:</strong></label>
@@ -41,7 +51,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     </select>
                 </div>
                 <?php } ?>
-                <div class="form-group col-md-6">
+                <div <?php if($nov=="news") echo 'class="form-group col-md-6"'; else if($nov=="late") echo 'class="form-group col-md-12"';?>>
                     <label for="obsnov"><strong>Observación:</strong></label>
                     <textarea class="form-control" type="text" id="obsnov" name="obsnov" <?php if ($datOne) echo 'required'; ?>><?php if ($datOne) echo $datOne[0]['obsnov']; ?></textarea>
                 </div>
@@ -57,16 +67,6 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 <div class="form-group col-md-6">
                     <label for="arcpdf"><strong>Soporte:</strong></label>
                     <input class="form-control" type="file" id="arcpdf" name="arcpdf" accept=".pdf" <?php if (!$datOne); ?>>
-                </div>
-                <?php } ?>
-                <?php if ($nov=="late") { ?>
-                <div class="form-group col-md-4">
-                    <label for="tini"><strong>Hora estipulada:</strong></label>
-                    <input class="form-control" type="time" id="tini" name="tini" value="<?php if ($datOne) echo $datOne[0]['tini']; ?>" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="tfin"><strong>Hora de llegada:</strong></label>
-                    <input class="form-control" type="time" id="tfin" name="tfin" value="<?php if ($datOne) echo $datOne[0]['tfin']; ?>" required>
                 </div>
                 <?php } ?>
                 
@@ -122,12 +122,12 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             </div>
                     </td>
                     <td style="text-align: left;">
-                        <?php if ($dta['estnov'] == 52) { ?>
+                        <?php if ($dta['estnov'] == 48) { ?>
                             <span style="font-size: 1px;opacity: 0;">1</span>
                             <?php if ($_SESSION['idpef'] == 7) { ?>
                                 <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="<?= $dta['est']; ?>"></i>
                             <?php } else { ?>
-                                <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&ope=est&estnov=54" onclick="return aceptar('<?= $dta['ndper'] . ' - ' . $dta['nomperg']; ?>');">
+                                <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&ope=est&estnov=50" onclick="return aceptar('<?= $dta['ndper'] . ' - ' . $dta['nomperg']; ?>');">
                                     <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="<?= $dta['est']; ?>"></i>
                                 </a>
                             <?php }
@@ -138,7 +138,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         <?php } ?>
                     </td>
                     <td tyle="text-align: right;">
-                    <?php if ($_SESSION['idpef'] == 7) { ?>
+                    <?php if ($_SESSION['idpef'] == 7 OR $_SESSION['idpef'] == 1) { ?>
                         <a href="home.php?pg=<?= $pg; ?>&idnov=<?= $dta['idnov']; ?>&ope=edi&nov=<?= $nov?>">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi" title="Editar"></i>
                         </a>

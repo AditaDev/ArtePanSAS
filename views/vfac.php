@@ -138,14 +138,14 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                     $info = $mfac->getOne();
                                     modalNov("mcbnov", $dta['idfac'], $pg, $info, $nmfl);
                                 }?>
-                                <?php if ($dta['numegr'] == NULL) { ?>
-                                  
+                                <?php if ($dta['numegr'] == NULL) { ?>                                  
+                                <?php if (($_SESSION['idpef'] == 12) OR ($_SESSION['idpef'] == 1)) { ?> 
                                 <i class="fa-solid fa-hashtag iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbegre<?= $dta['idfac']; ?>" title="# EGRESO"></i>
                                 <?php
                                     $mfac->setIdfac($dta['idfac']);
                                     $info = $mfac->getOne();
                                     modalegre("mcbegre", $dta['idfac'], $pg, $info);
-                                }?>
+                                }}?>
                             </div>
                     </td>
                     <td tyle="text-align: half;">

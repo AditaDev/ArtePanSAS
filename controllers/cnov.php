@@ -12,26 +12,29 @@
     $obsnov = isset($_POST['obsnov']) ? $_POST['obsnov']:NULL;
     $tini = isset($_POST['tini']) ? $_POST['tini']:NULL;
     $tfin = isset($_POST['tfin']) ? $_POST['tfin']:NULL;
-    $estnov = isset($_REQUEST['estnov']) ? $_REQUEST['estnov']:52;
+    $estnov = isset($_REQUEST['estnov']) ? $_REQUEST['estnov']:48;
     $arcpdf = isset($_FILES['arcpdf']) ? $_FILES['arcpdf']:NULL;
     $rutpdf = NULL;
+    $infoper = NULL;
+    $tnov = NULL;
 
     $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
     $nov = isset($_REQUEST['nov']) ? $_REQUEST['nov']:"news";
 
     $datOne = NULL;
     $pg = 110;
+
     $mnov->setIdnov($idnov);
-    
+    //var_dump($idperg);
     if($idperg) $infoper = $mnov->getOnePer($idperg);
     if($tipnov) $tnov = $mnov->getAllDom($tipnov);
-    if($arcpdf && $infoper && $infoper[0]['nomper'] && $infoper[0]['apeper'] && $tnov[0]['nomval']) $rutpdf = opti($arcpdf, $tnov[0]['nomval']."_", "arc/novedades/".$infoper[0]['nomper'].$infoper[0]['apeper'], $nmfl); 
-
+    //var_dump($infoper, $tnov, $arcpdf);
+    if($arcpdf && $infoper && $infoper[0]['nomper'] & $infoper[0]['apeper'] && $tnov[0]['nomval']) $rutpdf = opti($arcpdf, $tnov[0]['nomval'],"arc/novedades/".$infoper[0]['nomper'].$infoper[0]['apeper'], $nmfl); 
+    //var_dump($rutpdf);
     //------------Novedad-----------
 
-
-   
     if($ope=="save"){
+        // die;
         $mnov->setIdperg($idperg);
         $mnov->setFecreg($fecact);
         $mnov->setFecinov($fecinov);

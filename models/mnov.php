@@ -227,13 +227,12 @@
         }
 
         function edit(){
-           try {
+           //try {
                 $tini = $this->getTini();
                 $tfin = $this->getTfin();
                 $sql = "UPDATE novedad  SET ";
                 if($tini) $sql .= "tini=:tini, ";
                 if($tfin) $sql .= "tfin=:tfin, ";
-
                 $sql .= "fecinov=:fecinov, fecfnov=:fecfnov, tipnov=:tipnov, obsnov=:obsnov, estnov=:estnov"; 
                 if($this->getRutpdf()) $sql .= ", rutpdf=:rutpdf";
                 $sql .= " WHERE idnov=:idnov";
@@ -242,6 +241,8 @@
                 $result = $conexion->prepare($sql);
                 $idnov = $this->getIdnov();
                 $result->bindParam(":idnov", $idnov);
+                if($tini) $result->bindParam(":tini", $tini);
+                if($tfin) $result->bindParam(":tfin", $tfin);
                 $fecinov = $this->getFecinov();
                 $result->bindParam(":fecinov", $fecinov);
                 $fecfnov = $this->getFecfnov();
@@ -257,9 +258,9 @@
                     $result->bindParam(":rutpdf", $rutpdf);
                 }
                 $result->execute();
-            } catch (Exception $e) {
-                ManejoError($e);
-            }
+            // } catch (Exception $e) {
+            //     ManejoError($e);
+            // }
         }
 
         function del(){
