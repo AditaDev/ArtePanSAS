@@ -58,7 +58,8 @@ INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (10, 'Talla Z'),
 (11, 'Talla G'),
 (12, 'Colores'),
-(13, 'Días');
+(13, 'Días'),
+(14, 'Bodega');
 
 -- --------------------------------------------------------
 
@@ -126,7 +127,8 @@ CREATE TABLE `factura` (
   `idpernov` bigint(11) DEFAULT NULL,
   `obsnov` varchar(255) DEFAULT NULL,
   `fnov` datetime DEFAULT NULL,
-  `numegr` int(5) DEFAULT NULL
+  `numegr` int(5) DEFAULT NULL,
+  `numbod` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -1190,7 +1192,10 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (98, 'Miércoles', 13, 1303, 1),
 (99, 'Jueves', 13, 1304, 1),
 (100, 'Viernes', 13, 1305, 1),
-(101, 'Sábado', 13, 1306, 1);
+(101, 'Sábado', 13, 1306, 1),
+(102, 'Artepan', 14, 1401, 1),
+(103, 'PMP', 14, 1402, 1),
+(104, 'Del llano', 14, 1403, 1);
 
 --
 -- Índices para tablas volcadas
@@ -1244,6 +1249,7 @@ ALTER TABLE `factura`
   ADD KEY `tipfac` (`tipfac`),
   ADD KEY `forpag` (`forpag`),
   ADD KEY `estfac` (`estfac`),
+  ADD KEY `numbod` (`numbod`),
   ADD KEY `idpercre` (`idpercre`),
   ADD KEY `idperrev` (`idperrev`),
   ADD KEY `idperapr` (`idperapr`),

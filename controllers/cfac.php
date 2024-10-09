@@ -21,6 +21,7 @@
     $arcspt = isset($_FILES['arcspt']) ? $_FILES['arcspt']:NULL;
     $idpernov = isset($_POST['idpernov']) ? $_POST['idpernov']:$_SESSION['idper'];
     $numegr = isset($_POST['numegr']) ? $_POST['numegr']:NULL;
+    $numbod = isset($_POST['numbod']) ? $_POST['numbod']:NULL;
     $fnov = isset($_POST['fnov']) ? $_POST['fnov']:NULL;
     $obsnov = isset($_POST['obsnov']) ? $_POST['obsnov']:NULL;
     $rutpdf = NULL;
@@ -36,6 +37,7 @@
     $datALL = NULL;
     $dattpe = $mfac->getAllDom(1);
     $dattip = $mfac->getAllDom(2);
+    $datbod = $mfac->getAllDom(14);
 
     $mfac->setIdfac($idfac);
 
@@ -48,7 +50,6 @@
 //fijate amor
     //------------Factura-----------
     if($ope=="save"){
-
         $mfac->setNofac($nofac);
         $mfac->setFifac($fecact);
         $mfac->setConfac($confac);
@@ -93,6 +94,12 @@
     if($ope=="egreso" && $idfac){
         $mfac->setNumegr($numegr);
         $mfac->egreso();
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
+    }
+
+    if($ope=="bodega" && $idfac){
+        $mfac->setNumbod($numbod);
+        $mfac->bodega();
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 

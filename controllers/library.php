@@ -526,6 +526,7 @@ function modalDet($nom, $id, $titulo, $info){
 							$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$info[0]['fpag'].'</td></tr>';
 							$txt .= '<tr><td><strong>Tipo: </strong></td><td class="inffac">'.$info[0]['tip'].'</td></tr>';
 							if($info[0]['numegr'])$txt .= '<tr><td><strong>Número Egreso: </strong></td><td class="inffac">'.$info[0]['numegr'].'</td></tr>';
+							if($info[0]['numbod'])$txt .= '<tr><td><strong>Bodega: </strong></td><td class="inffac">'.$info[0]['bod'].'</td></tr>';
 							$txt .= '<tr><td><strong><hr>Registro: </strong></td><td class="inffac"><br><hr>'.$info[0]['nompcre'].'<br>' .$info[0]['fifac'].'</td></tr>';
 							if($info[0]['prev'])$txt .= '<tr><td><strong>Primer revisión: </strong></td><td class="inffac">'.$info[0]['nomprev'].'<br>'.$info[0]['fprfac'].'</td></tr>';
 							if($info[0]['papr'])$txt .= '<tr><td><strong>Aprobada: </strong></td><td class="inffac">'.$info[0]['nompapr'].'<br>'.$info[0]['faprfac'].'</td></tr>';

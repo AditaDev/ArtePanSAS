@@ -3,16 +3,17 @@ require_once('controllers/cfac.php');
 $hoy = date("Y-m-d");
 $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 ?>
-<?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 1 OR $_SESSION['idpef'] == 12 OR $_SESSION['idpef'] == 13 OR $_SESSION['idpef'] == 2 OR $_SESSION['idpef'] == 3) { ?>
     <div style="text-align: right;">
+        <?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 12) { ?>
     <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>carfac" title="Importar Facturas"></i>
     <?php modalImp("mod", $pg, "Facturas", "carfac", ""); ?>
         
+    <?php } ?>
         <a href="excel/xfac.php" title="Exportar Facturas">
     <i class="fa fa-solid fa-file-export fa-2x exp"></i>
         </a>
     </div>
-<?php } ?>
+
 
 <?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 1) { ?>
     <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
@@ -27,7 +28,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
             </div>
 
             <div class="form-group col-md-4 ui-widget">
-                <label for="idemp"><strong>Provedores:</strong></label>
+                <label for="idemp"><strong>Proveedores:</strong></label>
                 <select id="combobox1" name="idemp" class="form-control form-select" required>
                 <option value="0"></option>
                     <?php if ($datEmp) {
@@ -96,13 +97,16 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 <!-- class=" <?php echo ($row['estfac']==57)?'color-verde':'sin-color' ?>" -->
 
 
-
-
 <table id="mytable" class="table table-striped">
     <thead>
         <tr>
             <th>No.</th>
-            <th>Datos factura</th>
+            <th>
+                <div class="th-content">
+                    <span class="left">Datos factura</span>
+                    <span class="center">Detalles</span>
+                </div>
+            </th>
             <th>Estado</th>
             <th></th>
         </tr>
@@ -117,7 +121,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <div class="form-group col-md-10">
                                 <strong> <?= ($dta['nofac']) .  " - "  . $dta['confac']; ?></strong><br>
                                 <small>
-                                    <strong>Provedor: </strong> <?= $dta['razsoem']; ?><br>
+                                    <strong>Proveedor: </strong> <?= $dta['razsoem']; ?><br>
                                     <strong>Fecha de vencimiento: </strong><?= $dta['fvfac']; ?><br>
                                 </small>
 
@@ -129,7 +133,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 $info = $mfac->getOne();
                                 modalDet("mcbinf", $dta['idfac'], $dta['nofac'] . "-" . $dta['confac'], $info);
                                 if($dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
-                                <i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i>
+                                <i class="fa fa-solid fa-file-pdf iconi" title='PDF' onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i>
                                 <?php } ?>
                                 <?php if ($dta['pnov'] == NULL) { ?>
                                 <i class="fa-solid fa-circle-exclamation iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbnov<?= $dta['idfac']; ?>" title="NOVEDAD"></i>
@@ -138,14 +142,34 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                     $info = $mfac->getOne();
                                     modalNov("mcbnov", $dta['idfac'], $pg, $info, $nmfl);
                                 }?>
-                                <?php if ($dta['numegr'] == NULL) { ?>                                  
+                                <!-- <?php if ($dta['numegr'] == NULL) { ?>                                  
                                 <?php if (($_SESSION['idpef'] == 12) OR ($_SESSION['idpef'] == 1)) { ?> 
                                 <i class="fa-solid fa-hashtag iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbegre<?= $dta['idfac']; ?>" title="# EGRESO"></i>
                                 <?php
                                     $mfac->setIdfac($dta['idfac']);
                                     $info = $mfac->getOne();
                                     modalegre("mcbegre", $dta['idfac'], $pg, $info);
-                                }}?>
+                                }}?> -->
+                                <?php if ($dta['tipfac'] == 14 OR $dta['tipfac'] == 15 OR $dta['tipfac'] == 16)  { ?>
+                                <?php if ($dta['numbod'] == NULL)  { ?> 
+                                <form action="home.php?pg=<?= $pg; ?>" method="POST" id="numbodega">
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <label for="numbod"><strong>Bodega</strong></label>
+                                            <select name="numbod" id="numbod" class="form-control form-select" onchange="document.getElementById('numbodega').submit();">
+                                            <option value="0">Seleccione...</option>
+                                                <?php foreach ($datbod as $dte) { ?>
+                                                    <option value="<?= $dte['idval']; ?>" <?php if ($datOne && $dte['idval'] == $datOne[0]['numbod']) echo " selected "; ?>>
+                                                        <?= $dte['nomval']; ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="ope" value="bodega">
+                                    <input type="hidden" name="idfac" value="<?=$dta['idfac']; ?>">
+                                </form>
+                                <?php }} ?>
                             </div>
                     </td>
                     <td tyle="text-align: half;">
@@ -193,12 +217,12 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <i class="fa fa-solid fa-circle-check fa-2x pagada" title="<?= $dta['est']; ?>"></i>
                             <?php } ?>
                     <td class="form-group col-md-1" tyle="text-align: right;">
-                        <?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 1 ) { ?>
-                                                
+                        <?php if ($_SESSION['idpef'] == 4  ) { ?>
+                                        
                         <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi" title="Editar"></i>
                         </a>
-                        <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=eli" onclick="return eliminar('<?= $dta['idfac']; ?>');">
+                        <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=eli" onclick="return eliminar('<?= $dta['nofac']; ?>');">
                             <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
                         </a>
                     </td>
@@ -209,7 +233,12 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     <tfoot>
         <tr>
             <th>No.</th>
-            <th>Datos factura</th>
+            <th>
+                <div class="th-content">
+                    <span class="left">Datos factura</span>
+                    <span class="center">Detalles</span>
+                </div>
+            </th>
             <th>Estado</th>
             <th></th>
 
@@ -244,6 +273,21 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         border-radius: 5px;
         border: 1px solid #ced4da;
         background-color: #fff;
+    }
+    .th-content {
+    position: relative;
+    width: 100%;
+    }
+
+    .left {
+        position: absolute;
+        left: 0; /* Alinea el texto a la izquierda */
+    }
+
+    .center {
+        text-align: right;
+        display: block;
+        width: 95%; /* Esto asegura que el texto centrado ocupe todo el espacio disponible para centrarse */
     }
 </style>
 
