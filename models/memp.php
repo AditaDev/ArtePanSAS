@@ -160,25 +160,33 @@
             }
         }
         function del(){
-            $sql = "DELETE FROM provedores WHERE idemp=:idemp";
-            $modelo = new conexion();
-            $conexion = $modelo->get_conexion();
-            $result = $conexion-> prepare($sql);
-            $idemp = $this->getIdemp();
-            $result->bindParam(":idemp",$idemp);
-            $result->execute();
+            try{
+                $sql = "DELETE FROM provedores WHERE idemp=:idemp";
+                $modelo = new conexion();
+                $conexion = $modelo->get_conexion();
+                $result = $conexion-> prepare($sql);
+                $idemp = $this->getIdemp();
+                $result->bindParam(":idemp",$idemp);
+                $result->execute();
+            }catch(Exception $e){
+                ManejoError($e);
+            }
         }
 
         //Funcion para validar si la provedores ya esta relacionada con el registro de otra tabla
         function getExF($idemp){
-            $sql = "SELECT COUNT(idemp) AS can FROM factura WHERE idemp=:idemp";
-            $modelo = new conexion();
-            $conexion = $modelo->get_conexion();
-            $result = $conexion->prepare($sql);
-            $result->bindParam(':idemp',$idemp);
-            $result->execute();
-            $res = $result-> fetchall(PDO::FETCH_ASSOC);
-            return $res;
+            try{
+                $sql = "SELECT COUNT(idemp) AS can FROM factura WHERE idemp=:idemp";
+                $modelo = new conexion();
+                $conexion = $modelo->get_conexion();
+                $result = $conexion->prepare($sql);
+                $result->bindParam(':idemp',$idemp);
+                $result->execute();
+                $res = $result-> fetchall(PDO::FETCH_ASSOC);
+                return $res;
+            }catch(Exception $e){
+                ManejoError($e);
+            }
         }
 
         function CompEmp(){

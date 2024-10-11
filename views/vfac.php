@@ -9,6 +9,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
     <?php modalImp("mod", $pg, "Facturas", "carfac", ""); ?>
         
     <?php } ?>
+
         <a href="excel/xfac.php" title="Exportar Facturas">
     <i class="fa fa-solid fa-file-export fa-2x exp"></i>
         </a>
@@ -108,7 +109,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 </div>
             </th>
             <th>Estado</th>
-            <th></th>
+            <?php if ($_SESSION['idpef'] == 4  OR $_SESSION['idpef'] == 12) { ?><th></th><?php } ?>
         </tr>
     </thead>
     <tbody>
@@ -118,13 +119,33 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <td tyle="text-align: left;"><?= $dta['idfac']; ?></td>
                     <td>
                         <div class="row">
-                            <div class="form-group col-md-10">
+                            <div class="form-group col-md-7">
                                 <strong> <?= ($dta['nofac']) .  " - "  . $dta['confac']; ?></strong><br>
                                 <small>
                                     <strong>Proveedor: </strong> <?= $dta['razsoem']; ?><br>
                                     <strong>Fecha de vencimiento: </strong><?= $dta['fvfac']; ?><br>
                                 </small>
-
+                            </div>
+                            <div class="form-group col-md-3">
+                            <?php if ($dta['tipfac'] == 14 OR $dta['tipfac'] == 15 OR $dta['tipfac'] == 16)  { ?>
+                                <?php if ($dta['numbod'] == NULL)  { ?> 
+                                <form action="home.php?pg=<?= $pg; ?>" method="POST" id="numbodega">
+                                        <div class="form-group col-md-8">
+                                            <label for="numbod"><strong>Bodega</strong></label>
+                                            <select name="numbod" id="numbod" class="form-control form-select" onchange="document.getElementById('numbodega').submit();">
+                                            <option value="0">Seleccione...</option>
+                                                <?php foreach ($datbod as $dte) { ?>
+                                                    <option value="<?= $dte['idval']; ?>" <?php if ($datOne && $dte['idval'] == $datOne[0]['numbod']) echo " selected "; ?>>
+                                                        <?= $dte['nomval']; ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    
+                                    <input type="hidden" name="ope" value="bodega">
+                                    <input type="hidden" name="idfac" value="<?=$dta['idfac']; ?>">
+                                </form>
+                                <?php }} ?>    
                             </div>
                             <div class="form-group col-md-2" style="text-align: left;">
                                 <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idfac']; ?>" title="Detalles"></i>
@@ -142,34 +163,15 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                     $info = $mfac->getOne();
                                     modalNov("mcbnov", $dta['idfac'], $pg, $info, $nmfl);
                                 }?>
-                                <!-- <?php if ($dta['numegr'] == NULL) { ?>                                  
-                                <?php if (($_SESSION['idpef'] == 12) OR ($_SESSION['idpef'] == 1)) { ?> 
+                                <?php if ($dta['numegr'] == NULL) { ?>                                  
+                                <?php if (($_SESSION['idpef'] == 12) OR ($_SESSION['idpef'] == 12)) { ?> 
                                 <i class="fa-solid fa-hashtag iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbegre<?= $dta['idfac']; ?>" title="# EGRESO"></i>
                                 <?php
                                     $mfac->setIdfac($dta['idfac']);
                                     $info = $mfac->getOne();
                                     modalegre("mcbegre", $dta['idfac'], $pg, $info);
-                                }}?> -->
-                                <?php if ($dta['tipfac'] == 14 OR $dta['tipfac'] == 15 OR $dta['tipfac'] == 16)  { ?>
-                                <?php if ($dta['numbod'] == NULL)  { ?> 
-                                <form action="home.php?pg=<?= $pg; ?>" method="POST" id="numbodega">
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            <label for="numbod"><strong>Bodega</strong></label>
-                                            <select name="numbod" id="numbod" class="form-control form-select" onchange="document.getElementById('numbodega').submit();">
-                                            <option value="0">Seleccione...</option>
-                                                <?php foreach ($datbod as $dte) { ?>
-                                                    <option value="<?= $dte['idval']; ?>" <?php if ($datOne && $dte['idval'] == $datOne[0]['numbod']) echo " selected "; ?>>
-                                                        <?= $dte['nomval']; ?>
-                                                    </option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" name="ope" value="bodega">
-                                    <input type="hidden" name="idfac" value="<?=$dta['idfac']; ?>">
-                                </form>
-                                <?php }} ?>
+                                }}?>
+                                
                             </div>
                     </td>
                     <td tyle="text-align: half;">
@@ -215,9 +217,9 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                         } elseif ($dta["estfac"] == 52) { ?>
                             <span style="font-size: 1px;opacity: 0;">4</span>
                             <i class="fa fa-solid fa-circle-check fa-2x pagada" title="<?= $dta['est']; ?>"></i>
-                            <?php } ?>
+                            <?php }
+                            if ($_SESSION['idpef'] == 4  OR $_SESSION['idpef'] == 12) { ?>
                     <td class="form-group col-md-1" tyle="text-align: right;">
-                        <?php if ($_SESSION['idpef'] == 4  ) { ?>
                                         
                         <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi" title="Editar"></i>
@@ -226,8 +228,9 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
                         </a>
                     </td>
+                    <?php } ?>
                 </tr>
-        <?php }}
+        <?php }
         } ?>
     </tbody>
     <tfoot>
@@ -240,7 +243,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 </div>
             </th>
             <th>Estado</th>
-            <th></th>
+            <?php if ($_SESSION['idpef'] == 4  OR $_SESSION['idpef'] == 12) { ?><th></th><?php } ?>
 
 
         </tr>

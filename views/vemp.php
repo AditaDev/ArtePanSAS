@@ -3,10 +3,10 @@ include('controllers/cemp.php');
 ?>
 
     <div style="text-align: right;">
-        <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>caremp" title="Importar provedoress"></i>
-        <?php modalImp("mod", $pg, "provedoress", "caremp", ""); ?>
+        <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>caremp" title="Importar proveedores"></i>
+        <?php modalImp("mod", $pg, "Proveedores", "caremp", ""); ?>
 
-        <a href="excel/xemp.php" title="Exportar provedoress">
+        <a href="excel/xemp.php" title="Exportar proveedores">
     <i class="fa fa-solid fa-file-export fa-2x exp"></i>
         </a>
     </div>
@@ -81,7 +81,7 @@ include('controllers/cemp.php');
                         <a href="home.php?pg=<?= $pg; ?>&idemp=<?= $dta['idemp']; ?>&ope=edi" title="Editar">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
                         </a>
-                        <a href="home.php?pg=<?= $pg; ?>&idemp=<?= $dta['idemp']; ?>&ope=eli" onclick="return eliminar ('<?= $dta['idemp']; ?>');" title="Eliminar">
+                        <a href="home.php?pg=<?= $pg; ?>&idemp=<?= $dta['idemp']; ?>&ope=eli" onclick="return eliminar ('<?= $dta['nitemp']; ?>');" title="Eliminar">
                             <i class="fa fa-solid fa-trash-can fa-2x iconi"></i>
                         </a>
                         

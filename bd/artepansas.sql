@@ -211,7 +211,7 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (106, 'fa fa-solid fa-user', 'Personas', 'views/vper.php', 6, 'home.php', 1, 2),
 (107, 'fa fa-solid fa-boxes-stacked', 'Dominio', 'views/vdom.php', 7, 'home.php', 1, 2),
 (108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 2),
-(109, 'fa fa-solid fa-building', 'Provedores', 'views/vemp.php', 11, 'home.php', 1, 1),
+(109, 'fa fa-solid fa-building', 'Proveedores', 'views/vemp.php', 11, 'home.php', 1, 1),
 (110, 'fa fa-solid fa-solid fa-lightbulb', 'Novedades', 'views/vnov.php', 16, 'home.php', 1, 4),
 (111, 'fa fa-solid fa-solid fa-lightbulb', 'Dotación', 'views/vdot.php', 17, 'home.php', 1, 4);
 
