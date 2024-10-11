@@ -60,7 +60,10 @@ INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (11, 'Talla G'),
 (12, 'Colores'),
 (13, 'Días'),
-(14, 'Bodega');
+(14, 'Bodega'),
+(15, 'T. Permiso'),
+(16, 'Ubicación'),
+(17, 'Departamento');
 
 -- --------------------------------------------------------
 
@@ -153,7 +156,8 @@ INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`) VALUES
 (1, 'Facturas', 'img/mod_facturas.png', 1),
 (2, 'Configuración', 'img/mod_configuracion.png', 1),
 (3, 'Almuerzos', 'img/mod_almuerzos.png', 1),
-(4, 'Talento Humano', 'img/mod_novedades.png', 1);
+(4, 'Talento Humano', 'img/mod_novedades.png', 1),
+(5, 'Permisos', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -214,7 +218,8 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 2),
 (109, 'fa fa-solid fa-building', 'Proveedores', 'views/vemp.php', 11, 'home.php', 1, 1),
 (110, 'fa fa-solid fa-solid fa-lightbulb', 'Novedades', 'views/vnov.php', 16, 'home.php', 1, 4),
-(111, 'fa fa-solid fa-solid fa-lightbulb', 'Dotación', 'views/vdot.php', 17, 'home.php', 1, 4);
+(111, 'fa fa-solid fa-solid fa-lightbulb', 'Dotación', 'views/vdot.php', 17, 'home.php', 1, 4),
+(55, 'fa fa-solid fa-file-circle-check', 'Permisos', 'views/vprm.php', 55, 'home.php', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -281,7 +286,10 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (63, 8),
 (62, 8),
 (63, 9),
-(62, 9);
+(62, 9),
+(55, 7),
+(55, 5),
+(55, 1);
 
 -- --------------------------------------------------------
 
@@ -297,6 +305,27 @@ CREATE TABLE `pedido` (
   `canalm` tinyint(1) NOT NULL DEFAULT 1,
   `sopa` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `permiso` (
+  `idprm` bigint(11) NOT NULL,
+  `noprm` bigint(11) DEFAULT NULL,
+  `fecini` datetime DEFAULT NULL,
+  `fecfin` datetime DEFAULT NULL,
+  `idjef` bigint(11) NOT NULL,
+  `idvtprm` bigint(11) NOT NULL,
+  `sptrut` varchar(255) DEFAULT NULL,
+  `desprm` varchar(250) DEFAULT NULL,
+  `obsprm` varchar(250) DEFAULT NULL,
+  `estprm` tinyint(1) DEFAULT NULL,
+  `idper` bigint(11) NOT NULL,
+  `idvubi` bigint(11) NOT NULL,
+  `fecsol` date DEFAULT NULL,
+  `fecrev` date DEFAULT NULL,
+  `rutpdf` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 
 -- --------------------------------------------------------
 
@@ -342,7 +371,10 @@ INSERT INTO `pefxmod` (`idmod`, `idpef`, `idpag`) VALUES
 (1, 8, 63),
 (3, 8, 62),
 (1, 9, 63),
-(3, 9, 62);
+(3, 9, 62),
+(5, 7, 55),
+(5, 5, 55),
+(5, 1, 55);
 
 -- --------------------------------------------------------
 
@@ -1233,6 +1265,14 @@ ALTER TABLE `dotacion`
   ADD KEY `idperrecd` (`idperrecd`),
   ADD KEY `estent` (`estent`);
 
+ALTER TABLE `permiso`
+  ADD PRIMARY KEY (`idprm`),
+  ADD KEY `idjef` (`idjef`),
+  ADD KEY `idvtprm` (`idvtprm`),
+  ADD KEY `idper` (`idper`),
+  ADD KEY `idvubi` (`idvubi`);
+
+
 --
 -- Indices de la tabla `dotxent`
 --
@@ -1351,6 +1391,8 @@ ALTER TABLE `almuerzo`
 --
 -- AUTO_INCREMENT de la tabla `dominio`
 --
+
+
 ALTER TABLE `dominio`
   MODIFY `iddom` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
@@ -1359,6 +1401,10 @@ ALTER TABLE `dominio`
 --
 ALTER TABLE `dotacion`
   MODIFY `ident` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+
+ALTER TABLE `permiso`
+  MODIFY `idprm` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -1432,6 +1478,11 @@ ALTER TABLE `dotacion`
   ADD CONSTRAINT `dotacion_ibfk_2` FOREIGN KEY (`idperrec`) REFERENCES `persona` (`idper`),
   ADD CONSTRAINT `dotacion_ibfk_3` FOREIGN KEY (`idperentd`) REFERENCES `persona` (`idper`),
   ADD CONSTRAINT `dotacion_ibfk_4` FOREIGN KEY (`idperrecd`) REFERENCES `persona` (`idper`);
+
+
+ALTER TABLE `permiso`
+  ADD CONSTRAINT `permiso_ibfk_1` FOREIGN KEY (`idjef`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `permiso_ibfk_2` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`);
 
 --
 -- Filtros para la tabla `dotxent`

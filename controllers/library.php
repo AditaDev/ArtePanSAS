@@ -685,130 +685,87 @@ function modalegre($nm, $id, $pg, $info){
 	$txt .= '</div>';
 	echo $txt;
 }
-// ------------Modal vequ, prgxequi-----------
-// function modalPxE($nm, $id, $tit, $dom, $pg, $dms, $dga)
-// {
-// 	$mequ = new Mequ();
-// 	$i = 0;
-// 	$txt = '';
-// 	$txt .= '<div class="modal fade" id="' . $nm . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
-// 		$txt .= '<div class="modal-dialog">';
-// 			$txt .= '<form action="home.php?pg=' . $pg . '" method="POST">';
-// 				$txt .= '<div class="modal-content">';
-// 					$txt .= '<div class="modal-header">';
-// 						$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>' . $tit . '</strong></h1>';
-// 						$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
-// 					$txt .= '</div>';
-// 					$txt .= '<div class="modal-body">';
-// 						$txt .= '<input type="hidden" value="' . $id . '" name="idper">';
-// 						$txt .= '<div class="row">';
-// 							if ($dom) { foreach ($dom as $dom) {
-// 								$dtpg = $mequ->getOnePrg($dom['iddom']);
-// 								$txt .= '<div class="form-group col-md-6" style="text-align: left;">';
-// 									$txt .= '<label for="idvprg" class="titulo"><strong>' . $dom['nomdom'] . ':</strong></label>';
-// 									$txt .= '<input type="hidden" name="idequ" value="' . $id . '">';
-// 									$txt .= '<select name="idvprg[]" id="idvprg" class="form form-select">';
-// 										$txt .= '<option value="0">Sin licencia</option>';
-// 											if ($dtpg){ foreach ($dtpg as $td) {
-// 												$pos = strpos($dms, $td['idval']);
-// 												$txt .= '<option value="' . $td['idval'] . '"';
-// 												if ($pos > -1) $txt .= " selected ";
-// 												$txt .= '>' . $td['nomval'] . '</option>';
-// 											}}
-// 									$txt .= '</select>';
-// 								$txt .= '</div>';
-// 								$txt .= '<div class="form-group col-md-6" style="text-align: left;">';
-// 									$txt .= '<label for="verprg" class="titulo"><strong>Versión:</strong></label>';
-// 									$txt .= '<input class="form-control" type="text" id="verprg" name="verprg[]" ';
-// 										if ($dga){ 
-// 											$txt .= 'value="' . $dga[$i]['verprg'] . '"';
-// 											$i++;
-// 										}
-// 									$txt .= 'onkeypress="return solonum(event);" required>';
-// 								$txt .= '</div> ';
-// 							}}
-// 						$txt .= '</div>';
-// 					$txt .= '</div>';
-// 					$txt .= '<div class="modal-footer">';
-// 						$txt .= '<input type="hidden" value="savepxe" name="ope">';
-// 						$txt .= '<button type="submit" class="btn btn-primary btnmd">Guardar</button>';
-// 						$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
-// 					$txt .= '</div>';
-// 				$txt .= '</div>';
-// 			$txt .= '</form>';
-// 		$txt .= '</div>';
-// 	$txt .= '</div>';
-// 	echo $txt;
-// }
 
-// ------------Modal vper, tajxper-----------
-// function modalTj($nm, $id, $perent, $pg)
-// {
-// 	$mper = new Mper();
-// 	$dtj = NULL;
-// 	$dtj = $mper->getOneTaj($id);
-// 	$hoy = date("Y-m-d");
-// 	$txt = '';
-// 	$txt .= '<div class="modal fade" id="' . $nm . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
-// 		$txt .= '<div class="modal-dialog">';
-// 			$txt .= '<form action="home.php?pg=' . $pg . '" method="POST">';
-// 				$txt .= '<div class="modal-content">';
-// 					$txt .= '<div class="modal-header">';
-// 						$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Asignar tarjetas</strong></h1>';
-// 						$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
-// 					$txt .= '</div>';
-// 					$txt .= '<div class="modal-body">';
-// 						$txt .= '<div class="row">';
-// 							$txt .= '<div class="form-group col-md-6" style="text-align: left;">';
-// 								$txt .= '<label for="numtajpar" class="titulo"><strong>N° T. Parque:</strong></label>';
-// 								$txt .= '<input class="form-control" type="text" id="numtajpar" name="numtajpar"';
-// 								if ($dtj && $dtj[0]['numtajpar']) $txt .= ' value="'.$dtj[0]['numtajpar'].'" disabled';
-// 								$txt .= '>';
-// 							$txt .= '</div> ';
-// 							$txt .= '<div class="form-group col-md-6" style="text-align: left;">';
-// 								$txt .= '<label for="numtajofi" class="titulo"><strong>N° T. Bodega:</strong></label>';
-// 								$txt .= '<input class="form-control" type="text" id="numtajofi" name="numtajofi"';
-// 									if ($dtj && $dtj[0]['numtajofi']) $txt .= ' value="'.$dtj[0]['numtajofi'].'" disabled';
-// 								$txt .= '>';
-// 							$txt .= '</div> ';
-// 							$txt .= '<div class="form-group col-md-6" style="text-align: left;">';
-// 								$txt .= '<label for="fecent" class="titulo"><strong>F. Entrega</strong></label>';
-// 								$txt .= '<input class="form-control" max='.$hoy.' type="date" id="fecent" name="fecent"';
-// 									if ($dtj && $dtj[0]['fecent']) $txt .= ' value="'.$dtj[0]['fecent'].'" disabled';
-// 									else $txt .= ' required';
-// 								$txt .= '>';
-// 							$txt .= '</div> ';
-// 							$txt .= '<div class="form-group col-md-6" style="text-align: left;">';
-// 								$txt .= '<label for="fecent" class="titulo"><strong>F. Devolución</strong></label>';
-// 								$txt .= '<input class="form-control" min='.$hoy.' type="date" id="fecdev" name="fecdev"';
-// 									(!$dtj) ? $txt .= ' disabled' : $txt .= ' required';
-// 								$txt .= '>';
-// 							$txt .= '</div> ';
-// 						$txt .= '</div>';
-// 					$txt .= '</div>';
-// 					$txt .= '<div class="modal-footer">';
-// 						if (!$dtj){
-// 							$txt .= '<input type="hidden" value="savetxp" name="ope">';
-// 							$txt .= '<input type="hidden" value="'.$perent.'" name="idperent">';
-// 							$txt .= '<input type="hidden" value="'.$id.'" name="idperrec">';
-// 							$txt .= '<input type="hidden" value="1" name="esttaj">';
-// 						}else{
-// 							$txt .= '<input type="hidden" value="updtxp" name="ope">';
-// 							$txt .= '<input type="hidden" value="'.$id.'" name="idperentd">';
-// 							$txt .= '<input type="hidden" value="'.$perent.'" name="idperrecd">';
-// 							$txt .= '<input type="hidden" value="'.$dtj[0]['idtaj'].'" name="idtaj">';
-// 							$txt .= '<input type="hidden" value="2" name="esttaj">';
-// 						}
-// 						$txt .= '<button type="submit" class="btn btn-primary btnmd">Guardar</button>';
-// 						$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
-// 					$txt .= '</div>';
-// 				$txt .= '</div>';
-// 			$txt .= '</form>';
-// 		$txt .= '</div>';
-// 	$txt .= '</div>';
-// 	echo $txt;
-// }
+//------------Modal vprm, info permiso-----------
+function modalInfPrm($nm, $id, $det){		
+	$txt = '';
+	$txt .= '<div class="modal fade" id="' . $nm . $id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+		$txt .= '<div class="modal-dialog">';
+			$txt .= '<div class="modal-content">';
+				$txt .= '<div class="modal-header">';
+					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Permiso - '.$det[0]['tprm'].'</strong></h1>';
+					$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
+				$txt .= '</div>';
+				$txt .= '<div class="modal-body" style="margin: 0px 25px;">';
+					$txt .= '<div class="row">';
+						if($det[0]["ijef"] && $det[0]["ijef"]==$_SESSION['idper']){
+							$txt .= '<div class="form-group col-md-4"><strong>Solicitado a: </strong></div>';
+							$txt .= '<div class="form-group col-md-8">'.$det[0]["njef"].' '.$det[0]["ajef"].'</div>';
+						}if($det[0]["iper"] && $det[0]["iper"]==$_SESSION['idper']){
+							$txt .= '<div class="form-group col-md-4"><strong>Solicitado por: </strong></div>';
+							$txt .= '<div class="form-group col-md-8">'.$det[0]["nper"].' '.$det[0]["aper"].'</div>';
+						}
+						$txt .= '<big><br><strong>Fechas:</strong></big><hr>';
+						$txt .= '<div class="form-group col-sm-2"><strong>Desde: </strong></div>';
+						$txt .= '<div class="form-group col-sm-10">'.$det[0]["fini"].' - '.$det[0]["hini"].'</div>';
+						$txt .= '<div class="form-group col-sm-2"><strong>Hasta: </strong></div>';
+						$txt .= '<div class="form-group col-sm-10">'.$det[0]["ffin"].' - '.$det[0]["hfin"].'</div>';
+						$txt .= '<div class="form-group col-sm-2"><strong>Tiempo: </strong></div>';
+						$txt .= '<div class="form-group col-sm-4">Días: '.$det[0]["ddif"].'</div>';
+						$txt .= '<div class="form-group col-sm-6">Horas: '.$det[0]["hdif"].'</div>';
+						if($det[0]["desprm"]) $txt .= '<big><br><strong>Descripción:</strong></big><hr><div class="form-group col-md-12">'.$det[0]["desprm"].'</div>';
+						if($det[0]["obsprm"]) $txt .= '<big><br><strong>Observaciones:</strong></big><hr><div class="form-group col-md-12">'.$det[0]["obsprm"].'</div>';
+						if($det[0]["estprm"] != 1){
+							$txt .= '<big><br><strong>Resultado:</strong></big><hr>';
+							if($det[0]["estprm"] != 2){
+								$txt .= '<div class="form-group col-md-4"><strong>'.(($det[0]["estprm"] == 3) ? 'Aprobado' : 'Rechazado').' por: </strong></div>';
+								$txt .= '<div class="form-group col-md-8">'.$det[0]["nper"].' '.$det[0]["aper"].'</div>';
+							}
+							$txt .= '<div class="form-group col-md-4"><strong>F. Solicitud: </strong></div>';
+							$txt .= '<div class="form-group col-md-8">'.$det[0]["fsol"].'</div>';
+							if($det[0]["estprm"] != 2){
+								$txt .= '<div class="form-group col-md-4"><strong>F. Revisión: </strong></div>';
+								$txt .= '<div class="form-group col-md-8">'.$det[0]["frev"].'</div>';
+							}
+						}
+					$txt .= '</div>';
+				$txt .= '</div>';
+				$txt .= '<br><div class="modal-footer">';
+					$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
+				$txt .= '</div>';
+			$txt .= '</div>';
+		$txt .= '</div>';
+	$txt .= '</div>';
+	echo $txt;
+}
 
+//------------Modal vprm, rechazar permiso-----------
+function modalRecPrm($nm, $id, $tit){		
+	$txt = '';
+	$txt .= '<div class="modal fade" id="' . $nm . $id .'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+		$txt .= '<div class="modal-dialog">';
+			$txt .= '<form action="views/pdfprm.php" method="POST" target="_blank" onsubmit="setTimeout(() => location.reload(), 1000);"';
+				$txt .= '<div class="modal-content">';
+					$txt .= '<div class="modal-header">';
+						$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$tit.'</strong></h1>';
+						$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+					$txt .= '</div>';
+					$txt .= '<div class="modal-body" style="text-align: left;">';
+						$txt .= '<label for="arc" style="margin-bottom: 10px"><strong>Motivo rechazo:</strong></label>';
+						$txt .= '<textarea class="form-control" type="text" id="obsprm" name="obsprm" required></textarea>';
+					$txt .= '</div>';
+					$txt .= '<div class="modal-footer">';
+						$txt .= '<input type="hidden" value="'.$id.'" name="idprm">';
+						$txt .= '<input type="hidden" value="4" name="estprm">';
+						$txt .= '<button type="submit" class="btn btn-primary btnmd">Guardar</button>';
+						$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
+					$txt .= '</div>';
+				$txt .= '</div>';
+			$txt .= '</form>';
+		$txt .= '</div>';
+	$txt .= '</div>';
+	echo $txt;
+}
 
 //------------Array-string vequ, prgxequi-----------
 function arrstrprg($dt)
