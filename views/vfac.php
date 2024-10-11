@@ -4,7 +4,7 @@ $hoy = date("Y-m-d");
 $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 ?>
     <div style="text-align: right;">
-        <?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 12) { ?>
+        <?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 1) { ?>
     <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>carfac" title="Importar Facturas"></i>
     <?php modalImp("mod", $pg, "Facturas", "carfac", ""); ?>
         
@@ -109,7 +109,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 </div>
             </th>
             <th>Estado</th>
-            <?php if ($_SESSION['idpef'] == 4  OR $_SESSION['idpef'] == 12) { ?><th></th><?php } ?>
+            <?php if ($_SESSION['idpef'] == 4  OR $_SESSION['idpef'] == 1) { ?><th></th><?php } ?>
         </tr>
     </thead>
     <tbody>
@@ -153,9 +153,20 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 $mfac->setIdfac($dta['idfac']);
                                 $info = $mfac->getOne();
                                 modalDet("mcbinf", $dta['idfac'], $dta['nofac'] . "-" . $dta['confac'], $info);
+
                                 if($dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
                                 <i class="fa fa-solid fa-file-pdf iconi" title='PDF' onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i>
                                 <?php } ?>
+
+                                <?php
+                                if($dta['rutpdf'] && file_exists($dta['rutspt'])) { ?>
+                                    <i class="fa-regular fa-file-pdf iconi" title='SOPORTE' onclick="pdf('<?php echo $dta['rutspt']; ?>')"></i>
+
+                                <?php } ?>
+                                
+
+                                
+
                                 <?php if ($dta['pnov'] == NULL) { ?>
                                 <i class="fa-solid fa-circle-exclamation iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbnov<?= $dta['idfac']; ?>" title="NOVEDAD"></i>
                                 <?php
@@ -218,7 +229,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             <span style="font-size: 1px;opacity: 0;">4</span>
                             <i class="fa fa-solid fa-circle-check fa-2x pagada" title="<?= $dta['est']; ?>"></i>
                             <?php }
-                            if ($_SESSION['idpef'] == 4  OR $_SESSION['idpef'] == 12) { ?>
+                            if ($_SESSION['idpef'] == 4  OR $_SESSION['idpef'] == 1) { ?>
                     <td class="form-group col-md-1" tyle="text-align: right;">
                                         
                         <a href="home.php?pg=<?= $pg; ?>&idfac=<?= $dta['idfac']; ?>&ope=edi">
@@ -243,7 +254,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                 </div>
             </th>
             <th>Estado</th>
-            <?php if ($_SESSION['idpef'] == 4  OR $_SESSION['idpef'] == 12) { ?><th></th><?php } ?>
+            <?php if ($_SESSION['idpef'] == 4  OR $_SESSION['idpef'] == 1) { ?><th></th><?php } ?>
 
 
         </tr>

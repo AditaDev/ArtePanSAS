@@ -3,6 +3,7 @@ CREATE DATABASE artepansas;
 USE artepansas;
 
 
+
 -- --------------------------------------------------------
 
 --
@@ -396,75 +397,75 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`idper`, `nomper`, `pasper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`, `area`) VALUES
-(1, 'Nicole Adamarys', 'b49b50d25f178f2c6faf885a9d72fcf3be990e34', 'rodriada24@gmail.com', '3215646857', 'Rodríguez Estevez', '1071328321', 1, 45),
-(2, 'Luz Mery', 'a486854f8fdf9ba3996d0fdc52d8743328b0c678', 'agudeloluzmery@yahoo.com.co', NULL, 'Agudelo Romero', '20533039', 1, 45),
-(3, 'David Alexander', '2b9d7f0412b68939e0a477ccd1881cdf189115ad', 'davidalvarado0803@gmail.com', NULL, 'Alvarado Cardona', '1233509778', 1, 46),
-(4, 'Diego Alberto', '9e181e7440e2017a5471829fbd29880162a3592f', 'diegokatyandrade@gmail.com', NULL, 'Andrade', '93377712', 1, 47),
-(5, ' Edson Arante', '995f35637f6876fa7269fcbe166d0dde56c98de8', 'edsonballen.15@gmail.com', NULL, 'Ballen Rivera', '1022967621', 1, 46),
-(6, 'Jenny Paola', '1a829f8b3cf4baf21cdc68754bc74d9a0b7f3c3a', 'jpaopulido@gmail.com', NULL, 'Barrera Pulido', '53050180', 1, 45),
-(7, 'Edgar Fabian', '02cf3f95731920ac4afb57960616e10329d6701c', 'masterr4@hotmail.es', NULL, 'Bastidas Mariño', '79915984', 1, 45),
-(8, 'Jorge Eduardo', '52442b09375cc98ce52595cc82e75c8dbc1d1516', 'jebellog@hotmail.com', NULL, 'Bello', '11519701', 1, 45),
-(9, 'Maria Rita', '107ce0ab47457da27d04995d7f019b1814ead11e', 'mari_beme6@hotmail.com', NULL, 'Bejarano', '41363619', 1, 45),
-(10, ' Luz Antonia', 'e3a560b439efaa7907068a1630a769e931270ad3', 'Luz-antonia@hotmail.com', NULL, 'Blanco Maldonado', '41692666', 1, 47),
-(11, 'Gladys Astrid', '6af590edc1de9e2120fb83cc88e7cf10112e7bdd', 'astridbravogiraldo8@gmail.com', NULL, 'Bravo Giraldo', '65731647', 1, 47),
-(12, 'Victor', 'c39d832e411fd31c8e204b55d3000893808fdadb', 'camachop589@gmail.com', NULL, 'Buitrago', '1023943022', 1, 46),
-(13, 'Rafael Eduardo', '4d2cff43dcc1f653781548bac13d9b7006630316', 'rbustos@artepan.com.co', NULL, 'Bustos Malagón', '11346490', 1, 46),
-(14, 'Ricardo', '9ae5c4beb6928eccfdf6097ab71594ab6aa50b5a', 'ricardocabre3@hotmail.com', NULL, 'Cabrera Ducuara', '93117819', 1, 46),
-(15, 'Brandon Antonio', '6c0f20d92b8f70eeafbbb53b3935264e251b709b', 'calderonbrandon0411@gmail.com', NULL, 'Calderón Pinzon', '1001175984', 1, 45),
-(16, 'Martha Doris', '4cd00d7b4b187612c5600c6d5a91ae2ceda17bb0', 'Mdcmonita@hotmail.com', NULL, 'Castaño', '52305522', 1, 47),
-(17, 'Ronald', 'd9d53e362f73d09e8e2687f932b97d5dc84c5399', 'ronaldcas041220@gmail.com', NULL, 'Castañeda Peña', '79733403', 1, 46),
-(18, 'Walther Oswaldo', '70bc0a655c377206a3a1d863a2f5f7f8ee4b569f', 'walthcruz1886@gmail.com', NULL, 'Cruz Rodriguez', '1024505932', 1, 46),
-(19, 'Sandra Rocio', '2029a6ae9d86004da44dcb41a61c7c7e9c7ee08b', 'sandradiazv@gmail.com', NULL, 'Diaz Valbuena', '52089423', 1, 45),
-(20, 'Hernán Bernardo', '7db99e6cefcbd6538164d7aee277a56aeccb6a15', 'hernanduranb52@yahoo.com', NULL, 'Durán Baron', '19166998', 1, 46),
-(21, 'Claudia Bibiana', '04459c7b231f71fb200d850bcfb67543d277413a', 'claudiadurannhuergo@gmail.com', NULL, 'Durán huergo', '40780475', 1, 47),
-(22, 'Ivan', '45d07f6a04c8291a1f14208e5cfc8266f2c5d6bb', 'ivanvergara0976@gmail.com', NULL, 'Escobar Vergara', '79729150', 1, 46),
-(23, 'Alvaro Fernando', 'df8301e450ee3489f2c57db2f8b97fbb9fd50252', 'ferespejo69@hotmail.com', NULL, 'Espejo Beltran', '79498889', 1, 47),
-(24, 'Yolanda', 'c24513e196361e3891baedbb36285f75f46c400d', 'yolanda.fonseca.artepan@gmail.com', NULL, 'Fonseca Martinez', '41786746', 1, 47),
-(25, 'Jaime Alexander', 'e35cbd9e7ca585b1dd33c3f9b2e0654b14447e6a', 'pitero125@gmail.com', NULL, 'Forero Useche', '1031138935', 1, 46),
-(26, 'Carlos Hernando', '3b52ee1c4b4cd19fec378fa41fbdbb00c8f2d3e4', 'chgaravitov@hotmail.com', NULL, 'Garavito Velázquez', '80424994', 1, 47),
-(27, 'Amylee Andrea', '03c17ed37736a531a4a77ec5f661e82664dc172e', 'amy.gavilan12@gmail.com', NULL, 'Gavilán Niño', '1031125822', 1, 45),
-(28, 'Jefferson', '9d25c6846300f70df6308f152b6fb0185eafc653', 'jegold2120@hotmail.com', NULL, 'González Usme', '1013683528', 1, 46),
-(29, 'Albadan Yilmer', '48c62d495f96ee63e3cf25d80bb4e4310c81ba15', 'yilmerguerrero@yahoo.es', NULL, 'Guerrero', '79731631', 1, 46),
-(30, 'William', '23453c438df5ffe3417ae762ba0a41dece451623', 'Williams061@hotmail.com', NULL, 'Guerrero Gomez', '79320979', 1, 47),
-(31, 'Luz Yeny', 'da79f943a22219e2e3cddfa2774602f7ece577d3', 'luzyeny8@gmail.com', NULL, 'Guerrero Moreno', '53118633', 1, 47),
-(32, 'Blanca Nelsy', '958b9896303ef02958e81229e37efe27880cbad9', 'blancajimenez49@hotmail.com', NULL, 'Jiménez Castro', '41456223', 1, 47),
-(33, 'Jenny yisell', 'ced196f45ac8d6d2a12205891a146aa130f8d712', 'ronalfabijim@hotmail.com', NULL, 'Jiménez Godoy', '52879265', 1, 47),
-(34, 'Oscar Javier', '5f19d59f2680ae9093dbdcc8c41fb145b4189b63', 'Ooscarjimenez0@gmail.com', NULL, 'Jimenez grazon', '1026270180', 1, 46),
-(35, 'Miguel Angel', '48059740f38cf6b3115eadb0cf58c98451fe4cbb', 'angeldavilleren01a@gmail.com', NULL, 'Llerena Castro', '1044928400', 1, 46),
-(36, 'Jairo', '28801178cfd563b9f3193b483efe4a2f474f9a8a', 'martinezcorzojairo3@gmail.com', NULL, 'Martinez Corzo', '19483662', 1, 46),
-(37, 'Jader Hasmeth', '80e3967373784cd74baa2b609b2a5e1f2f76f05a', 'jadermen14@gmail.com', NULL, 'Mendoza Maza', '1001913358', 1, 46),
-(38, 'Miguel Angel', '67a06ade3e22714c33f8729a3c3aa06baeff6856', 'mk1218mendoza@gmail.com', NULL, 'Mendoza Maza', '1001911952', 1, 46),
-(39, 'Adriana', '8a7eafcf5f1cb1119d3741e26e6961492b02c5d8', 'amontano@artepan.com.co', NULL, 'Montaño Bejarano', '52263295', 1, 45),
-(40, 'Camilo Andrés', '5147b9564cc026d7c44c271aa31766ed05571bb6', 'camilomontano02@gmail.com', NULL, 'Montaño Rodríguez', '1193139757', 1, 46),
-(41, 'Sandra Milena', '8bb3d808e1bf782889071ffb6aa91469d9d85b06', 'smontenegro@artepan.com.co', NULL, 'Montenegro', '52130059', 1, 47),
-(42, 'Juan Sebastian', '4fe53589e4473ed1bae3cf9e4cd0fc5c5a337c99', 'jmoreno400@misena.edu.co', NULL, 'Moreno Garzon', '1030666431', 1, 45),
-(43, 'Ana Cecilia', '030cf7c7c7aa1aa500a63d7a34a641d43f640d24', 'anaceciliasm11@gmail.com', NULL, 'Moreno Suarez', '51988759', 1, 45),
-(44, 'Alvaro', '84dfebfdab0b51327d86bdce21c690f28480bcbb', 'alvaromoreraw123@gmail.com', NULL, 'Morera Rodriguez', '19073145', 1, 46),
-(45, 'Yenny Astrid', '716c5c28b08e88bf18a36d3dfa2b2628f7a631e0', 'yenny.astridm@gmail.com', NULL, 'Morera Rugeles', '52470161', 1, 47),
-(46, 'Yined Milandy', '90fce84e627854edf8c83ecfb543e650203f4ffb', 'Yined.pacacira@gmail.com', NULL, 'Pacacira Guio', '1056802041', 1, 45),
-(47, 'Juan Manuel', '12a115a2fc38780898564ad00f3d214a10396b18', 'jumapal2@hotmail.com', NULL, 'Palacios Chaves', '79135140', 1, 45),
-(48, 'Jairo Ancizar', 'f7903dae218f8127535770f5b23359bc46256e66', 'jairopardoasesorias@hotmail.com', NULL, 'Pardo Diaz', '17120780', 1, 45),
-(49, 'Juan Jairo', '80571fdbd17b8510970c43d718d6c5850b9f22c4', 'jjpardo@artepan.com.co', NULL, 'Pardo Rodríguez', '1069712627', 1, 45),
-(50, 'Germán Alfonso', 'c5464316d4fe22e00abd9310ef6b7aa0ffccb62b', 'gap@artepan.com.co', NULL, 'Párraga a Gutiérrez', '1032365342', 1, 45),
-(51, 'Alba', '838050c0752b0c700f89e9fbe2b3aea02a621f68', 'albaparrag@gmail.com', NULL, 'Parraga', '1024478347', 1, 45),
-(52, 'Marisol', '3be76ed69f674fd7eb6ed076b80ee6699eace881', 'shamarysu@gmail.com', NULL, 'Pedraza', '52349796', 1, 47),
-(53, 'Pablo', 'ab0183eb468c7ded53a427efb1a1ce95a6dfe671', 'Pabloalfonsopenagospastran@hmail.com', NULL, 'Penagos Pastran', '79917272', 1, 46),
-(54, 'Alfonso', '441fce7b3bd84c7356d115d0ce24954bc9d9ce74', 'HJKHJGK', NULL, 'Penagos Suares', '19238591', 1, 46),
-(55, 'Luis Dario', '5005a41a547146219e18d7276f0b4038b1b48cef', 'dariopena.2703@gmail.com', NULL, 'Peña Charry', '80274540', 1, 46),
-(56, 'Maria Concepcion', 'bd0eb8f8f2f3a1d707f25fa6cc234c8650d5b8f1', 'cperez@artepan.com.co', NULL, 'Perez Nepta', '41504804', 1, 45),
-(57, 'Victor Manuel', '579faef167c719e4cad94067283dcd125278ba32', 'victortransportevmp@gmail.com', NULL, 'Pinzon', '79640480', 1, 46),
-(58, 'Nickson Fabián', 'cf89ea0020da278abda379485d74e5254eaf4873', 'agerencia@artepan.com.co', NULL, 'Quiroga Lopez', '1020771962', 1, 45),
-(59, 'Jhon Jairo', 'cf852550225ecc901dd047dea8a019adb025a985', 'jhonjramirez45@gmail.com', NULL, 'Ramírez González', '75067802', 1, 46),
-(60, 'Kevin Andrés', '0356af424654df6e47b1a594a675e770537f000f', 'keviinramirez62@gmail.com', NULL, 'Ramírez Isaza', '1073715535', 1, 46),
-(61, 'Gustavo', '031ce38909899818b08a794b378df55e1cfaf5b3', 'JHKYUJK', NULL, 'Ramírez Valencia', '10078656', 1, 46),
-(62, 'Walter Stiven', '30fd413c9efb9922df232902cda5ce8704df381e', 'wsrr1013@gmail.com', NULL, 'Rodriguez Rodriguez', '1013678254', 1, 46),
-(63, 'Óscar Eduardo', '435e64c0a049e6752c08317065e2a9c9a0963531', 'osrodriguez76@hotmail.com', NULL, 'Rodríguez Soche', '79212499', 1, 46),
-(64, 'Alejandro', '37edbb092ca64d12ea28e8ca4a3b969fa31754fb', 'alrogehernandez@outlook.com', NULL, 'Rogelis Hernandez', '1192738328', 1, 46),
-(65, 'Brandon Jahir', '0d297353d76186217011b8938cdd706dffc2380f', 'brandonjahirsandoval@gmail.com', NULL, 'Sandoval Moreno', '1233509090', 1, 46),
-(66, 'Nelly Johana', '0fd0239c293407635ac6776272c2ff48f3f22235', 'johanita242009@gmail.com', NULL, 'Sandoval Moreno', '1030658669', 1, 45),
-(67, 'Gladys Milena', '5ff976a85ac78971543acb94d8cefdd3a8c8d1ea', 'milenatovar@gmail.com', NULL, 'Tovar Murillo', '52217915', 1, 47),
-(68, 'Angel Roberto', 'c908064d91c93513394785b64ca072a336a7c47a', 'atrilleras@artepan.com.co', NULL, 'Trilleras Viscaya', '7684074', 1, 45),
-(69, 'Alex Armando', 'f7cf01514a8f9080d7e615daa4edbad737d532e2', 'valenciaalexarmando@gmail.com', NULL, 'Valencia Rincon', '79532961', 1, 46);
+(1, 'Nicole Adamarys', '4ba5359101befefed89e3e748de749f3ac438bfc', 'rodriada24@gmail.com', '3215646857', 'Rodríguez Estevez ', '1071328321', 1, 45),
+(2, 'Luz Mery', '2dc193c588614bbb41e97826613ceab930129c79', 'agudeloluzmery@yahoo.com.co', NULL, 'Agudelo Romero', '20533039', 1, 45),
+(3, 'David Alexander', '7624cbd77a187735ed5212c208a8d44a509dc985', 'davidalvarado0803@gmail.com', NULL, 'Alvarado Cardona', '1233509778', 1, 46),
+(4, 'Diego Alberto', '550ebb4ca1e7e8261860662a3d488e2194c4217f', 'diegokatyandrade@gmail.com', NULL, 'Andrade', '93377712', 1, 47),
+(5, ' Edson Arante', '238a57246f1250ff609a75dd447128141526e609', 'edsonballen.15@gmail.com', NULL, 'Ballen Rivera ', '1022967621', 1, 46),
+(6, 'Jenny Paola', '90bb5c55227c92e4fd6d14c2b7f9ee1d10f5c49e', 'jpaopulido@gmail.com', NULL, 'Barrera Pulido', '53050180', 1, 45),
+(7, 'Edgar Fabian', '5d52fa3bfa3ca9f9fd54ca442f49ac0049664819', 'masterr4@hotmail.es', NULL, 'Bastidas Mariño', '79915984', 1, 45),
+(8, 'Jorge Eduardo', '265b671a3e6500b5669cb893d80d2878b74fbc13', 'jebellog@hotmail.com', NULL, 'Bello', '11519701', 1, 45),
+(9, 'Maria Rita', 'bce325c962b45fd3d67e9a3519ae3347605241a6', 'mari_beme6@hotmail.com', NULL, 'Bejarano', '41363619', 1, 45),
+(10, ' Luz Antonia', '1a2bda55a67b7a02ae3a2bc656bccfc01524281f', 'Luz-antonia@hotmail.com', NULL, 'Blanco Maldonado', '41692666', 1, 47),
+(11, 'Gladys Astrid', '2ae43cf71c61fba2541f765ff5506c03c1d55eb3', 'astridbravogiraldo8@gmail.com', NULL, 'Bravo Giraldo ', '65731647', 1, 47),
+(12, 'Victor', '548ab4f8ed58f80fe6e61fba30821c05b170dc44', 'camachop589@gmail.com', NULL, 'Buitrago ', '1023943022', 1, 46),
+(13, 'Rafael Eduardo', 'aa9930597c59ed54cb2ee1ca9556660ef5024eab', 'rbustos@artepan.com.co', NULL, 'Bustos Malagón ', '11346490', 1, 46),
+(14, 'Ricardo', '35f2ecf85b73114a7ee2625b4c88dfee180ca3cd', 'ricardocabre3@hotmail.com', NULL, 'Cabrera Ducuara ', '93117819', 1, 46),
+(15, 'Brandon Antonio', 'bdc72aa5710a82f36a35e3c272b5923005e76790', 'calderonbrandon0411@gmail.com', NULL, 'Calderón Pinzon ', '1001175984', 1, 45),
+(16, 'Martha Doris', '5b8d2a864dd941213e3aa257771e77173f4a897b', 'Mdcmonita@hotmail.com', NULL, 'Castaño ', '52305522', 1, 47),
+(17, 'Ronald', 'a04e77bbfc1e983478990384be6c0d30151b78cb', 'ronaldcas041220@gmail.com', NULL, 'Castañeda Peña ', '79733403', 1, 46),
+(18, 'Walther Oswaldo', '8ec687a5052bc8d19d79a3b08a84a1608b17f0b4', 'walthcruz1886@gmail.com', NULL, 'Cruz Rodriguez ', '1024505932', 1, 46),
+(19, 'Sandra Rocio', '8649889a345c6b98ee40f9869dab3d607519c22c', 'sandradiazv@gmail.com', NULL, 'Diaz Valbuena ', '52089423', 1, 45),
+(20, 'Hernán Bernardo', 'e69fdae7200efa9703e19805995a9e476eb95500', 'hernanduranb52@yahoo.com', NULL, 'Durán Baron ', '19166998', 1, 46),
+(21, 'Claudia Bibiana', '15341f259801f248790f63954217a6a5c8591f23', 'claudiadurannhuergo@gmail.com', NULL, 'Durán huergo ', '40780475', 1, 47),
+(22, 'Ivan', 'a06c4b323c4453572b0615671c77c6aae8413733', 'ivanvergara0976@gmail.com', NULL, 'Escobar Vergara ', '79729150', 1, 46),
+(23, 'Alvaro Fernando', 'f35d8f7e30b99b2e9f368164ecda2f9ae328adb4', 'ferespejo69@hotmail.com', NULL, 'Espejo Beltran ', '79498889', 1, 47),
+(24, 'Yolanda', '3187c188b6c4e37719cba209020110a0af15c295', 'yolanda.fonseca.artepan@gmail.com', NULL, 'Fonseca Martinez ', '41786746', 1, 47),
+(25, 'Jaime Alexander', 'cb724eb0d7c66d76474165374a6830f774005038', 'pitero125@gmail.com', NULL, 'Forero Useche ', '1031138935', 1, 46),
+(26, 'Carlos Hernando', 'a9f245f71f40e5bc42c8e70b96f6222262475f19', 'chgaravitov@hotmail.com', NULL, 'Garavito Velázquez ', '80424994', 1, 47),
+(27, 'Amylee Andrea', 'c830712d4f3b017cb6803d21d813b22dbcc750cb', 'amy.gavilan12@gmail.com', NULL, 'Gavilán Niño ', '1031125822', 1, 45),
+(28, 'Jefferson', 'd8c0b21ed80421d7c19a7208e6fe4da76faf159a', 'jegold2120@hotmail.com', NULL, 'González Usme ', '1013683528', 1, 46),
+(29, 'Albadan Yilmer', 'c71fd0eebf603c103399c133e3382d40bc40e42a', 'yilmerguerrero@yahoo.es', NULL, 'Guerrero ', '79731631', 1, 46),
+(30, 'William', '637f09ce67f2e15507be110cc49ff1bb17f11030', 'Williams061@hotmail.com', NULL, 'Guerrero Gomez ', '79320979', 1, 47),
+(31, 'Luz Yeny', 'ec8138832520225ed3fe338a7290bcf2d71b378e', 'luzyeny8@gmail.com', NULL, 'Guerrero Moreno ', '53118633', 1, 47),
+(32, 'Blanca Nelsy', '7cddc1bb0d62a2c0509908f2c946416c5d41dc4d', 'blancajimenez49@hotmail.com', NULL, 'Jiménez Castro ', '41456223', 1, 47),
+(33, 'Jenny yisell', 'f93b0f33e3c0e7215b9f85c54dcaed0cb6e23848', 'ronalfabijim@hotmail.com', NULL, 'Jiménez Godoy ', '52879265', 1, 47),
+(34, 'Oscar Javier', 'e8fb02df657490acea802341edf8ffbed8e311da', 'Ooscarjimenez0@gmail.com', NULL, 'Jimenez grazon ', '1026270180', 1, 46),
+(35, 'Miguel Angel', 'dffe7f3040a2e075d926187078785d909a94dc81', 'angeldavilleren01a@gmail.com', NULL, 'Llerena Castro ', '1044928400', 1, 46),
+(36, 'Jairo', '68e77bb6064fc196442902481c95d90a52150d37', 'martinezcorzojairo3@gmail.com', NULL, 'Martinez Corzo ', '19483662', 1, 46),
+(37, 'Jader Hasmeth', '5e138b27e909b588709c3dc6774857a7ccfe7eee', 'jadermen14@gmail.com', NULL, 'Mendoza Maza ', '1001913358', 1, 46),
+(38, 'Miguel Angel', 'afa192e4e55e423516590f10835abc9d150e9cd7', 'mk1218mendoza@gmail.com', NULL, 'Mendoza Maza ', '1001911952', 1, 46),
+(39, 'Adriana', '4ea2fd893bf03e470ceb74ea0f7baea56aafe3cd', 'amontano@artepan.com.co', NULL, 'Montaño Bejarano ', '52263295', 1, 45),
+(40, 'Camilo Andrés', '4e7a5f5dfaeb5e160cf482c764305a4add402688', 'camilomontano02@gmail.com', NULL, 'Montaño Rodríguez ', '1193139757', 1, 46),
+(41, 'Sandra Milena', 'da926dfe6de9873e377a764f8ba9f0aecb4929de', 'smontenegro@artepan.com.co', NULL, 'Montenegro ', '52130059', 1, 47),
+(42, 'Juan Sebastian', '4f61307024e951bf661fa20a188820fb6c189b77', 'jmoreno400@misena.edu.co', NULL, 'Moreno Garzon ', '1030666431', 1, 45),
+(43, 'Ana Cecilia', '4f3a1e6cc48f615356ca3ea5b2c8a1c9b42fd66d', 'anaceciliasm11@gmail.com', NULL, 'Moreno Suarez ', '51988759', 1, 45),
+(44, 'Alvaro', '0248e4c2e5f8c2902ebd921b05e04f5a1dc7d7f2', 'alvaromoreraw123@gmail.com', NULL, 'Morera Rodriguez ', '19073145', 1, 46),
+(45, 'Yenny Astrid', 'e0854fe9cb9c8bf0a06c76f433252d454e1c355c', 'yenny.astridm@gmail.com', NULL, 'Morera Rugeles ', '52470161', 1, 47),
+(46, 'Yined Milandy', 'fa2c11047ca9212539caa2271f61c0adf5fb7dd3', 'Yined.pacacira@gmail.com', NULL, 'Pacacira Guio ', '1056802041', 1, 45),
+(47, 'Juan Manuel', 'ce9bd93febc3ddfe04f7f32c98401656338cf735', 'jumapal2@hotmail.com', NULL, 'Palacios Chaves ', '79135140', 1, 45),
+(48, 'Jairo Ancizar', 'd2c7a6a03b3d808639079463e279e3efd458235e', 'jairopardoasesorias@hotmail.com', NULL, 'Pardo Diaz ', '17120780', 1, 45),
+(49, 'Juan Jairo', 'ac6fed2889c5a52538276334b41677c3bb2b2241', 'jjpardo@artepan.com.co', NULL, 'Pardo Rodríguez ', '1069712627', 1, 45),
+(50, 'Germán Alfonso', 'e79fa2f06772118c1682e2e3e98f83d71ef0f6da', 'gap@artepan.com.co', NULL, 'Párraga a Gutiérrez ', '1032365342', 1, 45),
+(51, 'Alba', '94346ff445dd8fd0f7e4c225e8ab8fe4e6b59977', 'albaparrag@gmail.com', NULL, 'Parraga ', '1024478347', 1, 45),
+(52, 'Marisol', 'c638add91a4654c89733df3edd2da691da2d2c40', 'shamarysu@gmail.com', NULL, 'Pedraza ', '52349796', 1, 47),
+(53, 'Pablo', 'ab3da323a997cc76923488e52241d7ee8c32dab3', 'Pabloalfonsopenagospastran@hmail.com', NULL, 'Penagos Pastran ', '79917272', 1, 46),
+(54, 'Alfonso', '9b5b185253cc1b6e82f63708fc37faf3d70c5142', 'HJKHJGK', NULL, 'Penagos Suares ', '19238591', 1, 46),
+(55, 'Luis Dario', '630c16e6468d539f2f1b87211fca698c57b29d26', 'dariopena.2703@gmail.com', NULL, 'Peña Charry ', '80274540', 1, 46),
+(56, 'Maria Concepcion', '350843f5a95dc298236853650613b0b8239993e6', 'cperez@artepan.com.co', NULL, 'Perez Nepta ', '41504804', 1, 45),
+(57, 'Victor Manuel', 'bbac55ecfdb43f589d24df348d9cad4970bd6b89', 'victortransportevmp@gmail.com', NULL, 'Pinzon ', '79640480', 1, 46),
+(58, 'Nickson Fabián', 'e4cc10ef038de7bfa93ce0f7a0b77ff0d5552f1e', 'agerencia@artepan.com.co', NULL, 'Quiroga Lopez ', '1020771962', 1, 45),
+(59, 'Jhon Jairo', '4f367d11e69d9c3fc1cdd382ab170d1db5435692', 'jhonjramirez45@gmail.com', NULL, 'Ramírez González ', '75067802', 1, 46),
+(60, 'Kevin Andrés', '6d64fba1b4cb31f524c3a3157c08cbe7337db928', 'keviinramirez62@gmail.com', NULL, 'Ramírez Isaza ', '1073715535', 1, 46),
+(61, 'Gustavo', '6f37174c887902bdac659c3ad17491b91fb8a38a', 'JHKYUJK', NULL, 'Ramírez Valencia ', '10078656', 1, 46),
+(62, 'Walter Stiven', '6742682fdad01a59a17f631d88b41db81139ddd3', 'wsrr1013@gmail.com', NULL, 'Rodriguez Rodriguez ', '1013678254', 1, 46),
+(63, 'Óscar Eduardo', '4b47dcfd141ce019b493f92b374b1cbe1458eb6d', 'osrodriguez76@hotmail.com', NULL, 'Rodríguez Soche ', '79212499', 1, 46),
+(64, 'Alejandro', '8230d9a0e0f8fe3cdcc3c6cbe4d7e5bfde251340', 'alrogehernandez@outlook.com', NULL, 'Rogelis Hernandez ', '1192738328', 1, 46),
+(65, 'Brandon Jahir', '3c5af3f1d44c1c79f442cdde2c2f3728cffd7a70', 'brandonjahirsandoval@gmail.com', NULL, 'Sandoval Moreno ', '1233509090', 1, 46),
+(66, 'Nelly Johana', '44d09936c21775af717c0a60ebe1ea6e9f8aafe6', 'johanita242009@gmail.com', NULL, 'Sandoval Moreno ', '1030658669', 1, 45),
+(67, 'Gladys Milena', 'b4ccfd8159fd725a128a0ccaa826b15042ea8fd8', 'milenatovar@gmail.com', NULL, 'Tovar Murillo ', '52217915', 1, 47),
+(68, 'Angel Roberto', '554e45046c0d0ed48e0bef63b8d79ef331ba0b62', 'atrilleras@artepan.com.co', NULL, 'Trilleras Viscaya ', '7684074', 1, 45),
+(69, 'Alex Armando', '84082da34468b72e26f0455d321a3ee29bc3c6ef', 'valenciaalexarmando@gmail.com', NULL, 'Valencia Rincon ', '79532961', 1, 46);
 
 -- --------------------------------------------------------
 
@@ -482,7 +483,6 @@ CREATE TABLE `perxpef` (
 --
 
 INSERT INTO `perxpef` (`idper`, `idpef`) VALUES
-(1, 1),
 (2, 5),
 (2, 11),
 (3, 5),
@@ -558,6 +558,7 @@ INSERT INTO `perxpef` (`idper`, `idpef`) VALUES
 (59, 5),
 (60, 5),
 (61, 5),
+(1, 1),
 (62, 5),
 (63, 5),
 (64, 5),
@@ -1345,13 +1346,13 @@ ALTER TABLE `valor`
 -- AUTO_INCREMENT de la tabla `almuerzo`
 --
 ALTER TABLE `almuerzo`
-  MODIFY `idalm` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idalm` bigint(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `dominio`
 --
 ALTER TABLE `dominio`
-  MODIFY `iddom` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `iddom` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `dotacion`
@@ -1411,7 +1412,7 @@ ALTER TABLE `provedores`
 -- AUTO_INCREMENT de la tabla `valor`
 --
 ALTER TABLE `valor`
-  MODIFY `idval` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `idval` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- Restricciones para tablas volcadas

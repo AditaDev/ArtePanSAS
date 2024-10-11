@@ -15,12 +15,11 @@
     $emaper = isset($_POST['emaper']) ? strtolower($_POST['emaper']):NULL;
     $actper = isset($_REQUEST['actper']) ? $_REQUEST['actper']:1;
 
-    $pasper = strtoupper(substr($nomper, 0, 1)).strtolower(substr($apeper, 0, 1)).$ndper."ATP";
+    $pasper = "A".$ndper."P";
     // Convierte el valor extraido en mayuscula(Extrae (del nombre de la persona, desde la posición 0, hasta la 1))
     // Convierte el valor extraido en minuscula(Extrae (del apellido de la persona, desde la posición 0, hasta la 1))
     //y las letricas de despues se ponen ahi?
     //upper, MAYUSCULA, lower - MINUSCULA SI?
-    // Juan David Chapar...... 1072642921 = Jc1072642ATP
 
     $arc = isset($_FILES["arc"]["name"]) ? $_FILES["arc"]["name"] : NULL;
     $arc = substr($arc, 0, strpos($arc, ".xls"));
@@ -111,7 +110,7 @@
                 $pef = $mper->CompPef();
             }
 
-            $pasper = strtoupper(substr($nomper, 0, 1)).strtolower(substr($apeper, 0, 1)).$ndper."ATP";
+            $pasper = "A".$ndper."P";
             $mper->setNomper($nomper);
             $mper->setApeper($apeper);
             $mper->setNdper($ndper);

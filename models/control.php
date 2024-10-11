@@ -31,6 +31,8 @@ function validar($usu,$pas){
 function valdat($usu,$pas){
 	$res = NULL;
 	$pas = sha1($pas);
+	// var_dump($pas);
+	// die;
 
 	$sql = "SELECT idper, nomper, apeper, ndper, emaper, actper FROM persona WHERE (emaper=:user OR ndper=:user) AND pasper=:pasper AND actper=1";
 	$modelo = new conexion();

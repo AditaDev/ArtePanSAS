@@ -45,9 +45,9 @@
     if($arcpdf && $infoemp && $infoemp[0]['razsoem']) $rutpdf = opti($arcpdf, $nofac."_".$confac, "arc/facturas/".$infoemp[0]['razsoem'], $nmfl); 
     // var_dump($rut, $rutpdf);
 
-    // if($arcspt && $arcspt['name']) $rutspt = opti($arcspt, "nombre", "ruta", "id");//esta bien esta amor? ESTAS AHI? Si amor aca toy y si esta bien pero le faltan cosa ahi todos los archivos se van a guardar igual, donde? En esa linea o sea todos con el mismo nombre, cual linea jsjsj, ahh si si, ese todavia no lo he puesto, la de arriba entonces jsjjs si amor
+    if($arcspt && $infoemp && $infoemp[0]['razsoem']) $rutspt = opti($arcspt, $nofac."_".$confac, "arc/soportes/".$infoemp[0]['razsoem'], $nmfl); 
         
-//fijate amor
+
     //------------Factura-----------
     if($ope=="save"){
         $mfac->setNofac($nofac);
