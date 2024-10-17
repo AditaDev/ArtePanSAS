@@ -1,4 +1,4 @@
-<?php
+d<?php
 // require_once("models/mper.php");
 
 //------------Titulos-----------
@@ -7,16 +7,19 @@ function titulo($ico, $tit, $mos, $pg)
 	$txt = '';
 	$txt .= '<div class="titu">';
 		$txt .= '<div class="titaju">';
-			$txt .= '<i class="' . $ico . '"></i>';
+			$txt .= '<i class="' . $ico. '"></i>';
 			$txt .= ' ' . $tit;
 			$txt .= '<hr class="hrtitu">';
 		$txt .= '</div>';
+		
 		if ($mos == 1 && $pg!=62 and $pg!=63) {
-			$txt .= '<div class="titaju" style="float: right;">';
+			$txt .= '<div class="titaju" style="float: right; font-size: 20px">';
+			$txt .= '<style"text-align: right;">Registrar </class=style>';
 				$txt .= '<i class="fa-solid fa-circle-plus" id="mas" onclick="ocul(' . $mos . ',1);"></i>';
 				$txt .= '<i class="fa-solid fa-circle-minus" id="menos" onclick="ocul(' . $mos . ');"></i>';
 			$txt .= '</div>';
 		}
+		
 	$txt .= '</div>';
 	echo $txt;
 }
@@ -525,6 +528,7 @@ function modalDet($nom, $id, $titulo, $info){
 							$txt .= '<tr><td><strong>Fecha de vencimiento: </strong></td><td class="inffac">'.$info[0]['fvfac'].'</td></tr>';
 							$txt .= '<tr><td><strong>Forma de pago: </strong></td><td class="inffac">'.$info[0]['fpag'].'</td></tr>';
 							$txt .= '<tr><td><strong>Tipo: </strong></td><td class="inffac">'.$info[0]['tip'].'</td></tr>';
+							if($info[0]['vneto'])$txt .= '<tr><td><strong>Valor neto: </strong></td><td class="inffac">'.$info[0]['vneto'].'</td></tr>';
 							if($info[0]['numegr'])$txt .= '<tr><td><strong>Número Egreso: </strong></td><td class="inffac">'.$info[0]['numegr'].'</td></tr>';
 							if($info[0]['numbod'])$txt .= '<tr><td><strong>Bodega: </strong></td><td class="inffac">'.$info[0]['bod'].'</td></tr>';
 							$txt .= '<tr><td><strong><hr>Registro: </strong></td><td class="inffac"><br><hr>'.$info[0]['nompcre'].'<br>' .$info[0]['fifac'].'</td></tr>';

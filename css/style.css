@@ -204,6 +204,10 @@ label {
   color: #393b3d;
 }
 
+.texttitu{
+  font-size: 20px;
+}
+
 .cont {
   display: block;
   width: 100%;

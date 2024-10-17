@@ -25,6 +25,7 @@
         private $idval;
         private $numegr;
         private $numbod;
+        private $vneto;
 
 
         
@@ -97,6 +98,9 @@
         }
         public function getNumbod(){
             return $this->numbod;
+        }
+        public function getVneto(){
+            return $this->vneto;
         }
         
 
@@ -171,11 +175,14 @@
         public function setNumbod($numbod){
             $this->numbod=$numbod;
         }
+        public function setVneto($vneto){
+            $this->vneto=$vneto;
+        }
        
       
         function getAll(){
             $idpef = $_SESSION['idpef'];
-            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.obsnov, f.idpercre AS pcre, f.idperrev AS prev, f.idperapr AS papr, f.idperent AS pent, f.idperpag AS ppag, f.idpernov AS pnov, f.fefac, f.fvfac, f.forpag, f.tipfac, f.numbod, f.faprfac, f.fprfac, f.fpagfac, f.fnov, f.rutpdf, f.rutspt, e.razsoem, e.nitemp, CONCAT(rc.nomper,' ',rc.apeper) AS nompcre, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, CONCAT(ra.nomper,' ',ra.apeper) AS nompapr,CONCAT(re.nomper,' ',re.apeper) AS nompent, CONCAT(rg.nomper,' ',rg.apeper) AS nomppag, CONCAT(rn.nomper,' ',rn.apeper) AS nompnov, ve.nomval AS est, vf.nomval AS fpag, vt.nomval AS tip, f.numegr, vb.nomval AS bod FROM factura AS f INNER JOIN provedores AS e ON f.idemp=e.idemp INNER JOIN persona AS rc ON f.idpercre=rc.idper LEFT JOIN persona AS rr ON f.idperrev=rr.idper LEFT JOIN persona AS ra ON f.idperapr=ra.idper LEFT JOIN persona AS re ON f.idperent=re.idper LEFT JOIN persona AS rg ON f.idperpag=rg.idper LEFT JOIN persona AS rn ON f.idpernov=rn.idper INNER JOIN valor AS ve ON f.estfac=ve.idval INNER JOIN valor AS vf ON f.forpag=vf.idval INNER JOIN valor AS vt ON f.tipfac=vt.idval LEFT JOIN valor AS vb ON f.numbod=vb.idval";
+            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.obsnov, f.idpercre AS pcre, f.idperrev AS prev, f.idperapr AS papr, f.idperent AS pent, f.idperpag AS ppag, f.idpernov AS pnov, f.fefac, f.fvfac, f.forpag, f.tipfac, f.numbod, f.faprfac, f.fprfac, f.fpagfac, f.fnov, f.rutpdf, f.rutspt, e.razsoem, e.nitemp, CONCAT(rc.nomper,' ',rc.apeper) AS nompcre, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, CONCAT(ra.nomper,' ',ra.apeper) AS nompapr,CONCAT(re.nomper,' ',re.apeper) AS nompent, CONCAT(rg.nomper,' ',rg.apeper) AS nomppag, CONCAT(rn.nomper,' ',rn.apeper) AS nompnov, ve.nomval AS est, vf.nomval AS fpag, vt.nomval AS tip, f.numegr, vb.nomval AS bod, f.vneto FROM factura AS f INNER JOIN provedores AS e ON f.idemp=e.idemp INNER JOIN persona AS rc ON f.idpercre=rc.idper LEFT JOIN persona AS rr ON f.idperrev=rr.idper LEFT JOIN persona AS ra ON f.idperapr=ra.idper LEFT JOIN persona AS re ON f.idperent=re.idper LEFT JOIN persona AS rg ON f.idperpag=rg.idper LEFT JOIN persona AS rn ON f.idpernov=rn.idper INNER JOIN valor AS ve ON f.estfac=ve.idval INNER JOIN valor AS vf ON f.forpag=vf.idval INNER JOIN valor AS vt ON f.tipfac=vt.idval LEFT JOIN valor AS vb ON f.numbod=vb.idval";
             if ($idpef == 7 ) {
                 $sql .= " WHERE (f.tipfac = 22 OR f.tipfac = 23 OR f.tipfac = 24) AND (f.estfac = 48 OR f.estfac = 49)"; 
             }if ($idpef == 8 ) { 
@@ -198,7 +205,7 @@
         }
 
         function getOne(){
-            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.obsnov, f.idpercre AS pcre, f.idperrev AS prev, f.idperapr AS papr, f.idperent AS pent, f.idperpag AS ppag, f.idpernov AS pnov, f.fefac, f.fvfac, f.forpag, f.tipfac, f.numbod, f.faprfac, f.fprfac, f.fpagfac, f.fnov, f.rutpdf, f.rutspt, e.razsoem, e.nitemp, CONCAT(rc.nomper,' ',rc.apeper) AS nompcre, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, CONCAT(ra.nomper,' ',ra.apeper) AS nompapr,CONCAT(re.nomper,' ',re.apeper) AS nompent, CONCAT(rg.nomper,' ',rg.apeper) AS nomppag, CONCAT(rn.nomper,' ',rn.apeper) AS nompnov, ve.nomval AS est, vf.nomval AS fpag, vt.nomval AS tip, f.numegr, vb.nomval AS bod FROM factura AS f INNER JOIN provedores AS e ON f.idemp=e.idemp INNER JOIN persona AS rc ON f.idpercre=rc.idper LEFT JOIN persona AS rr ON f.idperrev=rr.idper LEFT JOIN persona AS ra ON f.idperapr=ra.idper LEFT JOIN persona AS re ON f.idperent=re.idper LEFT JOIN persona AS rg ON f.idperpag=rg.idper LEFT JOIN persona AS rn ON f.idpernov=rn.idper INNER JOIN valor AS ve ON f.estfac=ve.idval INNER JOIN valor AS vf ON f.forpag=vf.idval INNER JOIN valor AS vt ON f.tipfac=vt.idval LEFT JOIN valor AS vb ON f.numbod=vb.idval WHERE idfac=:idfac";
+            $sql = "SELECT f.idfac, f.nofac, f.fifac, f.confac, f.fffac, f.idemp, f.estfac, f.obsnov, f.idpercre AS pcre, f.idperrev AS prev, f.idperapr AS papr, f.idperent AS pent, f.idperpag AS ppag, f.idpernov AS pnov, f.fefac, f.fvfac, f.forpag, f.tipfac, f.numbod, f.faprfac, f.fprfac, f.fpagfac, f.fnov, f.rutpdf, f.rutspt, e.razsoem, e.nitemp, CONCAT(rc.nomper,' ',rc.apeper) AS nompcre, CONCAT(rr.nomper,' ',rr.apeper) AS nomprev, CONCAT(ra.nomper,' ',ra.apeper) AS nompapr,CONCAT(re.nomper,' ',re.apeper) AS nompent, CONCAT(rg.nomper,' ',rg.apeper) AS nomppag, CONCAT(rn.nomper,' ',rn.apeper) AS nompnov, ve.nomval AS est, vf.nomval AS fpag, vt.nomval AS tip, f.numegr, vb.nomval AS bod, f.vneto FROM factura AS f INNER JOIN provedores AS e ON f.idemp=e.idemp INNER JOIN persona AS rc ON f.idpercre=rc.idper LEFT JOIN persona AS rr ON f.idperrev=rr.idper LEFT JOIN persona AS ra ON f.idperapr=ra.idper LEFT JOIN persona AS re ON f.idperent=re.idper LEFT JOIN persona AS rg ON f.idperpag=rg.idper LEFT JOIN persona AS rn ON f.idpernov=rn.idper INNER JOIN valor AS ve ON f.estfac=ve.idval INNER JOIN valor AS vf ON f.forpag=vf.idval INNER JOIN valor AS vt ON f.tipfac=vt.idval LEFT JOIN valor AS vb ON f.numbod=vb.idval WHERE idfac=:idfac";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -321,7 +328,6 @@
     }
 
         function nov(){
-            //try{
                 $sql = "UPDATE factura SET idpernov=:idpernov, fnov=:fnov, obsnov=:obsnov WHERE idfac=:idfac";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
@@ -335,13 +341,9 @@
                 $obsnov = $this->getObsnov();
                 $result->bindParam(":obsnov", $obsnov);
                 $result->execute();
-            // } catch (Exception $e) {
-            //     ManejoError($e);
-            // }
         }
 
         function egreso(){
-            //try{
                 $sql = "UPDATE factura SET numegr=:numegr WHERE idfac=:idfac";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
@@ -351,13 +353,9 @@
                 $numegr = $this->getNumegr();
                 $result->bindParam(":numegr", $numegr);
                 $result->execute();
-            // } catch (Exception $e) {
-            //     ManejoError($e);
-            // }
         }
 
         function bodega(){
-            //try{
                 $sql = "UPDATE factura SET numbod=:numbod WHERE idfac=:idfac";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
@@ -367,10 +365,20 @@
                 $numbod = $this->getNumbod();
                 $result->bindParam(":numbod", $numbod);
                 $result->execute();
-            // } catch (Exception $e) {
-            //     ManejoError($e);
-            // }
         }
+
+        function valneto(){
+            $sql = "UPDATE factura SET vneto=:vneto WHERE idfac=:idfac";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $idfac = $this->getIdfac();
+            $result->bindParam(":idfac", $idfac);
+            $vneto = $this->getVneto();
+            $result->bindParam(":vneto", $vneto);
+            $result->execute();
+    }
+
 
         function editAct() {
             $estfac = $this->getEstfac();

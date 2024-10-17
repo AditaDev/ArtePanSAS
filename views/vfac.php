@@ -3,6 +3,8 @@ require_once('controllers/cfac.php');
 $hoy = date("Y-m-d");
 $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 ?>
+
+
     <div style="text-align: right;">
         <?php if ($_SESSION['idpef'] == 4 OR $_SESSION['idpef'] == 1) { ?>
     <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>carfac" title="Importar Facturas"></i>
@@ -119,7 +121,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                     <td tyle="text-align: left;"><?= $dta['idfac']; ?></td>
                     <td>
                         <div class="row">
-                            <div class="form-group col-md-7">
+                            <div class="form-group col-md-5">
                                 <strong> <?= ($dta['nofac']) .  " - "  . $dta['confac']; ?></strong><br>
                                 <small>
                                     <strong>Proveedor: </strong> <?= $dta['razsoem']; ?><br>
@@ -127,6 +129,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                 </small>
                             </div>
                             <div class="form-group col-md-3">
+                            <?php if ($_SESSION['idpef'] == 13 OR $_SESSION['idpef'] == 12) { ?>
                             <?php if ($dta['tipfac'] == 14 OR $dta['tipfac'] == 15 OR $dta['tipfac'] == 16)  { ?>
                                 <?php if ($dta['numbod'] == NULL)  { ?> 
                                 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="numbodega">
@@ -145,7 +148,24 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                     <input type="hidden" name="ope" value="bodega">
                                     <input type="hidden" name="idfac" value="<?=$dta['idfac']; ?>">
                                 </form>
-                                <?php }} ?>    
+                                <?php }}} ?> 
+                                </div>
+                                <div class="form-group col-md-2">
+                                <?php if ($dta['vneto'] == NULL)  { ?> 
+                                <form action="home.php?pg=<?= $pg; ?>" method="POST" id="valnet">
+                                <div class="form-group col-md-8">
+                                    <label for="vneto"><strong>Valor neto</strong></label>
+                                </div>
+                                <div class="form-group col-md-8 input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input class="form-control" type="text" id="vneto" name="vneto" value="<?php if ($datOne) echo $datOne[0]['vneto']; ?>">
+                                </div>
+                                    <input type="hidden" name="ope" value="valneto">
+                                    <input type="hidden" name="idfac" value="<?=$dta['idfac']; ?>">
+                                </form>
+                                <?php } ?>    
                             </div>
                             <div class="form-group col-md-2" style="text-align: left;">
                                 <i class="fa fa-solid fa-eye iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbinf<?= $dta['idfac']; ?>" title="Detalles"></i>

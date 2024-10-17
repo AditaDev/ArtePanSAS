@@ -22,6 +22,7 @@
     $idpernov = isset($_POST['idpernov']) ? $_POST['idpernov']:$_SESSION['idper'];
     $numegr = isset($_POST['numegr']) ? $_POST['numegr']:NULL;
     $numbod = isset($_POST['numbod']) ? $_POST['numbod']:NULL;
+    $vneto = isset($_POST['vneto']) ? $_POST['vneto']:NULL;
     $fnov = isset($_POST['fnov']) ? $_POST['fnov']:NULL;
     $obsnov = isset($_POST['obsnov']) ? $_POST['obsnov']:NULL;
     $rutpdf = NULL;
@@ -100,6 +101,11 @@
     if($ope=="bodega" && $idfac){
         $mfac->setNumbod($numbod);
         $mfac->bodega();
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
+    }
+    if($ope=="valneto" && $idfac){
+        $mfac->setVneto($vneto);
+        $mfac->valneto();
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
