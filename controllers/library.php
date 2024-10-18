@@ -555,9 +555,8 @@ function modalDet($nom, $id, $titulo, $info){
 	echo $txt;
 }
 
-//modal numero de personas
+//modal numero de personas almuerzos
 function modalnper($nom, $id, $titulo, $info){
-	$sopaa=NULL;
 	$txt = '';
 	$txt .= '<div class="modal fade" id="' . $nom . $id . '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">';
 		$txt .= '<div class="modal-dialog modal-lg">';
@@ -572,9 +571,17 @@ function modalnper($nom, $id, $titulo, $info){
 				$txt .= '<div class="form-group col-md-3" style="text-align: left;"> <strong>Nombre </strong></div>';
 				$txt .= '<div class="form-group col-md-2" style="text-align: center;"> <strong>Cantidad/Sopa</strong></div>';
 				if($info){ foreach($info AS $if){
-						$sopaa = ($if['sopa']==1) ? 'Si' : 'No';
 						$txt .= '<div class="form-group col-md-3" style="text-align: left;">'.$if['nomper'].'</div>';
-						$txt .= '<div class="form-group col-md-3" style="text-align: center;">('.$if['canalm'].') / '.$sopaa.'</div>';
+						if($info[0]['tipalm'] == 1) {
+							$alm = "Almuerzo completo";
+						} elseif ($info[0]['tipalm'] == 2) {
+							$alm = "Seco";
+						} elseif ($info[0]['tipalm'] == 3) {
+							$alm = "Sopa";
+						}else{
+							$alm = "";
+						}
+						$txt .= '<div class="form-group col-md-3" style="text-align: center;">('.$if['canalm'].') / '.$alm.'</div>';
 				}}
 				$txt .= '</div>';
 				$txt .= '<div class="modal-footer">';

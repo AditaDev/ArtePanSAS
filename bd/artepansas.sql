@@ -16,8 +16,20 @@ CREATE TABLE `almuerzo` (
   `spalm` varchar(70) NOT NULL,
   `jgalm` varchar(70) NOT NULL,
   `fecalm` date DEFAULT NULL,
-  `rutpdf` varchar(255) DEFAULT NULL
+  `vfac` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `pedido` (
+  `idped` bigint(11) NOT NULL,
+  `idalm` bigint(11) NOT NULL,
+  `idper` bigint(11) NOT NULL,
+  `fecped` datetime DEFAULT NULL,
+  `canalm` tinyint(1) NOT NULL DEFAULT 1,
+  `tipalm` bigint(11) NOT NULL,
+  `obser` varchar(70) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -278,14 +290,6 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 -- Estructura de tabla para la tabla `pedido`
 --
 
-CREATE TABLE `pedido` (
-  `idped` bigint(11) NOT NULL,
-  `idalm` bigint(11) NOT NULL,
-  `idper` bigint(11) NOT NULL,
-  `fecped` datetime DEFAULT NULL,
-  `canalm` tinyint(1) NOT NULL DEFAULT 1,
-  `sopa` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 CREATE TABLE `permiso` (

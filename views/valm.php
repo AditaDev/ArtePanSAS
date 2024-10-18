@@ -10,22 +10,18 @@
 
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
     <div class="row">
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
             <label for="ppalm"><strong>Plato principal:</strong></label>
             <input type="text" name="ppalm" id="ppalm" class="form-control" value="<?php if ($datOne) echo $datOne[0]['ppalm']; ?>" required>
 
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
             <label for="spalm"><strong>Sopa:</strong></label>
             <input class="form-control" type="text" id="spalm" name="spalm" value="<?php if ($datOne) echo $datOne[0]['spalm']; ?>">
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
             <label for="jgalm"><strong>Jugo:</strong></label>
             <input type="text" name="jgalm" id="jgalm" class="form-control" value="<?php if ($datOne) echo $datOne[0]['jgalm']; ?>">
-        </div>
-        <div class="form-group col-md-3">
-            <label for="arcpdf"><strong>Factura:</strong></label>
-            <input class="form-control" type="file" id="arcpdf" name="arcpdf" accept=".pdf" <?php if ($datOne); ?>>
         </div>
     </div>
     <div class="form-group col-md-12" id="boxbtn">
@@ -42,7 +38,7 @@
         <tr>
             <th>Datos</th>
             <th>No. de personas</th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
         </tr>
     </thead>
@@ -69,13 +65,10 @@
                         <?php
                         $malm->setIdalm($dta['idalm']);
                         $info = $malm->getAllDatPed();
-                        modalnper("mtlp", $dta['idalm'], $dta['fecalm'] . " - " .$dta['ppalm']. " - " .$dta['spalm']. " - " .$dta['jgalm'], $info);?>
+                        modalnper("mtlp", $dta['idalm'], $dta['fecalm'], $info);?>
                     </td>
                     <td tyle="text-align: right;">
-                        <?php 
-                            if($dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
-                                <i class="fa fa-solid fa-file-pdf  iconi" onclick="pdf('<?php echo $dta['rutpdf']; ?>')"></i>
-                                <?php } ?>
+                        
                         <a href="home.php?pg=<?= $pg; ?>&idalm=<?= $dta['idalm']; ?>&ope=edi" title="Editar">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
                         </a>
@@ -90,7 +83,7 @@
         <tr>
             <th>Datos</th>
             <th>No. de personas</th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
         </tr>
     </tfoot>
