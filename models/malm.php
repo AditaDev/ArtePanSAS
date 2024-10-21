@@ -8,6 +8,7 @@ class Malm
     private $ppalm;
     private $spalm;
     private $jgalm;
+    private $vfac;
 
 //--------Pedido-------
     private $idped;
@@ -34,6 +35,9 @@ class Malm
     }
     public function getJgalm(){
         return $this->jgalm;
+    }
+    public function getVfac(){
+        return $this->vfac;
     }
 
 //--------Pedido-------
@@ -73,6 +77,9 @@ class Malm
     public function setJgalm($jgalm){
         $this->jgalm = $jgalm;
     }
+    public function setVfac($vfac){
+        $this->vfac = $vfac;
+    }
 
 //--------Pedido-------
     public function setIdped($idped){
@@ -96,7 +103,7 @@ class Malm
 
 //--------Almuerzo-------
     function getAll(){ 
-        $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm FROM almuerzo";
+        $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm, vfac FROM almuerzo";
         // $sql = "SELECT a.idalm, a.fecalm, a.ppalm, a.spalm, a.jgalm, p.idalm, p.idped FROM almuerzo AS a INNER JOIN pedido AS p ON a.idalm=p.idalm";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
@@ -107,7 +114,7 @@ class Malm
     }
 
     function getOne(){
-        $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm FROM almuerzo WHERE idalm=:idalm";
+        $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm, vfac FROM almuerzo WHERE idalm=:idalm";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -137,6 +144,18 @@ class Malm
         //     ManejoError($e);
         // }
     }
+
+    function valfac(){
+        $sql = "UPDATE almuerzo SET vfac=:vfac WHERE idalm=:idalm";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $idalm = $this->getIdalm();
+        $result->bindParam(":idalm", $idalm);
+        $vfac = $this->getVfac();
+        $result->bindParam(":vfac", $vfac);
+        $result->execute();
+}
 
     function edit(){
         $sql = "UPDATE almuerzo SET ppalm=:ppalm, spalm=:spalm, jgalm=:jgalm";
@@ -218,6 +237,18 @@ class Malm
             return $res;
         }
     
+    //Pedidos con fechas por persona 
+    function infoPed(){
+        $sql = "SELECT p.idped, a.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm, p.fecped, p.idper, p.canalm, p.tipalm, p.obser, CONCAT(l.nomper,' ',l.apeper) AS nomper, l.ndper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm INNER JOIN persona AS l ON p.idper=l.idper WHERE p.idper=l.idper ORDER BY p.fecped";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->bindParam(":idper", $idper);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+        }
+    
     function savePed(){
         //try{
             $sql = "INSERT INTO pedido (fecped, idper, idalm, canalm, tipalm, obser) VALUES (:fecped, :idper, :idalm, :canalm, :tipalm, :obser)";
@@ -241,6 +272,7 @@ class Malm
     //         ManejoError($e);
     //     }
         }
+
     function delped(){
         //try {
             $sql = "DELETE FROM pedido WHERE idped=:idped";

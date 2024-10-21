@@ -593,6 +593,36 @@ function modalnper($nom, $id, $titulo, $info){
 	echo $txt;
 }
 
+//modal numero de pedidos de una persona
+function modalnpedper($nom, $id, $titulo, $info){
+	$txt = '';
+	$txt .= '<div class="modal fade" id="' . $nom . $id . '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">';
+		$txt .= '<div class="modal-dialog modal-lg">';
+			$txt .= '<div class="modal-content">';
+				$txt .= '<div class="modal-header">';
+					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$titulo.'</strong></h1>';
+					$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
+				$txt .= '</div>';
+				$txt .= '<div class="modal-body row" style="margin: 0px 25px;">';
+				$txt .= '<div class="form-group col-md-3" style="text-align: left;"> <strong>Nombre </strong></div>';
+				$txt .= '<div class="form-group col-md-3" style="text-align: center;"> <strong>Cantidad/Sopa</strong></div>';
+				
+				if($info){ foreach($info AS $if){
+						$txt .= '<div class="form-group col-md-3" style="text-align: left;">'.$if['nomper'].'</div>';
+						
+						$txt .= '<div class="form-group col-md-3" style="text-align: center;">'.$if['canalm'].'</div>';
+				}}
+				$txt .= '</div>';
+				$txt .= '<div class="modal-footer">';
+					$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
+				$txt .= '</div>';
+			$txt .= '</div>';
+		$txt .= '</div>';
+	$txt .= '</div>';
+	echo $txt;
+}
+
+
 //modal info novedad
 
 function modalinfonov($nom, $id, $titulo, $info, $nov){

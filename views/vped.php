@@ -2,18 +2,41 @@
 require_once('controllers/calm.php');
 ?>
 
+    <div style="text-align: right;">
+    <?php if ($datMod) {
+        foreach ($datMod as $dta) { ?>
+        <i class="fa-solid fa-list-check fa-2x btn btn-primary"  title="PEDIDOS"></i>
+
+        <?php
+        $malm->setIdalm($dta['idalm']);
+        $info = $malm->infoPed();
+        modalnpedper("mnpp", $dta['idalm'], "PEDIDOS ",  $info);?>
+        <?php }
+        } ?> 
+    </div> 
+
+
 
     <?php if ($datPed){ ?>
-        <img src="img/orders.png" class="pedido">
+
+        <div class="contenido-login">
+    	        <div class="row">
+                    <div class="text form-group col-md-10">
+                        <h1><strong></strong>Genial, ya hiciste tu pedido</strong></h1>
+                    </div>
+                
+
     <?php if ($datAllPed){ ?>
         <?php foreach ($datAllPed as $dta){ ?>
-            <div>
+            <div class="text form-group col-md-2">
                 <a href="home.php?pg=<?= ($pg); ?>&idped=<?= ($dta['idped']); ?>&ope=eli" 
                    onclick="return confirmarEliminar('<?= ($dta['idped']); ?>');">
                     <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
                 </a>
             </div>
+        </div>
         <?php }?> 
+    
 
 
 <?php }}elseif ($datOneAlmF) { ?>
@@ -50,7 +73,7 @@ require_once('controllers/calm.php');
                 </div>
                 <div class="form-group col-6">
                     <label for="obser"><strong>Observación:</strong></label>
-                    <textarea class="form-control" type="text" id="obser" name="obser" <?php if ($datOne) echo 'required'; ?>><?php if ($datOne) echo $datOne[0]['obser']; ?></textarea>
+                    <textarea class="form-control" type="text" id="obser" name="obser" <?php if ($datOne); ?>><?php if ($datOne) echo $datOne[0]['obser']; ?></textarea>
                 </div>
             </div>  
             <div class="col-12">
@@ -82,14 +105,29 @@ require_once('controllers/calm.php');
             text-shadow:  1px 1px 2px white;
             border-radius: 5rem;
         }
-        .form-group {
+        .imagen{
+            width: 300px;  /* Ancho*/
+            max-width: 100%; /* Para que la imagen no desborde el contenedor */
+            height: auto;
+        }
+        .contenido-login {
+        background-color: rgba(255, 255, 255);
+        padding: 40px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        box-shadow: 6px 10px 20px 0 rgba(0, 0, 0, 0.4);
+        margin: 0 auto;
+        position: relative;
+        width: 50%;
+	}   
+    .text{
+        padding: 10px 20px;
         display: flex;
-        align-items: center; /* Alinea verticalmente el label y el select */
-        }
-
-        .form-group label {
-            margin-right: 1rem; /* Espacio entre el label y el select */
-        }
+        align-items: flex-start;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
     </style>
 
 

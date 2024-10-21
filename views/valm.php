@@ -38,6 +38,7 @@
         <tr>
             <th>Datos</th>
             <th>No. de personas</th>
+            <th>Valor factura</th>
             <th>Acciones</th>
         </tr>
         </tr>
@@ -46,7 +47,7 @@
         <?php if ($datAll) {
             foreach ($datAll as $dta) { ?>
                 <tr>
-                    <td tyle="text-align: left;">
+                    <td tyle="text-align: left;" class="form-group col-md-5">
                         <small>
                         
                         <strong><?= $dta['fecalm']; ?> </strong><br>
@@ -60,14 +61,42 @@
                         <?php endif; ?>
                         </small>
                     </td>
-                    <td tyle="text-align: half;">
-                        <i class="fa-solid fa-rectangle-list fa-2x iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mtlp<?= $dta['idalm']; ?>" title="Detalle almuerzo"></i>              
-                        <?php
-                        $malm->setIdalm($dta['idalm']);
-                        $info = $malm->getAllDatPed();
-                        modalnper("mtlp", $dta['idalm'], $dta['fecalm'], $info);?>
+                    <td tyle="text-align: half;" class="form-group col-md-3">
+                            <div class="form-group col-md-2">
+                                <i class="fa-solid fa-rectangle-list fa-2x iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mtlp<?= $dta['idalm']; ?>" title="Detalle almuerzo"></i>              
+                            <?php
+                            $malm->setIdalm($dta['idalm']);
+                            $info = $malm->getAllDatPed();
+                            modalnper("mtlp", $dta['idalm'], $dta['fecalm'], $info);?>
+                            </div>
                     </td>
-                    <td tyle="text-align: right;">
+                    <td tyle="text-align: half;" class="form-group col-md-3">
+                            <div class="form-group col-md-8">
+                            <form action="home.php?pg=<?= $pg; ?>" method="POST" id="valnet">                        
+                                <div class="col-12">
+                                <?php if ($datOne)  { ?> 
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                        </div>
+                                        <input class="form-control" type="text" id="vfac" name="vfac" value="<?php if (!$dta['vfac'] OR ($datOne && $datOne[0]['idalm'] == $dta['idalm'])) ?>">
+
+                                    </div>
+                                </div>
+                                </div>
+                                <input type="hidden" name="ope" value="vfactura">
+                                <input type="hidden" name="idalm" value="<?=$dta['idalm']; ?>">
+                            </form>
+                            <?php } ?>  
+
+                            <div class="form-group col-md-2">
+                            <strong><?= $dta['vfac']; ?> </strong><br>
+                            <a href="home.php?pg=<?= $pg; ?>&idalm=<?= $dta['idalm']; ?>&ope=edifac" title="Edifac">
+                                <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
+                            </a>
+                        </div>
+                    </td>
+                    <td tyle="text-align: right;" class="form-group col-md-2">
                         
                         <a href="home.php?pg=<?= $pg; ?>&idalm=<?= $dta['idalm']; ?>&ope=edi" title="Editar">
                             <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
@@ -83,8 +112,13 @@
         <tr>
             <th>Datos</th>
             <th>No. de personas</th>
+            <th>Valor factura</th>
             <th>Acciones</th>
         </tr>
         </tr>
     </tfoot>
 </table>
+<style>
+
+ 
+</style>
