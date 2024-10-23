@@ -190,6 +190,17 @@ class Malm
 
 //--------Pedido-------
 
+    function getInfoAll(){ 
+        $sql = "SELECT p.idped, l.idper, p.idalm, p.fecped, CONCAT(l.nomper,' ',l.apeper) AS nomper FROM pedido AS p INNER JOIN persona AS l ON p.idper=l.idper WHERE l.idper=1";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->execute();
+        $res = $result->fetchall(PDO::FETCH_ASSOC);
+        return $res; 
+    }
+
+    //Info pedidos dia actual
     function getAllPed(){ 
         $sql = "SELECT idped, idalm, fecped FROM pedido WHERE DATE(fecped) >= DATE(NOW())";
         $modelo = new conexion();
@@ -238,8 +249,8 @@ class Malm
         }
     
     //Pedidos con fechas por persona 
-    function infoPed(){
-        $sql = "SELECT p.idped, a.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm, p.fecped, p.idper, p.canalm, p.tipalm, p.obser, CONCAT(l.nomper,' ',l.apeper) AS nomper, l.ndper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm INNER JOIN persona AS l ON p.idper=l.idper WHERE p.idper=l.idper ORDER BY p.fecped";
+    function infoPed($idper){
+        $sql = "SELECT p.idped, a.idalm, a.ppalm, a.spalm, a.jgalm, a.fecalm, p.fecped, p.idper, p.canalm, p.tipalm, p.obser, CONCAT(l.nomper,' ',l.apeper) AS nomper, l.ndper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm INNER JOIN persona AS l ON p.idper=l.idper WHERE p.idper=:idper ORDER BY p.fecped";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);

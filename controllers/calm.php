@@ -18,6 +18,7 @@ $canalm = isset($_POST['canalm']) ? $_POST['canalm']:1;
 $tipalm = isset($_POST['tipalm']) ? $_POST['tipalm']:1;
 $obser = isset($_POST['obser']) ? $_POST['obser']:1;
 $fecped = date("Y-m-d H:i:s");
+$idper = isset($_REQUEST['idper$idper']) ? $_REQUEST['idper$idper'] :NULL;
 
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
@@ -69,9 +70,11 @@ if ($ope == "eli" && $idalm) $malm->del();
 
 $datAll = $malm->getAll();
 $datOneAlmF = $malm->getOneAlmF();
-
 $datAllPed = $malm->getOnePed();
 
-$datMod = $malm->infoPed();
+
+$datMod = $malm->getInfoAll();
+
+$datpper = $malm->getAllDatPed();
 
 ?>

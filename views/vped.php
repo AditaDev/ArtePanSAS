@@ -4,13 +4,13 @@ require_once('controllers/calm.php');
 
     <div style="text-align: right;">
     <?php if ($datMod) {
-        foreach ($datMod as $dta) { ?>
-        <i class="fa-solid fa-list-check fa-2x btn btn-primary"  title="PEDIDOS"></i>
+            foreach ($datMod as $dta) { ?>
+        <i class="fa-solid fa-list-check fa-2x" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mnpp<?= $dta['idper']; ?>"  title="PEDIDOS"></i>
 
         <?php
-        $malm->setIdalm($dta['idalm']);
-        $info = $malm->infoPed();
-        modalnpedper("mnpp", $dta['idalm'], "PEDIDOS ",  $info);?>
+        $malm->setIdper($dta['idalm']);
+        $info = $malm->infoPed($idper);
+        modalnpedper("mnpp", $dta['idper'], "PEDIDOS",  $info);?>
         <?php }
         } ?> 
     </div> 

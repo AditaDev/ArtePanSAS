@@ -603,10 +603,7 @@ function modalnpedper($nom, $id, $titulo, $info){
 					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$titulo.'</strong></h1>';
 					$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
 				$txt .= '</div>';
-				$txt .= '<div class="modal-body row" style="margin: 0px 25px;">';
-				$txt .= '<div class="form-group col-md-3" style="text-align: left;"> <strong>Nombre </strong></div>';
-				$txt .= '<div class="form-group col-md-3" style="text-align: center;"> <strong>Cantidad/Sopa</strong></div>';
-				
+				$txt .= '<div class="modal-body row" style="margin: 0px 25px;">';				
 				if($info){ foreach($info AS $if){
 						$txt .= '<div class="form-group col-md-3" style="text-align: left;">'.$if['nomper'].'</div>';
 						
