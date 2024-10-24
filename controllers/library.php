@@ -555,7 +555,7 @@ function modalDet($nom, $id, $titulo, $info){
 	echo $txt;
 }
 
-//modal numero de personas almuerzos
+//modal numero de personas en almuerzos
 function modalnper($nom, $id, $titulo, $info){
 	$txt = '';
 	$txt .= '<div class="modal fade" id="' . $nom . $id . '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">';
@@ -605,10 +605,10 @@ function modalnpedper($nom, $id, $titulo, $info){
 				$txt .= '</div>';
 				$txt .= '<div class="modal-body row" style="margin: 0px 25px;">';				
 				if($info){ foreach($info AS $if){
-						$txt .= '<div class="form-group col-md-3" style="text-align: left;">'.$if['nomper'].'</div>';
-						
-						$txt .= '<div class="form-group col-md-3" style="text-align: center;">'.$if['canalm'].'</div>';
-				}}
+					$txt .= '<div class="form-group col-md-3" style="text-align: left;">'.$if['nomper'].'</div>';
+					
+					$txt .= '<div class="form-group col-md-3" style="text-align: center;">'.$if['canalm'].'</div>';
+			}}
 				$txt .= '</div>';
 				$txt .= '<div class="modal-footer">';
 					$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';

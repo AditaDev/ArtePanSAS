@@ -8,8 +8,8 @@ require_once('controllers/calm.php');
         <i class="fa-solid fa-list-check fa-2x" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mnpp<?= $dta['idper']; ?>"  title="PEDIDOS"></i>
 
         <?php
-        $malm->setIdper($dta['idalm']);
-        $info = $malm->infoPed($idper);
+        $malm->setIdper($dta['idper']);
+        $info = $malm->infoPed();
         modalnpedper("mnpp", $dta['idper'], "PEDIDOS",  $info);?>
         <?php }
         } ?> 
