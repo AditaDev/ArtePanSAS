@@ -5,11 +5,11 @@ $hoy = date("Y-m-d");
 $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
 ?>
 
-<!-- <div class="row">
-        <div class="col-6" style="text-align: right;">
-            <i class="fa fa-solid fa-file-import fa-2x imp" title="Importar"></i>
-        </div>
-</div> -->
+    <div style="text-align: right;">
+        <a href="excel/xdot.php" title="Exportar Dotaciones">
+            <i class="fa fa-solid fa-file-export fa-2x exp"></i>
+        </a>
+    </div>
 
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
     <div class="row">
@@ -28,11 +28,17 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         </div>
         <?php ?>
         <div class="form-group col-md-4">
-            <label for="fecent"><strong>F. Entrega:</strong></label>
+            <label for="fecent"><strong>Fecha Entrega:</strong></label>
             <input class="form-control" type="date" id="fecent" name="fecent" max=<?php echo $hoy; ?> <?php if ($datOne) echo 'value="' . $datOne[0]['fecent'] . '" disabled';
                 else echo 'value="' . $hoy . '" required'; ?>>
         </div>
-        <div class="form-group col-md-12"><br></div>
+        <div class="form-group col-md-12"></div>
+        <br>
+        <div class="form-group col-md-2" style="text-align: left;"><strong><u>Días</u></strong></div>
+        <div class="form-group col-md-2" style="text-align: left;"><strong><u>Colores</u></strong></div>
+        <div class="form-group col-md-4"style="text-align: left;" ><strong><u>Elementos</u></strong></div>
+        <div class="form-group col-md-3"><strong><u>Tallas</u></strong></div>
+        <div class="form-group col-md-12"></div><br>
         <div class="form-group col-md-4">
             <div class="row">
             <?php if ($datDia && $datCol ) {
@@ -93,7 +99,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         </div>
         <div class="form-group col-md-12">
             <br>
-            <label for="observ"><strong>Observaciones entrega:</strong></label>
+            <label for="observ"><strong>Observaciones Entrega:</strong></label>
             <textarea class="form-control" type="text" id="observ" name="observ" <?php if ($datOne) echo 'required'; ?>><?php if ($datOne) echo $datOne[0]['observ']; ?></textarea>
         </div>
         <div class="form-group col-md-12" id="boxbtn">
@@ -173,7 +179,12 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             $det = $mdot->getOne();
                             modalDev("mcbdev", $dta['ident'], $acc, $det, $pg, $nmfl);
                             ?>
-                            <!-- <a href="home.php?pg=<?= $pg; ?>&ident=<?= $dta['ident']; ?>&ope=edi&asg=<?= $asg; ?>" title="Editar"> -->
+                            <a href="home.php?pg=<?= $pg; ?>&ident=<?= $dta['ident']; ?>&ope=edi">
+                                <i class="fa fa-solid fa-pen-to-square fa-2x iconi" title="Editar"></i>
+                            </a>
+                            <a href="home.php?pg=<?= $pg; ?>&ident=<?= $dta['ident']; ?>&ope=eli" onclick="return eliminar('<?= $dta['nomprec']; ?>');">
+                                <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
+                            </a>
                             
                         <?php } ?>
                     </td>

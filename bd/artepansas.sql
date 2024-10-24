@@ -73,7 +73,7 @@ INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (12, 'Colores'),
 (13, 'Días'),
 (14, 'Bodega'),
-(15, 'T. Permiso'),
+(15, 'Tipo de Permiso'),
 (16, 'Ubicación'),
 (17, 'Departamento');
 
@@ -1130,6 +1130,7 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (28, 'Jugo', 3, 303, 1),
 (29, 'Ensalada', 3, 304, 1),
 (30, 'Postre', 3, 305, 1),
+
 (31, 'Calamidad familiar', 4, 401, 1),
 (32, 'Llegada tarde', 4, 402, 1),
 (33, 'Liquidación vacaciones', 4, 403, 1),
@@ -1144,6 +1145,8 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (42, 'Licencias', 4, 411, 1),
 (43, 'Incapacidad Arl', 4, 412, 1),
 (44, 'Incapacidad Eps', 4, 413, 1),
+
+
 (45, 'Directivos', 5, 501, 1),
 (46, 'Logistica', 5, 502, 1),
 (47, 'Ventas', 5, 503, 1),
@@ -1203,7 +1206,17 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (101, 'Sábado', 13, 1306, 1),
 (102, 'Artepan', 14, 1401, 1),
 (103, 'PMP', 14, 1402, 1),
-(104, 'Del llano', 14, 1403, 1);
+(104, 'Del llano', 14, 1403, 1),
+
+(105, 'Calamidad Domestica', 15, 1501, 1),
+(106, 'Cita Medica', 15, 1502, 1),
+(107, 'Licencia Maternidad/Paternidad', 15, 1503, 1),
+(108, 'Permiso No Remunerado', 15, 1504, 1),
+(109, 'Trabajo En Casa', 15, 1505, 1),
+(110, 'Día Cumpleaños', 15, 1506, 1),
+(111, 'Vacaciones', 15, 1507, 1),
+(112, 'Otro', 15, 1508, 1);
+
 
 --
 -- Índices para tablas volcadas

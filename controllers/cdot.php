@@ -1,10 +1,8 @@
 <?php
     require_once("models/mdot.php");
-    // require ('vendor/autoload.php');
 
     $mdot = new Mdot();
 
-    // use PhpOffice\PhpSpreadsheet\IOFactory;
 
     //------------Asignar-----------
     $ident = isset($_POST['ident']) ? $_POST['ident']:NULL;
@@ -36,9 +34,7 @@
     $idvdia = $mdot->getAllDom(13);
     $idvcol = isset($_POST['idvcol']) ? $_POST['idvcol']:NULL;
 
-    // $arc = isset($_FILES["arc"]["name"]) ? $_FILES["arc"]["name"] : NULL;
-    // $arc = substr($arc, 0, strpos($arc, ".xls"));
-    
+  
     $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
     
     $datOne = NULL;
@@ -48,8 +44,6 @@
     $pg = 111;
 
     $mdot->setIdent($ident);
-    // var_dump($idvdot, $idvtal);
-    // var_dump($idvcol, $idvdia);
 
     //------------Asignar-----------
     if($ope=="save"){
@@ -83,7 +77,7 @@
                 $mdot->setIdvcol($idvcol[$index]);
                 $mdot->saveCxc();
         }}
-        echo "<script>window.location='home.php?pg=".$pg."';</script>";
+            echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
 
@@ -127,9 +121,13 @@
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
-    // if($ope=="edi" && $ideqxpr) {
-    //     $datOneA = $masg->getOne();
-    //     $datAxE = $masg->getAllAxE($ideqxpr);
+    // if($ope=="edi" && $ident) {
+    //     $datOneA = $mdot->edit();
+    //     $datAxE = $mdot->getAllTxD($ident);
+    // }
+    // if($ope=="eli" && $ident) {
+    //     $mdot->del();
+    //     echo "<script>window.location='home.php?pg=".$pg."';</script>";
     // }
     
     //------------Traer valores-----------

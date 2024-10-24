@@ -216,6 +216,24 @@
             // }
         }
 
+        function edit(){
+            try {
+                $sql = "UPDATE dotacion  SET idperrec=:idperrec, observ=:observ WHERE ident=:ident";
+                $modelo = new conexion();
+                $conexion = $modelo->get_conexion();
+                $result = $conexion->prepare($sql);
+                $ident = $this->getIdent();
+                $result->bindParam(":ident", $ident);
+                $idperrec = $this->getIdperrec();
+                $result->bindParam(":idperrec", $idperrec);
+                $observ = $this->getObserv();
+                $result->bindParam(":observ", $observ);           
+                $result->execute();
+            } catch (Exception $e) {
+                ManejoError($e);
+            }
+        }
+
         function saveFir($fir){
             try{
                 $sql = "UPDATE dotacion SET";
@@ -409,7 +427,19 @@
                     return $res;
                  }
 
-    
+    function del(){
+        try{
+            $sql = "DELETE FROM dotacion WHERE ident=:ident";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion-> prepare($sql);
+            $ident = $this->getIdent();
+            $result->bindParam(":ident", $ident);
+            $result->execute();
+        } catch (Exception $e) {
+            ManejoError($e);
+        }
+        }
         
 
     }
