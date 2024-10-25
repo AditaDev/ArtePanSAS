@@ -442,9 +442,10 @@ function modalInfAsg($nm, $id, $acc, $det, $cxc){
 						if($acc){
 							$txt .= '<big><br><strong>Elementos</strong></big><hr>';
 							foreach($acc AS $ac){
-								$txt .= '<div class="form-group col-md-6"><strong>+</strong> '.$ac['nomvdot'].'</div>';
+								$txt .= '<div class="form-group col-md-6 row"><div class="form-group col-md-9"><strong>+</strong> '.$ac['nomvdot'].'</div><div class="form-group col-md-3"> ('.$ac['cant'].')</div></div>';
 								$txt .= '<div class="form-group col-md-6"><strong>+</strong> '.$ac['nomvtal'].'</div>';
 							}}
+							
 						$txt .= '<big><br><strong>Asignación</strong></big><hr>';
 						$txt .= '<div class="form-group col-md-4"><strong>Entrega: </strong></div>';
 						$txt .= '<div class="form-group col-md-8">'.$det[0]["nompent"].'</div>';

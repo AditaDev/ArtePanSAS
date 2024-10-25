@@ -5,7 +5,7 @@
 
 
     //------------Asignar-----------
-    $ident = isset($_POST['ident']) ? $_POST['ident']:NULL;
+    $ident = isset($_REQUEST['ident']) ? $_REQUEST['ident']:NULL;
     $idperent = isset($_POST['idperent']) ? $_POST['idperent']:NULL;
     $idperrec = isset($_POST['idperrec']) ? $_POST['idperrec']:NULL;
     $fecent = isset($_POST['fecent']) ? $_POST['fecent']:NULL;
@@ -14,7 +14,7 @@
     $idperrecd = isset($_POST['idperrecd']) ? $_POST['idperrecd']:$_SESSION['idper'];
     $fecdev = isset($_POST['fecdev']) ? $_POST['fecdev']:NULL;
     $observd = isset($_POST['observd']) ? $_POST['observd']:NULL;
-    $estent = isset($_POST['estent']) ? $_POST['estent']:1;
+    $estent = isset($_REQUEST['estent']) ? $_REQUEST['estent']:1;
     $firpent = isset($_FILES['firpent']) ? $_FILES['firpent']:NULL;
     $firprec = isset($_FILES['firprec']) ? $_FILES['firprec']:NULL;
 
@@ -29,6 +29,7 @@
     //------------Elementos-----------
     $idvdot = isset($_POST['idvdot']) ? $_POST['idvdot']:NULL;
     $idvtal = isset($_POST['idvtal']) ? $_POST['idvtal']:NULL;
+    $cant = isset($_POST['cant']) ? $_POST['cant']:NULL;
     
     //------------ColorxCamisa-----------
     $idvdia = $mdot->getAllDom(13);
@@ -40,11 +41,11 @@
     $datOne = NULL;
     $datTxD = NULL;
     $datCxD = NULL;
- 
+    
     $pg = 111;
-
+    
     $mdot->setIdent($ident);
-
+    
     //------------Asignar-----------
     if($ope=="save"){
         $mdot->setIdperent($idperent);
@@ -58,25 +59,26 @@
             $id = $mdot->getOneAsg($nmfl);
             $ident = $id[0]['ident'];
             $mdot->setIdent($ident);
-        }
+        } $mdot->edit();
         if($ident){
             $mdot->delExD();
             $mdot->delCxc();
-        } if($idvtal && $idvdot && $ident){
-            $i = 0;
-            foreach($idvtal AS $id){
-                if($id!="0"){
+        } if($idvtal && $idvdot && $cant && $ident){
+            foreach($idvtal AS $ind=>$id){
+                if($id!="0" && $cant[$ind]!=""){
                     $mdot->setIdvtal($id);
-                    $mdot->setIdvdot($idvdot[$i]);
-                    $mdot->saveExD();
-                    $i++;
+                    $mdot->setIdvdot($idvdot[$ind]);
+                    $mdot->setCant($cant[$ind]);
+                    $mdot->saveExD(); 
                 }
             }}
+            
         if($idvdia && $idvcol && $ident){ foreach($idvdia AS $index=>$id){
                 $mdot->setIdvdia($id['idval']);
                 $mdot->setIdvcol($idvcol[$index]);
                 $mdot->saveCxc();
         }}
+
             echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
@@ -121,15 +123,15 @@
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
-    // if($ope=="edi" && $ident) {
-    //     $datOneA = $mdot->edit();
-    //     $datAxE = $mdot->getAllTxD($ident);
-    // }
+    if($ope=="edi" && $ident) {
+        $datOne = $mdot->getOne();
+        $datTxD = $mdot->getAllTxD($ident);
+        $datCxD = $mdot->getAllCxc($ident);
+    }
     // if($ope=="eli" && $ident) {
     //     $mdot->del();
     //     echo "<script>window.location='home.php?pg=".$pg."';</script>";
     // }
-    
     //------------Traer valores-----------
 
     $datAllD = $mdot->getAllD();

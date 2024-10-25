@@ -25,6 +25,7 @@
 
         private $idvdot; 
         private $idvtal;
+        private $cant;
 
          //------------CCxEnt-----------
 
@@ -90,6 +91,9 @@
         }
         public function getIdvtal(){
             return $this->idvtal;
+        }
+        public function getCant(){
+            return $this->cant;
         }
 
          //------------CCxEnt-----------
@@ -159,6 +163,9 @@
         public function setIdvtal($idvtal){
             $this->idvtal = $idvtal;
         }
+        public function setCant($cant){
+            $this->cant = $cant;
+        }
 
         //------------CCxEnt-----------
         public function setIdvdia($idvdia){
@@ -218,14 +225,12 @@
 
         function edit(){
             try {
-                $sql = "UPDATE dotacion  SET idperrec=:idperrec, observ=:observ WHERE ident=:ident";
+                $sql = "UPDATE dotacion SET observ=:observ WHERE ident=:ident";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
                 $ident = $this->getIdent();
                 $result->bindParam(":ident", $ident);
-                $idperrec = $this->getIdperrec();
-                $result->bindParam(":idperrec", $idperrec);
                 $observ = $this->getObserv();
                 $result->bindParam(":observ", $observ);           
                 $result->execute();
@@ -296,7 +301,7 @@
     //------------Elementos x dotacion-----------
 
         function getAllTxD($ident){
-            $sql = "SELECT de.idvdot, v.nomval AS nomvdot, vv.nomval AS nomvtal, de.idvtal FROM dotxent AS de INNER JOIN valor AS v ON de.idvdot=v.idval INNER JOIN valor AS vv ON de.idvtal=vv.idval WHERE ident=:ident";
+            $sql = "SELECT de.idvdot, v.nomval AS nomvdot, vv.nomval AS nomvtal, de.idvtal, de.cant FROM dotxent AS de INNER JOIN valor AS v ON de.idvdot=v.idval INNER JOIN valor AS vv ON de.idvtal=vv.idval WHERE ident=:ident";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -309,7 +314,7 @@
         function saveExD() 
         {
             // try{
-                $sql = "INSERT INTO dotxent (ident, idvdot, idvtal) VALUES (:ident, :idvdot, :idvtal)";
+                $sql = "INSERT INTO dotxent (ident, idvdot, idvtal, cant) VALUES (:ident, :idvdot, :idvtal, :cant)";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -319,11 +324,14 @@
                 $result->bindParam(":idvdot", $idvdot);
                 $idvtal = $this->getIdvtal();
                 $result->bindParam(":idvtal", $idvtal);
+                $cant = $this->getCant();
+                $result->bindParam(":cant", $cant); 
                 $result->execute();
             // } catch (Exception $e) {
             //     ManejoError($e);
             // }
         }
+
 
         function delExD()
         {
