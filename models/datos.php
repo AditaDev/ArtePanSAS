@@ -8,6 +8,6 @@
 	//$psem = "iifx fywg drwn jnjf";
 
 
-    $ema = "sgsstartepan@gmail.com";
-	$psem = "krhc gqti kvhd bzlp";
+    // $ema = "sgsstartepan@gmail.com";
+	// $psem = "krhc gqti kvhd bzlp";
 ?>

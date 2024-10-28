@@ -129,84 +129,82 @@ $html .= '
             <td colspan="11">';
                 if($det['eprec']) $html .= $det['eprec'];
                 else $html .= 'N/A';
-
-
-
-
-
 $html .= '
         </td>
         </tr>
-            <tr>
-                <td class="tit sec fond" colspan="14"><strong>HORARIO DE CAMISA</strong></td>
+            <tr>  
+            <td class="tit sec fond" colspan="4" style="text-align: center;"><strong>HORARIO DE CAMISA</strong></td>
+            <td class="tit sec fond" colspan="9" style="text-align: center;"><strong>DOTACIÓN</strong></td> 
             </tr>
         <tr>';
-        
-        if ($datDia) {
-                    foreach ($datDia as $dac) {
-                        $marcadorEncontrado = false;
-                        $html .= '<td colspan="2"><strong>'.strtoupper($dac['nomval']).'</strong></td>';
-                      
-                    
-                    }
-                }
-$html .= '
-            <td colspan="4"></td>
-        </tr>';
-        if ($datCol) {
-            foreach ($datCol as $dac) {
-                $marcadorEncontrado = false;
-                $html .= '<td colspan="2"><strong>'.strtoupper($dac['nomval']).'</strong></td>';
-                if ($datCxC) {
-                    foreach ($datCxC as $dae) {
-                        if ($dac['idval'] == $dae['idvcol']) {
-                            $html .= '<td colspan="1" style="text-align: center">X</td>';
-                            $marcadorEncontrado = true;
-                            break;
-                        }
-                    }
-                }
-                if ($marcadorEncontrado==false) $html .= '<td colspan="1"></td>';
-                $cont++;
-                if($cont==4) $html .= '</tr><tr>';
+        if ($datDia && $datCol) {
+            foreach ($datDia as $index => $datd) {
+                $html .= '<tr>'; 
+                $html .= '<td colspan="2" style="text-align: center;"><strong>' . strtoupper($datd['nomval']) . '</strong></td>'; 
+                $html .= '<td colspan="2" style="text-align: center;">' .($datCol[$index]['nomval']) . '</td>';
+                $html .= '</tr>'; 
             }
         }
-          
-        
-$html .= '
-        </td>
-        </tr>
-            <td class="tit sec fond" colspan="14"><strong>DOTACIÓN</strong></td>    
-        </tr>';
-                if ($datDot) {
-                    foreach ($datDot as $dac) {
-                        $marcadorEncontrado = false;
-                        $html .= '<td colspan="2"><strong>'.strtoupper($dac['nomval']).'</strong></td>';
+
+        if ($datDot) {
+            foreach ($datDot as $ddt) {
+                $marcadorEncontrado = true;
+                $html .= '<tr>'; 
+                $html .= '<td colspan="2" style="text-align: center;"><strong>' . strtoupper($ddt['nomval']) . '</strong></td>'; 
+
+
+        if ($datTxD) {
+            foreach ($datTxD as $dae) {
+                                if ($ddt['idval'] == $dae['idvdot']) {
+
+                                    $html .= '<td colspan="1" style="text-align: center">X</td>';
+                                    $marcadorEncontrado = true;
+                                   
+                                    break;
+                                }
+                            }
+                        }
+
+    
+                        if ($marcadorEncontrado==false) $html .= '<td colspan="1"></td>';
+                        $cont++;
+                        if($cont==3) $html .= '</tr><tr>';
+                        $html .= '</tr>'; 
                     }
                 }
-        
-$html .= '
-    <td colspan="4"></td>
-        </tr>';
-                // if ($datTalS)
-                // foreach ($datTal as $dac) {
-                //     $marcadorEncontrado = false;
-                //     $html .= '<td colspan="2"><strong>'.strtoupper($dac['nomval']).'</strong></td>';
-                //     if ($datCxC) {
-                //         foreach ($datTxD as $dae) {
-                //             if ($dac['idval'] == $dae['idvtal']) {
-                //                 $html .= '<td colspan="1" style="text-align: center">X</td>';
-                //                 $marcadorEncontrado = true;
-                //                 break;
-                //             }
-                //         }
-                //     }
-                //     if ($marcadorEncontrado==false) $html .= '<td colspan="1"></td>';
-                //     $cont++;
-                //     if($cont==4) $html .= '</tr><tr>';
-                // }
-            
+                                                    
+        //         // $marcadorEncontrado = false;
+        //         $html .= '<td colspan="2" style="text-align: center;">' .($datTalP[$index]['nomval']) . '</td>';
+        //         $html .= '<td colspan="2" style="text-align: center;">' .($datTalS[$index]['nomval']) . '</td>';
+        //         $html .= '<td colspan="2" style="text-align: center;">' .($datTalZ[$index]['nomval']) . '</td>';
+        //         $html .= '<td colspan="2" style="text-align: center;">' .($datTalG[$index]['nomval']) . '</td>';
                 
+        //         $html .= '</tr>'; 
+        //     }
+        // }
+        
+             
+
+
+        // <td colspan="2" rowspan="2"><strong>ACCESORIOS:</strong></td>';
+        // if ($datAcc) {
+        //     foreach ($datAcc as $dac) {
+        //         $marcadorEncontrado = false;
+        //         $html .= '<td colspan="3"><strong>'.strtoupper($dac['nomval']).'</strong></td>';
+        //         if ($datAxE) {
+        //             foreach ($datAxE as $dae) {
+        //                 if ($dac['idval'] == $dae['idvacc']) {
+        //                     $html .= '<td colspan="1" style="text-align: center">X</td>';
+        //                     $marcadorEncontrado = true;
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //         if ($marcadorEncontrado==false) $html .= '<td colspan="1"></td>';
+        //         $cont++;
+        //         if($cont==3) $html .= '</tr><tr>';
+        //     }
+        // }
 
 $html .= '
             </td>
