@@ -40,7 +40,7 @@ $style->getFont()->setBold(true)->setSize(30);
 $style->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('B8CCE4');
 
 // Agregar encabezados
-$sheet->setCellValue('A2', 'DATOS DE provedores');
+$sheet->setCellValue('A2', 'DATOS DE PROVEEDORES');
 $sheet->mergeCells('A2:B2');
 $sheet->setCellValue('C2', 'DATOS DE FACTURAS');
 $sheet->mergeCells('C2:H2');
