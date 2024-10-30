@@ -63,32 +63,26 @@ $html .= '
     <title>ARTEPAN SAS</title>
     <link rel="icon" href="../img/logoartepan_sinfondo.png">
     <style>
-        table, tbody, tr, td{
+        table{
+              width: 50%;
+          }
+        table, .td{
             border-collapse: collapse;
             border: 1px solid #000;
             padding: 1px 3px;
             font-size: 12px;
         }
-        table, .tit, .pie{
-            border: 3px solid #000;
+        .datper{
+            padding: 8px;
         }
         .tit{
             text-align: center;
-        }
-        .fond{
+            }
+        .fond1{
             background-color: #a5cdfa;
         }
-        .sep{
-            height: 16px;
-        }
-        .sec{
-            font-size: 15px
-        }
-        .obs{
-            height: 32px;   
-        }
-        .obs tx{
-            vertical-align: top;           
+        .fond2{
+            background-color: #a5cdfa;
         }
     </style>
 </head>
@@ -96,47 +90,58 @@ $html .= '
 <table>
     <tbody>
         <tr>
-            <td class="tit fond" style="width: 100px" colspan="4" rowspan="4"><img style="width: 80%;" src="'.$logob64.'" alt="Logo ARTEPAN SAS"></td>
-            <td class="tit fond" colspan="6" rowspan="4"><strong>FORMATO ENTREGA DE ELEMENTOS DE PROTECCIÓN PERSONAL Y DOTACIÓN DE TRABAJO</strong></td>
-            <td class="pie fond" colspan="4"><strong>Código: THM-FOR09</strong></td>
+            <td class="td datper fond1" style="width: 100px" colspan="4" rowspan="4"><img style="width: 80%;" src="'.$logob64.'" alt="Logo ARTEPAN SAS"></td>
+            <td class="td datper fond1" colspan="6" rowspan="4"><strong>FORMATO ENTREGA DE ELEMENTOS DE PROTECCIÓN PERSONAL Y DOTACIÓN DE TRABAJO</strong></td>
+            <td class="td datper fond1" colspan="4"><strong>Código: THM-FOR09</strong></td>
         </tr>
         <tr>
-            <td class="pie fond" colspan="4"><strong>Versión: 1</strong></td>
+            <td class="td datper fond1" colspan="4"><strong>Versión: 1</strong></td>
         </tr>
         <tr>
-            <td class="pie fond" colspan="4"><strong>Fecha: 26/01/2023</strong></td>
+            <td class="td datper fond1" colspan="4"><strong>Fecha: 26/01/2023</strong></td>
         </tr>
         <tr>
-            <td class="pie fond" colspan="4"><strong>Página: 1 de 1</strong></td>
+            <td class="td datper fond1" colspan="4"><strong>Página: 1 de 1</strong></td>
+        </tr>
+    </tbody>
+</table>
+<span><br></span>
+<table>
+    <tbody>
+        <tr>
+            <td class="td datper fond1" colspan="14"><strong>DATOS DEL FUNCIONARIO</strong></td>
         </tr>
         <tr>
-            <td class="tit sec fond" colspan="14"><strong>DATOS DEL FUNCIONARIO</strong></td>
+            <td class="td" style="width: 70%"><strong>NOMBRE:</strong></td>
+            <td class="td" style="width: 30%">'.$det['nomprec'].'</td>
         </tr>
         <tr>
-            <td colspan="3"><strong>NOMBRE:</strong></td>
-            <td colspan="11">'.$det['nomprec'].'</td>
+            <td class="td" style="width: 70%"><strong>CEDULA:</strong></td>
+            <td class="td" style="width: 30%">'.$det['dprec'].'</td>
         </tr>
         <tr>
-            <td colspan="3"><strong>CEDULA:</strong></td>
-            <td colspan="11">'.$det['dprec'].'</td>
+            <td class="td" style="width: 70%"><strong>AREA:</strong></td>
+            <td class="td" style="width: 30%">'.$det['aprec'].'</td>
         </tr>
         <tr>
-            <td colspan="3"><strong>AREA:</strong></td>
-            <td colspan="11">'.$det['aprec'].'</td>
-        </tr>
-        <tr>
-            <td colspan="3"><strong>CORREO CORPORATIVO:</strong></td>
-            <td colspan="11">';
+            <td class="td" style="width: 70%"><strong>CORREO CORPORATIVO:</strong></td>
+            <td class="td" style="width: 30%">';
                 if($det['eprec']) $html .= $det['eprec'];
                 else $html .= 'N/A';
-$html .= '
+
+ $html .= '
         </td>
         </tr>
-            <tr>  
-            <td class="tit sec fond" colspan="4" style="text-align: center;"><strong>HORARIO DE CAMISA</strong></td>
-            <td class="tit sec fond" colspan="9" style="text-align: center;"><strong>DOTACIÓN</strong></td> 
-            </tr>
-        <tr>';
+</tbody>
+</table>
+    <span><br></span>
+<table border="1" style="float: right;" width="10%">
+    <tbody>
+        <tr>  
+            <td class="td datper fond1" colspan="5" style="width: 100%"><strong>HORARIO DE CAMISA</strong></td>
+        </tr>';
+
+            
         if ($datDia && $datCol) {
             foreach ($datDia as $index => $datd) {
                 $html .= '<tr>'; 
@@ -145,13 +150,24 @@ $html .= '
                 $html .= '</tr>'; 
             }
         }
+$html .= '
+    </td>
+    </tr>
+    </tbody>
+</table>
+<span><br></span>
+<table border="1" style="float: right;" width="25%">
+    <tbody>
+            <tr>
+                <td class="td datper fond1" colspan="9" style="text-align: center;"><strong>DOTACIÓN</strong></td>
+            </tr>';
 
         if ($datDot) {
             foreach ($datDot as $ddt) {
                 $marcadorEncontrado = true;
-                $html .= '<tr>'; 
-                $html .= '<td colspan="2" style="text-align: center;"><strong>' . strtoupper($ddt['nomval']) . '</strong></td>'; 
+                 $html .= '<td style="text-align: center;"><strong>' . strtoupper($ddt['nomval']) . '</strong></td>';
 
+                
 
         if ($datTxD) {
             foreach ($datTxD as $dae) {
@@ -159,7 +175,8 @@ $html .= '
 
                                     $html .= '<td colspan="1" style="text-align: center">X</td>';
                                     $marcadorEncontrado = true;
-                                   
+                                    $html .= '<td colspan="2" style="text-align: center;"><strong>' . strtoupper($dae['nomvtal']) . '</strong></td>'; 
+                                    $html .= '<td colspan="2" style="text-align: center;"><strong>' . strtoupper($dae['cant']) . '</strong></td>'; 
                                     break;
                                 }
                             }
@@ -170,47 +187,20 @@ $html .= '
                         $cont++;
                         if($cont==3) $html .= '</tr><tr>';
                         $html .= '</tr>'; 
+
                     }
                 }
-                                                    
-        //         // $marcadorEncontrado = false;
-        //         $html .= '<td colspan="2" style="text-align: center;">' .($datTalP[$index]['nomval']) . '</td>';
-        //         $html .= '<td colspan="2" style="text-align: center;">' .($datTalS[$index]['nomval']) . '</td>';
-        //         $html .= '<td colspan="2" style="text-align: center;">' .($datTalZ[$index]['nomval']) . '</td>';
-        //         $html .= '<td colspan="2" style="text-align: center;">' .($datTalG[$index]['nomval']) . '</td>';
-                
-        //         $html .= '</tr>'; 
-        //     }
-        // }
-        
-             
-
-
-        // <td colspan="2" rowspan="2"><strong>ACCESORIOS:</strong></td>';
-        // if ($datAcc) {
-        //     foreach ($datAcc as $dac) {
-        //         $marcadorEncontrado = false;
-        //         $html .= '<td colspan="3"><strong>'.strtoupper($dac['nomval']).'</strong></td>';
-        //         if ($datAxE) {
-        //             foreach ($datAxE as $dae) {
-        //                 if ($dac['idval'] == $dae['idvacc']) {
-        //                     $html .= '<td colspan="1" style="text-align: center">X</td>';
-        //                     $marcadorEncontrado = true;
-        //                     break;
-        //                 }
-        //             }
-        //         }
-        //         if ($marcadorEncontrado==false) $html .= '<td colspan="1"></td>';
-        //         $cont++;
-        //         if($cont==3) $html .= '</tr><tr>';
-        //     }
-        // }
-
+                // $html .= '</tr>';        
 $html .= '
             </td>
         </tr>
+    </tbody>
+</table>
+<span><br></span>
+<table>
+    <tbody>
         <tr>
-            <td class="sep" colspan="14"> </td>
+            <td  colspan="14"> </td>
         </tr>        
         <tr>
             <td colspan="4"><strong>FECHA ENTREGA:</strong></td>
@@ -245,6 +235,11 @@ $html .= '
         <tr>
             <td class="sep" colspan="14"> </td>
         </tr>        
+    </tbody>
+</table>
+<span><br></span>
+<table>
+    <tbody>        
         <tr>
             <td colspan="4"><strong>FECHA DEVOLUCION:</strong></td>
             <td colspan="10">'.$det['fecdev'].'</td>
