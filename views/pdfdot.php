@@ -64,7 +64,7 @@ $html .= '
     <link rel="icon" href="../img/logoartepan_sinfondo.png">
     <style>
         table{
-              width: 50%;
+              width: 100%;
           }
         table, .td{
             border-collapse: collapse;
@@ -81,27 +81,24 @@ $html .= '
         .fond1{
             background-color: #a5cdfa;
         }
-        .fond2{
-            background-color: #a5cdfa;
-        }
     </style>
 </head>
 <body>
 <table>
     <tbody>
         <tr>
-            <td class="td datper fond1" style="width: 100px" colspan="4" rowspan="4"><img style="width: 80%;" src="'.$logob64.'" alt="Logo ARTEPAN SAS"></td>
-            <td class="td datper fond1" colspan="6" rowspan="4"><strong>FORMATO ENTREGA DE ELEMENTOS DE PROTECCIÓN PERSONAL Y DOTACIÓN DE TRABAJO</strong></td>
-            <td class="td datper fond1" colspan="4"><strong>Código: THM-FOR09</strong></td>
+            <td class="td fond1" style="width: 100px" colspan="4" rowspan="4"><img style="width: 80%;" src="'.$logob64.'" alt="Logo ARTEPAN SAS"></td>
+            <td class="td datper fond1" colspan="6" rowspan="4" style="text-align: center;"><strong>FORMATO ENTREGA DE ELEMENTOS DE PROTECCIÓN PERSONAL Y DOTACIÓN DE TRABAJO</strong></td>
+            <td class="td fond1" colspan="4"><strong>Código: THM-FOR09</strong></td>
         </tr>
         <tr>
-            <td class="td datper fond1" colspan="4"><strong>Versión: 1</strong></td>
+            <td class="td fond1" colspan="4"><strong>Versión: 1</strong></td>
         </tr>
         <tr>
-            <td class="td datper fond1" colspan="4"><strong>Fecha: 26/01/2023</strong></td>
+            <td class="td fond1" colspan="4"><strong>Fecha: 26/01/2023</strong></td>
         </tr>
         <tr>
-            <td class="td datper fond1" colspan="4"><strong>Página: 1 de 1</strong></td>
+            <td class="td fond1" colspan="4"><strong>Página: 1 de 1</strong></td>
         </tr>
     </tbody>
 </table>
@@ -112,20 +109,20 @@ $html .= '
             <td class="td datper fond1" colspan="14"><strong>DATOS DEL FUNCIONARIO</strong></td>
         </tr>
         <tr>
-            <td class="td" style="width: 70%"><strong>NOMBRE:</strong></td>
-            <td class="td" style="width: 30%">'.$det['nomprec'].'</td>
+            <td class="td datper" style="width: 30%"><strong>NOMBRE:</strong></td>
+            <td class="td datper" style="width: 70%">'.$det['nomprec'].'</td>
         </tr>
         <tr>
-            <td class="td" style="width: 70%"><strong>CEDULA:</strong></td>
-            <td class="td" style="width: 30%">'.$det['dprec'].'</td>
+            <td class="td datper" style="width: 30%"><strong>CEDULA:</strong></td>
+            <td class="td datper" style="width: 70%">'.$det['dprec'].'</td>
         </tr>
         <tr>
-            <td class="td" style="width: 70%"><strong>AREA:</strong></td>
-            <td class="td" style="width: 30%">'.$det['aprec'].'</td>
+            <td class="td datper" style="width: 30%"><strong>AREA:</strong></td>
+            <td class="td datper" style="width: 70%">'.$det['aprec'].'</td>
         </tr>
         <tr>
-            <td class="td" style="width: 70%"><strong>CORREO CORPORATIVO:</strong></td>
-            <td class="td" style="width: 30%">';
+            <td class="td datper" style="width: 30%"><strong>CORREO CORPORATIVO:</strong></td>
+            <td class="td datper" style="width: 70%">';
                 if($det['eprec']) $html .= $det['eprec'];
                 else $html .= 'N/A';
 
@@ -135,18 +132,16 @@ $html .= '
 </tbody>
 </table>
     <span><br></span>
-<table border="1" style="float: right;" width="10%">
+<table>
     <tbody>
         <tr>  
-            <td class="td datper fond1" colspan="5" style="width: 100%"><strong>HORARIO DE CAMISA</strong></td>
+            <td class="td datper fond1" colspan="14"  style="text-align: center;"><strong>HORARIO DE CAMISA</strong></td>
         </tr>';
-
-            
         if ($datDia && $datCol) {
             foreach ($datDia as $index => $datd) {
                 $html .= '<tr>'; 
-                $html .= '<td colspan="2" style="text-align: center;"><strong>' . strtoupper($datd['nomval']) . '</strong></td>'; 
-                $html .= '<td colspan="2" style="text-align: center;">' .($datCol[$index]['nomval']) . '</td>';
+                $html .= '<td class="td" style="text-align: center;"><strong>' . strtoupper($datd['nomval']) . '</strong></td>'; 
+                $html .= '<td class="td" style="text-align: center;">' .($datCol[$index]['nomval']) . '</td>';
                 $html .= '</tr>'; 
             }
         }
@@ -156,41 +151,37 @@ $html .= '
     </tbody>
 </table>
 <span><br></span>
-<table border="1" style="float: right;" width="25%">
+<table>
     <tbody>
-            <tr>
-                <td class="td datper fond1" colspan="9" style="text-align: center;"><strong>DOTACIÓN</strong></td>
-            </tr>';
 
+            <tr>
+                <td class="td datper fond1" colspan="14" style="text-align: center;"><strong>ELEMENTO - TALLA - CANTIDAD</strong></td>
+                
+            </tr>';
         if ($datDot) {
             foreach ($datDot as $ddt) {
                 $marcadorEncontrado = true;
-                 $html .= '<td style="text-align: center;"><strong>' . strtoupper($ddt['nomval']) . '</strong></td>';
+                $html .= '<td class="td" style="width: 25%; text-align: center;"><strong>' . strtoupper($ddt['nomval']) . '</strong></td>';
 
-                
 
         if ($datTxD) {
             foreach ($datTxD as $dae) {
                                 if ($ddt['idval'] == $dae['idvdot']) {
-
-                                    $html .= '<td colspan="1" style="text-align: center">X</td>';
+                                    $html .= '<td class="td" style="text-align: center">X</td>';
                                     $marcadorEncontrado = true;
-                                    $html .= '<td colspan="2" style="text-align: center;"><strong>' . strtoupper($dae['nomvtal']) . '</strong></td>'; 
-                                    $html .= '<td colspan="2" style="text-align: center;"><strong>' . strtoupper($dae['cant']) . '</strong></td>'; 
+                                    $html .= '<td class="td"  style="text-align: center;"><strong>' . strtoupper($dae['nomvtal']) . '</strong></td>'; 
+                                    $html .= '<td class="td" style="text-align: center;"><strong>' . strtoupper($dae['cant']) . '</strong></td>'; 
                                     break;
+                                    if ($marcadorEncontrado==false) $html .= '<td class="td"></td>';
                                 }
                             }
                         }
-
-    
-                        if ($marcadorEncontrado==false) $html .= '<td colspan="1"></td>';
                         $cont++;
                         if($cont==3) $html .= '</tr><tr>';
                         $html .= '</tr>'; 
 
                     }
-                }
-                // $html .= '</tr>';        
+                }     
 $html .= '
             </td>
         </tr>
@@ -198,85 +189,69 @@ $html .= '
 </table>
 <span><br></span>
 <table>
-    <tbody>
+    <tbody>       
         <tr>
-            <td  colspan="14"> </td>
-        </tr>        
-        <tr>
-            <td colspan="4"><strong>FECHA ENTREGA:</strong></td>
-            <td colspan="10">'.$det['fecent'].'</td>
+            <td class="td datper fond1" colspan="4"><strong>FECHA ENTREGA:</strong></td>
+            <td class="td datper" colspan="10">'.$det['fecent'].'</td>
         </tr>
         <tr>
-            <td class="sep" colspan="14"> </td>
+            <td class="td datper"><strong>NOMBRE DE QUIEN ENTREGA:</strong></td>
+            <td class="td datper">'.$det['nompent'].'</td>
+            <td class="td datper"><strong>AREA:</strong></td>
+            <td class="td datper">'.$det['apent'].'</td>
+            <td class="td datper"><strong>FIRMA:</strong></td>
+            <td class="td datper">'.(function($name) { return explode(" ", $name)[0]; })($_SESSION["nomper"]) . " " . (function($surname) { return explode(" ", $surname)[0]; })($_SESSION["apeper"]).'</td>
         </tr>
         <tr>
-            <td colspan="3"><strong>NOMBRE DE QUIEN ENTREGA:</strong></td>
-            <td colspan="3">'.$det['nompent'].'</td>
-            <td colspan="1"><strong>Area:</strong></td>
-            <td colspan="3">'.$det['apent'].'</td>
-            <td colspan="1"><strong>FIRMA:</strong></td>
-            <td colspan="3">'.(function($name) { return explode(" ", $name)[0]; })($_SESSION["nomper"]) . " " . (function($surname) { return explode(" ", $surname)[0]; })($_SESSION["apeper"]).'</td>
-        </tr>
-        <tr>
-            <td colspan="3"><strong>NOMBRE DE QUIEN RECIBE:</strong></td>
-            <td colspan="3">'.$det['nomprec'].'</td>
-            <td colspan="1"><strong>Area:</strong></td>
-            <td colspan="3">'.$det['aprec'].'</td>
-            <td colspan="1"><strong>FIRMA:</strong></td>
-            <td colspan="3">';
+            <td class="td datper"><strong>NOMBRE DE QUIEN RECIBE:</strong></td>
+            <td class="td datper">'.$det['nomprec'].'</td>
+            <td class="td datper"><strong>AREA:</strong></td>
+            <td class="td datper">'.$det['aprec'].'</td>
+            <td class="td datper"><strong>FIRMA:</strong></td>
+            <td class="td datper">';
             if ($det['firpent']) $html .= '<img style="height: 30px;" src="'.$fentb64.'">';
 $html .= '
             </td>
         </tr>
         <tr>
-            <td class="obs" colspan="3"><strong>OBSERVACIONES:</strong></td>
-            <td class="obs tx" colspan="11">'.$det['observ'].'</td>
-        </tr>
-        <tr>
-            <td class="sep" colspan="14"> </td>
-        </tr>        
+            <td class="td datper"><strong>OBSERVACIONES:</strong></td>
+            <td class="td datper">'.$det['observ'].'</td>
+        </tr>       
     </tbody>
 </table>
 <span><br></span>
 <table>
     <tbody>        
         <tr>
-            <td colspan="4"><strong>FECHA DEVOLUCION:</strong></td>
-            <td colspan="10">'.$det['fecdev'].'</td>
+            <td class="td datper fond1" colspan="4"><strong>FECHA DEVOLUCION:</strong></td>
+            <td class="td datper" colspan="10">'.$det['fecdev'].'</td>
         </tr>
         <tr>
-            <td class="sep" colspan="14"> </td>
-        </tr>
-        <tr>
-            <td colspan="3"><strong>NOMBRE DE QUIEN ENTREGA:</strong></td>
-            <td colspan="3">'.$det['nompentd'].'</td>
-            <td colspan="1"><strong>Area:</strong></td>
-            <td colspan="3">'.$det['apentd'].'</td>
-            <td colspan="1"><strong>FIRMA:</strong></td>
-            <td colspan="3">';
+            <td class="td datper"><strong>NOMBRE DE QUIEN ENTREGA:</strong></td>
+            <td class="td datper">'.$det['nompentd'].'</td>
+            <td class="td datper"><strong>AREA:</strong></td>
+            <td class="td datper">'.$det['apentd'].'</td>
+            <td class="td datper"><strong>FIRMA:</strong></td>
+            <td class="td datper">';
             if ($det['firprec']) $html .= '<img style="height: 30px;" src="'.$fdevb64.'">';
 $html .= '
             </td>
         </tr>
         <tr>
-            <td colspan="3"><strong>NOMBRE DE QUIEN RECIBE:</strong></td>
-            <td colspan="3">'.$det['nomprecd'].'</td>
-            <td colspan="1"><strong>AREA:</strong></td>
-            <td colspan="3">'.$det['aprecd'].'</td>
-            <td colspan="1"><strong>FIRMA:</strong></td>
-            <td colspan="3">';
+            <td class="td datper"><strong>NOMBRE DE QUIEN RECIBE:</strong></td>
+            <td class="td datper">'.$det['nomprecd'].'</td>
+            <td class="td datper"><strong>AREA:</strong></td>
+            <td class="td datper">'.$det['aprecd'].'</td>
+            <td class="td datper"><strong>FIRMA:</strong></td>
+            <td class="td datper">';
             if ($det['firprec']) $html .= (function($name) { return explode(" ", $name)[0]; })($_SESSION["nomper"]) . " " . (function($surname) { return explode(" ", $surname)[0]; })($_SESSION["apeper"]);
 $html .= '
             </td>
         </tr>
         <tr>
-            <td class="obs" colspan="3"><strong>OBSERVACIONES:</strong></td>
-            <td class="obs tx" colspan="11">'.$det['observd'].'</td>
-        </tr>
-        <tr>
-            <td class="sep" colspan="14"> </td>
-        </tr>
-        
+            <td class="td datper"><strong>OBSERVACIONES:</strong></td>
+            <td class="td datper">'.$det['observd'].'</td>
+        </tr>    
     </tbody>
 </table>
 </body>
@@ -328,7 +303,7 @@ if($ident){
         $mail = $det['epent'];
         $area = $det['apent'];
     }elseif($det['fecent'] && $det['fecdev']){
-        $perm = $det['nompentd']; 
+        $perm = $det['nompent']; 
         $mail = $det['eprecd'];
         $area = $det['aprecd'];
     }
