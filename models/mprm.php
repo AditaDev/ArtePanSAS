@@ -11,7 +11,6 @@
         private $obsprm;
         private $estprm;
         private $idper;
-        private $idvubi;
         private $fecsol;
         private $fecrev;
         private $rutpdf;
@@ -49,9 +48,6 @@
         }
         public function getIdper(){
             return $this->idper;
-        }
-        public function getIdvubi(){
-            return $this->idvubi;
         }
         public function getFecsol(){
             return $this->fecsol;
@@ -96,9 +92,6 @@
         public function setIdper($idper){
             $this->idper=$idper;
         }
-        public function setIdvubi($idvubi){
-            $this->idvubi=$idvubi;
-        }
         public function setFecsol($fecsol){
             $this->fecsol=$fecsol;
         }
@@ -110,7 +103,7 @@
         }
 
         function getAll($id){
-            $sql ="SELECT r.idprm, r.noprm, r.fecini, r.fecfin, r.idvtprm, r.idvubi, r.rutpdf, DATE_FORMAT(r.fecini, '%e de %M de %Y') AS fini, DATE_FORMAT(r.fecini, '%h:%i %p') AS hini, DATE_FORMAT(r.fecfin, '%e de %M de %Y') AS ffin, DATE_FORMAT(r.fecfin, '%h:%i %p') AS hfin, r.sptrut, r.desprm, r.obsprm, r.estprm, 
+            $sql ="SELECT r.idprm, r.noprm, r.fecini, r.fecfin, r.idvtprm, r.rutpdf, DATE_FORMAT(r.fecini, '%e de %M de %Y') AS fini, DATE_FORMAT(r.fecini, '%h:%i %p') AS hini, DATE_FORMAT(r.fecfin, '%e de %M de %Y') AS ffin, DATE_FORMAT(r.fecfin, '%h:%i %p') AS hfin, r.sptrut, r.desprm, r.obsprm, r.estprm, 
     -- Ajuste de duración con condiciones
     FLOOR((TIME_TO_SEC(TIMEDIFF(r.fecfin, r.fecini)) - 
     CASE 
@@ -121,7 +114,7 @@
     CASE 
         WHEN (HOUR(r.fecini) < 14 AND HOUR(r.fecfin) > 13) THEN TIME_TO_SEC('1:00:00') 
         ELSE 0 
-    END) % TIME_TO_SEC('8:30:00')) AS hdif, DATE_FORMAT(r.fecsol, '%e de %M de %Y') AS fsol, DATE_FORMAT(r.fecrev, '%e de %M de %Y') AS frev, vu.nomval AS ubi, vt.nomval AS tprm, pp.idper AS iper, pp.nomper AS nper, pp.apeper AS aper, pp.ndper AS dper, pp.emaper AS eper, pj.idper AS ijef, pj.nomper AS njef, pj.apeper AS ajef, pj.ndper AS djef, pj.emaper AS ejef FROM permiso AS r INNER JOIN persona AS pp ON r.idper = pp.idper INNER JOIN persona AS pj ON r.idjef = pj.idper INNER JOIN valor AS vu ON r.idvubi = vu.idval INNER JOIN valor AS vt ON r.idvtprm = vt.idval";
+    END) % TIME_TO_SEC('8:30:00')) AS hdif, DATE_FORMAT(r.fecsol, '%e de %M de %Y') AS fsol, DATE_FORMAT(r.fecrev, '%e de %M de %Y') AS frev, vt.nomval AS tprm, pp.idper AS iper, pp.nomper AS nper, pp.apeper AS aper, pp.ndper AS dper, pp.emaper AS eper, pj.idper AS ijef, pj.nomper AS njef, pj.apeper AS ajef, pj.ndper AS djef, pj.emaper AS ejef FROM permiso AS r INNER JOIN persona AS pp ON r.idper = pp.idper INNER JOIN persona AS pj ON r.idjef = pj.idper INNER JOIN valor AS vt ON r.idvtprm = vt.idval";
             if($id==5) $sql .= " WHERE r.idper=:id";
             if($id==7) $sql .= " WHERE r.estprm=3 OR r.estprm=4";
             if($id==15) $sql .= " WHERE r.estprm=2";
@@ -138,7 +131,7 @@
         }
 
         function getOne(){
-            $sql ="SELECT r.idprm, r.noprm, r.fecini, r.fecfin, r.idvtprm, r.idvubi, r.rutpdf, DATE_FORMAT(r.fecini, '%e de %M de %Y') AS fini, DATE_FORMAT(r.fecini, '%h:%i %p') AS hini, DATE_FORMAT(r.fecfin, '%e de %M de %Y') AS ffin, DATE_FORMAT(r.fecfin, '%h:%i %p') AS hfin, r.sptrut, r.desprm, r.obsprm, r.estprm, 
+            $sql ="SELECT r.idprm, r.noprm, r.fecini, r.fecfin, r.idvtprm, r.rutpdf, DATE_FORMAT(r.fecini, '%e de %M de %Y') AS fini, DATE_FORMAT(r.fecini, '%h:%i %p') AS hini, DATE_FORMAT(r.fecfin, '%e de %M de %Y') AS ffin, DATE_FORMAT(r.fecfin, '%h:%i %p') AS hfin, r.sptrut, r.desprm, r.obsprm, r.estprm, 
     -- Ajuste de duración con condiciones
     FLOOR((TIME_TO_SEC(TIMEDIFF(r.fecfin, r.fecini)) - 
     CASE 
@@ -149,7 +142,7 @@
     CASE 
         WHEN (HOUR(r.fecini) < 14 AND HOUR(r.fecfin) > 13) THEN TIME_TO_SEC('1:00:00') 
         ELSE 0 
-    END) % TIME_TO_SEC('8:30:00')) AS hdif, DATE_FORMAT(r.fecsol, '%e de %M de %Y') AS fsol, DATE_FORMAT(r.fecrev, '%e de %M de %Y') AS frev, vu.nomval AS ubi, vt.nomval AS tprm, pp.idper AS iper, pp.nomper AS nper, pp.apeper AS aper, pp.ndper AS dper, pp.emaper AS eper,  pj.idper AS ijef, pj.nomper AS njef, pj.apeper AS ajef, pj.ndper AS djef, pj.emaper AS ejef FROM permiso AS r INNER JOIN persona AS pp ON r.idper = pp.idper INNER JOIN persona AS pj ON r.idjef = pj.idper INNER JOIN valor AS vu ON r.idvubi = vu.idval INNER JOIN valor AS vt ON r.idvtprm = vt.idval  WHERE r.idprm=:idprm";
+    END) % TIME_TO_SEC('8:30:00')) AS hdif, DATE_FORMAT(r.fecsol, '%e de %M de %Y') AS fsol, DATE_FORMAT(r.fecrev, '%e de %M de %Y') AS frev, vt.nomval AS tprm, pp.idper AS iper, pp.nomper AS nper, pp.apeper AS aper, pp.ndper AS dper, pp.emaper AS eper,  pj.idper AS ijef, pj.nomper AS njef, pj.apeper AS ajef, pj.ndper AS djef, pj.emaper AS ejef FROM permiso AS r INNER JOIN persona AS pp ON r.idper = pp.idper INNER JOIN persona AS pj ON r.idjef = pj.idper INNER JOIN valor AS vt ON r.idvtprm = vt.idval  WHERE r.idprm=:idprm";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $conexion->query("SET lc_time_names = 'es_ES';");
@@ -162,13 +155,13 @@
         }
 
         function save(){
-            try{
+            //try{
                 $sptrut = $this->getSptrut();
                 $sql = "INSERT INTO permiso (fecini, fecfin, idjef, idvtprm,";
                 if($sptrut) $sql .= " sptrut,";
-                $sql .= " desprm, estprm, idper, idvubi) VALUES (:fecini, :fecfin, :idjef, :idvtprm,";
+                $sql .= " desprm, estprm, idper) VALUES (:fecini, :fecfin, :idjef, :idvtprm,";
                 if($sptrut) $sql .= " :sptrut,";
-                $sql .= " :desprm, :estprm, :idper, :idvubi)";
+                $sql .= " :desprm, :estprm, :idper)";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -187,12 +180,10 @@
                 $result->bindParam(":estprm", $estprm);
                 $idper = $this->getIdper();
                 $result->bindParam(":idper", $idper);
-                $idvubi = $this->getIdvubi();
-                $result->bindParam(":idvubi", $idvubi);
                 $result->execute();
-            }catch(Exception $e){
-                ManejoError($e);
-            }
+            // }catch(Exception $e){
+            //     ManejoError($e);
+            // }
         }
 
         function edit(){
@@ -200,7 +191,7 @@
                 $sptrut = $this->getSptrut();
                 $sql = "UPDATE permiso SET fecini=:fecini, fecfin=:fecfin, idjef=:idjef, idvtprm=:idvtprm,";
                 if($sptrut) $sql .= " sptrut=:sptrut,";
-                $sql .= " desprm=:desprm, estprm=:estprm, idper=:idper, idvubi=:idvubi WHERE idprm=:idprm";
+                $sql .= " desprm=:desprm, estprm=:estprm, idper=:idper WHERE idprm=:idprm";
                 $modelo = new conexion();
                 $conexion = $modelo->get_conexion();
                 $result = $conexion->prepare($sql);
@@ -221,8 +212,6 @@
                 $result->bindParam(":estprm", $estprm);
                 $idper = $this->getIdper();
                 $result->bindParam(":idper", $idper);
-                $idvubi = $this->getIdvubi();
-                $result->bindParam(":idvubi", $idvubi);
                 $result->execute();
             }catch(Exception $e){
                 ManejoError($e);

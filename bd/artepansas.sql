@@ -79,7 +79,7 @@ CREATE TABLE `dotacion` (
   `ident` bigint(11) NOT NULL,
   `idperent` bigint(11) NOT NULL,
   `idperrec` bigint(11) NOT NULL,
-  `fecent` date DEFAULT NULL,
+  `fecent` datetime DEFAULT NULL,
   `observ` varchar(1000) DEFAULT NULL,
   `estent` bigint(11) NOT NULL,
   `firpent` varchar(255) DEFAULT NULL,
@@ -169,8 +169,7 @@ INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`) VALUES
 (1, 'Facturas', 'img/mod_facturas.png', 1),
 (2, 'Configuración', 'img/mod_configuracion.png', 1),
 (3, 'Almuerzos', 'img/mod_almuerzos.png', 1),
-(4, 'Talento Humano', 'img/mod_novedades.png', 1),
-(5, 'Permisos', NULL, 1);
+(4, 'Talento Humano', 'img/mod_novedades.png', 1);
 
 -- --------------------------------------------------------
 
@@ -230,9 +229,9 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (107, 'fa fa-solid fa-boxes-stacked', 'Dominio', 'views/vdom.php', 7, 'home.php', 1, 2),
 (108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 2),
 (109, 'fa fa-solid fa-building', 'Proveedores', 'views/vemp.php', 11, 'home.php', 1, 1),
-(110, 'fa fa-solid fa-solid fa-lightbulb', 'Novedades', 'views/vnov.php', 16, 'home.php', 1, 4),
+(110, 'fa-solid fa-bullhorn', 'Novedades', 'views/vnov.php', 16, 'home.php', 1, 4),
 (111, 'fa fa-solid fa-solid fa-lightbulb', 'Dotación', 'views/vdot.php', 17, 'home.php', 1, 4),
-(55, 'fa fa-solid fa-file-circle-check', 'Permisos', 'views/vprm.php', 55, 'home.php', 1, 5);
+(112, 'fa fa-solid fa-file-circle-check', 'Permisos', 'views/vprm.php', 18, 'home.php', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -280,9 +279,9 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (110, 4),
 (111, 7),
 (111, 1),
-(55, 7),
-(55, 5),
-(55, 1);
+(112, 7),
+(112, 5),
+(112, 1);
 
 -- --------------------------------------------------------
 
@@ -347,9 +346,7 @@ INSERT INTO `pefxmod` (`idmod`, `idpef`, `idpag`) VALUES
 (4, 4, 110),
 (4, 1, 110),
 (4, 7, 110),
-(5, 7, 55),
-(5, 5, 55),
-(5, 1, 55);
+(4, 5, 112);
 
 -- --------------------------------------------------------
 

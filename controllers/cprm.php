@@ -13,13 +13,12 @@
     $obsprm = isset($_POST['obsprm']) ? $_POST['obsprm']:NULL;
     $estprm = isset($_POST['estprm']) ? $_POST['estprm']:1;
     $arcspt = isset($_FILES['arcspt']) ? $_FILES['arcspt']:NULL;
-    $idvubi = isset($_POST['idvubi']) ? $_POST['idvubi']:NULL;
     $idper = $_SESSION['idper'];
     $sptrut = NULL;
 
     $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
 
-    $pg = 55;
+    $pg = 112;
     $datOne = NULL;
 
     $nomprm = $mprm->getAllDom($idvtprm);
@@ -39,7 +38,6 @@
         $mprm->setObsprm($obsprm);
         $mprm->setEstprm($estprm);
         $mprm->setIdper($idper);
-        $mprm->setIdvubi($idvubi);
         if(!$idprm) $mprm->save();
         else $mprm->edit();
         echo "<script>window.location='home.php?pg=".$pg."';</script>";

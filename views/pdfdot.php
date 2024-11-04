@@ -77,9 +77,18 @@ $html .= '
         }
         .tit{
             text-align: center;
-            }
+        }
         .fond1{
             background-color: #a5cdfa;
+        }
+        .bloc{
+            text-align: center;
+            margin-top: 50px;
+        }
+        .dot{
+            width: 40%;
+            display: inline-block;
+            margin: 0 35px;
         }
     </style>
 </head>
@@ -106,7 +115,7 @@ $html .= '
 <table>
     <tbody>
         <tr>
-            <td class="td datper fond1" colspan="14"><strong>DATOS DEL FUNCIONARIO</strong></td>
+            <td class="td tit datper fond1" colspan="2"><strong>DATOS DEL FUNCIONARIO</strong></td>
         </tr>
         <tr>
             <td class="td datper" style="width: 30%"><strong>NOMBRE:</strong></td>
@@ -125,74 +134,68 @@ $html .= '
             <td class="td datper" style="width: 70%">';
                 if($det['eprec']) $html .= $det['eprec'];
                 else $html .= 'N/A';
-
  $html .= '
         </td>
         </tr>
-</tbody>
-</table>
-    <span><br></span>
-<table>
-    <tbody>
-        <tr>  
-            <td class="td datper fond1" colspan="14"  style="text-align: center;"><strong>HORARIO DE CAMISA</strong></td>
-        </tr>';
-        if ($datDia && $datCol) {
-            foreach ($datDia as $index => $datd) {
-                $html .= '<tr>'; 
-                $html .= '<td class="td" style="text-align: center;"><strong>' . strtoupper($datd['nomval']) . '</strong></td>'; 
-                $html .= '<td class="td" style="text-align: center;">' .($datCol[$index]['nomval']) . '</td>';
-                $html .= '</tr>'; 
-            }
-        }
-$html .= '
-    </td>
-    </tr>
     </tbody>
 </table>
 <span><br></span>
-<table>
-    <tbody>
+<div class="bloc">
+    <div class="dot">
+        <table>
+            <tbody>
+                <tr>  
+                    <td class="td tit datper fond1" colspan="2" style="width: 100%"><strong>HORARIO DE CAMISA</strong></td>
+                </tr>';
+                if ($datDia && $datCol){ foreach ($datDia AS $dda) {
+                    $marcadorEncontrado = false;
+                    $html .= '<tr><td class="td datper" text-align: center;"><strong>' . strtoupper($dda['nomval']) . '</strong></td>';
+                    foreach ($datCol AS $dtc){ if ($datCxC){ 
+                        foreach ($datCxC as $dcc){ if ($dtc['idval'] == $dcc['idvcol'] && $dda['idval'] == $dcc['idvdia']) {
+                            $html .= '<td class="td datper" style="text-align: center;"><strong>' . strtoupper($dtc['nomval']) . '</strong></td>';
+                            $marcadorEncontrado = true;
+                            break;
+                        }}
+                    }}
+                    if ($marcadorEncontrado==false) $html .= '<td class="td"></td>';
+                    $html .= '</tr>';
 
-            <tr>
-                <td class="td datper fond1" colspan="14" style="text-align: center;"><strong>ELEMENTO - TALLA - CANTIDAD</strong></td>
-                
-            </tr>';
-        if ($datDot) {
-            foreach ($datDot as $ddt) {
-                $marcadorEncontrado = true;
-                $html .= '<td class="td" style="width: 25%; text-align: center;"><strong>' . strtoupper($ddt['nomval']) . '</strong></td>';
-
-
-        if ($datTxD) {
-            foreach ($datTxD as $dae) {
-                                if ($ddt['idval'] == $dae['idvdot']) {
-                                    $html .= '<td class="td" style="text-align: center">X</td>';
-                                    $marcadorEncontrado = true;
-                                    $html .= '<td class="td"  style="text-align: center;"><strong>' . strtoupper($dae['nomvtal']) . '</strong></td>'; 
-                                    $html .= '<td class="td" style="text-align: center;"><strong>' . strtoupper($dae['cant']) . '</strong></td>'; 
-                                    break;
-                                    if ($marcadorEncontrado==false) $html .= '<td class="td"></td>';
-                                }
-                            }
-                        }
-                        $cont++;
-                        if($cont==3) $html .= '</tr><tr>';
-                        $html .= '</tr>'; 
-
-                    }
-                }     
+                }}
 $html .= '
-            </td>
-        </tr>
-    </tbody>
-</table>
-<span><br></span>
+            </tbody>
+        </table>
+    </div>
+    <div class="dot" style="padding-bottom: 30px;">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="td tit datper fond1" colspan="4"><strong>ELEMENTO - TALLA - CANTIDAD</strong></td>  
+                </tr>';
+                if ($datDot){ foreach ($datDot as $ddt) {
+                    $marcadorEncontrado = false;
+                    $html .= '<tr><td class="td datper" style="width: 25%; text-align: center;"><strong>' . strtoupper($ddt['nomval']) . '</strong></td>';
+                    if ($datTxD){ foreach ($datTxD as $dae) {
+                        if ($ddt['idval'] == $dae['idvdot']) {
+                            $html .= '<td class="td datper" style="text-align: center">X</td>';
+                            $html .= '<td class="td datper"  style="text-align: center;"><strong>' . strtoupper($dae['nomvtal']) . '</strong></td>'; 
+                            $html .= '<td class="td datper" style="text-align: center;"><strong>' . strtoupper($dae['cant']) . '</strong></td>'; 
+                            $marcadorEncontrado = true;
+                            break;
+                        } 
+                    }}
+                    if ($marcadorEncontrado==false) $html .= '<td class="td"></td><td class="td"></td><td class="td"></td>';
+                    $html .= '</tr>';
+                }}     
+$html .= '
+            </tbody>
+        </table>
+    </div>
+</div>
 <table>
     <tbody>       
         <tr>
-            <td class="td datper fond1" colspan="4"><strong>FECHA ENTREGA:</strong></td>
-            <td class="td datper" colspan="10">'.$det['fecent'].'</td>
+            <td class="td tit datper fond1" colspan="4"><strong>FECHA ENTREGA:</strong></td>
+            <td class="td datper" colspan="2">'.$det['fecent'].'</td>
         </tr>
         <tr>
             <td class="td datper"><strong>NOMBRE DE QUIEN ENTREGA:</strong></td>
@@ -215,16 +218,16 @@ $html .= '
         </tr>
         <tr>
             <td class="td datper"><strong>OBSERVACIONES:</strong></td>
-            <td class="td datper">'.$det['observ'].'</td>
+            <td class="td datper" colspan="5">'.$det['observ'].'</td>
         </tr>       
     </tbody>
 </table>
 <span><br></span>
 <table>
-    <tbody>        
+    <tbody>      
         <tr>
-            <td class="td datper fond1" colspan="4"><strong>FECHA DEVOLUCION:</strong></td>
-            <td class="td datper" colspan="10">'.$det['fecdev'].'</td>
+            <td class="td tit datper fond1" colspan="4"><strong>FECHA DEVOLUCION:</strong></td>
+            <td class="td datper" colspan="2">'.$det['fecdev'].'</td>
         </tr>
         <tr>
             <td class="td datper"><strong>NOMBRE DE QUIEN ENTREGA:</strong></td>
@@ -250,7 +253,7 @@ $html .= '
         </tr>
         <tr>
             <td class="td datper"><strong>OBSERVACIONES:</strong></td>
-            <td class="td datper">'.$det['observd'].'</td>
+            <td class="td datper" colspan="5">'.$det['observd'].'</td>
         </tr>    
     </tbody>
 </table>

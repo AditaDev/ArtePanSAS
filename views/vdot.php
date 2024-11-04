@@ -116,7 +116,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         <tr>
             <th>Datos persona</th>
             <th>Estado</th>
-            <th></th>
+            <th>Acciones</th>
 
         </tr>
     </thead>
@@ -181,11 +181,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                             ?>
                             <a href="home.php?pg=<?= $pg; ?>&ident=<?= $dta['ident']; ?>&ope=edi">
                                 <i class="fa fa-solid fa-pen-to-square fa-2x iconi" title="Editar"></i>
-                            </a>
-                            <a href="home.php?pg=<?= $pg; ?>&ident=<?= $dta['ident']; ?>&ope=eli" onclick="return eliminar('<?= $dta['nomprec']; ?>');">
-                                <i class="fa fa-solid fa-trash-can fa-2x iconi" title="Eliminar"></i>
-                            </a>
-                            
+                            </a>                            
                         <?php } ?>
                     </td>
 
@@ -198,7 +194,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         <tr>
             <th>Datos persona</th>
             <th>Estado</th>
-            <th></th>
+            <th>Acciones</th>
 
 
 
