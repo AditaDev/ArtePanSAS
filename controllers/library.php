@@ -806,6 +806,41 @@ function modalRecPrm($nm, $id, $tit){
 	echo $txt;
 }
 
+//------------Modal vper, Cambiar contraseña-----------
+function modalCamPass($nm, $id, $tit){	
+	$txt = '';
+	$txt .= '<div class="modal fade" id="' . $nm . $id .'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+		$txt .= '<div class="modal-dialog">';
+			$txt .= '<form action="controllers/colv.php" method="POST">';
+				$txt .= '<div class="modal-content">';
+					$txt .= '<div class="modal-header">';
+						$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Cambiar Contraseña'.(($id==$_SESSION['idper']) ? "" : "/".$tit ).'</strong></h1>';
+						$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+					$txt .= '</div>';
+					$txt .= '<div class="modal-body" style="text-align: left;">';
+                        $txt .= '<div class="contra">';
+                            $txt .= '<label for="pasper" class="labcon"><small><strong>Nueva contraseña: </strong></small></label>';
+                            $txt .= '<input class="form-control" type="password" id="pasper'.$id.'" name="pasper" required oninput="comparar('.$id.')">';
+                        $txt .= '</div>';
+                        $txt .= '<div class="contra">';
+                            $txt .= '<label for="newpasper" class="labcon"><small><strong>Confirmar contraseña: </strong></small></label>';
+                            $txt .= '<input class="form-control" type="password" id="newpasper'.$id.'" name="newpasper" required oninput="comparar('.$id.')">';
+                        $txt .= '</div>';
+                        $txt .= '<small><small id="error-message'.$id.'" style="color: red; display: none;"></small></small>';
+					$txt .= '</div>';
+					$txt .= '<div class="modal-footer">';
+						$txt .= '<input type="hidden" value="'.$id.'" name="idper">';
+						$txt .= '<input type="hidden" value="changpass" name="ope">';
+						$txt .= '<button type="submit" class="btn btn-primary btnmd" id="btncon'.$id.'">Reestablecer</button>';
+						$txt .= '<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>';
+					$txt .= '</div>';
+				$txt .= '</div>';
+			$txt .= '</form>';
+		$txt .= '</div>';
+	$txt .= '</div>';
+	echo $txt;
+}
+
 //------------Array-string vequ, prgxequi-----------
 function arrstrprg($dt)
 {
@@ -827,5 +862,22 @@ function arremp($dt)
 		}
 	}
 	return $txt;
+}
+
+//------------Encriptar-----------
+function encripta($password) {
+    // Generar una sal aleatoria
+	$salt = bin2hex(random_bytes(16));
+    $iterations = 10000;
+    $length = 32; 
+	
+    // Derivar el hash de la contraseña
+    $hash = hash_pbkdf2("sha256", $password, $salt, $iterations, $length);
+	
+    $pass = [
+        'salt' => $salt,
+        'hash' => $hash,
+    ];
+    return $pass; // Devuelve el usuario (en un caso real, guarda en la base de datos)
 }
 

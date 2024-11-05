@@ -1,6 +1,8 @@
 <?php
     require_once("models/mper.php");
     require ('vendor/autoload.php');
+    include("models/datos.php");
+    // require ('controllers/sendemail.php');
 
     use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -15,19 +17,36 @@
     $emaper = isset($_POST['emaper']) ? strtolower($_POST['emaper']):NULL;
     $actper = isset($_REQUEST['actper']) ? $_REQUEST['actper']:1;
 
-    $pasper = "A".$ndper."P";
-    // Convierte el valor extraido en mayuscula(Extrae (del nombre de la persona, desde la posición 0, hasta la 1))
-    // Convierte el valor extraido en minuscula(Extrae (del apellido de la persona, desde la posición 0, hasta la 1))
-    //y las letricas de despues se ponen ahi?
-    //upper, MAYUSCULA, lower - MINUSCULA SI?
+    $pass = "A".$ndper."P";
+    $pasper = encripta($pass);
+    $hash = $pasper['hash'];
+    $salt = $pasper['salt'];
 
     $arc = isset($_FILES["arc"]["name"]) ? $_FILES["arc"]["name"] : NULL;
     $arc = substr($arc, 0, strpos($arc, ".xls"));
 
+    //------------Jefe-----------
+    $idjef = isset($_POST['idjef']) ? $_POST['idjef']:NULL;
+
     //------------Perfil-----------
     $idpef = isset($_POST['idpef']) ? $_POST['idpef']:5;
     $datOne = NULL;
+    $datJxP=NULL;
     $pg = 106;
+
+
+    //------------Correo-----------
+    // $nombre = nombre($apeper." ".$nomper);
+    // $template = "views/mail.html";
+    // $mail_asun = "¡Bienvenido a nuestra app!";
+    // $txt_mess = "Es un placer darle la bienvenida a nuestra nueva aplicación. A continuación, le proporcionamos sus credenciales de acceso:<br><br>
+    // <strong>Usuario: </strong>".$ndper.(($emaper) ? "/".$emaper : "")."<br>
+    // <strong>Contraseña: </strong>".$pass."<br><br>
+    // Le solicitamos que, al iniciar sesión por primera vez, cambie su contraseña para garantizar la seguridad de su cuenta.<br><br>
+    // Para acceder a la aplicación, ingrese en el siguiente enlace: <a href='".$url."'>App Galqui</a><br><br>
+    // Si tiene alguna pregunta o requiere asistencia, no dude en ponerse en contacto con nosotros.<br><br>
+    // Agradecemos su confianza y esperamos que disfrute de la nueva experiencia.<br><br>";
+    // $fir_mail = '<strong>'.$nom.'</strong><br>Cra 1 Nº 4 - 02 Bdg 2 Parque Industrial K2<br>Chía - Cund<br>www.galqui.com';
 
     $mper->setIdper($idper);
     //------------Persona-----------
@@ -38,11 +57,15 @@
         $mper->setNdper($ndper);
         $mper->setArea($area);
         $mper->setActper($actper);
-        $mper->setPasper($pasper);
+        $mper->setIdjef($idjef);
+        $mper->setHash($hash);
+        $mper->setSalt($salt);
         if(!$idper) {
             $mper->save();
             $per = $mper->getOneSPxF($ndper); 
             $mper->savePxFAut($per[0]['idper'],$idpef);
+            $mper->setIdper($per[0]['idper']);
+            if($emaper) sendemail($ema, $psem, $nom, $emaper, $nombre, "", $txt_mess, $mail_asun, $fir_mail, $template, "", "", "");
         }
         else{
             $mper->edit();
@@ -52,8 +75,15 @@
                 $_SESSION['emaper'] = $emaper;
                 $_SESSION['ndper'] = $ndper;
                 $_SESSION['area'] = $area;
-            };
+            }
         } 
+        if($idper) $mper->delJxP();
+        if($idjef){ foreach ($idjef as $i=>$jf) {
+            if($jf){
+                $mper->setIdjef($jf);
+                $mper->saveJxP($i+1);
+            }
+        }}
         echo "<script>window.location='home.php?pg=".$pg."';</script>";
     }
 
@@ -62,8 +92,22 @@
         $mper->editAct();
     }
 
-    if($ope=="eli"&& $idper) $mper->del();
-    if($ope=="edi"&& $idper) $datOne=$mper->getOne();
+    if($ope=="edi"&& $idper){
+        $datOne=$mper->getOne();
+        $datJxP=$mper->getOneJxP();
+    }
+
+    if($_SESSION['idpef']==5){
+        $mper->setIdper($_SESSION['idper']);
+        $datOne=$mper->getOne();
+        $datJxP=$mper->getOneJxP();
+        $est = 1;
+    }
+
+   if($ope=="eli"&& $idper){
+        $mper->del();
+        echo "<script>window.location='home.php?pg=".$pg."';</script>";
+    }
 
     //------------Perfil-----------
     if($ope=="savepxf"){
@@ -92,6 +136,8 @@
         $highestColumn = $sheet->getHighestColumn();
         for ($row = 3; $row <= $highestRow; $row++) {
             // obtengo el valor de la celda
+            $pf = 0;
+            $idpefA = [];
             $ndper = $sheet->getCell("B" . $row)->getValue();
             $nomper = $sheet->getCell("C" . $row)->getValue();
             $apeper = $sheet->getCell("D" . $row)->getValue();
@@ -100,50 +146,91 @@
             $mper->setIdval($area);
             $carea = $mper->CompVal();
             $area = $carea[0]['idval'];
+            
             $actper = $sheet->getCell("G" . $row)->getValue();
             $idpef = $sheet->getCell("H" . $row)->getValue();
-            
             $idpef = str_replace(' ', '', $idpef);
             $idpefA = explode(".", $idpef);
             foreach($idpefA AS $pa){
                 $mper->setIdpef($pa); 
                 $pef = $mper->CompPef();
+                $pef = $pef[0]['idpef'];
+                if($pef) $pf++;
             }
 
-            $pasper = "A".$ndper."P";
+            $ndjefi = $sheet->getCell("I" . $row)->getValue();
+            $mper->setNdper($ndjefi); 
+            $idjefi = $mper->selectUsu(); 
+            $idjefi = $idjefi[0]['idper'];
+    		$ndjefa = $sheet->getCell("K" . $row)->getValue();
+            $mper->setNdper($ndjefa); 
+            $idjefa = $mper->selectUsu(); 
+            $idjefa = $idjefa[0]['idper'];
+            $pass = "A".$ndper."P";
+            $pasper = encripta($pass);
+            $hash = $pasper['hash'];
+            $salt = $pasper['salt'];
+            $nombre = nombre($apeper." ".$nomper);
+            $txt_mess = "Es un placer darle la bienvenida a nuestra nueva aplicación. A continuación, le proporcionamos sus credenciales de acceso:<br><br>
+            <strong>Usuario: </strong>".$ndper.(($emaper) ? "/".$emaper : "")."<br>
+            <strong>Contraseña: </strong>".$pass."<br><br>
+            Le solicitamos que, al iniciar sesión por primera vez, cambie su contraseña para garantizar la seguridad de su cuenta.<br><br>
+            Para acceder a la aplicación, ingrese en el siguiente enlace: <a href='".$url."'>App Tummy</a><br><br>
+            Si tiene alguna pregunta o requiere asistencia, no dude en ponerse en contacto con nosotros.<br><br>
+            Agradecemos su confianza y esperamos que disfrute de la nueva experiencia.<br><br>";
             $mper->setNomper($nomper);
             $mper->setApeper($apeper);
             $mper->setNdper($ndper);
             $mper->setEmaper($emaper);
             $mper->setArea($area);
             $mper->setActper($actper);
-            $mper->setPasper($pasper);
-            $existingData = $mper->selectUsu();
+            $mper->setIdpef($idpef);
+            $mper->setHash($hash);
+            $mper->setSalt($salt);
+    		$existingData = $mper->selectUsu();
             $idper = $existingData[0]['idper'];
             $mper->setIdper($idper);
-            if ($pef) {
-                if (!empty($ndper)) {
-                    if ($existingData[0]['sum'] == 0){$mper->savePerXls();
+
+            if (count($idpefA)==$pf && (!$ndjefi OR ($ndjefi && $idjefi)) && (!$ndjefa OR ($ndjefa && $idjefa))) {
+    		    if (!empty($ndper)) {
+    		    	if ($existingData[0]['sum'] == 0) {
+    		    		$mper->save();
                         $per = $mper->getOneSPxF($ndper);
                         $mper->setIdper($per[0]['idper']);
-                    }else{
-                         $mper->EditPerXls();
-                         $mper->delPxF();
-                    }if($idpefA){ foreach ($idpefA as $pf) {
+                        if($emaper) sendemail($ema, $psem, $nom, $emaper, $nombre, "", $txt_mess, $mail_asun, $fir_mail, $template, "", "", "");
+
+    		    	}else {
+    		    		$mper->edit();
+                        $mper->delPxF();
+                        $mper->delJxP();
+    		    	} if($idjefi){
+                        $mper->setIdjef($idjefi);
+                        $mper->saveJxP(1);
+                    } if($idjefa){
+                        $mper->setIdjef($idjefa);
+                        $mper->saveJxP(2);
+                    } if($idpefA){ foreach ($idpefA as $pf) {
                         if($pf){
                             $mper->setIdpef($pf);
                             $mper->savePxF();
                         }
-                    }}
+                    }} 
                 }
-            }else{
+    		}else{
                 $reg = $row;
                 $row = $highestRow+5;
             }
-        }
+    	}
         if($row>$highestRow+5) echo '<script>err("Ooops... Algo esta mal en la fila #'.$reg.', corrígelo y vuelve a subir el archivo");</script>';
         else echo '<script>satf("Todos los datos han sido registrados con exito, por favor espere un momento");</script>';
         echo "<script>setTimeout(function(){ window.location='home.php?pg=".$pg."';}, 7000);</script>";
+    }
+
+    function nombre($nombre){
+        $partesp = explode(" ", $nombre);
+        $apefor = ucfirst(strtolower($partesp[0]));
+        $nomfor = ucfirst(strtolower($partesp[count($partesp) > 2 ? 2 : 1]));
+        return $nomfor." ".$apefor;
     }
 
 

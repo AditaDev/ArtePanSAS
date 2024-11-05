@@ -36,6 +36,19 @@ require_once('controllers/cper.php');
             <label for="apeper"><strong>Correo Electrónico:</strong></label>
             <input class="form-control" type="email" id="emaper" name="emaper" value="<?php if ($datOne) echo $datOne[0]['emaper']; ?>" required>
         </div>
+        <?php if($_SESSION['idpef']!=3){ for($i=0; $i<=1; $i++){ ?>
+            <div class="form-group col-md-4 ui-widget">
+                <label for="idjef"><strong>Jefe <?php if($i==0) echo "Inmediato"; else echo "Area";?></strong></label>
+                <select id="combobox<?=($i+1)?>" name="idjef[]" class="form-control form-select" <?php if($i==0) echo "required";?>>
+                    <option value="0"></option>
+                    <?php if ($datPer) { foreach ($datPer as $dpr) { ?>
+                            <option value="<?= $dpr['idper']; ?>" <?php if ($datJxP){ foreach ($datJxP AS $dtj) { if($dpr['idper'] == $dtj['idjef'] && $dtj['tipjef'] == ($i+1)) echo " selected "; }}?>>
+                                <?= $dpr['nomper']." ".$dpr['apeper']; ?>     
+                            </option>
+                    <?php }} ?>
+                </select>
+            </div>
+        <?php }} ?>
         <?php if ($_SESSION['idpef'] != 3) { ?>
             <div class="form-group col-md-4">
                 <label for="actper" class="titulo"><strong>Activo:</strong></label>
@@ -77,13 +90,24 @@ require_once('controllers/cper.php');
                     <BIG><strong> <?= $dta['ndper']; ?> - <?= $dta['nomper']; ?> <?= $dta['apeper']; ?></strong></BIG>
                     <small>
                         <div class="row">
-                            <?php if ($dta['emaper']) { ?>
+                            <?php
+                            $jef = $mper->getOneJxP();
+                            $dtj = NULL;
+                            if($jef && $jef[0]['tipjef']==1){
+                                $mper->setIdper($jef[0]['idjef']);
+                                $dtj = $mper->getOne();
+                            }if ($dta['emaper']) { ?>
                                 <div class="form-group col-md-8">
                                     <strong>Email: </strong> <?= $dta['emaper']; }?>
                                 </div> 
                                 <div class="form-group col-md-4">
                                 <strong>Area: </strong> <?= $dta['nomval']; ?>
                                 </div> 
+                                <?php } if ($dtj) { ?>
+                                    <div class="form-group col-md-12">
+                                        <strong>Jefe: </strong> <?= explode(' ', $dtj[0]['nomper'])[0] . " " . explode(' ', $dtj[0]['apeper'])[0]; ?>
+                                    </div>
+                                <?php } ?>
                         </div>
                     </small>
                 </td>
@@ -109,28 +133,88 @@ require_once('controllers/cper.php');
                         <i class="fa fa-solid fa-id-card-clip fa-2x iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcb<?= $dta['idper']; ?>" title="Asignar perfil"></i>
                         <?php
                         $mper->setIdper($dta['idper']);
+                        $i = $mper->getOne();
                         $dga = $mper->getOnePxF();
                         $pef = $mper->getPef();
+                        $info = $i[0];
                         modalCmb("mcb", $dta['idper'], $dta['nomper']." ".$dta['apeper'], $pef, $dga, $pg);
-                        // $pe = $mper->getExPE($dta['idper']);
-                        // $pr = $mper->getExPR($dta['idper']);
-                        $pf = $mper->getPFxP($dta['idper']);
-                        // if ($pe && $pr && $pf && $pe[0]['can'] == 0 && $pr[0]['can'] == 0 && $pf[0]['can'] == 0) { ?>
+                        modalCamPass("contra", $info['idper'], $info['nomper'] . " " . $info['apeper']);
+                        ?>
+                        <i class="fa fa-solid fa-key fa-2x iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contra<?= $info['idper']; ?>" title="Cambiar Contraseña"></i>
                             <a href="home.php?pg=<?= $pg; ?>&idper=<?= $dta['idper']; ?>&ope=eli" onclick="return eliminar('<?= $dta['nomper'].' '.$dta['apeper']; ?>');" title="Eliminar">
                                 <i class="fa fa-solid fa-trash-can fa-2x iconi"></i>
                             </a>
                     <?php }} ?>
                 </td>
             </tr>
-        <?php } ?>
     </tbody>
     <tfoot>
         <tr>
             <th>Datos personales</th>
             <?php if ($pg == 102) { ?>
                 <th>Estado</th>
-            <?php } ?>
             <th></th>
         </tr>
     </tfoot>
 </table>
+
+<?php } ?>
+<div class="modal fade" id="pass<?=$_SESSION['idper']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<form action="controllers/colv.php" method="POST">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Cambiar Contraseña</strong></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body" style="text-align: left;">
+                    <div class="contra">
+                        <label for="pasper" class="labcon"><small><strong>Nueva contraseña: </strong></small></label>
+                        <input class="form-control" type="password" id="pasper<?=$_SESSION['idper']?>" name="pasper" required oninput="comparar(<?=$_SESSION['idper']?>)">
+                    </div>
+                    <div class="contra">
+                        <label for="newpasper" class="labcon"><small><strong>Confirmar contraseña: </strong></small></label>
+                        <input class="form-control" type="password" id="newpasper<?=$_SESSION['idper']?>" name="newpasper" required oninput="comparar(<?=$_SESSION['idper']?>)">
+                    </div>
+                    <small><small id="error-message<?=$_SESSION['idper']?>" style="color: red; display: none;"></small></small>
+				</div>
+				<div class="modal-footer">
+					<input type="hidden" value="<?=$_SESSION['idper']?>" name="idper">
+					<input type="hidden" value="changpass" name="ope">
+					<button type="submit" class="btn btn-primary btnmd" id="btncon<?=$_SESSION['idper']?>">Reestablecer</button>
+					<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<style>
+    .custom-combobox1,
+    .custom-combobox2 {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .custom-combobox1-toggle,
+    .custom-combobox2-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+    }
+
+    .custom-combobox1-input,
+    .custom-combobox2-input {
+        margin: 0;
+        padding: 5px 10px;
+        width: 100%;
+        text-align: left;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        background-color: #fff;
+    }
+</style>
+

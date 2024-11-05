@@ -1,8 +1,53 @@
-<?php include('controllers/cprm.php');?>
+<?php include('controllers/cprm.php');
+if ($datOne) {
+    $fechai = (new DateTime($datOne[0]['fecini']))->format('Y-m-d\TH:i');
+    $fechaf = (new DateTime($datOne[0]['fecfin']))->format('Y-m-d\TH:i');
+}
+if($_SESSION['idpef']==7){?>
+    <form action="home.php?pg=<?= $pg; ?>" method="post">
+        <div class="row">
+            <div class="form-group col-md-2 col-sm-4">
+                <label for="fecinib"><strong>Fecha inicial:</strong></label>
+                <input type="date" name="fecini" id="fecinib" value="<?= $fecini; ?>" onchange="this.form.submit(); actMinMax();" class="form-control">
+            </div>
+            <div class="form-group col-md-2 col-sm-4">
+                <label for="fecfinb"><strong>Fecha final:</strong></label>
+                <input type="date" name="fecfin" id="fecfinb" value="<?= $fecfin; ?>" onchange="this.form.submit()" class="form-control">
+            </div>
+            <div class="form-group col-md-2 ">
+                <label for="ndper"><strong>Documento:</strong></label>
+                <input type="text" name="ndper" id="ndper" value="<?= $ndper; ?>" onkeydown="return enter(event);" onchange="this.form.submit();" onkeypress="return solonum(event);" class="form-control">
+            </div>
+            <div class="form-group col-md-2 col-sm-4">
+                <label for="estprm"><strong>Estado:</strong></label>
+                <select name="estprm" id="estprm" class="form-control form-select" onchange="this.form.submit();">
+                    <option value="0">Seleccione...</option>
+                    <option value="3" <?php if ($estprm && $estprm == 3) echo " selected "; ?>>Aprobados</option>
+                    <option value="4" <?php if ($estprm && $estprm == 4) echo " selected "; ?>>Rechazados</option>
+                </select>
+            </div>
+            <input type="hidden" name="ope" value="busc">
+            <div class="form-group col-md-2 col-sm-4" id="btnprm">
+                <div>
+                    <button type="submit" title="Limpiar" value="limp" name="ope" style="border: none;">
+                        <i class="fa fa-solid fa-eraser fa-2x desact"></i>
+                    </button>
+                </div>
+                <div>
+                    <a href="excel/xprm.php?<?php if($idvdpt)echo"d=".$idvdpt."&";if($fecini)echo"fi=".$fecini."&";if($ndper)echo"n=".$ndper."&";if($fecfin)echo"ff=".$fecfin; ?>" title="Exportar permisos">
+                        <i class="fa fa-solid fa-file-export fa-2x act"></i>
+                    </a>
+                </div>
+                <div>
+                    <i class="fa fa-solid fa-chart-simple fa-2x iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#grafprm" title="Gráfica"></i>                                
+                </div>
+            </div>
+        </div>
+    </form>
+<?php } ?>
 
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
     <div class="row">
-        
         <div class="form-group col-md-4">
             <label for="idvtprm"><strong>Permiso por:</strong></label>
             <select name="idvtprm" id="idvtprm" class="form-control form-select" required onchange="validarPermiso()">
@@ -15,7 +60,7 @@
             <label for="idjef"><strong>Enviar a:</strong></label>
             <select id="combobox1" name="idjef" class="form-control form-select" required>
                 <option value="0"></option>
-                <?php if ($datPer) { foreach ($datPer as $dpr) { ?>
+                <?php if ($datJef) { foreach ($datJef as $dpr) { ?>
                         <option value="<?= $dpr['idper']; ?>" <?php if ($datOne && $dpr['idper'] == $datOne[0]['ijef']) echo " selected "; ?>>
                             <?= $dpr['nomjef']; ?>     
                         </option>
@@ -24,27 +69,29 @@
         </div>
         <div class="form-group col-md-4">
             <label for="fecini"><strong>Desde:</strong></label>
-            <input class="form-control" type="datetime-local" id="fecini" name="fecini" <?php if ($datOne) echo 'value="'.$datOne[0]['fecini'].'"';?> step="1800" required onchange="validarHora(this); actualizarMinMax()">
-            <small id="error-message-fecini" style="color: red; display: none;">La hora debe estar entre las 7:00 AM y las 6:00 PM.</small>
+            <input class="form-control" type="datetime-local" id="fecini" name="fecini" value="<?php if ($fechai) echo $fechai;?>" step="1800" required onchange="validarHora(this); actualizarMinMax()">
+            <small id="error-message-fecini" style="color: red; display: none;"></small>
         </div>
         <div class="form-group col-md-4">
             <label for="fecfin"><strong>Hasta:</strong></label>
-            <input class="form-control" type="datetime-local" id="fecfin" name="fecfin" <?php if ($datOne) echo 'value="'.$datOne[0]['fecfin'].'"';?> step="1800" required onchange="validarHora(this)">
-            <small id="error-message-fecfin" style="color: red; display: none;">La hora debe estar entre las 7:00 AM y las 6:00 PM.</small>
+            <input class="form-control" type="datetime-local" id="fecfin" name="fecfin" value="<?php if ($fechaf) echo $fechaf;?>" step="1800" required onchange="validarHora(this)">
+            <small id="error-message-fecfin" style="color: red; display: none;"></small>
         </div>
         <div class="form-group col-md-4">
             <label for="arcspt"><strong>Soporte:</strong></label>
-            <input class="form-control" type="file" id="arcspt" name="arcspt" accept=".pdf">
+            <input class="form-control" type="file" id="arcspt" name="arcspt" accept=".pdf, image/png,image/jpeg">
             <small id="soporte-requerido" style="color: red; display: none;">Este campo es obligatorio.</small>
         </div>
         <div class="form-group col-md-12">
-            <label for="desprm"><strong>Descripción:</strong></label>
-            <textarea class="form-control" type="text" id="desprm" name="desprm" required><?php if ($datOne) echo $datOne[0]['desprm']; ?></textarea>
+            <label for="desprm"><strong>Justificación:</strong></label>
+            <textarea placeholder="Por favor especifique el motivo de su solicitud" class="form-control" type="text" id="desprm" name="desprm" required oninput="contar()"><?php if ($datOne) echo $datOne[0]['desprm']; ?></textarea>
+            <small id="error-message-des" style="color: red; display: none;"></small>
         </div>
         <div class="form-group col-md-12" id="boxbtn">
             <br><br>
             <input class="btn btn-primary" type="submit" value="Registrar" id="btns">
             <input type="hidden" name="ope" value="save">
+            <input type="hidden" name="estprm" value="1">
             <input type="hidden" name="idprm" value="<?php if ($datOne) echo $datOne[0]['idprm']; ?>">
         </div>
     </div>
@@ -63,6 +110,9 @@
                 <td>
                     <div class="row">
                         <div class="form-group col-md-10">
+                            <?php if($_SESSION['idpef']==7){ ?>
+                                <span style="font-size: 0px;opacity: 0;"><?=$dta['fecsol'];?></span>
+                            <?php } ?>
                             <BIG><strong><?php if($_SESSION['idpef']==5) echo $dta['tprm']; else echo $dta['dper']." - ".$dta['aper']." ".$dta['nper']?></strong></BIG>
                             <small>
                                 <div class="row">
@@ -106,7 +156,7 @@
                 <td style="text-align: left;">
                     <?php
                     $fecini = date("Y-m-d", strtotime($dta['fecini'])); 
-                    if($dta['idvtprm']==73) $fecha = $hoy; 
+                    if($dta['idvtprm']==31) $fecha = $hoy; 
                     else $fecha = $mañana;
                     if ($dta['estprm'] == 1){
                         if ($fecha<=$fecini) { ?>
@@ -162,7 +212,6 @@
         </tr>
     </tfoot>
 </table>
-
 <?php 
     if($solper){ 
         titulo("fa fa-solid fa-file-circle-check", "Solicitudes", 0, $pg);?>
@@ -179,6 +228,7 @@
                     <td>
                         <div class="row">
                             <div class="form-group col-md-10">
+                                <span style="font-size: 0px;opacity: 0;"><?=$slp['fecsol'];?></span>
                                 <BIG><strong><?= $slp['dper']." - ".$slp['aper']." ".$slp['nper']?></strong></BIG>
                                 <small>
                                     <div class="row">
@@ -219,8 +269,7 @@
                     <td style="text-align: left;">
                         <?php if ($slp['estprm'] == 2){
                             $fecini = date("Y-m-d", strtotime($slp['fecini'])); 
-                            if($slp['idvtprm']==73) $fecha = $hoy; 
-                            else $fecha = $mañana; 
+                            $fecha = $hoy;
                             if ($fecha<=$fecini) { 
                                 $mprm->setIdprm($slp['idprm']);
                                 $inf = $mprm->getOne();
@@ -228,14 +277,20 @@
                                 $fec = strtoupper($pfec[0].' de '.$pfec[2]);
                                 modalRecPrm("mcbrprm", $slp['idprm'], $slp['nper']." ".$slp['aper']." - ".$fec);    
                             ?>
-                                <a href="views/pdfprm.php?idprm=<?= $slp['idprm']; ?>&estprm=3" title="Aprobar" onclick="confirmar('¿Está seguro de aprobar este permiso?\n\n- <?= $slp['tprm'].'-'.$slp['nper'].' '.$slp['aper'] ?>', this.href); return false;">
+                                <a href="views/pdfprm.php?idprm=<?= $slp['idprm']; ?>&estprm=3&idrev=<?= $_SESSION['idper']; ?>" title="Aprobar" onclick="confirmar('¿Está seguro de aprobar este permiso?\n\n- <?= $slp['tprm'].'-'.$slp['nper'].' '.$slp['aper'] ?>', this.href); return false;">
                                     <i class="fa fa-solid fa-circle-check fa-2x act"></i>
                                 </a>
-                                <i class="fa fa-solid fa-circle-xmark fa-2x desact" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbrprm<?= $dta['idprm']; ?>" title="Rechazar"></i>
+                                <i class="fa fa-solid fa-circle-xmark fa-2x desact" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcbrprm<?= $slp['idprm']; ?>" title="Rechazar"></i>
                             <?php }else{ ?>
                                 <span style="font-size: 1px;opacity: 0;">5</span>
                                 <i class="fa fa-solid fa-circle-exclamation fa-2x iconi" title="Fuera de Tiempo"></i>
-                        <?php }} ?>
+                        <?php }} else if ($slp['estprm'] == 3) { ?>
+                            <span style="font-size: 1px;">3</span>
+                            <i class="fa fa-solid fa-circle-check fa-2x act" title="Aprobado"></i>
+                        <?php } else if ($slp['estprm'] == 4) { ?>
+                            <span style="font-size: 1px;">4</span>
+                            <i class="fa fa-solid fa-circle-xmark fa-2x desact" title="Rechazado"></i>
+                        <?php } ?>
                     </td>
                 </tr>
             <?php } ?>
@@ -248,6 +303,30 @@
         </tfoot>
     </table>
 <?php } ?>
+<div class="modal fade" id="grafprm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Permisos por Dpto.</strong></h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body" style="text-align: left;">
+                <figure class="highcharts-figure">
+                    <div id="container"></div>
+                    <div style="text-align: center;">
+                        <button class="btn btn-primary" id="plain">Vertical</button>
+                        <button class="btn btn-primary" id="inverted">Horizontal</button>
+                        <button class="btn btn-primary" id="polar">Polar</button>
+                    </div>
+                </figure>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary btnmd" data-bs-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <style>
     .custom-combobox1 {
         position: relative;
@@ -273,4 +352,214 @@
         border: 1px solid #ced4da;
         background-color: #fff;
     }
+    
+    /*----- CSS Información de la gráfica -----*/
+
+    #container {
+        height: 400px;
+    }
+
+    .highcharts-figure,
+    .highcharts-data-table table {
+        min-width: 320px;
+        max-width: 800px;
+        margin: 1em auto;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #ebebeb;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td,
+    .highcharts-data-table th,
+    .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr,
+    .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+
+    .imgmod{
+        max-width: 150px;
+    }
+
+    @media screen and (max-width: 600px){
+        
+        .imgmod{
+            max-width: 75px;
+        }
+
+    }
 </style>
+
+<!-- JS Funcionamiento de la gráfica -->
+<script type="text/javascript">
+    const chart = Highcharts.chart('container', {
+        lang: {
+            viewFullscreen: "Ver en pantalla completa",
+            printChart: "Imprimir",
+            downloadPNG: "Descarga imagen PNG",
+            downloadJPEG: "Descarga imagen JPEG",
+            downloadPDF: "Descarga documento PDF",
+            downloadSVG: "Descarga SVG",
+            downloadXLS: "Descarga XLS",
+            downloadCSV: "Descarga CSV",
+            viewData: "Ver tabla de datos",
+            exitFullscreen: "Salir de pantalla completa"
+        },
+
+        credits: {
+            enabled: false
+        },
+
+        title: {
+            text: 'Cantidad de solicitudes por departamento',
+            align: 'left'
+        },
+
+        colors: [
+            '#423f8c',
+            '#8237bc',
+            '#26b0bf',
+            '#a9bf04',
+            '#26b0bf',
+            '#8237bc',
+            '#423f8c'
+        ],
+
+        yAxis: {
+            title: {
+                text: 'Permisos',
+                style: {
+                    fontWeight: 'bold',
+                }
+            }
+        },
+
+        xAxis: {
+            title: {
+                text: 'Departamento',
+                style: {
+                    fontWeight: 'bold',
+                }
+            },
+            categories: [
+                <?php if ($datGra) { foreach ($datGra as $dtgn) { ?>
+                    '<?= $dtgn['dpto']; ?>',
+                <?php }} ?>
+            ]
+        },
+
+        series: [{
+            type: 'column',
+            name: 'Permisos',
+            borderRadius: 5,
+            colorByPoint: true,
+            data: [<?php if ($datGra) { foreach ($datGra as $dtgc) { ?>
+                    <?= $dtgc['cn']; ?>,
+                <?php }} ?>
+            ],
+            showInLegend: false
+        }]
+    });
+
+    document.getElementById('plain').addEventListener('click', () => {
+        chart.update({
+            chart: {
+                inverted: false,
+                polar: false
+            },
+
+            yAxis: {
+                title: {
+                    text: 'Permisos',
+                    style: {
+                        fontWeight: 'bold',
+                    }
+                }
+            },
+
+            xAxis: {
+                title: {
+                    text: 'Departamento',
+                    style: {
+                        fontWeight: 'bold',
+                    }
+                },
+            },
+
+        });
+    });
+
+    document.getElementById('inverted').addEventListener('click', () => {
+        chart.update({
+            chart: {
+                inverted: true,
+                polar: false
+            },
+
+            yAxis: {
+                title: {
+                    text: 'Permisos',
+                    style: {
+                        fontWeight: 'bold',
+                    }
+                }
+            },
+
+            xAxis: {
+                title: {
+                    text: 'Departamento',
+                    style: {
+                        fontWeight: 'bold',
+                    }
+                },
+            },
+
+        });
+    });
+
+    document.getElementById('polar').addEventListener('click', () => {
+        chart.update({
+            chart: {
+                inverted: false,
+                polar: true
+            },
+
+            yAxis: {
+                title: {
+                    text: ''
+                }
+            },
+
+            xAxis: {
+                title: {
+                    text: ''
+                },
+            },
+        });
+    });
+</script>

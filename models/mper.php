@@ -8,9 +8,16 @@ class Mper
     private $ndper;
     private $area;
     private $emaper;
-    private $pasper;
     private $actper;
     private $idval;
+    private $hash;
+    private $salt;
+    private $token;
+    private $feccam;
+
+
+    //------------Jefe-----------
+    private $idjef;
 
     //------------Perfil-----------
     private $idpef;
@@ -34,15 +41,30 @@ class Mper
     public function getEmaper(){
         return $this->emaper;
     }
-    public function getPasper(){
-        return $this->pasper;
-    }
     public function getActper(){
         return $this->actper;
     }
     public function getIdval(){
         return $this->idval;
     }
+    public function getHash(){
+        return $this->hash;
+    }
+    public function getSalt(){
+        return $this->salt;
+    }
+    public function getToken(){
+        return $this->token;
+    }
+    public function getFeccam(){
+        return $this->feccam;
+    }
+    
+    //------------Jefe-----------
+    public function getIdjef(){
+        return $this->idjef;
+    }
+
     //------------Perfil-----------
     public function getIdpef()
     {
@@ -67,15 +89,30 @@ class Mper
     public function setEmaper($emaper){
         $this->emaper = $emaper;
     }
-    public function setPasper($pasper){
-        $this->pasper = $pasper;
-    }
     public function setActper($actper){
         $this->actper = $actper;
     }
     public function setIdval($idval){
         $this->idval = $idval;
     }
+    public function setHash($hash){
+        $this->hash = $hash;
+    }
+    public function setSalt($salt){
+        $this->salt = $salt;
+    }
+    public function setToken($token){
+        $this->token = $token;
+    }
+    public function setFeccam($feccam){
+        $this->feccam = $feccam;
+    }
+
+    //------------Jefe-----------
+    public function setIdjef($idjef){
+        $this->idjef = $idjef;
+    }
+
     //------------Perfil-----------
     public function setIdpef($idpef)
     {
@@ -84,7 +121,7 @@ class Mper
     //------------Persona-----------
     function getAll()
     {
-        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.pasper, p.area, p.actper, pf.idpef, v.nomval FROM persona AS p INNER JOIN valor AS v ON p.area=v.idval LEFT JOIN perxpef AS pf ON p.idper=pf.idper";
+        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.area, p.actper, pf.idpef, v.nomval, pf.idpef FROM persona AS p INNER JOIN valor AS v ON p.area=v.idval LEFT JOIN perxpef AS pf ON p.idper=pf.idper";
         $sql .= " GROUP BY p.idper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
@@ -96,7 +133,7 @@ class Mper
 
     function getOne()
     {
-        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.pasper, p.area, p.actper, pf.idpef, v.nomval FROM persona AS p INNER JOIN valor AS v ON p.area=v.idval LEFT JOIN perxpef AS pf ON p.idper=pf.idper WHERE p.idper=:idper";
+        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.area, p.actper, pf.idpef, v.nomval, pf.idpef FROM persona AS p INNER JOIN valor AS v ON p.area=v.idval LEFT JOIN perxpef AS pf ON p.idper=pf.idper WHERE p.idper=:idper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -110,10 +147,14 @@ class Mper
     function save()
     {
         //try {
+            $hash = $this->getHash();
+            $salt = $this->getSalt();
             $sql = "INSERT INTO persona(nomper, apeper, ndper, area, emaper, actper";
-            if ($this->getPasper()) $sql .= ", pasper";
+            if ($hash) $sql .= ", hashl";
+            if ($salt) $sql .= ", salt";
             $sql .= ") VALUES (:nomper, :apeper, :ndper, :area, :emaper, :actper";
-            if ($this->getPasper()) $sql .= ", :pasper";
+            if ($hash) $sql .= ", hashl";
+            if ($salt) $sql .= ", salt";
             $sql .= ")";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
@@ -130,69 +171,8 @@ class Mper
             $result->bindParam(":emaper", $emaper);
             $actper = $this->getActper();
             $result->bindParam(":actper", $actper);
-            if ($this->getPasper()) {
-                $pasper = $this->getPasper();
-                $pasper = sha1($pasper);
-                $result->bindParam(":pasper", $pasper);
-            }
-            $result->execute();
-        // } catch (Exception $e) {
-        //     ManejoError($e);
-        // }
-    }
-
-    function savePerXls()
-    {
-        // try{
-            $sql = "INSERT INTO persona (nomper, apeper, ndper, emaper, area, actper, pasper) VALUES (:nomper, :apeper, :ndper, :emaper, :area, :actper, :pasper)";
-            $modelo = new conexion();
-            $conexion = $modelo->get_conexion();
-            $result = $conexion->prepare($sql);
-                $nomper = $this->getNomper();
-                $result->bindParam(":nomper", $nomper);
-                $apeper = $this->getApeper();
-                $result->bindParam(":apeper", $apeper);
-                $ndper = $this->getNdper();
-                $result->bindParam(":ndper", $ndper);
-                $emaper = $this->getEmaper();
-                $result->bindParam(":emaper", $emaper);
-                $area = $this->getArea();
-                $result->bindParam(":area", $area);
-                $actper = $this->getActper();
-                $result->bindParam(":actper", $actper);
-                $pasper = $this->getPasper();
-                $pasper = sha1($pasper);
-                $result->bindParam(":pasper", $pasper);
-                $result->execute();
-        // } catch (Exception $e) {
-        //     ManejoError($e);
-        // }
-    }
-
-    function EditPerXls()
-    {
-        // try{
-            $sql = "UPDATE persona SET nomper=:nomper, apeper=:apeper, ndper=:ndper, emaper=:emaper, area=:area,  actper=:actper, pasper=:pasper WHERE idper=:idper";
-            $modelo = new conexion();
-            $conexion = $modelo->get_conexion();
-            $result = $conexion->prepare($sql);
-                $idper = $this->getIdper();
-                $result->bindParam(":idper", $idper);
-                $nomper = $this->getNomper();
-                $result->bindParam(":nomper", $nomper);
-                $apeper = $this->getApeper();
-                $result->bindParam(":apeper", $apeper);
-                $ndper = $this->getNdper();
-                $result->bindParam(":ndper", $ndper);
-                $emaper = $this->getEmaper();
-                $result->bindParam(":emaper", $emaper);
-                $area = $this->getArea();
-                $result->bindParam(":area", $area);
-                $actper = $this->getActper();
-                $result->bindParam(":actper", $actper);
-                $pasper = $this->getPasper();
-                $pasper = sha1($pasper);
-                $result->bindParam(":pasper", $pasper);
+            if ($hash) $result->bindParam(":hashl", $hash);
+            if ($salt) $result->bindParam(":salt", $salt);
             $result->execute();
         // } catch (Exception $e) {
         //     ManejoError($e);
@@ -214,9 +194,7 @@ class Mper
 
     function edit(){
         try{
-            $sql = "UPDATE persona SET nomper=:nomper, apeper=:apeper, ndper=:ndper, area=:area, emaper=:emaper, actper=:actper";
-            if ($this->getPasper()) $sql .= ", pasper=:pasper";
-            $sql .= " WHERE idper=:idper";
+            $sql = "UPDATE persona SET nomper=:nomper, apeper=:apeper, ndper=:ndper, area=:area, emaper=:emaper, actper=:actper WHERE idper=:idper";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -234,13 +212,32 @@ class Mper
             $result->bindParam(":emaper", $emaper);
             $actper = $this->getActper();
             $result->bindParam(":actper", $actper);
-            if ($this->getPasper()) {
-                $pasper = $this->getPasper();
-                $pasper = sha1($pasper);
-                $result->bindParam(":pasper", $pasper);
-            }
             $result->execute();
         }catch (Exception $e) {
+            ManejoError($e);
+        }
+    }
+
+    function updpass(){
+        try {
+            $token = $this->getToken();
+            $sql = "UPDATE persona SET hashl=:hashl, salt=:salt, feccam=:feccam";
+            if ($token) $sql .= ", token=:token";
+            $sql .= " WHERE idper=:idper";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $idper = $this->getIdper();
+            $result->bindParam(":idper", $idper);
+            $hash = $this->getHash();
+            $result->bindParam(":hashl", $hash);
+            $salt = $this->getSalt();
+            $result->bindParam(":salt", $salt);
+            $feccam = $this->getFeccam();
+            $result->bindParam(":feccam", $feccam);
+            if ($token) $result->bindParam(":token", $token);
+            $result->execute();
+        } catch (Exception $e) {
             ManejoError($e);
         }
     }
@@ -356,6 +353,53 @@ class Mper
             ManejoError($e);
         }
     }
+
+    //------------Jefe-----------
+    function getOneJxP()
+    {
+        $sql = "SELECT idjef, tipjef FROM jefxper WHERE idper=:idper";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $idper = $this->getIdper();
+        $result->bindParam(":idper", $idper);
+        $result->execute();
+        $res = $result->fetchall(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
+    function saveJxP($tip)
+    {
+        //try{
+            $sql = "INSERT INTO jefxper (idper, idjef, tipjef) VALUES (:idper, :idjef, :tipjef)";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $idper = $this->getIdper();
+            $result->bindParam(":idper", $idper);
+            $idjef = $this->getIdjef();
+            $result->bindParam(":idjef", $idjef);
+            $result->bindParam(":tipjef", $tip);
+            $result->execute();
+        // } catch (Exception $e) {
+        //     ManejoError($e);
+        // }
+    }
+
+    function delJxP()
+    {
+        try{
+            $sql = "DELETE FROM jefxper WHERE idper=:idper";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $idper = $this->getIdper();
+            $result->bindParam(":idper", $idper);
+            $result->execute();
+        } catch (Exception $e) {
+            ManejoError($e);
+        }
+    }
     
 
      //------------Traer valores-----------
@@ -367,6 +411,17 @@ class Mper
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
         $result->bindParam(":iddom", $iddom);
+        $result->execute();
+        $res = $result->fetchall(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
+    function getPer()
+    {
+        $sql = "SELECT idper, nomper, apeper, ndper FROM persona WHERE actper=1";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
         $result->execute();
         $res = $result->fetchall(PDO::FETCH_ASSOC);
         return $res;
