@@ -300,10 +300,57 @@ class Malm
         //     ManejoError($e);
         // }
         }
+
+
+        function getAllPer($ope){
+
+            $sql = "SELECT DISTINCT idper, nomper, apeper, ndper FROM persona";
+            if(!$ope) $sql.= " WHERE actper=1";
+            $sql .= " ORDER BY apeper";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+         }
     
+    //Consultas para excel
+
+    //fechas de todos los almuerzos
+    function totalfec(){
+        $sql = "SELECT DISTINCT fecalm FROM almuerzo ORDER BY fecalm";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
     }
 
+    //total de personas que han hecho pedido
+    function totalper(){
+        $sql = "SELECT p.idper, CONCAT(l.nomper, ' ', l.apeper) AS nomper, l.ndper FROM pedido AS p INNER JOIN persona AS l ON p.idper = l.idper GROUP BY p.idper";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+    }
 
-    
+    //total pedidos x persona y fecha 
+    function pedxper($fecha){
+        $sql = "SELECT p.idper, CONCAT(l.nomper, ' ', l.apeper) AS nomper, l.ndper, MAX(CASE WHEN a.fecalm = :fec THEN p.canalm ELSE 'NO' END) AS fecha FROM almuerzo AS a INNER JOIN pedido AS p ON a.idalm = p.idalm INNER JOIN persona AS l ON p.idper = l.idper GROUP BY p.idper, l.nomper, l.apeper, l.ndper ORDER BY l.apeper";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->bindParam(":fec", $fecha);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+    }
+
+}
 ?>
     

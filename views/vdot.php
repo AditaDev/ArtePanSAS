@@ -34,8 +34,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
         </div>
         <div class="form-group col-md-12"></div>
         <br>
-        <div class="form-group col-md-2"><strong><u>Días</u></strong></div>
-        <div class="form-group col-md-2" style="text-align: left;"><strong><u>Colores</u></strong></div>
+        <div class="form-group col-md-4" style="text-align: center;"><strong><u>Horario de Camisa</u></strong></div>
         <div class="form-group col-md-4" style="text-align: left;" ><strong><u>Cantidad - Elementos</u></strong></div>
         <div class="form-group col-md-3" style="text-align: center;"><strong><u>Tallas</u></strong></div>
         <div class="form-group col-md-12"></div><br>

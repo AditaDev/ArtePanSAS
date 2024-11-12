@@ -79,7 +79,7 @@ CREATE TABLE `dotacion` (
   `ident` bigint(11) NOT NULL,
   `idperent` bigint(11) NOT NULL,
   `idperrec` bigint(11) NOT NULL,
-  `fecent` datetime DEFAULT NULL,
+  `fecent` date DEFAULT NULL,
   `observ` varchar(1000) DEFAULT NULL,
   `estent` bigint(11) NOT NULL,
   `firpent` varchar(255) DEFAULT NULL,
@@ -412,18 +412,19 @@ CREATE TABLE `persona` (
 -- Volcado de datos para la tabla `persona`
 --
 
-INSERT INTO `persona` (`idper`, `nomper`, `apeper`, `ndper`, `emaper`, `area`, `actper`, `hashl`, `salt`) VALUES
-(1, 'Nicole Adamarys ', 'Rodriguez Estevez','1071328321', 'rodriada24@gmail.com', 45, 1, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68');
--- (2, 'Luz Mery', '2dc193c588614bbb41e97826613ceab930129c79', 'agudeloluzmery@yahoo.com.co', NULL, 'Agudelo Romero', '20533039', 1, 45),
--- (3, 'David Alexander', '7624cbd77a187735ed5212c208a8d44a509dc985', 'davidalvarado0803@gmail.com', NULL, 'Alvarado Cardona', '1233509778', 1, 46),
--- (4, 'Diego Alberto', '550ebb4ca1e7e8261860662a3d488e2194c4217f', 'diegokatyandrade@gmail.com', NULL, 'Andrade', '93377712', 1, 47),
--- (5, 'Edson Arante', '238a57246f1250ff609a75dd447128141526e609', 'edsonballen.15@gmail.com', NULL, 'Ballen Rivera', '1022967621', 1, 46),
--- (6, 'Jenny Paola', '90bb5c55227c92e4fd6d14c2b7f9ee1d10f5c49e', 'jpaopulido@gmail.com', NULL, 'Barrera Pulido', '53050180', 1, 45),
--- (7, 'Edgar Fabian', '5d52fa3bfa3ca9f9fd54ca442f49ac0049664819', 'masterr4@hotmail.es', NULL, 'Bastidas Mariño', '79915984', 1, 45),
--- (8, 'Jorge Eduardo', '265b671a3e6500b5669cb893d80d2878b74fbc13', 'jebellog@hotmail.com', NULL, 'Bello', '11519701', 1, 45),
--- (9, 'Maria Rita', 'bce325c962b45fd3d67e9a3519ae3347605241a6', 'mari_beme6@hotmail.com', NULL, 'Bejarano', '41363619', 1, 45),
--- (10, ' Luz Antonia', '1a2bda55a67b7a02ae3a2bc656bccfc01524281f', 'Luz-antonia@hotmail.com', NULL, 'Blanco Maldonado', '41692666', 1, 47),
--- (11, 'Gladys Astrid', '2ae43cf71c61fba2541f765ff5506c03c1d55eb3', 'astridbravogiraldo8@gmail.com', NULL, 'Bravo Giraldo', '65731647', 1, 47),
+INSERT INTO `persona` (`idper`, `nomper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`, `area` , `hashl`, `salt`, `token`, `feccam`) VALUES
+(1, 'Nicole Adamarys ', 'rodriada24@gmail.com', null, 'Rodriguez Estevez','1071328321', 1,45,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+
+(2, 'Luz Mery', 'agudeloluzmery@yahoo.com.co', NULL,'Agudelo Romero' , '20533039', 1,45 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(3, 'David Alexander','davidalvarado0803@gmail.com', NULL, 'Alvarado Cardona', '1233509778' , 1,46 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(4, 'Diego Alberto', 'diegokatyandrade@gmail.com', NULL, 'Andrade', '93377712', 1, 47, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(5, 'Edson Arante', 'edsonballen.15@gmail.com', NULL, 'Ballen Rivera' , '1022967621', 1,46 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(6, 'Jenny Paola', 'jpaopulido@gmail.com', NULL, 'Barrera Pulido' , '53050180', 1,45 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(7, 'Edgar Fabian', 'masterr4@hotmail.es', NULL, 'Bastidas Mariño' , '79915984',  1,45 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(8, 'Jorge Eduardo', 'jebellog@hotmail.com', NULL, 'Bello', '11519701', 1,45 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(9, 'Maria Rita', 'mari_beme6@hotmail.com', NULL, 'Bejarano' , '41363619', 1,45 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(10, 'Luz Antonia', 'Luz-antonia@hotmail.com', NULL, 'Blanco Maldonado' , '41692666', 1,47 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(11, 'Gladys Astrid', 'astridbravogiraldo8@gmail.com', NULL, 'Bravo Giraldo' , '65731647', 1,47 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL);
 -- (12, 'Victor', '548ab4f8ed58f80fe6e61fba30821c05b170dc44', 'camachop589@gmail.com', NULL, 'Buitrago', '1023943022', 1, 46),
 -- (13, 'Rafael Eduardo', 'aa9930597c59ed54cb2ee1ca9556660ef5024eab', 'rbustos@artepan.com.co', NULL, 'Bustos Malagón', '11346490', 1, 46),
 -- (14, 'Ricardo', '35f2ecf85b73114a7ee2625b4c88dfee180ca3cd', 'ricardocabre3@hotmail.com', NULL, 'Cabrera Ducuara', '93117819', 1, 46),

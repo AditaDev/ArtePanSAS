@@ -112,7 +112,7 @@ foreach ($datos as $dato) {
 $styleArray = [
     'borders' => [
         'allBorders' => [
-            'borderStyle' => Border::BORDER_THIN,
+ 0<           'borderStyle' => Border::BORDER_THIN,
             'color' => ['argb' => '00000000'],
         ],
     ],

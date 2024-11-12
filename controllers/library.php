@@ -12,7 +12,7 @@ function titulo($ico, $tit, $mos, $pg)
 			$txt .= '<hr class="hrtitu">';
 		$txt .= '</div>';
 		
-		if ($mos == 1 && $pg!=62 and $pg!=63) {
+		if ($mos == 1  and $pg!=63) {
 			$txt .= '<div class="titaju" style="float: right; font-size: 20px">';
 			$txt .= '<style"text-align: right;">Registrar </class=style>';
 				$txt .= '<i class="fa-solid fa-circle-plus" id="mas" onclick="ocul(' . $mos . ',1);"></i>';
@@ -866,7 +866,7 @@ function arremp($dt)
 
 //------------Encriptar-----------
 function encripta($password) {
-    // Generar una sal aleatoria
+    // Generar una salt aleatoria
 	$salt = bin2hex(random_bytes(16));
     $iterations = 10000;
     $length = 32; 

@@ -9,7 +9,7 @@ if($username && $password){
 }
 
 function validar($usu,$pas){
-	$res = valdat($usu,$pas);
+	$res = valdat($usu);
 	$res = isset($res) ? $res:NULL;	
 	if($res){
 		if(verificar($pas, $res[0]['salt'], $res[0]['hashl'])){

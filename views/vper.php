@@ -39,7 +39,7 @@ require_once('controllers/cper.php');
         <?php if($_SESSION['idpef']!=3){ for($i=0; $i<=1; $i++){ ?>
             <div class="form-group col-md-4 ui-widget">
                 <label for="idjef"><strong>Jefe <?php if($i==0) echo "Inmediato"; else echo "Area";?></strong></label>
-                <select id="combobox<?=($i+1)?>" name="idjef[]" class="form-control form-select" <?php if($i==0) echo "required";?>>
+                <select id="combobox<?php ($i+1)?>" name="idjef[]" class="form-control form-select" <?php if($i==0) echo "required";?>>
                     <option value="0"></option>
                     <?php if ($datPer) { foreach ($datPer as $dpr) { ?>
                             <option value="<?= $dpr['idper']; ?>" <?php if ($datJxP){ foreach ($datJxP AS $dtj) { if($dpr['idper'] == $dtj['idjef'] && $dtj['tipjef'] == ($i+1)) echo " selected "; }}?>>

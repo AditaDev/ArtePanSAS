@@ -3,7 +3,7 @@
 require_once ("../models/seguridad.php");
 require_once ('../models/conexion.php');
 require_once ('../models/mdot.php');
-require_once ('../sendemail.php');
+require_once ('../controllers/sendemail.php');
 include("../models/datos.php");
 
 require ('../vendor/autoload.php');
@@ -320,7 +320,7 @@ if($ident){
     $a = ucfirst(strtolower($area));
 
     // //-------Contenido del correo--------
-    $template="../tempmail.html"; //Plantilla
+    $template="../views/mail.html"; //Plantilla
     $txt_mess = "";
     $txt_mess = "Adjunto a este correo se encuentra el acta de ";
     if($det['fecent'] && !$det['fecdev']) $txt_mess .= "entrega";
@@ -336,7 +336,7 @@ if($ident){
     $fir_mail = '<strong>'.$nomperm.'</strong><br>'.$a.' | '.$mail.'<br>Cra 34a 3 63, Puente Aranda <br>Bogotá D.C.<br>www.artepan.com.co';
 
     //-------Llama la función que crea y envía el correo--------
-    sendemail($ema, $psem, $maild, $nomperd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template);
+    sendemail($ema, $psem, $nom, $maild, $nomperd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template, "", "", "../");
 }
 
 ?>

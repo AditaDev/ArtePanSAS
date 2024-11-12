@@ -16,6 +16,55 @@ require_once('controllers/calm.php');
     </div> 
 
 
+    <?php if ($_SESSION['idpef'] == 7 OR $_SESSION['idpef'] == 1) { ?>
+    <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
+    <div class="row">
+        <div class="form-group col-md-6">
+
+                <label for="ppalm"><strong>Persona:</strong></label>
+                <select id="combobox1" name="idperrec" class="form-control form-select" <?php if ($datOne) echo 'disabled'; else echo 'required';?>>
+                    <option value="0"></option>
+                    <?php if ($datPer) {
+                        foreach ($datPer as $dep) { ?>
+                            <option value='<?= $dep['idper']; ?>' <?php if ($datOne && $dep['idper'] == $datOne[0]['idper']) echo " selected "; ?>>
+                                <?= $dep['ndper'] . " - " . $dep['nomper'] . "  " . $dep['apeper']; ?>
+                            </option>
+                    <?php }
+                    } ?>
+                </select>
+                </div>
+            <div class="form-group col-md-6">
+                <label for="spalm"><strong>Cantidad:</strong></label>
+                <input type="number" value="<?php if ($datOne) echo $datOne[0]['canalm']; ?>"  min="1" max="2" placeholder="   #" required>
+            </div>
+          
+        
+            <div class="form-group col-md-6">
+                <label for="jgalm"><strong>Tipo almuerzo:</strong></label>
+                <select name="tipalm" id="tipalm" class="form-control form-select" required>
+                            <option value="1" <?php if ($datOne && $datOne[0]['tipalm'] == 1) echo " selected "; ?>>Almuerzo completo</option>
+                            <option value="2" <?php if ($datOne && $datOne[0]['tipalm'] == 2) echo " selected "; ?>>Seco</option>
+                            <option value="3" <?php if ($datOne && $datOne[0]['tipalm'] == 3) echo " selected "; ?>>Sopa</option>  
+                        </select>
+            </div>
+          
+            <div class="form-group col-md-6">
+            <label for="obser"><strong>Observación:</strong></label>
+            <textarea class="form-control" type="text" id="obser" name="observ" <?php if ($datOne) echo 'required'; ?>><?php if ($datOne) echo $datOne[0]['obser']; ?></textarea>
+        </div>
+    </div>
+    <div class="form-group col-md-12" id="boxbtn">
+        <br><br>
+        <input class="btn btn-primary" type="submit" value="Pedir">
+        <input type="hidden" name="idalm" value="<?= $dta['idalm'] ?>">
+        <input type="hidden" name="idped" value="<?php if ($datOne) echo $datOne[0]['idped']; ?>">
+        <input type="hidden" name="ope" value="savePed">
+
+    </div> 
+</form> 
+<?php } ?>
+
+
 
     <?php if ($datPed){ ?>
 
@@ -127,6 +176,34 @@ require_once('controllers/calm.php');
         flex-direction: column;
         flex-wrap: nowrap;
         justify-content: center;
+    }
+
+    .custom-combobox1,
+    .custom-combobox2-input {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .custom-combobox1-toggle,
+    .custom-combobox2-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+    }
+
+    .custom-combobox1-input,
+    .custom-combobox2-input {
+        margin: 0;
+        padding: 5px 10px;
+        width: 100%;
+        text-align: left;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        background-color: #fff;
     }
     </style>
 

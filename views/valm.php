@@ -7,6 +7,25 @@
         </a>
     </div>
 
+
+    <?php if ($datfec) {
+        foreach ($datfec as $dat) { 
+            echo $dat['fecalm'], "<br>"; 
+            $datos = $malm->pedxper($dat['fecalm']);
+            if ($datos) {
+                foreach ($datos as $dt) {
+                    echo $dt['nomper'], "______".$dt['fecha'], "<br>";
+            }}
+            echo "<br>";
+    }} ?>
+
+        
+    <?php if ($datper) {
+        foreach ($datper as $dat) { ?> 
+             <?= $dat['nomper']; ?> 
+             <?php }} ?>
+
+
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
     <div class="row">
         <div class="form-group col-md-4">
@@ -73,7 +92,6 @@
                             <div class="form-group col-md-8">
                             <form action="home.php?pg=<?= $pg; ?>" method="POST" id="valnet">                        
                                 <div class="col-12">
-                                <?php if ($datOne)  { ?> 
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">$</span>
@@ -86,7 +104,7 @@
                                 <input type="hidden" name="ope" value="vfactura">
                                 <input type="hidden" name="idalm" value="<?=$dta['idalm']; ?>">
                             </form>
-                            <?php } ?>  
+                           
 
                             <div class="form-group col-md-2">
                             <strong><?= $dta['vfac']; ?> </strong><br>
@@ -117,7 +135,3 @@
         </tr>
     </tfoot>
 </table>
-<style>
-
- 
-</style>

@@ -18,10 +18,9 @@ $canalm = isset($_POST['canalm']) ? $_POST['canalm']:1;
 $tipalm = isset($_POST['tipalm']) ? $_POST['tipalm']:1;
 $obser = isset($_POST['obser']) ? $_POST['obser']:1;
 $fecped = date("Y-m-d H:i:s");
-$idper = isset($_REQUEST['idper$idper']) ? $_REQUEST['idper$idper'] :NULL;
+$idper = isset($_REQUEST['idper']) ? $_REQUEST['idper'] :$_SESSION['idper'];
 
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
-
 
 $datOne = NULL;
 
@@ -58,7 +57,7 @@ if($ope=="savePed"){
     $malm->setCanalm($canalm);
     $malm->setTipalm($tipalm);
     $malm->setObser($obser);
-    $malm->setIdper($_SESSION['idper']);
+    $malm->setIdper($idper);
     $malm->savePed(); 
     echo "<script>alert('Has pedido ".$canalm." almuerzo(s) exitosamente!!!');window.location='home.php?pg=".$pg."';</script>";
 }
@@ -69,12 +68,22 @@ if ($ope == "edifac" && $idalm) $datOne = $malm->valfac($idalm);
 if ($ope == "eli" && $idalm) $malm->del();
 
 $datAll = $malm->getAll();
+$datPer = $malm->getAllPer($ope);
 $datOneAlmF = $malm->getOneAlmF();
 $datAllPed = $malm->getOnePed();
-
-
 $datMod = $malm->getInfoAll();
-
 $datpper = $malm->getAllDatPed();
+
+
+//excel
+$datfec = $malm->totalfec();
+$datper = $malm->totalper();
+// $dattot = $malm->pedxper();
+
+// $fechas = [];
+
+// foreach ($datfec as $fecha) {
+//     $fechas[] = "MAX(CASE WHEN a.fecalm = '{$fecha['fecalm']}' THEN 'X' ELSE '-' END) AS `{$fecha['fecalm']}`";
+// }
 
 ?>

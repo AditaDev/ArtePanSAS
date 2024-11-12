@@ -2,7 +2,7 @@
     require_once("models/mper.php");
     require ('vendor/autoload.php');
     include("models/datos.php");
-    // require ('controllers/sendemail.php');
+    require ('controllers/sendemail.php');
 
     use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -36,22 +36,22 @@
 
 
     //------------Correo-----------
-    // $nombre = nombre($apeper." ".$nomper);
-    // $template = "views/mail.html";
-    // $mail_asun = "¡Bienvenido a nuestra app!";
-    // $txt_mess = "Es un placer darle la bienvenida a nuestra nueva aplicación. A continuación, le proporcionamos sus credenciales de acceso:<br><br>
-    // <strong>Usuario: </strong>".$ndper.(($emaper) ? "/".$emaper : "")."<br>
-    // <strong>Contraseña: </strong>".$pass."<br><br>
-    // Le solicitamos que, al iniciar sesión por primera vez, cambie su contraseña para garantizar la seguridad de su cuenta.<br><br>
-    // Para acceder a la aplicación, ingrese en el siguiente enlace: <a href='".$url."'>App Galqui</a><br><br>
-    // Si tiene alguna pregunta o requiere asistencia, no dude en ponerse en contacto con nosotros.<br><br>
-    // Agradecemos su confianza y esperamos que disfrute de la nueva experiencia.<br><br>";
-    // $fir_mail = '<strong>'.$nom.'</strong><br>Cra 1 Nº 4 - 02 Bdg 2 Parque Industrial K2<br>Chía - Cund<br>www.galqui.com';
+    $nombre = nombre($apeper." ".$nomper);
+    $template = "views/mail.html";
+    $mail_asun = "¡Bienvenido a nuestra app!";
+    $txt_mess = "Es un placer darle la bienvenida a nuestra nueva aplicación. A continuación, le proporcionamos sus credenciales de acceso:<br><br>
+    <strong>Usuario: </strong>".$ndper.(($emaper) ? "/".$emaper : "")."<br>
+    <strong>Contraseña: </strong>".$pass."<br><br>
+    Le solicitamos que, al iniciar sesión por primera vez, cambie su contraseña para garantizar la seguridad de su cuenta.<br><br>
+    Para acceder a la aplicación, ingrese en el siguiente enlace: <a href='".$url."'>App Galqui</a><br><br>
+    Si tiene alguna pregunta o requiere asistencia, no dude en ponerse en contacto con nosotros.<br><br>
+    Agradecemos su confianza y esperamos que disfrute de la nueva experiencia.<br><br>";
+    $fir_mail = '<strong>'.$nom.'</strong><br>Cra 1 Nº 4 - 02 Bdg 2 Parque Industrial K2<br>Chía - Cund<br>www.galqui.com';
 
     $mper->setIdper($idper);
     //------------Persona-----------
     if($ope=="save"){
-        $mper->setNomper($nomper);
+        $mper->setNomper($nomper); 
         $mper->setApeper($apeper);
         $mper->setEmaper($emaper);
         $mper->setNdper($ndper);

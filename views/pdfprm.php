@@ -65,8 +65,8 @@ if($idprm && ($comest[0]['estprm']!=3 || $comest[0]['estprm']!=4)){
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>GALQUI SAS</title>
-        <link rel="icon" href="../img/logo.png">
+        <title>ARTEPAN SAS</title>
+        <link rel="icon" href="../img/logoartepan_sinfondo.png">
         <style>
             table{
                 width: 100%;
@@ -263,7 +263,7 @@ if($idprm && ($comest[0]['estprm']!=3 || $comest[0]['estprm']!=4)){
         $mail_asun = "Solicitud Permiso ".$nompp." - ".$fec;
         $link = $url."views/pdfprm.php?idprm=".$idprm."&estprm=3&idrev=".$det['ijef'];
         $txt_mess = "";
-        $txt_mess = "Te informamos que ".$nompp." está solicitando un permiso para el ".$fec.(($det['tprm']!=48) ? " por motivos de ".$det['tprm'] : "").".<br><br>
+        $txt_mess = "Te informamos que ".$nompp." está solicitando un permiso para el ".$fec.(($det['tprm']!=38) ? " por motivos de ".$det['tprm'] : "").".<br><br>
         Adjunto a este correo se encuentra el formato debidamente diligenciado.<br><br>
         En los siguientes enlaces podrá aceptar o rechazar la solicitud respectivamente";
         

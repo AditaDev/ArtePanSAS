@@ -4,13 +4,23 @@
     $user = "root";
     $pass = "";
 
-    $ema = "rodriada24@gmail.com";
-	$psem = "iifx fywg drwn jnjf";
 
+    $nom = "Talento Humano";
+    $ema = "sgsstartepan@gmail.com";
+	$psem = "krhc gqti kvhd bzlp";
 
+    // $nom = "Talento Humano";
     // $ema = "sgsstartepan@gmail.com";
 	// $psem = "krhc gqti kvhd bzlp";
 
-    $url = "http:/localhost/artepansas/";
+    $nomrh = "Dpto. Recursos Humanos";
+    $rrhh = "rodriada24@gmail.com";
+
+    $nomadm = "Adamarys Rodriguez1";
+    $diradm = "rodriada24@gmail.com";
+
+   
+
+    $url = "http://localhost/artepansas/";
 
 ?>
