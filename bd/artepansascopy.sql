@@ -4,6 +4,12 @@ USE artepansas;
 
 
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `almuerzo`
+--
+
 CREATE TABLE `almuerzo` (
   `idalm` bigint(11) NOT NULL,
   `ppalm` varchar(70) NOT NULL,
@@ -13,17 +19,21 @@ CREATE TABLE `almuerzo` (
   `vfac` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+CREATE TABLE `pedido` (
+  `idped` bigint(11) NOT NULL,
+  `idalm` bigint(11) NOT NULL,
+  `idper` bigint(11) NOT NULL,
+  `fecped` datetime DEFAULT NULL,
+  `canalm` tinyint(1) NOT NULL DEFAULT 1,
+  `tipalm` bigint(11) NOT NULL,
+  `obser` varchar(70) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 -- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `ccxent`
---
 
-CREATE TABLE `ccxent` (
-  `ident` bigint(11) NOT NULL,
-  `idvdia` bigint(11) NOT NULL,
-  `idvcol` bigint(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -82,17 +92,24 @@ CREATE TABLE `dotacion` (
   `rutpdf` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `dotxent`
---
 
 CREATE TABLE `dotxent` (
   `ident` bigint(11) NOT NULL,
   `idvdot` bigint(11) NOT NULL,
   `idvtal` bigint(11) NOT NULL,
   `cant` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+--
+-- Estructura de tabla para la tabla `ccxent`
+--
+
+CREATE TABLE `ccxent` (
+  `ident` bigint(11) NOT NULL,
+  `idvdia` bigint(11) NOT NULL,
+  `idvcol` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -130,30 +147,6 @@ CREATE TABLE `factura` (
   `numbod` int(5) DEFAULT NULL,
   `vneto` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `jefxper`
---
-
-CREATE TABLE `jefxper` (
-  `idjef` bigint(11) DEFAULT NULL,
-  `idper` bigint(11) DEFAULT NULL,
-  `tipjef` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `jefxper`
---
-
-INSERT INTO `jefxper` (`idjef`, `idper`, `tipjef`) VALUES
-(1, 1, 1),
-(1, 1, 2),
-(1, 2, 1),
-(1, 2, 2),
-(1, 3, 1),
-(1, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -296,15 +289,35 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 -- Estructura de tabla para la tabla `pedido`
 --
 
-CREATE TABLE `pedido` (
-  `idped` bigint(11) NOT NULL,
-  `idalm` bigint(11) NOT NULL,
+
+
+CREATE TABLE `permiso` (
+  `idprm` bigint(11) NOT NULL,
+  `noprm` bigint(11) DEFAULT NULL,
+  `fecini` datetime DEFAULT NULL,
+  `fecfin` datetime DEFAULT NULL,
+  `idjef` bigint(11) NOT NULL,
+  `idvtprm` bigint(11) NOT NULL,
+  `sptrut` varchar(255) DEFAULT NULL,
+  `desprm` varchar(250) DEFAULT NULL,
+  `obsprm` varchar(250) DEFAULT NULL,
+  `estprm` tinyint(1) DEFAULT NULL,
   `idper` bigint(11) NOT NULL,
-  `fecped` datetime DEFAULT NULL,
-  `canalm` tinyint(1) NOT NULL DEFAULT 1,
-  `tipalm` bigint(11) NOT NULL,
-  `obser` varchar(70) DEFAULT NULL
+  `fecsol` date DEFAULT NULL,
+  `fecrev` date DEFAULT NULL,
+  `idrev` bigint(11) DEFAULT NULL,
+  `rutpdf` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `jefxper` (
+  `idjef` bigint(11) DEFAULT NULL,
+  `idper` bigint(11) DEFAULT NULL,
+  `tipjef` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `jefxper`(`idjef`, `idper`, `tipjef`) VALUES (1,1,1), (1,1,2);
 
 -- --------------------------------------------------------
 
@@ -342,6 +355,8 @@ INSERT INTO `pefxmod` (`idmod`, `idpef`, `idpag`) VALUES
 (4, 7, 110),
 (4, 5, 112);
 
+
+
 -- --------------------------------------------------------
 
 --
@@ -375,38 +390,6 @@ INSERT INTO `perfil` (`idpef`, `nompef`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `permiso`
---
-
-CREATE TABLE `permiso` (
-  `idprm` bigint(11) NOT NULL,
-  `noprm` bigint(11) DEFAULT NULL,
-  `fecini` datetime DEFAULT NULL,
-  `fecfin` datetime DEFAULT NULL,
-  `idjef` bigint(11) NOT NULL,
-  `idvtprm` bigint(11) NOT NULL,
-  `sptrut` varchar(255) DEFAULT NULL,
-  `desprm` varchar(250) DEFAULT NULL,
-  `obsprm` varchar(250) DEFAULT NULL,
-  `estprm` tinyint(1) DEFAULT NULL,
-  `idper` bigint(11) NOT NULL,
-  `fecsol` date DEFAULT NULL,
-  `fecrev` date DEFAULT NULL,
-  `idrev` bigint(11) DEFAULT NULL,
-  `rutpdf` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `permiso`
---
-
-INSERT INTO `permiso` (`idprm`, `noprm`, `fecini`, `fecfin`, `idjef`, `idvtprm`, `sptrut`, `desprm`, `obsprm`, `estprm`, `idper`, `fecsol`, `fecrev`, `idrev`, `rutpdf`) VALUES
-(1, NULL, '2024-11-08 08:30:00', '2024-11-08 17:30:00', 1, 32, 'arc/permisos/Rodriguez Estevez Nicole Adamarys _1071328321/soportes/sop_Cita medica2024-11-08.pdf', 'hsrfdhsfhdshfshsf', NULL, 1, 1, NULL, NULL, NULL, NULL),
-(2, 1, '2024-11-14 08:30:00', '2024-11-14 17:30:00', 1, 32, 'arc/permisos/Rodriguez Estevez Nicole Adamarys _1071328321/soportes/sop_Cita medica2024-11-14.pdf', 'eewgewghrwh', NULL, 3, 1, '2024-11-13', '2024-11-13', 1, 'arc/permisos/Rodriguez Estevez Nicole Adamarys _1071328321/Cita medica_2024-11-14.pdf');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `persona`
 --
 
@@ -419,9 +402,9 @@ CREATE TABLE `persona` (
   `ndper` varchar(12) NOT NULL,
   `actper` tinyint(1) DEFAULT 1,
   `area` bigint(11) NOT NULL,
-  `hashl` tinytext DEFAULT NULL,
-  `salt` tinytext DEFAULT NULL,
-  `token` tinytext DEFAULT NULL,
+  `hashl` text(50) DEFAULT NULL,
+  `salt` text(50) DEFAULT NULL,
+  `token` text(50) DEFAULT NULL,
   `feccam` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -429,18 +412,77 @@ CREATE TABLE `persona` (
 -- Volcado de datos para la tabla `persona`
 --
 
-INSERT INTO `persona` (`idper`, `nomper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`, `area`, `hashl`, `salt`, `token`, `feccam`) VALUES
-(1, 'Nicole Adamarys ', 'rodriada24@gmail.com', NULL, 'Rodriguez Estevez', '1071328321', 1, 45, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(2, 'Germán Alfonso', 'gap@artepan.com.co', NULL, 'Párraga a Gutiérrez', '20533039', 1, 45, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(3, 'Amylee Andrea', 'amy.gavilan12@gmail.com', NULL, 'Gavilán Niño', '1233509778', 1, 46, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+INSERT INTO `persona` (`idper`, `nomper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`, `area` , `hashl`, `salt`, `token`, `feccam`) VALUES
+(1, 'Nicole Adamarys ', 'rodriada24@gmail.com', null, 'Rodriguez Estevez','1071328321', 1,45,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+
+(2, 'Luz Mery', 'agudeloluzmery@yahoo.com.co', NULL,'Agudelo Romero' , '20533039', 1,45 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(3, 'David Alexander','davidalvarado0803@gmail.com', NULL, 'Alvarado Cardona', '1233509778' , 1,46 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
 (4, 'Diego Alberto', 'diegokatyandrade@gmail.com', NULL, 'Andrade', '93377712', 1, 47, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(5, 'Edson Arante', 'edsonballen.15@gmail.com', NULL, 'Ballen Rivera', '1022967621', 1, 46, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(6, 'Jenny Paola', 'jpaopulido@gmail.com', NULL, 'Barrera Pulido', '53050180', 1, 45, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(7, 'Edgar Fabian', 'masterr4@hotmail.es', NULL, 'Bastidas Mariño', '79915984', 1, 45, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(8, 'Jorge Eduardo', 'jebellog@hotmail.com', NULL, 'Bello', '11519701', 1, 45, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(9, 'Maria Rita', 'mari_beme6@hotmail.com', NULL, 'Bejarano', '41363619', 1, 45, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(10, 'Luz Antonia', 'Luz-antonia@hotmail.com', NULL, 'Blanco Maldonado', '41692666', 1, 47, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(11, 'Gladys Astrid', 'astridbravogiraldo8@gmail.com', NULL, 'Bravo Giraldo', '65731647', 1, 47, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL);
+(5, 'Edson Arante', 'edsonballen.15@gmail.com', NULL, 'Ballen Rivera' , '1022967621', 1,46 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(6, 'Jenny Paola', 'jpaopulido@gmail.com', NULL, 'Barrera Pulido' , '53050180', 1,45 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(7, 'Edgar Fabian', 'masterr4@hotmail.es', NULL, 'Bastidas Mariño' , '79915984',  1,45 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(8, 'Jorge Eduardo', 'jebellog@hotmail.com', NULL, 'Bello', '11519701', 1,45 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(9, 'Maria Rita', 'mari_beme6@hotmail.com', NULL, 'Bejarano' , '41363619', 1,45 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(10, 'Luz Antonia', 'Luz-antonia@hotmail.com', NULL, 'Blanco Maldonado' , '41692666', 1,47 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
+(11, 'Gladys Astrid', 'astridbravogiraldo8@gmail.com', NULL, 'Bravo Giraldo' , '65731647', 1,47 ,  '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL);
+-- (12, 'Victor', '548ab4f8ed58f80fe6e61fba30821c05b170dc44', 'camachop589@gmail.com', NULL, 'Buitrago', '1023943022', 1, 46),
+-- (13, 'Rafael Eduardo', 'aa9930597c59ed54cb2ee1ca9556660ef5024eab', 'rbustos@artepan.com.co', NULL, 'Bustos Malagón', '11346490', 1, 46),
+-- (14, 'Ricardo', '35f2ecf85b73114a7ee2625b4c88dfee180ca3cd', 'ricardocabre3@hotmail.com', NULL, 'Cabrera Ducuara', '93117819', 1, 46),
+-- (15, 'Brandon Antonio', 'bdc72aa5710a82f36a35e3c272b5923005e76790', 'calderonbrandon0411@gmail.com', NULL, 'Calderón Pinzon', '1001175984', 1, 45),
+-- (16, 'Martha Doris', '5b8d2a864dd941213e3aa257771e77173f4a897b', 'Mdcmonita@hotmail.com', NULL, 'Castaño', '52305522', 1, 47),
+-- (17, 'Ronald', 'a04e77bbfc1e983478990384be6c0d30151b78cb', 'ronaldcas041220@gmail.com', NULL, 'Castañeda Peña', '79733403', 1, 46),
+-- (18, 'Walther Oswaldo', '8ec687a5052bc8d19d79a3b08a84a1608b17f0b4', 'walthcruz1886@gmail.com', NULL, 'Cruz Rodriguez', '1024505932', 1, 46),
+-- (19, 'Sandra Rocio', '8649889a345c6b98ee40f9869dab3d607519c22c', 'sandradiazv@gmail.com', NULL, 'Diaz Valbuena', '52089423', 1, 45),
+-- (20, 'Hernán Bernardo', 'e69fdae7200efa9703e19805995a9e476eb95500', 'hernanduranb52@yahoo.com', NULL, 'Durán Baron', '19166998', 1, 46),
+-- (21, 'Claudia Bibiana', '15341f259801f248790f63954217a6a5c8591f23', 'claudiadurannhuergo@gmail.com', NULL, 'Durán huergo', '40780475', 1, 47),
+-- (22, 'Ivan', 'a06c4b323c4453572b0615671c77c6aae8413733', 'ivanvergara0976@gmail.com', NULL, 'Escobar Vergara', '79729150', 1, 46),
+-- (23, 'Alvaro Fernando', 'f35d8f7e30b99b2e9f368164ecda2f9ae328adb4', 'ferespejo69@hotmail.com', NULL, 'Espejo Beltran', '79498889', 1, 47),
+-- (24, 'Yolanda', '3187c188b6c4e37719cba209020110a0af15c295', 'yolanda.fonseca.artepan@gmail.com', NULL, 'Fonseca Martinez', '41786746', 1, 47),
+-- (25, 'Jaime Alexander', 'cb724eb0d7c66d76474165374a6830f774005038', 'pitero125@gmail.com', NULL, 'Forero Useche', '1031138935', 1, 46),
+-- (26, 'Carlos Hernando', 'a9f245f71f40e5bc42c8e70b96f6222262475f19', 'chgaravitov@hotmail.com', NULL, 'Garavito Velázquez', '80424994', 1, 47),
+-- (27, 'Amylee Andrea', 'c830712d4f3b017cb6803d21d813b22dbcc750cb', 'amy.gavilan12@gmail.com', NULL, 'Gavilán Niño', '1031125822', 1, 45),
+-- (28, 'Jefferson', 'd8c0b21ed80421d7c19a7208e6fe4da76faf159a', 'jegold2120@hotmail.com', NULL, 'González Usme', '1013683528', 1, 46),
+-- (29, 'Albadan Yilmer', 'c71fd0eebf603c103399c133e3382d40bc40e42a', 'yilmerguerrero@yahoo.es', NULL, 'Guerrero', '79731631', 1, 46),
+-- (30, 'William', '637f09ce67f2e15507be110cc49ff1bb17f11030', 'Williams061@hotmail.com', NULL, 'Guerrero Gomez', '79320979', 1, 47),
+-- (31, 'Luz Yeny', 'ec8138832520225ed3fe338a7290bcf2d71b378e', 'luzyeny8@gmail.com', NULL, 'Guerrero Moreno', '53118633', 1, 47),
+-- (32, 'Blanca Nelsy', '7cddc1bb0d62a2c0509908f2c946416c5d41dc4d', 'blancajimenez49@hotmail.com', NULL, 'Jiménez Castro', '41456223', 1, 47),
+-- (33, 'Jenny yisell', 'f93b0f33e3c0e7215b9f85c54dcaed0cb6e23848', 'ronalfabijim@hotmail.com', NULL, 'Jiménez Godoy', '52879265', 1, 47),
+-- (34, 'Oscar Javier', 'e8fb02df657490acea802341edf8ffbed8e311da', 'Ooscarjimenez0@gmail.com', NULL, 'Jimenez grazon', '1026270180', 1, 46),
+-- (35, 'Miguel Angel', 'dffe7f3040a2e075d926187078785d909a94dc81', 'angeldavilleren01a@gmail.com', NULL, 'Llerena Castro', '1044928400', 1, 46),
+-- (36, 'Jairo', '68e77bb6064fc196442902481c95d90a52150d37', 'martinezcorzojairo3@gmail.com', NULL, 'Martinez Corzo', '19483662', 1, 46),
+-- (37, 'Jader Hasmeth', '5e138b27e909b588709c3dc6774857a7ccfe7eee', 'jadermen14@gmail.com', NULL, 'Mendoza Maza', '1001913358', 1, 46),
+-- (38, 'Miguel Angel', 'afa192e4e55e423516590f10835abc9d150e9cd7', 'mk1218mendoza@gmail.com', NULL, 'Mendoza Maza', '1001911952', 1, 46),
+-- (39, 'Adriana', '4ea2fd893bf03e470ceb74ea0f7baea56aafe3cd', 'amontano@artepan.com.co', NULL, 'Montaño Bejarano', '52263295', 1, 45),
+-- (40, 'Camilo Andrés', '4e7a5f5dfaeb5e160cf482c764305a4add402688', 'camilomontano02@gmail.com', NULL, 'Montaño Rodríguez', '1193139757', 1, 46),
+-- (41, 'Sandra Milena', 'da926dfe6de9873e377a764f8ba9f0aecb4929de', 'smontenegro@artepan.com.co', NULL, 'Montenegro', '52130059', 1, 47),
+-- (42, 'Juan Sebastian', '4f61307024e951bf661fa20a188820fb6c189b77', 'jmoreno400@misena.edu.co', NULL, 'Moreno Garzon', '1030666431', 1, 45),
+-- (43, 'Ana Cecilia', '4f3a1e6cc48f615356ca3ea5b2c8a1c9b42fd66d', 'anaceciliasm11@gmail.com', NULL, 'Moreno Suarez', '51988759', 1, 45),
+-- (44, 'Alvaro', '0248e4c2e5f8c2902ebd921b05e04f5a1dc7d7f2', 'alvaromoreraw123@gmail.com', NULL, 'Morera Rodriguez', '19073145', 1, 46),
+-- (45, 'Yenny Astrid', 'e0854fe9cb9c8bf0a06c76f433252d454e1c355c', 'yenny.astridm@gmail.com', NULL, 'Morera Rugeles', '52470161', 1, 47),
+-- (46, 'Yined Milandy', 'fa2c11047ca9212539caa2271f61c0adf5fb7dd3', 'Yined.pacacira@gmail.com', NULL, 'Pacacira Guio', '1056802041', 1, 45),
+-- (47, 'Juan Manuel', 'ce9bd93febc3ddfe04f7f32c98401656338cf735', 'jumapal2@hotmail.com', NULL, 'Palacios Chaves', '79135140', 1, 45),
+-- (48, 'Jairo Ancizar', 'd2c7a6a03b3d808639079463e279e3efd458235e', 'jairopardoasesorias@hotmail.com', NULL, 'Pardo Diaz', '17120780', 1, 45),
+-- (49, 'Juan Jairo', 'ac6fed2889c5a52538276334b41677c3bb2b2241', 'jjpardo@artepan.com.co', NULL, 'Pardo Rodríguez', '1069712627', 1, 45),
+-- (50, 'Germán Alfonso', 'e79fa2f06772118c1682e2e3e98f83d71ef0f6da', 'gap@artepan.com.co', NULL, 'Párraga a Gutiérrez', '1032365342', 1, 45),
+-- (51, 'Alba', '94346ff445dd8fd0f7e4c225e8ab8fe4e6b59977', 'albaparrag@gmail.com', NULL, 'Parraga', '1024478347', 1, 45),
+-- (52, 'Marisol', 'c638add91a4654c89733df3edd2da691da2d2c40', 'shamarysu@gmail.com', NULL, 'Pedraza', '52349796', 1, 47),
+-- (53, 'Pablo', 'ab3da323a997cc76923488e52241d7ee8c32dab3', 'Pabloalfonsopenagospastran@hmail.com', NULL, 'Penagos Pastran', '79917272', 1, 46),
+-- (54, 'Alfonso', '9b5b185253cc1b6e82f63708fc37faf3d70c5142', 'HJKHJGK', NULL, 'Penagos Suares', '19238591', 1, 46),
+-- (55, 'Luis Dario', '630c16e6468d539f2f1b87211fca698c57b29d26', 'dariopena.2703@gmail.com', NULL, 'Peña Charry', '80274540', 1, 46),
+-- (56, 'Maria Concepcion', '350843f5a95dc298236853650613b0b8239993e6', 'cperez@artepan.com.co', NULL, 'Perez Nepta', '41504804', 1, 45),
+-- (57, 'Victor Manuel', 'bbac55ecfdb43f589d24df348d9cad4970bd6b89', 'victortransportevmp@gmail.com', NULL, 'Pinzon', '79640480', 1, 46),
+-- (58, 'Nickson Fabián', 'e4cc10ef038de7bfa93ce0f7a0b77ff0d5552f1e', 'agerencia@artepan.com.co', NULL, 'Quiroga Lopez', '1020771962', 1, 45),
+-- (59, 'Jhon Jairo', '4f367d11e69d9c3fc1cdd382ab170d1db5435692', 'jhonjramirez45@gmail.com', NULL, 'Ramírez González', '75067802', 1, 46),
+-- (60, 'Kevin Andrés', '6d64fba1b4cb31f524c3a3157c08cbe7337db928', 'keviinramirez62@gmail.com', NULL, 'Ramírez Isaza', '1073715535', 1, 46),
+-- (61, 'Gustavo', '6f37174c887902bdac659c3ad17491b91fb8a38a', 'JHKYUJK', NULL, 'Ramírez Valencia ', '10078656', 1, 46),
+-- (62, 'Walter Stiven', '6742682fdad01a59a17f631d88b41db81139ddd3', 'wsrr1013@gmail.com', NULL, 'Rodriguez Rodriguez', '1013678254', 1, 46),
+-- (63, 'Óscar Eduardo', '4b47dcfd141ce019b493f92b374b1cbe1458eb6d', 'osrodriguez76@hotmail.com', NULL, 'Rodríguez Soche', '79212499', 1, 46),
+-- (64, 'Alejandro', '8230d9a0e0f8fe3cdcc3c6cbe4d7e5bfde251340', 'alrogehernandez@outlook.com', NULL, 'Rogelis Hernandez', '1192738328', 1, 46),
+-- (65, 'Brandon Jahir', '3c5af3f1d44c1c79f442cdde2c2f3728cffd7a70', 'brandonjahirsandoval@gmail.com', NULL, 'Sandoval Moreno', '1233509090', 1, 46),
+-- (66, 'Nelly Johana', '44d09936c21775af717c0a60ebe1ea6e9f8aafe6', 'johanita242009@gmail.com', NULL, 'Sandoval Moreno', '1030658669', 1, 45),
+-- (67, 'Gladys Milena', 'b4ccfd8159fd725a128a0ccaa826b15042ea8fd8', 'milenatovar@gmail.com', NULL, 'Tovar Murillo', '52217915', 1, 47),
+-- (68, 'Angel Roberto', '554e45046c0d0ed48e0bef63b8d79ef331ba0b62', 'atrilleras@artepan.com.co', NULL, 'Trilleras Viscaya', '7684074', 1, 45),
+-- (69, 'Alex Armando', '84082da34468b72e26f0455d321a3ee29bc3c6ef', 'valenciaalexarmando@gmail.com', NULL, 'Valencia Rincon', '79532961', 1, 46);
 
 -- --------------------------------------------------------
 
@@ -463,6 +505,89 @@ INSERT INTO `perxpef` (`idper`, `idpef`) VALUES
 (1, 7),
 (2, 5),
 (3, 5);
+-- (2, 5),
+-- (2, 11),
+-- (3, 5),
+-- (4, 5),
+-- (5, 5),
+-- (6, 5),
+-- (6, 7),
+-- (7, 5),
+-- (7, 9),
+-- (8, 3),
+-- (8, 5),
+-- (9, 2),
+-- (9, 5),
+-- (10, 5),
+-- (11, 5),
+-- (12, 5),
+-- (13, 5),
+-- (14, 5),
+-- (15, 5),
+-- (16, 5),
+-- (17, 5),
+-- (18, 5),
+-- (19, 5),
+-- (20, 5),
+-- (21, 5),
+-- (22, 5),
+-- (23, 5),
+-- (24, 5),
+-- (25, 5),
+-- (26, 5),
+-- (27, 4),
+-- (27, 5),
+-- (28, 5),
+-- (29, 5),
+-- (30, 5),
+-- (31, 5),
+-- (32, 5),
+-- (33, 5),
+-- (34, 5),
+-- (35, 5),
+-- (36, 5),
+-- (37, 10),
+-- (37, 5),
+-- (38, 5),
+-- (39, 3),
+-- (39, 5),
+-- (40, 5),
+-- (41, 5),
+-- (42, 5),
+-- (43, 6),
+-- (44, 5),
+-- (45, 5),
+-- (46, 4),
+-- (46, 5),
+-- (47, 5),
+-- (48, 5),
+-- (49, 5),
+-- (49, 12),
+-- (50, 3),
+-- (50, 5),
+-- (51, 4),
+-- (51, 5),
+-- (52, 5),
+-- (53, 5),
+-- (54, 5),
+-- (55, 5),
+-- (56, 5),
+-- (56, 13),
+-- (57, 5),
+-- (58, 5),
+-- (58, 8),
+-- (59, 5),
+-- (60, 5),
+-- (61, 5),
+-- (62, 5),
+-- (63, 5),
+-- (64, 5),
+-- (65, 5),
+-- (66, 5),
+-- (66, 7),
+-- (67, 5),
+-- (68, 5),
+-- (69, 5);
 
 -- --------------------------------------------------------
 
@@ -1019,6 +1144,7 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (28, 'Jugo', 3, 303, 1),
 (29, 'Ensalada', 3, 304, 1),
 (30, 'Postre', 3, 305, 1),
+
 (31, 'Calamidad domestica', 4, 401, 1),
 (32, 'Cita medica', 4, 402, 1),
 (33, 'Licencia Maternidad/paternidad', 15, 403, 1),
@@ -1027,12 +1153,15 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (36, 'Dia Cumpleaños', 4, 406, 1),
 (37, 'Vacaciones', 15, 407, 1),
 (38, 'Otro', 4, 408, 1),
+
 (39, 'Llegada tarde', 15, 1501, 1),
 (40, 'Censantias', 15, 1502, 1),
 (41, 'Prestamos', 15, 1503, 1),
 (42, 'Renuncia', 15, 1504, 1),
 (43, 'Incapacidad Arl', 15, 1505, 1),
-(44, 'Incapacidad Eps', 15, 1506, 1),
+(44, 'Incapacidad Eps', 15, 1506, 1), 
+
+
 (45, 'Directivos', 5, 501, 1),
 (46, 'Logistica', 5, 502, 1),
 (47, 'Ventas', 5, 503, 1),
@@ -1093,8 +1222,10 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (102, 'Artepan', 14, 1401, 1),
 (103, 'PMP', 14, 1402, 1),
 (104, 'Del llano', 14, 1403, 1),
+
 (105, 'Ingreso', 15, 1507, 1),
 (106, 'Liquidación vacaciones', 15, 1508, 1);
+
 
 --
 -- Índices para tablas volcadas
@@ -1131,6 +1262,18 @@ ALTER TABLE `dotacion`
   ADD KEY `idperrecd` (`idperrecd`),
   ADD KEY `estent` (`estent`);
 
+ALTER TABLE `permiso`
+  ADD PRIMARY KEY (`idprm`),
+  ADD KEY `idjef` (`idjef`),
+  ADD KEY `idvtprm` (`idvtprm`),
+  ADD KEY `idper` (`idper`);
+
+
+ALTER TABLE `jefxper`
+  ADD KEY `idper` (`idper`),
+  ADD KEY `idjef` (`idjef`);
+
+
 --
 -- Indices de la tabla `dotxent`
 --
@@ -1155,13 +1298,6 @@ ALTER TABLE `factura`
   ADD KEY `idperent` (`idperent`),
   ADD KEY `idperpag` (`idperpag`),
   ADD KEY `idpernov` (`idpernov`);
-
---
--- Indices de la tabla `jefxper`
---
-ALTER TABLE `jefxper`
-  ADD KEY `idper` (`idper`),
-  ADD KEY `idjef` (`idjef`);
 
 --
 -- Indices de la tabla `modulo`
@@ -1217,15 +1353,6 @@ ALTER TABLE `perfil`
   ADD PRIMARY KEY (`idpef`);
 
 --
--- Indices de la tabla `permiso`
---
-ALTER TABLE `permiso`
-  ADD PRIMARY KEY (`idprm`),
-  ADD KEY `idjef` (`idjef`),
-  ADD KEY `idvtprm` (`idvtprm`),
-  ADD KEY `idper` (`idper`);
-
---
 -- Indices de la tabla `persona`
 --
 ALTER TABLE `persona`
@@ -1265,14 +1392,20 @@ ALTER TABLE `almuerzo`
 --
 -- AUTO_INCREMENT de la tabla `dominio`
 --
+
+
 ALTER TABLE `dominio`
-  MODIFY `iddom` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `iddom` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `dotacion`
 --
 ALTER TABLE `dotacion`
   MODIFY `ident` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+
+ALTER TABLE `permiso`
+  MODIFY `idprm` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -1296,7 +1429,7 @@ ALTER TABLE `novedad`
 -- AUTO_INCREMENT de la tabla `pagina`
 --
 ALTER TABLE `pagina`
-  MODIFY `idpag` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `idpag` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
@@ -1311,12 +1444,6 @@ ALTER TABLE `perfil`
   MODIFY `idpef` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de la tabla `permiso`
---
-ALTER TABLE `permiso`
-  MODIFY `idprm` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
@@ -1326,13 +1453,13 @@ ALTER TABLE `persona`
 -- AUTO_INCREMENT de la tabla `provedores`
 --
 ALTER TABLE `provedores`
-  MODIFY `idemp` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=487;
+  MODIFY `idemp` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=486;
 
 --
 -- AUTO_INCREMENT de la tabla `valor`
 --
 ALTER TABLE `valor`
-  MODIFY `idval` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `idval` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- Restricciones para tablas volcadas
@@ -1353,6 +1480,17 @@ ALTER TABLE `dotacion`
   ADD CONSTRAINT `dotacion_ibfk_3` FOREIGN KEY (`idperentd`) REFERENCES `persona` (`idper`),
   ADD CONSTRAINT `dotacion_ibfk_4` FOREIGN KEY (`idperrecd`) REFERENCES `persona` (`idper`);
 
+
+ALTER TABLE `permiso`
+  ADD CONSTRAINT `permiso_ibfk_1` FOREIGN KEY (`idjef`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `permiso_ibfk_2` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`);
+
+
+
+ALTER TABLE `jefxper`
+  ADD CONSTRAINT `jefxper_ibfk_1` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `jefxper_ibfk_2` FOREIGN KEY (`idjef`) REFERENCES `persona` (`idper`); 
+
 --
 -- Filtros para la tabla `dotxent`
 --
@@ -1370,13 +1508,6 @@ ALTER TABLE `factura`
   ADD CONSTRAINT `factura_ibfk_5` FOREIGN KEY (`idperent`) REFERENCES `persona` (`idper`),
   ADD CONSTRAINT `factura_ibfk_6` FOREIGN KEY (`idperpag`) REFERENCES `persona` (`idper`),
   ADD CONSTRAINT `factura_ibfk_7` FOREIGN KEY (`idpernov`) REFERENCES `persona` (`idper`);
-
---
--- Filtros para la tabla `jefxper`
---
-ALTER TABLE `jefxper`
-  ADD CONSTRAINT `jefxper_ibfk_1` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`),
-  ADD CONSTRAINT `jefxper_ibfk_2` FOREIGN KEY (`idjef`) REFERENCES `persona` (`idper`);
 
 --
 -- Filtros para la tabla `novedad`
@@ -1412,13 +1543,6 @@ ALTER TABLE `pedido`
 ALTER TABLE `pefxmod`
   ADD CONSTRAINT `pefxmod_ibfk_1` FOREIGN KEY (`idmod`) REFERENCES `modulo` (`idmod`),
   ADD CONSTRAINT `pefxmod_ibfk_2` FOREIGN KEY (`idpef`) REFERENCES `perfil` (`idpef`);
-
---
--- Filtros para la tabla `permiso`
---
-ALTER TABLE `permiso`
-  ADD CONSTRAINT `permiso_ibfk_1` FOREIGN KEY (`idjef`) REFERENCES `persona` (`idper`),
-  ADD CONSTRAINT `permiso_ibfk_2` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`);
 
 --
 -- Filtros para la tabla `perxpef`

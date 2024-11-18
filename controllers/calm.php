@@ -16,7 +16,7 @@ $fecalm = date("Y-m-d H:i:s");
 $idped = isset($_REQUEST['idped']) ? $_REQUEST['idped'] :NULL;
 $canalm = isset($_POST['canalm']) ? $_POST['canalm']:1;
 $tipalm = isset($_POST['tipalm']) ? $_POST['tipalm']:1;
-$obser = isset($_POST['obser']) ? $_POST['obser']:1;
+$obser = isset($_POST['obser']) ? $_POST['obser']:NULL;
 $fecped = date("Y-m-d H:i:s");
 $idper = isset($_REQUEST['idper']) ? $_REQUEST['idper'] :$_SESSION['idper'];
 

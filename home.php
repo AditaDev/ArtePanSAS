@@ -77,7 +77,9 @@ include("models/seguridad.php");
 		<?php
 		$mos = 0;
 		$est = 0;
-		$rut = validar($pg);
+		$rut = validarpg($pg);
+
+		
 		if ($rut) {
 			$mos = $rut[0]['mospag'];
 			if ($ope == "edi") $est = 1;

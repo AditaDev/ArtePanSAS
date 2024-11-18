@@ -8,7 +8,7 @@
     </div>
 
 
-    <?php if ($datfec) {
+    <!-- <?php if ($datfec) {
         foreach ($datfec as $dat) { 
             echo $dat['fecalm'], "<br>"; 
             $datos = $malm->pedxper($dat['fecalm']);
@@ -22,8 +22,8 @@
         
     <?php if ($datper) {
         foreach ($datper as $dat) { ?> 
-             <?= $dat['nomper']; ?> 
-             <?php }} ?>
+             <?= $dat['nomper']; ?>  
+             <?php }} ?> -->
 
 
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">

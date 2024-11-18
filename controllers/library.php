@@ -598,17 +598,26 @@ function modalnper($nom, $id, $titulo, $info){
 function modalnpedper($nom, $id, $titulo, $info){
 	$txt = '';
 	$txt .= '<div class="modal fade" id="' . $nom . $id . '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">';
-		$txt .= '<div class="modal-dialog modal-lg">';
+		$txt .= '<div class="modal-dialog">';
 			$txt .= '<div class="modal-content">';
 				$txt .= '<div class="modal-header">';
 					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$titulo.'</strong></h1>';
 					$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
 				$txt .= '</div>';
-				$txt .= '<div class="modal-body row" style="margin: 0px 25px;">';				
+				$txt .= '<div class="modal-body row" style="margin: 0px 25px;">';	
+				$txt .= '<div class="form-group col-md-12" style="text-align: left;"> <strong>Fechas </strong></div>';			
 				if($info){ foreach($info AS $if){
-					$txt .= '<div class="form-group col-md-3" style="text-align: left;">'.$if['nomper'].'</div>';
-					
-					$txt .= '<div class="form-group col-md-3" style="text-align: center;">'.$if['canalm'].'</div>';
+					if($if['tipalm'] == 1) {
+						$alm = "Almuerzo completo";
+					} elseif ($if['tipalm'] == 2) {
+						$alm = "Seco";
+					} elseif ($if['tipalm'] == 3) {
+						$alm = "Sopa";
+					}else{
+						$alm = "";
+					}
+					// $txt .= '<div class="form-group col-md-2" style="text-align: left;">'.$if['nomper'].'</div>';
+					$txt .= '<div class="form-group col-md-12" style="text-align: left;"><strong>~ </strong>' . $if['fecped'] . ' / ' . $alm . '  (' . $if['canalm'] . ')</div>';
 			}}
 				$txt .= '</div>';
 				$txt .= '<div class="modal-footer">';

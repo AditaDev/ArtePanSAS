@@ -84,13 +84,15 @@ require_once('controllers/cper.php');
         </tr>
     </thead>
     <tbody>
-        <?php if ($datAll) { foreach ($datAll as $dta) { ?>
+        <?php if ($datAll) {
+            foreach ($datAll as $dta) { ?>
             <tr>
                 <td>
                     <BIG><strong> <?= $dta['ndper']; ?> - <?= $dta['nomper']; ?> <?= $dta['apeper']; ?></strong></BIG>
                     <small>
                         <div class="row">
                             <?php
+                            $mper->setIdper($dta['idper']);
                             $jef = $mper->getOneJxP();
                             $dtj = NULL;
                             if($jef && $jef[0]['tipjef']==1){
@@ -98,12 +100,13 @@ require_once('controllers/cper.php');
                                 $dtj = $mper->getOne();
                             }if ($dta['emaper']) { ?>
                                 <div class="form-group col-md-8">
-                                    <strong>Email: </strong> <?= $dta['emaper']; }?>
+                                    <strong>Email: </strong> <?= $dta['emaper']; ?>
                                 </div> 
+                            <?php } if ($dta['area']) { ?>
                                 <div class="form-group col-md-4">
-                                <strong>Area: </strong> <?= $dta['nomval']; ?>
+                                    <strong>Area: </strong> <?= $dta['nomval']; ?>
                                 </div> 
-                                <?php } if ($dtj) { ?>
+                            <?php } if ($dtj) { ?>
                                     <div class="form-group col-md-12">
                                         <strong>Jefe: </strong> <?= explode(' ', $dtj[0]['nomper'])[0] . " " . explode(' ', $dtj[0]['apeper'])[0]; ?>
                                     </div>
@@ -111,7 +114,7 @@ require_once('controllers/cper.php');
                         </div>
                     </small>
                 </td>
-                <?php if ($_SESSION['idpef'] != 3) { ?>
+                <?php if ($_SESSION['idpef'] = 3) { ?>
                     <td style="text-align: left;">
                         <?php if ($dta['actper'] == 1) { ?>
                             <span style="font-size: 1px;opacity: 0;">+</span>
@@ -129,9 +132,7 @@ require_once('controllers/cper.php');
                 <a href="home.php?pg=<?= $pg; ?>&idper=<?= $dta['idper']; ?>&ope=edi" title="Editar">
                         <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
                     </a>
-                    <?php if ($_SESSION['idpef'] != 3) { ?>
-                        <i class="fa fa-solid fa-id-card-clip fa-2x iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcb<?= $dta['idper']; ?>" title="Asignar perfil"></i>
-                        <?php
+                    <?php if ($_SESSION['idpef'] != 3) { 
                         $mper->setIdper($dta['idper']);
                         $i = $mper->getOne();
                         $dga = $mper->getOnePxF();
@@ -140,25 +141,28 @@ require_once('controllers/cper.php');
                         modalCmb("mcb", $dta['idper'], $dta['nomper']." ".$dta['apeper'], $pef, $dga, $pg);
                         modalCamPass("contra", $info['idper'], $info['nomper'] . " " . $info['apeper']);
                         ?>
+                        <i class="fa fa-solid fa-id-card-clip fa-2x iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mcb<?= $dta['idper']; ?>" title="Asignar perfil"></i>
                         <i class="fa fa-solid fa-key fa-2x iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contra<?= $info['idper']; ?>" title="Cambiar Contraseña"></i>
+
                             <a href="home.php?pg=<?= $pg; ?>&idper=<?= $dta['idper']; ?>&ope=eli" onclick="return eliminar('<?= $dta['nomper'].' '.$dta['apeper']; ?>');" title="Eliminar">
                                 <i class="fa fa-solid fa-trash-can fa-2x iconi"></i>
                             </a>
-                    <?php }} ?>
-                </td>
-            </tr>
-    </tbody>
+                    <?php } ?>
+        </td>
+    </tr>
+    <?php }} ?>
+</tbody>
     <tfoot>
         <tr>
             <th>Datos personales</th>
-            <?php if ($pg == 102) { ?>
+            <?php if ($_SESSION['idpef'] != 3) { ?>
                 <th>Estado</th>
+            <?php } ?>
             <th></th>
         </tr>
     </tfoot>
 </table>
 
-<?php } ?>
 <div class="modal fade" id="pass<?=$_SESSION['idper']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<form action="controllers/colv.php" method="POST">

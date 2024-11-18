@@ -48,7 +48,7 @@
     </header>
     <section class="cont">
         <?php
-            if ($pg == 101 or !$pg) include('views/ses.php');
+            if (!$pg) include('views/ses.php');
             else echo "<script>window.location.href = '404.php';</script>";
         ?>
     </section>

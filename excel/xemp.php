@@ -1,8 +1,11 @@
 <?php
 require_once ("../models/seguridad.php");
 require_once ('../models/conexion.php');
-require_once ('../models/memp.php');
 require ('../vendor/autoload.php');
+
+ob_start();
+require_once ('../models/memp.php');
+ob_end_clean();
 
 ini_set('memory_limit', '4096M');
 
@@ -42,7 +45,7 @@ $style->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('B8CC
 $sheet->setCellValue('A2', 'DATOS DE PROVEDORES');
 $sheet->mergeCells('A2:D2');
 
-$style = $sheet->getStyle('A2:C2');
+$style = $sheet->getStyle('A2:D2');
 $style->getFont()->setBold(true)->setSize(18);
 $style->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('B7DEE8');
 
@@ -58,25 +61,25 @@ $style->getFont()->setBold(true);
 //información
 $datos = [];
 
+
 if ($datAll) {
     foreach ($datAll as $dat) {
-        if($dat['tipemp']==1) $filaDatos = ["NIT"];
-        elseif($dat['tipemp']==2) $filaDatos = ["CC"];
+        $filaDatos = [];
+        if ($dat['tipemp'] == 1) $filaDatos[] = "NIT";
+        elseif ($dat['tipemp'] == 2) $filaDatos[] = "CC";
         $filaDatos = array_merge($filaDatos,[$dat['nitemp'], $dat['razsoem']]);
-        if($dat['actemp']==1) $filaDatos = ["Activa"]; //si el valor de actemp es 1 agrega Activa a $filadatos
-        elseif($dat['actemp']==2) $filaDatos = ["Inactiva"]; //si el valor de actemp es 2 agrega Inactiva a $filadatos
+        if ($dat['actemp'] == 1) $filaDatos[] = "Activa";
+        elseif ($dat['actemp'] == 2) $filaDatos[] = "Inactiva";
         $datos[] = $filaDatos;
-        // $filaDatos = [valor]; Es cuando se agrega de a uno
-        // $filaDatos = array_merge($filaDatos,[valor1, valor2, ...]); 
-        // $filadatos = a la union de($filadatos(los valores que tenia) ("," con)[valor1, valor2, ...])
     }
 }
+
     
 // Agregar datos dinámicos
 $fila = 4; // Comienza en la fila 3 porque la fila 1 y 2 tiene encabezados
 foreach ($datos as $dato) {
     $sheet->fromArray($dato, NULL, 'A' . $fila);
-    $sheet->getStyle('B'.$fila.':C'.$fila)->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_NUMBER);
+    $sheet->getStyle('B'.$fila.':D'.$fila)->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_NUMBER);
     $fila++;
 }
 
