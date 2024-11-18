@@ -103,7 +103,6 @@ class Malm
 //--------Almuerzo-------
     function getAll(){ 
         $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm, vfac FROM almuerzo";
-        // $sql = "SELECT a.idalm, a.fecalm, a.ppalm, a.spalm, a.jgalm, p.idalm, p.idped FROM almuerzo AS a INNER JOIN pedido AS p ON a.idalm=p.idalm";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -326,6 +325,7 @@ class Malm
             $res = $result->fetchall(PDO::FETCH_ASSOC);
             return $res;
     }
+
     //total de personas que han hecho pedido
     function totalper(){
         $sql = "SELECT p.idper, CONCAT(l.nomper, ' ', l.apeper) AS nomper, l.ndper FROM pedido AS p INNER JOIN persona AS l ON p.idper = l.idper GROUP BY p.idper";
@@ -336,19 +336,10 @@ class Malm
             $res = $result->fetchall(PDO::FETCH_ASSOC);
             return $res;
     }
-    //total pedidos x persona y fecha 
-    function pedxper($fecha){
-        $sql = "SELECT p.idper, CONCAT(l.nomper, ' ', l.apeper) AS nomper, l.ndper, MAX(CASE WHEN a.fecalm = :fec THEN p.canalm ELSE 'NO' END) AS fecha FROM almuerzo AS a INNER JOIN pedido AS p ON a.idalm = p.idalm INNER JOIN persona AS l ON p.idper = l.idper GROUP BY p.idper, l.nomper, l.apeper, l.ndper ORDER BY l.apeper";
-            $modelo = new conexion();
-            $conexion = $modelo->get_conexion();
-            $result = $conexion->prepare($sql);
-            $result->bindParam(":fec", $fecha);
-            $result->execute();
-            $res = $result->fetchall(PDO::FETCH_ASSOC);
-            return $res;
-    }
+
+    //modal pedidos por cada persona
     function modper(){
-    $sql = "SELECT p.idped, a.idalm, p.fecped, p.idper, p.canalm, p.tipalm, p.obser, CONCAT(l.nomper, ' ', l.apeper) AS nomper, l.ndper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm = a.idalm INNER JOIN persona AS l ON p.idper = l.idper WHERE p.idper=:idper";
+        $sql = "SELECT p.idped, a.idalm, p.fecped, p.idper, p.canalm, p.tipalm, p.obser, CONCAT(l.nomper, ' ', l.apeper) AS nomper, l.ndper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm = a.idalm INNER JOIN persona AS l ON p.idper = l.idper WHERE p.idper=:idper";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $result = $conexion->prepare($sql);
@@ -358,6 +349,17 @@ class Malm
             $res = $result->fetchall(PDO::FETCH_ASSOC);
             return $res;
             }
+
+    function getAllPxF($idper){
+        $sql = "SELECT p.idped, a.idalm, a.fecalm, p.fecped, p.idper, p.canalm, CONCAT(l.nomper,' ',l.apeper) AS nomper, l.ndper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm INNER JOIN persona AS l ON p.idper=l.idper WHERE p.idper=:idper ORDER BY p.fecped";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $result->bindParam(":idper", $idper);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+        }
 }
 ?>
     

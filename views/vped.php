@@ -68,7 +68,7 @@ require_once('controllers/calm.php');
 
 
 
-    <?php if ($datPed){ ?>
+    <?php if ($datAllPed){ ?>
         <div class="orden">
                     <div class="texto-animado">
                     <span>G</span><span>E</span><span>N</span><span>I</span><span>A</span><span>L</span><span>,</span><span>Y</span><span>A</span>&nbsp;<span>H</span><span>I</span><span>C</span><span>I</span><span>S</span><span>T</span><span>E</span>&nbsp;<span>T</span><span>U</span>&nbsp;<span>P</span><span>E</span><span>D</span><span>I</span><span>D</span><span>O</span>

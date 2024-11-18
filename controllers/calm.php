@@ -27,8 +27,6 @@ $datOne = NULL;
 $malm->setIdalm($idalm);
 $malm->setIdped($idped);
 
-$datPed = $malm->getOnePed();
-
 if ($ope == "eli" && $idped){ 
     $malm->delped();
 echo "<script>window.location='home.php?pg=".$pg."';</script>";
@@ -74,16 +72,9 @@ $datAllPed = $malm->getOnePed();
 $datMod = $malm->getInfoAll();
 $datpper = $malm->getAllDatPed();
 
-
 //excel
 $datfec = $malm->totalfec();
 $datper = $malm->totalper();
-// $dattot = $malm->pedxper();
 
-// $fechas = [];
-
-// foreach ($datfec as $fecha) {
-//     $fechas[] = "MAX(CASE WHEN a.fecalm = '{$fecha['fecalm']}' THEN 'X' ELSE '-' END) AS `{$fecha['fecalm']}`";
-// }
 
 ?>

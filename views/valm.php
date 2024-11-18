@@ -8,24 +8,6 @@
     </div>
 
 
-    <!-- <?php if ($datfec) {
-        foreach ($datfec as $dat) { 
-            echo $dat['fecalm'], "<br>"; 
-            $datos = $malm->pedxper($dat['fecalm']);
-            if ($datos) {
-                foreach ($datos as $dt) {
-                    echo $dt['nomper'], "______".$dt['fecha'], "<br>";
-            }}
-            echo "<br>";
-    }} ?>
-
-        
-    <?php if ($datper) {
-        foreach ($datper as $dat) { ?> 
-             <?= $dat['nomper']; ?>  
-             <?php }} ?> -->
-
-
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
     <div class="row">
         <div class="form-group col-md-4">

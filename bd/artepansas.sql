@@ -9,7 +9,7 @@ CREATE TABLE `almuerzo` (
   `ppalm` varchar(70) NOT NULL,
   `spalm` varchar(70) NOT NULL,
   `jgalm` varchar(70) NOT NULL,
-  `fecalm` date DEFAULT NULL,
+  `fecalm` datetime DEFAULT NULL,
   `vfac` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
