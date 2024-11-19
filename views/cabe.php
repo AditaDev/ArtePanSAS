@@ -8,7 +8,7 @@
 			<div class="imgnomper">
 				<a href="" style="display: grid; grid-template-columns: max-content max-content; color: #073663;">
 					<div class="headernom">
-						<?= $_SESSION["nomper"] . " " . $_SESSION["apeper"]; ?>
+						<?php echo (function($name) { return explode(" ", $name)[0]; })($_SESSION["nomper"]) . " " . (function($surname) { return explode(" ", $surname)[0]; })($_SESSION["apeper"]);?>
 						<br>
 						<small><small><?= $_SESSION["nompef"]; ?></small></small>
 					</div>

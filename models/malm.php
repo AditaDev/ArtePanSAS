@@ -190,7 +190,7 @@ class Malm
 
 
     function getInfoAll(){ 
-        $sql = "SELECT p.idped, l.idper, p.idalm, p.fecped, CONCAT(l.nomper,' ',l.apeper) AS nomper FROM pedido AS p INNER JOIN persona AS l ON p.idper=l.idper WHERE l.idper=:idper";
+        $sql = "SELECT p.idped, p.idalm, p.fecped, p.idper, p.canalm, p.tipalm, p.obser, CONCAT(l.nomper, ' ', l.apeper) AS nomper, l.ndper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm = a.idalm INNER JOIN persona AS l ON p.idper = l.idper WHERE p.idper=:idper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -337,18 +337,18 @@ class Malm
             return $res;
     }
 
-    //modal pedidos por cada persona
-    function modper(){
-        $sql = "SELECT p.idped, a.idalm, p.fecped, p.idper, p.canalm, p.tipalm, p.obser, CONCAT(l.nomper, ' ', l.apeper) AS nomper, l.ndper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm = a.idalm INNER JOIN persona AS l ON p.idper = l.idper WHERE p.idper=:idper";
-            $modelo = new conexion();
-            $conexion = $modelo->get_conexion();
-            $result = $conexion->prepare($sql);
-            $idper = $this->getIdper();
-            $result->bindParam(":idper", $idper);
-            $result->execute();
-            $res = $result->fetchall(PDO::FETCH_ASSOC);
-            return $res;
-            }
+    // //modal pedidos por cada persona
+    // function modper(){
+    //     $sql = "SELECT p.idped, a.idalm, p.fecped, p.idper, p.canalm, p.tipalm, p.obser, CONCAT(l.nomper, ' ', l.apeper) AS nomper, l.ndper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm = a.idalm INNER JOIN persona AS l ON p.idper = l.idper WHERE p.idper=:idper";
+    //         $modelo = new conexion();
+    //         $conexion = $modelo->get_conexion();
+    //         $result = $conexion->prepare($sql);
+    //         $idper = $this->getIdper();
+    //         $result->bindParam(":idper", $idper);
+    //         $result->execute();
+    //         $res = $result->fetchall(PDO::FETCH_ASSOC);
+    //         return $res;
+    //         }
 
     function getAllPxF($idper){
         $sql = "SELECT p.idped, a.idalm, a.fecalm, p.fecped, p.idper, p.canalm, CONCAT(l.nomper,' ',l.apeper) AS nomper, l.ndper FROM pedido AS p INNER JOIN almuerzo AS a ON p.idalm=a.idalm INNER JOIN persona AS l ON p.idper=l.idper WHERE p.idper=:idper ORDER BY p.fecped";

@@ -1,4 +1,4 @@
-d<?php
+<?php
 // require_once("models/mper.php");
 
 //------------Titulos-----------
@@ -600,7 +600,7 @@ function modalnpedper($nom, $id, $titulo, $info){
 	$txt .= '<div class="modal fade" id="' . $nom . $id . '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">';
 		$txt .= '<div class="modal-dialog">';
 			$txt .= '<div class="modal-content">';
-				$txt .= '<div class="modal-header">';
+				$txt .= '<div class="modal-header" style="text-align: left">';
 					$txt .= '<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>'.$titulo.'</strong></h1>';
 					$txt .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
 				$txt .= '</div>';

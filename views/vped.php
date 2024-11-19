@@ -4,16 +4,13 @@ require_once('controllers/calm.php');
 
 
     <div style="text-align: right;">
-    <?php if ($datMod) {
-            foreach ($datMod as $dta) { ?>
-        <i class="fa-solid fa-list-check fa-2x" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mnpp<?= $dta['idper']; ?>" title="PEDIDOS"></i>
-
-        <?php
-        $malm->setIdper($dta['idper']);
-        $info = $malm->modper();
-        modalnpedper("mnpp", $dta['idper'], "PEDIDOS - ". $dta['nomper'],  $info);?>
-        <?php }
-        } ?> 
+    <?php 
+        $malm->setIdper($_SESSION['idper']);
+        $info = $malm->getInfoAll();
+        if ($info) {
+            modalnpedper("mnpp", $_SESSION['idper'], "PEDIDOS - ". $info[0]['nomper'],  $info);?>
+            <i class="fa-solid fa-list-check fa-2x" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mnpp<?= $_SESSION['idper']; ?>" title="PEDIDOS"></i>
+        <?php } ?> 
     </div> 
 
 
