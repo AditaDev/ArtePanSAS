@@ -1,6 +1,48 @@
 <?php
  require_once ('controllers/calm.php'); ?>
 
+
+
+<button class="mostrar-noalm-btn" onclick="mostrarnoalm()">Ver disponibilidad de almuerzo</button>
+
+<!-- <div id="noalm" class="noalm">
+        <p>No hay almuerzo disponible hoy. ¡Lo sentimos!</p>
+    </div> -->
+
+    <style>
+        /* Contenedor de noalm */
+        .noalm {
+            display: none; /* Inicialmente oculto */
+            margin: 20px;
+            padding: 15px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        /* Estilo para el botón */
+        .mostrar-noalm-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .mostrar-noalm-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+
+
+
+
     <div style="text-align: right;">
         <a href="excel/xalm.php" title="Exportar Almuerzos">
             <i class="fa fa-solid fa-file-export fa-2x exp"></i>

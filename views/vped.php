@@ -1,7 +1,14 @@
 <?php
 require_once('controllers/calm.php');
+
+$horlim = 10; 
+$horac = date('H');
+$mosped = $horac < $horlim;
 ?>
 
+    <div id="noalm" class="noalm">
+        <p>No vino ANITA</p>
+    </div>
 
     <div style="text-align: right;">
     <?php 
@@ -15,8 +22,6 @@ require_once('controllers/calm.php');
 
 
     <?php if ($_SESSION['idpef'] == 7 OR $_SESSION['idpef'] == 1) { ?>
-
-
     <?php if ($datOneAlmF) { ?>
         <?php foreach ($datOneAlmF as $dat) { ?>
     <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
@@ -63,8 +68,6 @@ require_once('controllers/calm.php');
 </form> 
 <?php }}}?>
 
-
-
     <?php if ($datAllPed){ ?>
         <div class="orden">
                     <div class="texto-animado">
@@ -81,11 +84,20 @@ require_once('controllers/calm.php');
             </div>
         </div>
         <?php }?> 
-    
 
+<?php }}
 
-<?php }}elseif ($datOneAlmF) { ?>
+if (!$mosped) {
+    echo "<div class='men'>
+   <img src='https://ih1.redbubble.net/image.2776950716.0945/raf,360x360,075,t,fafafa:ca443f4786.jpg' alt='Alerta' class='men-img'>
+        <p><strong>Información:</strong> A partir de las $horlim:00 am, ya no es posible realizar ni cancelar pedidos.</p>
+        </div>";
+}
+
+elseif ($datOneAlmF) { ?>
     <?php foreach ($datOneAlmF as $dta) { ?>
+        
+        <div id="disponibles" class="<?= $mosped ? '' : 'oculto' ?>">
         <form action="home.php?pg=<?= $pg; ?>" method="post" name="pedido">
         <div class="row">  
             <div class="card"><br>
@@ -128,12 +140,11 @@ require_once('controllers/calm.php');
                 <input type="hidden" name="idped" value="<?php if ($datOne) echo $datOne[0]['idped']; ?>">
                 <input type="hidden" name="ope" value="savePed">
             </div>
-            <br>
-            
-                
+            <br>  
         </div>
-    </form>
-<?php }}?>
+        </form>
+    </div>
+    <?php }}?>
 
     <style>
         .card {
@@ -221,3 +232,35 @@ require_once('controllers/calm.php');
     
         .texto-animado span:nth-child(odd) { animation-delay: 0.2s; }
         .texto-animado span:nth-child(even) { animation-delay: 0.4s; }
+
+        .oculto {
+            display: none;
+        }
+        .men {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 15px 20px;
+            background-color: #ffe4e1; 
+            border: 1px solid #ff7f7f; 
+            border-radius: 10px;
+            font-size: 16px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+        }
+        .men img.men-img {
+            width: 150px;
+            height: auto; 
+            object-fit: cover; 
+            border-radius: 5px; 
+        }
+        .men p {
+            margin: 0;
+            text-align: left; /* Texto alineado a la izquierda */
+        }
+        .men strong {
+            color: #d32f2f; /* Destacar "Información" */
+        }
+
+        
