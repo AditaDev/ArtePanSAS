@@ -36,7 +36,7 @@ require_once('controllers/cper.php');
             <label for="apeper"><strong>Correo Electrónico:</strong></label>
             <input class="form-control" type="email" id="emaper" name="emaper" value="<?php if ($datOne) echo $datOne[0]['emaper']; ?>" required>
         </div>
-        <?php if($_SESSION['idpef']!=3){ for($i=0; $i<=1; $i++){ ?>
+        <?php if($_SESSION['idpef']!=5){ for($i=0; $i<=1; $i++){ ?>
             <div class="form-group col-md-4 ui-widget">
                 <label for="idjef"><strong>Jefe <?php if($i==0) echo "Inmediato"; else echo "Area";?></strong></label>
                 <select id="combobox<?php ($i+1)?>" name="idjef[]" class="form-control form-select" <?php if($i==0) echo "required";?>>
@@ -49,7 +49,7 @@ require_once('controllers/cper.php');
                 </select>
             </div>
         <?php }} ?>
-        <?php if ($_SESSION['idpef'] != 3) { ?>
+        <?php if ($_SESSION['idpef'] != 5) { ?>
             <div class="form-group col-md-4">
                 <label for="actper" class="titulo"><strong>Activo:</strong></label>
                 <select name="actper" id="actper" class="form-control form-select" required>
@@ -57,12 +57,16 @@ require_once('controllers/cper.php');
                     <option value="2" <?php if ($datOne && $datOne[0]['actper'] == 2) echo " selected "; ?>>No</option>
                 </select>
             </div>
-        <!-- <?php } if (!$datOne && $_SESSION['idpef'] == 1) { ?>
-                <div class="form-group col-md-4">
-                    <label for="pasper"><strong>Contraseña:</strong></label>
-                    <input class="form-control" type="password" id="pasper" name="pasper" required>
-                </div>
-        <?php } ?> -->
+
+
+        <?php } if ($datOne && $_SESSION['idpef'] == 5) { ?>
+            <div class="form-group col-md-4">
+                <label for="pasper"><strong>Contraseña:</strong></label>
+                <input class="form-control" type="password" value="**********" <?php if($_SESSION['idpef']==5) echo " disabled "?>>
+                <span class="txtcontra" data-bs-toggle="modal" data-bs-target="#pass<?=$_SESSION['idper']?>">(Cambiar contraseña)</span>                   
+            </div>
+            <?php } ?>
+
         <div class="form-group col-md-12" id="boxbtn">
             <br><br>
             <input class="btn btn-primary" type="submit" value="Registrar">
@@ -77,7 +81,7 @@ require_once('controllers/cper.php');
     <thead>
         <tr>
             <th>Datos personales</th>
-            <?php if ($_SESSION['idpef'] != 3) { ?>
+            <?php if ($_SESSION['idpef'] != 5) { ?>
                 <th>Estado</th>
             <?php } ?>
             <th></th>
@@ -114,7 +118,7 @@ require_once('controllers/cper.php');
                         </div>
                     </small>
                 </td>
-                <?php if ($_SESSION['idpef'] = 3) { ?>
+                <?php if ($_SESSION['idpef'] != 5) { ?>
                     <td style="text-align: left;">
                         <?php if ($dta['actper'] == 1) { ?>
                             <span style="font-size: 1px;opacity: 0;">+</span>
@@ -132,7 +136,7 @@ require_once('controllers/cper.php');
                 <a href="home.php?pg=<?= $pg; ?>&idper=<?= $dta['idper']; ?>&ope=edi" title="Editar">
                         <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
                     </a>
-                    <?php if ($_SESSION['idpef'] != 3) { 
+                    <?php
                         $mper->setIdper($dta['idper']);
                         $i = $mper->getOne();
                         $dga = $mper->getOnePxF();
@@ -147,15 +151,15 @@ require_once('controllers/cper.php');
                             <a href="home.php?pg=<?= $pg; ?>&idper=<?= $dta['idper']; ?>&ope=eli" onclick="return eliminar('<?= $dta['nomper'].' '.$dta['apeper']; ?>');" title="Eliminar">
                                 <i class="fa fa-solid fa-trash-can fa-2x iconi"></i>
                             </a>
-                    <?php } ?>
-        </td>
+                    
+                </td>
     </tr>
     <?php }} ?>
 </tbody>
     <tfoot>
         <tr>
             <th>Datos personales</th>
-            <?php if ($_SESSION['idpef'] != 3) { ?>
+            <?php if ($_SESSION['idpef'] != 5) { ?>
                 <th>Estado</th>
             <?php } ?>
             <th></th>
@@ -174,11 +178,13 @@ require_once('controllers/cper.php');
 				<div class="modal-body" style="text-align: left;">
                     <div class="contra">
                         <label for="pasper" class="labcon"><small><strong>Nueva contraseña: </strong></small></label>
-                        <input class="form-control" type="password" id="pasper<?=$_SESSION['idper']?>" name="pasper" required oninput="comparar(<?=$_SESSION['idper']?>)">
+                        <input class="form-control" style="margin-right: 10px;" type="password" id="pasper<?=$_SESSION['idper']?>" name="pasper" required oninput="comparar(<?=$_SESSION['idper']?>)">
+					    <i id="vpass<?=$_SESSION['idper']?>" class="fas fa-eye" onclick="verpass('pasper', 'vpass', <?=$_SESSION['idper']?>)"></i>
                     </div>
                     <div class="contra">
                         <label for="newpasper" class="labcon"><small><strong>Confirmar contraseña: </strong></small></label>
-                        <input class="form-control" type="password" id="newpasper<?=$_SESSION['idper']?>" name="newpasper" required oninput="comparar(<?=$_SESSION['idper']?>)">
+                        <input class="form-control" style="margin-right: 10px;" type="password" id="newpasper<?=$_SESSION['idper']?>" name="newpasper" required oninput="comparar(<?=$_SESSION['idper']?>)">
+                        <i id="vpassc<?=$_SESSION['idper']?>" class="fas fa-eye" onclick="verpass('newpasper', 'vpassc', <?=$_SESSION['idper']?>)"></i>
                     </div>
                     <small><small id="error-message<?=$_SESSION['idper']?>" style="color: red; display: none;"></small></small>
 				</div>
