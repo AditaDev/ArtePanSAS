@@ -106,7 +106,6 @@
     margin: 0 auto;
     background-color: rgba(7,54,99);
     border: 4px solid rgba(7,54,99);
-;
 }
 
 .barra {
@@ -125,13 +124,18 @@
     }
 }
 
-@media(max-width: 459px) {
+@media screen and (min-width: 451px) and (max-width: 1280px){
+    .contenedor{
+        margin: 175px auto 50PX auto;
+    }
+}
+@media screen and (max-width: 450px) {
     body {
         font-size: 2.5em;
     }
     .contenedor{
         width: 80%;
-        margin: 350px auto 50PX auto;
+        margin: 275px auto 50PX auto;
     }
 
     .carga {
