@@ -58,7 +58,7 @@ $html .= '
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ARTEPAN SAS</title>
     <link rel="icon" href="../img/logoartepan_sinfondo.png">
@@ -336,7 +336,8 @@ if($ident){
     $fir_mail = '<strong>'.$nomperm.'</strong><br>'.$a.' | '.$mail.'<br>Cra 34a 3 63, Puente Aranda <br>Bogotá D.C.<br>www.artepan.com.co';
 
     //-------Llama la función que crea y envía el correo--------
-    sendemail($ema, $psem, $nom, $maild, $nomperd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template, "", "", "../");
+    $exito = sendemail($ema, $psem, $nom, $maild, $nomperd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template, "", "", "../");
+    while ($exito==2) $exito = sendemail($ema, $psem, $nom, $maild, $nomperd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template, "", "", "../");
 }
 
 ?>
