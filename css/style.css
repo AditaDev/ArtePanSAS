@@ -204,6 +204,15 @@ label {
   color: #393b3d;
 }
 
+.txtcontra{
+  color: #000000;
+  opacity: 0.5;  
+}
+.txtcontra:hover{
+  cursor: pointer;  
+  text-shadow: 0px 0px 2px #393b3d;
+}
+
 .texttitu{
   font-size: 20px;
 }
@@ -213,6 +222,16 @@ label {
   width: 100%;
   padding: 50px 50px 100px 50px;
 }
+
+.contmod {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
 
 #err {
   display: inline-block;
@@ -700,6 +719,12 @@ a {
 a:hover {
   color: rgb(118, 118, 118);
 } 
+
+.lcon {
+  color: #00573B;
+  font-size: 1rem;
+  font-weight: bold;
+}
 
 /*-----------Boton---------*/
 #boxbtn {
