@@ -62,18 +62,6 @@ function verpass() {
   }
 }
 
-//pedidos
-const horac = new Date().getHours(); 
-if (horac >= horaLimite) {
-    document.getElementById('disponibles').style.display = 'none';
-}
-
-function mostrarnoalm() {
-    const noalm = document.getElementById('noalm');
-    noalm.style.display = 'block';
-}
-
-
 
 function solonum(e) {
 	key=e.keyCode || e.which;

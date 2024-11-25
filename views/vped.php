@@ -4,12 +4,8 @@ require_once('controllers/calm.php');
 $horlim = 10; 
 $horac = date('H');
 $mosped = $horac < $horlim;
+$datalm = $malm->getOneAlmF()
 ?>
-
-    <div id="noalm" class="noalm">
-        <p>No vino ANITA</p>
-    </div>
-
     <div style="text-align: right;">
     <?php 
         $malm->setIdper($_SESSION['idper']);
@@ -69,6 +65,7 @@ $mosped = $horac < $horlim;
 <?php }}}?>
 
     <?php if ($datAllPed){ ?>
+        <div id="disponibles" class="<?= $mosped ? '' : 'oculto' ?>"> 
         <div class="orden">
                     <div class="texto-animado">
                     <span>G</span><span>E</span><span>N</span><span>I</span><span>A</span><span>L</span><span>,</span><span>Y</span><span>A</span>&nbsp;<span>H</span><span>I</span><span>C</span><span>I</span><span>S</span><span>T</span><span>E</span>&nbsp;<span>T</span><span>U</span>&nbsp;<span>P</span><span>E</span><span>D</span><span>I</span><span>D</span><span>O</span>
@@ -83,68 +80,74 @@ $mosped = $horac < $horlim;
                 </a>
             </div>
         </div>
+        </div>
         <?php }?> 
-
 <?php }}
-
-if (!$mosped) {
-    echo "<div class='men'>
-   <img src='https://ih1.redbubble.net/image.2776950716.0945/raf,360x360,075,t,fafafa:ca443f4786.jpg' alt='Alerta' class='men-img'>
-        <p><strong>Información:</strong> A partir de las $horlim:00 am, ya no es posible realizar ni cancelar pedidos.</p>
-        </div>";
-}
-
-elseif ($datOneAlmF) { ?>
-    <?php foreach ($datOneAlmF as $dta) { ?>
-        
-        <div id="disponibles" class="<?= $mosped ? '' : 'oculto' ?>">
-        <form action="home.php?pg=<?= $pg; ?>" method="post" name="pedido">
+elseif($datalm) { ?>
+<div id="disponibles" class="<?= $mosped ? '' : 'oculto' ?>"> 
+    <form action="home.php?pg=<?= $pg; ?>" method="post" name="pedido">
         <div class="row">  
             <div class="card"><br>
                 <div class="texto-animado">
-                    <span>A</span><span>L</span><span>M</span><span>U</span><span>E</span><span>Z</span><span>O</span>&nbsp;<span>D</span><span>E</span><span>L</span>&nbsp;<span>D</span><span>I</span><span>A</span><span>&nbsp;<?= $dta['fecalm']; ?></span>
-                    </div>
-                <div class="col">
-                        <h6><strong>Plato principal: </strong> <?= $dta['ppalm']; ?></h6>
+                    <span>A</span><span>L</span><span>M</span><span>U</span><span>E</span><span>R</span><span>Z</span><span>O</span>&nbsp;<span>D</span><span>E</span><span>L</span>&nbsp;<span>D</span><span>I</span><span>A</span><span>&nbsp;<?= $datalm[0]['fecalm']; ?></span>
                 </div>
                 <div class="col">
-                    <?php if (!empty($dta['spalm'])): ?>
-                        <h6><strong>Sopa: </strong> <?= $dta['spalm']; ?></h6>
+                        <h6><strong>Plato principal: </strong> <?= $datalm[0]['ppalm']; ?></h6>
+                </div>
+                <div class="col">
+                    <?php if (!empty($datalm[0]['spalm'])): ?>
+                        <h6><strong>Sopa: </strong> <?= $datalm[0]['spalm']; ?></h6>
                     <?php endif; ?>
                 </div>
                 <div class="col">
-                    <?php if (!empty($dta['jgalm'])): ?>
-                        <h6><strong>Jugo: </strong> <?= $dta['jgalm']; ?></h6>
+                    <?php if (!empty($datalm[0]['jgalm'])): ?>
+                        <h6><strong>Jugo: </strong> <?= $datalm[0]['jgalm']; ?></h6>
                     <?php endif; ?>
                 </div><br>
-            <div class="row">
-                <div class="col-5">
-                    <label for="canalm"><strong>Cantidad:</strong></label>
-                    <input type="number" value="<?php if ($datOne) echo $datOne[0]['canalm']; ?>" id="canalm" name="canalm" min="1" max="2" placeholder="   #" required>
+                <div class="row">
+                    <div class="col-5">
+                        <label for="canalm"><strong>Cantidad:</strong></label>
+                        <input type="number" value="<?php if ($datOne) echo $datOne[0]['canalm']; ?>" id="canalm" name="canalm" min="1" max="2" placeholder="   #" required>
+                    </div>
+                    <div class="form-group col-6">  
+                            <select name="tipalm" id="tipalm" class="form-control form-select" required>
+                                <option value="1" <?php if ($datOne && $datOne[0]['tipalm'] == 1) echo " selected "; ?>>Almuerzo completo</option>
+                                <option value="2" <?php if ($datOne && $datOne[0]['tipalm'] == 2) echo " selected "; ?>>Seco</option>
+                                <option value="3" <?php if ($datOne && $datOne[0]['tipalm'] == 3) echo " selected "; ?>>Sopa</option>  
+                            </select>
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="obser"><strong>Observación:</strong></label>
+                        <textarea class="form-control" type="text" id="obser" name="obser" <?php if ($datOne); ?>><?php if ($datOne) echo $datOne[0]['obser']; ?></textarea>
+                    </div>
+                </div>  
+                <div class="col-12">
+                <input class="btn btn-primary" type="submit" value="Pedir">
+                    <input type="hidden" name="idalm" value="<?= $datalm[0]['idalm'] ?>">
+                    <input type="hidden" name="idped" value="<?php if ($datOne) echo $datOne[0]['idped']; ?>">
+                    <input type="hidden" name="ope" value="savePed">
                 </div>
-                <div class="form-group col-6">  
-                        <select name="tipalm" id="tipalm" class="form-control form-select" required>
-                            <option value="1" <?php if ($datOne && $datOne[0]['tipalm'] == 1) echo " selected "; ?>>Almuerzo completo</option>
-                            <option value="2" <?php if ($datOne && $datOne[0]['tipalm'] == 2) echo " selected "; ?>>Seco</option>
-                            <option value="3" <?php if ($datOne && $datOne[0]['tipalm'] == 3) echo " selected "; ?>>Sopa</option>  
-                        </select>
-                </div>
-                <div class="form-group col-12">
-                    <label for="obser"><strong>Observación:</strong></label>
-                    <textarea class="form-control" type="text" id="obser" name="obser" <?php if ($datOne); ?>><?php if ($datOne) echo $datOne[0]['obser']; ?></textarea>
-                </div>
-            </div>  
-            <div class="col-12">
-            <input class="btn btn-primary" type="submit" value="Pedir">
-                <input type="hidden" name="idalm" value="<?= $dta['idalm'] ?>">
-                <input type="hidden" name="idped" value="<?php if ($datOne) echo $datOne[0]['idped']; ?>">
-                <input type="hidden" name="ope" value="savePed">
+                <br>  
             </div>
-            <br>  
+        </div> 
+    </form>
+</div> 
+    <?php }
+    if (!empty($datalm[0]['ppalm'])) {
+    if (!$mosped) { ?>
+        <div class='men'>
+            <img src='https://ih1.redbubble.net/image.2776950716.0945/raf,360x360,075,t,fafafa:ca443f4786.jpg' alt='Información' class='men-img'>
+            <p><strong>Información:</strong> A partir de las <?=$horlim?>:00 am, ya no es posible realizar ni cancelar pedidos.</p>
         </div>
-        </form>
-    </div>
-    <?php }}?>
+    <?php }} 
+    if (empty($datalm[0]['ppalm'])) {
+    if ($horac >= 8) { ?>
+        <div class='men'>
+            <img src='https://www.rockandpop.cl/wp-content/uploads/2021/04/Sin-titulo-2021-04-22T131526.753-768x432.jpg' alt='Información' class='men-img'>
+            <p><strong>Información:</strong> No habrá almuerzo hoy porque la señora Anita no vino.</p>
+        </div>
+    <?php
+    }} ?>
 
     <style>
         .card {

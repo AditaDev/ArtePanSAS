@@ -69,7 +69,6 @@ $datAll = $malm->getAll();
 $datPer = $malm->getAllPer($ope);
 $datOneAlmF = $malm->getOneAlmF();
 $datAllPed = $malm->getOnePed();
-// $datMod = $malm->getInfoAll();
 $datpper = $malm->getAllDatPed();
 
 //excel

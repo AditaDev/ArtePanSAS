@@ -1,54 +1,27 @@
 <?php
  require_once ('controllers/calm.php'); ?>
 
-
-
-<button class="mostrar-noalm-btn" onclick="mostrarnoalm()">Ver disponibilidad de almuerzo</button>
-
-<!-- <div id="noalm" class="noalm">
-        <p>No hay almuerzo disponible hoy. ¡Lo sentimos!</p>
-    </div> -->
-
-    <style>
-        /* Contenedor de noalm */
-        .noalm {
-            display: none; /* Inicialmente oculto */
-            margin: 20px;
-            padding: 15px;
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            border-radius: 5px;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-
-        /* Estilo para el botón */
-        .mostrar-noalm-btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .mostrar-noalm-btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
-
-
-
-
-
-    <div style="text-align: right;">
+    
+    <div class="row">
+    <div class="form-group col-md-2">
+                <label for="fecinib"><strong>Fecha inicial:</strong></label>
+                <input type="date" name="fecini" id="fecinib" value="<?= $fecini; ?>" onchange="this.form.submit(); actMinMax();" class="form-control">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="fecfinb"><strong>Fecha final:</strong></label>
+                <input type="date" name="fecfin" id="fecfinb" value="<?= $fecfin; ?>" onchange="this.form.submit()" class="form-control">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="ndper"><strong>Documento:</strong></label>
+                <input type="text" name="ndper" id="ndper" class="form-control">
+            </div>
+    
+            <div class="form-group col-md-6" style="text-align: right;"> 
         <a href="excel/xalm.php" title="Exportar Almuerzos">
             <i class="fa fa-solid fa-file-export fa-2x exp"></i>
         </a>
+            </div>
     </div>
-
 
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins" enctype="multipart/form-data">
     <div class="row">
