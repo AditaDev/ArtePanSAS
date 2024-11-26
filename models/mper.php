@@ -450,7 +450,7 @@ class Mper
 		return $res;
 	}
     function selectUsu(){
-		$sql = "SELECT idper, COUNT(*) AS sum FROM persona WHERE ndper=:ndper";
+		$sql = "SELECT idper, COUNT(*) AS sum FROM persona WHERE ndper=:ndper GROUP BY idper";
 		$modelo = new conexion();
 		$conexion = $modelo->get_conexion();
 		$result = $conexion->prepare($sql);

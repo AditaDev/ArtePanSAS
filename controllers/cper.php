@@ -65,7 +65,10 @@
             $per = $mper->getOneSPxF($ndper); 
             $mper->savePxFAut($per[0]['idper'],$idpef);
             $mper->setIdper($per[0]['idper']);
-            if($emaper) sendemail($ema, $psem, $nom, $emaper, $nombre, "", $txt_mess, $mail_asun, $fir_mail, $template, "", "", "");
+            if($emaper){ 
+                $exito = sendemail($ema, $psem, $nom, $emaper, $nombre, "", $txt_mess, $mail_asun, $fir_mail, $template, "", "", "");
+                while ($exito==2) $exito = sendemail($ema, $psem, $nom, $emaper, $nombre, "", $txt_mess, $mail_asun, $fir_mail, $template, "", "", "");
+            }
         }
         else{
             $mper->edit();
@@ -138,6 +141,9 @@
             // obtengo el valor de la celda
             $pf = 0;
             $idpefA = [];
+            $idjefi = NULL;
+            $idjefa = NULL;
+            $idper = NULL;
             $ndper = $sheet->getCell("B" . $row)->getValue();
             $nomper = $sheet->getCell("C" . $row)->getValue();
             $apeper = $sheet->getCell("D" . $row)->getValue();
@@ -160,12 +166,16 @@
 
             $ndjefi = $sheet->getCell("I" . $row)->getValue();
             $mper->setNdper($ndjefi); 
-            $idjefi = $mper->selectUsu(); 
-            $idjefi = $idjefi[0]['idper'];
-    		$ndjefa = $sheet->getCell("K" . $row)->getValue();
+            $idjefia = $mper->selectUsu(); 
+            if($idjefia) $idjefi = $idjefia[0]['idper'];
+
+
+            $ndjefa = $sheet->getCell("J" . $row)->getValue();
             $mper->setNdper($ndjefa); 
-            $idjefa = $mper->selectUsu(); 
-            $idjefa = $idjefa[0]['idper'];
+            $idjefaa = $mper->selectUsu(); 
+            if($idjefaa) $idjefa = $idjefaa[0]['idper'];
+
+
             $pass = "A".$ndper."P";
             $pasper = encripta($pass);
             $hash = $pasper['hash'];
@@ -187,17 +197,20 @@
             $mper->setIdpef($idpef);
             $mper->setHash($hash);
             $mper->setSalt($salt);
-    		$existingData = $mper->selectUsu();
-            $idper = $existingData[0]['idper'];
-            $mper->setIdper($idper);
-
-            if (count($idpefA)==$pf && (!$ndjefi OR ($ndjefi && $idjefi)) && (!$ndjefa OR ($ndjefa && $idjefa))) {
+            $existingData = $mper->selectUsu();
+    		 if($existingData){
+                $idper = $existingData[0]['idper'];
+                $mper->setIdper($idper);
+    		} if (count($idpefA)==$pf && (!$ndjefi OR ($ndjefi && $idjefi)) && (!$ndjefa OR ($ndjefa && $idjefa))) {
     		    if (!empty($ndper)) {
-    		    	if ($existingData[0]['sum'] == 0) {
+    		    	if (!$idper) {
     		    		$mper->save();
                         $per = $mper->getOneSPxF($ndper);
                         $mper->setIdper($per[0]['idper']);
-                        if($emaper) sendemail($ema, $psem, $nom, $emaper, $nombre, "", $txt_mess, $mail_asun, $fir_mail, $template, "", "", "");
+                        if($emaper){
+                            $exito = sendemail($ema, $psem, $nom, $emaper, $nombre, "", $txt_mess, $mail_asun, $fir_mail, $template, "", "", "");
+                            while ($exito==2) $exito = sendemail($ema, $psem, $nom, $emaper, $nombre, "", $txt_mess, $mail_asun, $fir_mail, $template, "", "", "");
+                        }
 
     		    	}else {
     		    		$mper->edit();
