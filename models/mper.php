@@ -121,7 +121,8 @@ class Mper
     //------------Persona-----------
     function getAll()
     {
-        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.area, p.actper, pf.idpef, v.nomval, pf.idpef FROM persona AS p INNER JOIN valor AS v ON p.area=v.idval LEFT JOIN perxpef AS pf ON p.idper=pf.idper";
+        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.area, p.actper,  v.nomval FROM persona AS p INNER JOIN valor AS v ON p.area=v.idval";
+        if($_SESSION['idpef']==5) $sql .= " WHERE p.idper=:idper ";
         $sql .= " GROUP BY p.idper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
@@ -133,7 +134,7 @@ class Mper
 
     function getOne()
     {
-        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.area, p.actper, pf.idpef, v.nomval, pf.idpef FROM persona AS p INNER JOIN valor AS v ON p.area=v.idval LEFT JOIN perxpef AS pf ON p.idper=pf.idper WHERE p.idper=:idper";
+        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.area, p.actper,  v.nomval FROM persona AS p INNER JOIN valor AS v ON p.area=v.idval WHERE p.idper=:idper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -153,8 +154,8 @@ class Mper
             if ($hash) $sql .= ", hashl";
             if ($salt) $sql .= ", salt";
             $sql .= ") VALUES (:nomper, :apeper, :ndper, :area, :emaper, :actper";
-            if ($hash) $sql .= ", hashl";
-            if ($salt) $sql .= ", salt";
+            if ($hash) $sql .= ", :hashl";
+            if ($salt) $sql .= ", :salt";
             $sql .= ")";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
@@ -269,6 +270,53 @@ class Mper
 		return $res;
 	}
 
+    //------------Jefe-----------
+    function getOneJxP()
+    {
+        $sql = "SELECT idjef, tipjef FROM jefxper WHERE idper=:idper";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $idper = $this->getIdper();
+        $result->bindParam(":idper", $idper);
+        $result->execute();
+        $res = $result->fetchall(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
+    function saveJxP($tip)
+    {
+        //try{
+            $sql = "INSERT INTO jefxper (idper, idjef, tipjef) VALUES (:idper, :idjef, :tipjef)";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $idper = $this->getIdper();
+            $result->bindParam(":idper", $idper);
+            $idjef = $this->getIdjef();
+            $result->bindParam(":idjef", $idjef);
+            $result->bindParam(":tipjef", $tip);
+            $result->execute();
+        // } catch (Exception $e) {
+        //     ManejoError($e);
+        // }
+    }
+
+    function delJxP()
+    {
+        try{
+            $sql = "DELETE FROM jefxper WHERE idper=:idper";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $idper = $this->getIdper();
+            $result->bindParam(":idper", $idper);
+            $result->execute();
+        } catch (Exception $e) {
+            ManejoError($e);
+        }
+    }
+
     //------------Perfil-----------
     
     function getOnePxF()
@@ -286,22 +334,11 @@ class Mper
 
     function getOneSPxF($ndper)
     {
-        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.pasper, p.actper, pf.idpef, v.nomval FROM persona AS p INNER JOIN valor AS v ON p.idper=v.idval LEFT JOIN perxpef AS pf ON p.idper=pf.idper WHERE p.ndper=:ndper";
+        $sql = "SELECT p.idper FROM persona AS p WHERE p.ndper=:ndper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
         $result->bindParam(":ndper", $ndper);
-        $result->execute();
-        $res = $result->fetchall(PDO::FETCH_ASSOC);
-        return $res;
-    }
-
-    function getOnePef()
-    {
-        $sql = "SELECT idpef, nompef FROM perfil";
-        $modelo = new conexion();
-        $conexion = $modelo->get_conexion();
-        $result = $conexion->prepare($sql);
         $result->execute();
         $res = $result->fetchall(PDO::FETCH_ASSOC);
         return $res;
@@ -354,54 +391,6 @@ class Mper
         }
     }
 
-    //------------Jefe-----------
-    function getOneJxP()
-    {
-        $sql = "SELECT idjef, tipjef FROM jefxper WHERE idper=:idper";
-        $modelo = new conexion();
-        $conexion = $modelo->get_conexion();
-        $result = $conexion->prepare($sql);
-        $idper = $this->getIdper();
-        $result->bindParam(":idper", $idper);
-        $result->execute();
-        $res = $result->fetchall(PDO::FETCH_ASSOC);
-        return $res;
-    }
-
-    function saveJxP($tip)
-    {
-        //try{
-            $sql = "INSERT INTO jefxper (idper, idjef, tipjef) VALUES (:idper, :idjef, :tipjef)";
-            $modelo = new conexion();
-            $conexion = $modelo->get_conexion();
-            $result = $conexion->prepare($sql);
-            $idper = $this->getIdper();
-            $result->bindParam(":idper", $idper);
-            $idjef = $this->getIdjef();
-            $result->bindParam(":idjef", $idjef);
-            $result->bindParam(":tipjef", $tip);
-            $result->execute();
-        // } catch (Exception $e) {
-        //     ManejoError($e);
-        // }
-    }
-
-    function delJxP()
-    {
-        try{
-            $sql = "DELETE FROM jefxper WHERE idper=:idper";
-            $modelo = new conexion();
-            $conexion = $modelo->get_conexion();
-            $result = $conexion->prepare($sql);
-            $idper = $this->getIdper();
-            $result->bindParam(":idper", $idper);
-            $result->execute();
-        } catch (Exception $e) {
-            ManejoError($e);
-        }
-    }
-    
-
      //------------Traer valores-----------
 
       function getAllDom($iddom)
@@ -439,7 +428,7 @@ class Mper
     }
 
     function CompVal(){
-		$sql = "SELECT idval, COUNT(*) AS sum FROM valor WHERE idval=:idval";
+		$sql = "SELECT idval, COUNT(*) AS sum FROM valor WHERE idval=:idval GROUP BY idval";
 		$modelo = new conexion();
 		$conexion = $modelo->get_conexion();
 		$result = $conexion->prepare($sql);
@@ -461,7 +450,7 @@ class Mper
 		return $res;
 	}
     function CompPef(){
-		$sql = "SELECT idpef, COUNT(*) AS sum FROM perfil WHERE idpef=:idpef";
+		$sql = "SELECT idpef, COUNT(*) AS sum FROM perfil WHERE idpef=:idpef GROUP BY idpef";
 		$modelo = new conexion();
 		$conexion = $modelo->get_conexion();
 		$result = $conexion->prepare($sql);

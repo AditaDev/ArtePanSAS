@@ -1,7 +1,7 @@
 <?php
     require_once("models/mper.php");
-    require ('vendor/autoload.php');
     include("models/datos.php");
+    require ('vendor/autoload.php');
     require ('controllers/sendemail.php');
 
     use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -17,36 +17,40 @@
     $emaper = isset($_POST['emaper']) ? strtolower($_POST['emaper']):NULL;
     $actper = isset($_REQUEST['actper']) ? $_REQUEST['actper']:1;
 
+     //------------Contraseña-----------
     $pass = "A".$ndper."P";
     $pasper = encripta($pass);
     $hash = $pasper['hash'];
     $salt = $pasper['salt'];
-
-    $arc = isset($_FILES["arc"]["name"]) ? $_FILES["arc"]["name"] : NULL;
-    $arc = substr($arc, 0, strpos($arc, ".xls"));
 
     //------------Jefe-----------
     $idjef = isset($_POST['idjef']) ? $_POST['idjef']:NULL;
 
     //------------Perfil-----------
     $idpef = isset($_POST['idpef']) ? $_POST['idpef']:5;
+    
+    $arc = isset($_FILES["arc"]["name"]) ? $_FILES["arc"]["name"] : NULL;
+    $arc = substr($arc, 0, strpos($arc, ".xls"));
+
+    $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
     $datOne = NULL;
     $datJxP=NULL;
     $pg = 106;
 
-
     //------------Correo-----------
     $nombre = nombre($apeper." ".$nomper);
     $template = "views/mail.html";
-    $mail_asun = "¡Bienvenido a nuestra app!";
-    $txt_mess = "Es un placer darle la bienvenida a nuestra nueva aplicación. A continuación, le proporcionamos sus credenciales de acceso:<br><br>
-    <strong>Usuario: </strong>".$ndper.(($emaper) ? "/".$emaper : "")."<br>
-    <strong>Contraseña: </strong>".$pass."<br><br>
-    Le solicitamos que, al iniciar sesión por primera vez, cambie su contraseña para garantizar la seguridad de su cuenta.<br><br>
-    Para acceder a la aplicación, ingrese en el siguiente enlace: <a href='".$url."'>App Galqui</a><br><br>
+    $mail_asun = "¡Bienvenido a TUMMY!";
+    $txt_mess = "Es un placer darte la bienvenida a TUMMY, nuestra nueva aplicación está diseñada para facilitar la gestión de tus permisos laborales y agilizar la solicitud de almuerzos.<br><br>
+    Aquí tienes tus credenciales de acceso:<br><br>
+    <strong>• Usuario: </strong>".$ndper.(($emaper) ? " / ".$emaper : "")."<br>
+    <strong>• Contraseña: </strong>".$pass."<br><br><br>
+    <mark><strong>Importante:</strong></mark><br><br>
+    Por tu seguridad, te pedimos que cambies tu contraseña al iniciar sesión por primera vez.<br><br>
+    Para acceder a la aplicación, ingrese en el siguiente enlace: <a href='".$url."'>👉 Acceder a TUMMY</a><br><br>
     Si tiene alguna pregunta o requiere asistencia, no dude en ponerse en contacto con nosotros.<br><br>
     Agradecemos su confianza y esperamos que disfrute de la nueva experiencia.<br><br>";
-    $fir_mail = '<strong>'.$nom.'</strong><br>Cra 1 Nº 4 - 02 Bdg 2 Parque Industrial K2<br>Chía - Cund<br>www.galqui.com';
+    $fir_mail = '<strong>'.$nom.'</strong><br>Cra 34a 3 63, Puente Aranda <br>Bogotá D.C.<br>www.artepan.com.co';
 
     $mper->setIdper($idper);
     //------------Persona-----------
@@ -126,6 +130,7 @@
      //------------Traer valores-----------
     $datAll = $mper->getAll();
     $datarea = $mper->getAllDom(5);
+    $datPer = $mper->getPer();
 
 
         //------------Importar empleados-----------
@@ -149,6 +154,7 @@
             $apeper = $sheet->getCell("D" . $row)->getValue();
             $emaper = $sheet->getCell("E" . $row)->getValue();
             $area = $sheet->getCell("F" . $row)->getValue();
+
             $mper->setIdval($area);
             $carea = $mper->CompVal();
             $area = $carea[0]['idval'];
@@ -156,14 +162,13 @@
             $actper = $sheet->getCell("G" . $row)->getValue();
             $idpef = $sheet->getCell("H" . $row)->getValue();
             $idpef = str_replace(' ', '', $idpef);
-            $idpefA = explode(".", $idpef);
+            $idpefA = explode("-", $idpef);
             foreach($idpefA AS $pa){
                 $mper->setIdpef($pa); 
                 $pef = $mper->CompPef();
                 $pef = $pef[0]['idpef'];
                 if($pef) $pf++;
             }
-
             $ndjefi = $sheet->getCell("I" . $row)->getValue();
             $mper->setNdper($ndjefi); 
             $idjefia = $mper->selectUsu(); 

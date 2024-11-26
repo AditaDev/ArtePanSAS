@@ -30,7 +30,7 @@ function sendemail($mail_ema, $mail_upa, $nommail, $mail_sfe, $mail_name, $file_
 	 $message = str_replace('{{first_name}}', $mail_name, $message);
 	 $message = str_replace('{{message}}', $txt_mess, $message);
 	 $message = str_replace('{{fir}}', $fir_mail, $message);
-	 $mail->addEmbeddedImage($rut.'img/firma.jpg', 'firma_cid');
+	 $mail->addEmbeddedImage($rut.'img/firma.png', 'firma_cid');
 	 if($link_mail1 && $link_mail2){
 		 $message = str_replace('{{link1}}', $link_mail1, $message);
 		 $message = str_replace('{{link2}}', $link_mail2, $message);
