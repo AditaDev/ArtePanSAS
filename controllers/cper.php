@@ -162,7 +162,7 @@
             $actper = $sheet->getCell("G" . $row)->getValue();
             $idpef = $sheet->getCell("H" . $row)->getValue();
             $idpef = str_replace(' ', '', $idpef);
-            $idpefA = explode("-", $idpef);
+            $idpefA = explode("*", $idpef);
             foreach($idpefA AS $pa){
                 $mper->setIdpef($pa); 
                 $pef = $mper->CompPef();

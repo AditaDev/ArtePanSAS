@@ -147,14 +147,6 @@ CREATE TABLE `jefxper` (
 -- Volcado de datos para la tabla `jefxper`
 --
 
-INSERT INTO `jefxper` (`idjef`, `idper`, `tipjef`) VALUES
-(1, 1, 1),
-(1, 1, 2),
-(1, 2, 1),
-(1, 2, 2),
-(1, 3, 1),
-(1, 3, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -400,10 +392,6 @@ CREATE TABLE `permiso` (
 -- Volcado de datos para la tabla `permiso`
 --
 
-INSERT INTO `permiso` (`idprm`, `noprm`, `fecini`, `fecfin`, `idjef`, `idvtprm`, `sptrut`, `desprm`, `obsprm`, `estprm`, `idper`, `fecsol`, `fecrev`, `idrev`, `rutpdf`) VALUES
-(1, NULL, '2024-11-08 08:30:00', '2024-11-08 17:30:00', 1, 32, 'arc/permisos/Rodriguez Estevez Nicole Adamarys _1071328321/soportes/sop_Cita medica2024-11-08.pdf', 'hsrfdhsfhdshfshsf', NULL, 1, 1, NULL, NULL, NULL, NULL),
-(2, 1, '2024-11-14 08:30:00', '2024-11-14 17:30:00', 1, 32, 'arc/permisos/Rodriguez Estevez Nicole Adamarys _1071328321/soportes/sop_Cita medica2024-11-14.pdf', 'eewgewghrwh', NULL, 3, 1, '2024-11-13', '2024-11-13', 1, 'arc/permisos/Rodriguez Estevez Nicole Adamarys _1071328321/Cita medica_2024-11-14.pdf');
-
 -- --------------------------------------------------------
 
 --
@@ -430,17 +418,7 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`idper`, `nomper`, `emaper`, `telper`, `apeper`, `ndper`, `actper`, `area`, `hashl`, `salt`, `token`, `feccam`) VALUES
-(1, 'Nicole Adamarys ', 'rodriada24@gmail.com', NULL, 'Rodriguez Estevez', '1071328321', 1, 45, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(2, 'Germán Alfonso', 'gap@artepan.com.co', NULL, 'Párraga a Gutiérrez', '20533039', 1, 45, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(3, 'Amylee Andrea', 'amy.gavilan12@gmail.com', NULL, 'Gavilán Niño', '1233509778', 1, 46, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(4, 'Diego Alberto', 'diegokatyandrade@gmail.com', NULL, 'Andrade', '93377712', 1, 47, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(5, 'Edson Arante', 'edsonballen.15@gmail.com', NULL, 'Ballen Rivera', '1022967621', 1, 46, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(6, 'Jenny Paola', 'jpaopulido@gmail.com', NULL, 'Barrera Pulido', '53050180', 1, 45, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(7, 'Edgar Fabian', 'masterr4@hotmail.es', NULL, 'Bastidas Mariño', '79915984', 1, 45, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(8, 'Jorge Eduardo', 'jebellog@hotmail.com', NULL, 'Bello', '11519701', 1, 45, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(9, 'Maria Rita', 'mari_beme6@hotmail.com', NULL, 'Bejarano', '41363619', 1, 45, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(10, 'Luz Antonia', 'Luz-antonia@hotmail.com', NULL, 'Blanco Maldonado', '41692666', 1, 47, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL),
-(11, 'Gladys Astrid', 'astridbravogiraldo8@gmail.com', NULL, 'Bravo Giraldo', '65731647', 1, 47, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL);
+(1, 'Nicole Adamarys ', 'rodriada24@gmail.com', NULL, 'Rodriguez Estevez', '1071328321', 1, 45, '7bb5f4680f2b1ef09d1ff9f4a2502ec2', 'b139771e98bf5e9bb807302f0fb0bd68', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -460,9 +438,7 @@ CREATE TABLE `perxpef` (
 INSERT INTO `perxpef` (`idper`, `idpef`) VALUES
 (1, 1),
 (1, 5),
-(1, 7),
-(2, 5),
-(3, 5);
+(1, 7);
 
 -- --------------------------------------------------------
 

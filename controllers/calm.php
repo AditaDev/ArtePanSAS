@@ -20,6 +20,7 @@ $obser = isset($_POST['obser']) ? $_POST['obser']:NULL;
 $fecped = date("Y-m-d H:i:s");
 $idper = isset($_REQUEST['idper']) ? $_REQUEST['idper'] :$_SESSION['idper'];
 
+$ndper = isset($_POST['ndper']) ? $_POST['ndper']:NULL;
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
 $datOne = NULL;

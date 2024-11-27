@@ -5,7 +5,7 @@
     <div class="row">
     <div class="form-group col-md-2">
                 <label for="fecinib"><strong>Fecha inicial:</strong></label>
-                <input type="date" name="fecini" id="fecinib" value="<?= $fecini; ?>" onchange="this.form.submit(); actMinMax();" class="form-control">
+                <input type="date" name="fecini" id="fecinib" value="<?= $fecalm; ?>" onchange="this.form.submit(); actMinMax();" class="form-control">
             </div>
             <div class="form-group col-md-2">
                 <label for="fecfinb"><strong>Fecha final:</strong></label>
@@ -13,7 +13,7 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="ndper"><strong>Documento:</strong></label>
-                <input type="text" name="ndper" id="ndper" class="form-control">
+                <input type="text" name="ndper" id="ndper" value="<?= $ndper; ?>" onkeydown="return enter(event);" onchange="this.form.submit();" onkeypress="return solonum(event);" class="form-control">
             </div>
     
             <div class="form-group col-md-6" style="text-align: right;"> 
