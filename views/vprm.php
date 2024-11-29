@@ -50,7 +50,7 @@ if($_SESSION['idpef']==7){?>
     <div class="row">
         <div class="form-group col-md-4">
             <label for="idvtprm"><strong>Permiso por:</strong></label>
-            <select name="idvtprm" id="idvtprm" class="form-control form-select" required onchange="validarPermiso()">
+            <select name="idvtprm" id="idvtprsh" class="form-control form-select" onchange="this.form.submit();" >
             <?php if($datTprm){ foreach($datTprm AS $dtp){ ?>
                 <option value="<?=$dtp['idval']?>" <?php if($datOne && $datOne[0]['idvtprm']==$dtp['idval']) echo " selected "?>><?=$dtp['nomval']?></option>
             <?php }} ?>
@@ -69,12 +69,12 @@ if($_SESSION['idpef']==7){?>
         </div>
         <div class="form-group col-md-4">
             <label for="fecini"><strong>Desde:</strong></label>
-            <input class="form-control" type="datetime-local" id="fecini" name="fecini" value="<?php if ($fechai) echo $fechai;?>" step="1800" required onchange="validarHora(this); actualizarMinMax()">
+            <input class="form-control" type="datetime-local" id="fecini" name="fecini" value="<?php if ($datOne){ if ($fechai) echo $fechai;}; ?>" step="900" required>
             <small id="error-message-fecini" style="color: red; display: none;"></small>
         </div>
         <div class="form-group col-md-4">
             <label for="fecfin"><strong>Hasta:</strong></label>
-            <input class="form-control" type="datetime-local" id="fecfin" name="fecfin" value="<?php if ($fechaf) echo $fechaf;?>" step="1800" required onchange="validarHora(this)">
+            <input class="form-control" type="datetime-local" id="fecfin" name="fecfin" value="<?php if ($datOne){ if ($fechaf) echo $fechaf;}?>" step="900" required>
             <small id="error-message-fecfin" style="color: red; display: none;"></small>
         </div>
         <div class="form-group col-md-4">

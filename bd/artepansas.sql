@@ -165,8 +165,8 @@ CREATE TABLE `modulo` (
 --
 
 INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`) VALUES
-(1, 'Facturas', 'img/mod_facturas.png', 1),
-(2, 'Configuración', 'img/mod_configuracion.png', 1),
+(1, 'Configuración', 'img/mod_configuracion.png', 1),
+(2, 'Facturas', 'img/mod_facturas.png', 1),
 (3, 'Almuerzos', 'img/mod_almuerzos.png', 1),
 (4, 'Talento Humano', 'img/mod_novedades.png', 1);
 
@@ -215,19 +215,19 @@ CREATE TABLE `pagina` (
 --
 
 INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, `mospag`, `idmod`) VALUES
-(60, 'fa fa-solid fa-file-invoice-dollar', 'Facturas', 'views/vfac.php', 12, 'home.php', 1, 1),
+(60, 'fa fa-solid fa-file-invoice-dollar', 'Facturas', 'views/vfac.php', 12, 'home.php', 1, 2),
 (61, 'fa-solid fa-bacon', 'Almuerzos', 'views/valm.php', 13, 'home.php', 1, 3),
 (62, 'fa fa-solid fa-file-invoice-dollar', 'Pedidos', 'views/vped.php', 14, 'home.php', 1, 3),
-(63, 'fa fa-solid fa-duotone fa-wallet', 'Facturas por revisar', 'views/vfac.php', 15, 'home.php', 1, 1),
-(101, 'fa fa-solid fa-cubes', 'Módulos', 'views/vmod.php', 1, 'home.php', 1, 2),
-(102, 'fa fa-regular fa-file', 'Paginas', 'views/vpag.php', 2, 'home.php', 1, 2),
-(103, 'fa fa-solid fa-user', 'PagxPef', 'views/vpgxf.php', 3, 'home.php', 2, 2),
-(104, 'fa fa-solid fa-address-card', 'Perfil', 'views/vpef.php', 4, 'home.php', 1, 2),
-(105, 'fa fa-solid fa-user', 'PerxPef', 'views/vperxf.php', 5, 'home.php', 2, 2),
-(106, 'fa fa-solid fa-user', 'Personas', 'views/vper.php', 6, 'home.php', 1, 3),
-(107, 'fa fa-solid fa-boxes-stacked', 'Dominio', 'views/vdom.php', 7, 'home.php', 1, 2),
-(108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 2),
-(109, 'fa fa-solid fa-building', 'Proveedores', 'views/vemp.php', 11, 'home.php', 1, 1),
+(63, 'fa fa-solid fa-duotone fa-wallet', 'Facturas por revisar', 'views/vfac.php', 15, 'home.php', 1, 2),
+(101, 'fa fa-solid fa-cubes', 'Módulos', 'views/vmod.php', 1, 'home.php', 1, 1),
+(102, 'fa fa-regular fa-file', 'Paginas', 'views/vpag.php', 2, 'home.php', 1, 1),
+(103, 'fa fa-solid fa-user', 'PagxPef', 'views/vpgxf.php', 3, 'home.php', 2, 1),
+(104, 'fa fa-solid fa-address-card', 'Perfil', 'views/vpef.php', 4, 'home.php', 1, 1),
+(105, 'fa fa-solid fa-user', 'PerxPef', 'views/vperxf.php', 5, 'home.php', 2, 1),
+(106, 'fa fa-solid fa-user', 'Personas', 'views/vper.php', 6, 'home.php', 1, 1),
+(107, 'fa fa-solid fa-boxes-stacked', 'Dominio', 'views/vdom.php', 7, 'home.php', 1, 1),
+(108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 1),
+(109, 'fa fa-solid fa-building', 'Proveedores', 'views/vemp.php', 11, 'home.php', 1, 2),
 (110, 'fa-solid fa-bullhorn', 'Novedades', 'views/vnov.php', 16, 'home.php', 1, 4),
 (111, 'fa fa-solid fa-solid fa-lightbulb', 'Dotación', 'views/vdot.php', 17, 'home.php', 1, 4),
 (112, 'fa fa-solid fa-file-circle-check', 'Permisos', 'views/vprm.php', 18, 'home.php', 1, 4);
@@ -316,18 +316,19 @@ CREATE TABLE `pefxmod` (
 --
 
 INSERT INTO `pefxmod` (`idmod`, `idpef`, `idpag`) VALUES
-(1, 1, 60),
-(1, 2, 63),
-(1, 3, 63),
-(1, 4, 60),
-(1, 7, 63),
-(1, 8, 63),
-(1, 9, 63),
-(1, 10, 63),
-(1, 11, 63),
-(1, 12, 63),
-(1, 13, 63),
-(2, 1, 106),
+(1, 1, 106),
+(1, 5, 106),
+(2, 1, 60),
+(2, 2, 63),
+(2, 3, 63),
+(2, 4, 60),
+(2, 7, 63),
+(2, 8, 63),
+(2, 9, 63),
+(2, 10, 63),
+(2, 11, 63),
+(2, 12, 63),
+(2, 13, 63),
 (3, 1, 61),
 (3, 5, 62),
 (3, 6, 61),

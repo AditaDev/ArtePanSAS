@@ -92,22 +92,26 @@ if($idprm && ($comest[0]['estprm']!=3 || $comest[0]['estprm']!=4)){
         </style>
     </head>
     <body>
-    <table>
-        <tbody>
-            <tr>
-                <td class="tit td" style="width: 100px" colspan="2" rowspan="4"><img style="width: 80%;" src="'.$logob64.'" alt="Logo ARTEPAN SAS"></td>
-                <td class="tit td" colspan="2" rowspan="4"><strong>FORMATO CONTROL DE PERMISOS</strong></td>
-                <td class="td" colspan="1"><strong>Código: THM-FOR04</strong></td>
-            </tr>
-             <tr>
-                <td class="td" colspan="1"><strong>Fecha: 26/01/2023</strong></td>
-            </tr>
-            <tr>
-                <td class="td" colspan="1"><strong>Versión: 1</strong></td>
-            </tr>
-            
-        </tbody>
-    </table>
+    <table style="width: 100%; border-collapse: collapse;">
+    <tbody>
+        <tr>
+                <td class="tit td" style="width: 100px; height: auto;" colspan="2" rowspan="4"><img style="width: 70%; height: auto; height: auto;" src="'.$logob64.'" alt="Logo ARTEPAN SAS"></td>
+                 <td class="tit td" style="width: 50%; text-align: center;" colspan="2" rowspan="4">
+                <strong>FORMATO CONTROL DE PERMISOS</strong>
+            </td>
+            <!-- Código -->
+            <td class="td" style="width: 30%;"><strong>Código: THM-FOR04</strong></td>
+        </tr>
+        <tr>
+            <!-- Fecha -->
+            <td class="td" style="width: 30%;"><strong>Fecha: 26/01/2023</strong></td>
+        </tr>
+        <tr>
+            <!-- Versión -->
+            <td class="td" style="width: 30%;"><strong>Versión: 1</strong></td>
+        </tr>
+    </tbody>
+</table>
     <span><br></span>
     <table>
         <tbody>
@@ -160,7 +164,7 @@ if($idprm && ($comest[0]['estprm']!=3 || $comest[0]['estprm']!=4)){
             if($datTprm){ foreach($datTprm AS $i=>$dtp){
             $html .= '<td class="td datper" style="width: 45%">'.strtoupper($dtp['nomval']).'</td>
                 <td class="td datper fond2 tit" style="width: 5%">'.(($dtp['idval']==$det['idvtprm']) ? 'X' : '').'</td>';
-                if($i%2==1 && $dtp['idval']!=48) $html .= '</tr><tr>';
+                if($i%2==1 && $dtp['idval']!=38) $html .= '</tr><tr>';
             }}
     $html .= '
             </tr>
@@ -193,7 +197,7 @@ if($idprm && ($comest[0]['estprm']!=3 || $comest[0]['estprm']!=4)){
     <table>
         <tbody>
             <tr>
-                <td class="datper td"><span style="color: blue"><b>NOTA:</b></span> <b>TELETRABAJO</b>SE PERMITE SOLO UNA VEZ AL MES EN LOS CARGOS EN LOS CUALES ES POSIBLE REALIZARLO Y AVISANDO CON 1 DÍA DE ANTICIPACIÓN. CUALQUIER OTRA AUSENCIA QUE NO CALIFIAQUE COMO <b>CALAMIDAD DOMESTICA</b> DEBE SER TRAMITADA COMO <b>INCAPACIDAD</b> EN EL CASO DE ESTAR ENFERMOS O LICENCIA NO REMUNERADA, LA CUAL DEBE SER ACEPTADA POR EL JEFE DIRECTO DE ACUERDO A LOS COMPROMISOS QUE SE TENGA EN CADA ÁREA.</td>
+                <td class="datper td"><span style="color: blue"><b>NOTA:</b></span> <b>TRABAJO EN CASA</b>SE PERMITE SOLO UNA VEZ AL MES EN LOS CARGOS EN LOS CUALES ES POSIBLE REALIZARLO Y AVISANDO CON 1 DÍA DE ANTICIPACIÓN. CUALQUIER OTRA AUSENCIA QUE NO CALIFIAQUE COMO <b>CALAMIDAD DOMESTICA</b> DEBE SER TRAMITADA COMO <b>INCAPACIDAD</b> EN EL CASO DE ESTAR ENFERMOS O LICENCIA NO REMUNERADA, LA CUAL DEBE SER ACEPTADA POR EL JEFE DIRECTO DE ACUERDO A LOS COMPROMISOS QUE SE TENGA EN CADA ÁREA.</td>
             </tr>
         </tbody>
     </table>
