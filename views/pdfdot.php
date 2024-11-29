@@ -51,7 +51,8 @@ if($det['firpent']){
     $fdevb64 = "data:image/png;base64,".base64_encode(file_get_contents($fdev));
 }
 
-$anctbla = 750;
+$intentos = 5;
+$c = 0;
 $cont = 0;
 $html = '';
 $html .= '
@@ -337,7 +338,11 @@ if($ident){
 
     //-------Llama la función que crea y envía el correo--------
     $exito = sendemail($ema, $psem, $nom, $maild, $nomperd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template, "", "", "../");
-    while ($exito==2) $exito = sendemail($ema, $psem, $nom, $maild, $nomperd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template, "", "", "../");
+    while ($exito==2 && $c<$intentos){
+        $exito = sendemail($ema, $psem, $nom, $maild, $nomperd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template, "", "", "../");
+        sleep(5);
+        $c++;
+    }
 }
 
 ?>
