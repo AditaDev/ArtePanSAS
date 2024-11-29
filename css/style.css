@@ -244,7 +244,7 @@ label {
   margin-bottom: 10px;
 }
 
-#satf {
+#satf, #cpass {
   display: inline-block;
   width: 100%;
   color: #008000;
@@ -253,6 +253,12 @@ label {
   border-radius: 100px;
   background-color: #ffffff;
   margin-bottom: 10px;
+}
+
+#cpass{
+  margin-top: 30px;
+  color: #073663;
+  border: 1px solid #073663;
 }
 
 .hrtitu {

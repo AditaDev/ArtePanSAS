@@ -4,8 +4,9 @@
     
     <div class="row">
     <div class="form-group col-md-2">
+    <form action="home.php?pg=<?= $pg; ?>" method="post">
                 <label for="fecinib"><strong>Fecha inicial:</strong></label>
-                <input type="date" name="fecini" id="fecinib" value="<?= $fecalm; ?>" onchange="this.form.submit(); actMinMax();" class="form-control">
+                <input type="date" name="fecini" id="fecinib" value="<?= $fecini; ?>" onchange="this.form.submit(); actMinMax();" class="form-control">
             </div>
             <div class="form-group col-md-2">
                 <label for="fecfinb"><strong>Fecha final:</strong></label>
@@ -15,11 +16,15 @@
                 <label for="ndper"><strong>Documento:</strong></label>
                 <input type="text" name="ndper" id="ndper" value="<?= $ndper; ?>" onkeydown="return enter(event);" onchange="this.form.submit();" onkeypress="return solonum(event);" class="form-control">
             </div>
-    
+            <input type="hidden" name="ope" value="busc">
             <div class="form-group col-md-6" style="text-align: right;"> 
-        <a href="excel/xalm.php" title="Exportar Almuerzos">
-            <i class="fa fa-solid fa-file-export fa-2x exp"></i>
-        </a>
+                <button type="submit" title="Limpiar" value="limp" name="ope" style="border: none;">
+                    <i class="fa fa-solid fa-eraser fa-2x desact"></i>
+                </button>
+                </form>
+                <a href="excel/xalm.php" title="Exportar Almuerzos">
+                    <i class="fa fa-solid fa-file-export fa-2x exp"></i>
+                </a>
             </div>
     </div>
 

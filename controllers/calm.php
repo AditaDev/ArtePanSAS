@@ -21,6 +21,9 @@ $fecped = date("Y-m-d H:i:s");
 $idper = isset($_REQUEST['idper']) ? $_REQUEST['idper'] :$_SESSION['idper'];
 
 $ndper = isset($_POST['ndper']) ? $_POST['ndper']:NULL;
+$fecini = isset($_POST['fecini']) ? $_POST['fecini'] : '';  
+$fecfin = isset($_POST['fecfin']) ? $_POST['fecfin'] : '';
+
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
 $datOne = NULL;
@@ -60,6 +63,12 @@ if($ope=="savePed"){
     $malm->savePed(); 
     echo "<script>alert('Has pedido ".$canalm." almuerzo(s) exitosamente!!!');window.location='home.php?pg=".$pg."';</script>";
 }
+
+// if ($ope == 'busc') {
+//     $datAll = $malm->getAll("bus", $fecini, $fecfin);
+// }
+
+if($ope=='limp') echo "<script>window.location='home.php?pg=".$pg."';</script>";
 
 
 if ($ope == "edi" && $idalm) $datOne = $malm->getOne($idalm);

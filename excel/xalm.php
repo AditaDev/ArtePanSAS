@@ -28,6 +28,7 @@ $malm = new Malm();
 $datfec = $malm->totalfec();
 $datper = $malm->totalper();
 
+
 $sheet = $spreadsheet->getActiveSheet();
 
 // Agregar titulo hoja
@@ -96,6 +97,7 @@ $datos = [];
 if ($datper) {
     foreach ($datper as $dper) {
         $filaDatos = [$dper['ndper'], $dper['nomper'], " "];
+        $datval = $malm->getAll($vfac);
         $datPxF = $malm->getAllPxF($dper['idper']);  
         if (!empty($datfec)) {    
             foreach ($datfec as $dalm) {
@@ -107,6 +109,11 @@ if ($datper) {
                         if ($f1 === $f2) {
                             $marcadorEncontrado = true;
                             $filaDatos[] = $dae['canalm'];
+                            if(!empty($datval)){
+                                foreach ($datval as $dval) {
+                                    
+                                    $filaDatos[] = $dval['vfac'];
+                                }}
                             break;
                         }
                     }
@@ -114,6 +121,18 @@ if ($datper) {
                 if (!$marcadorEncontrado) {
                     $filaDatos[] = ' ';
                 }
+                // if (!empty($datfec)) {    
+                //     foreach ($datfec as $dalm) {
+                //         $marcadorEncontrado = false;
+                //     if(!empty($datval)){
+                //         foreach ($datval as $dval) {
+                //             $marcadorEncontrado = true;
+                //             $filaDatos[] = $dval['vfac'];
+                //     }
+                // }
+        //     }
+        // }
+            
             }
         }
         // Agregar la fila al array final
@@ -138,7 +157,6 @@ foreach (range($startRow, $endRow) as $row) {
 // Calcular el total de la columna C
 $totalRow = $endRow + 1; // Fila donde irá el total
 $sheet->setCellValue("C$totalRow", "=SUM(C$startRow:C$endRow)"); // Suma de toda la columna C
-
 // Agregar datos dinámicos
 
 $fila = 4; // Comienza en la fila 3 porque la fila 1 y 2 tiene encabezados

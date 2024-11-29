@@ -102,7 +102,7 @@ class Malm
 
 //--------Almuerzo-------
     function getAll(){ 
-        $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm, vfac FROM almuerzo";
+        $sql = "SELECT idalm, fecalm, ppalm, spalm, jgalm, vfac FROM almuerzo"; 
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);

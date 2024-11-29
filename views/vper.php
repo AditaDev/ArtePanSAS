@@ -1,12 +1,12 @@
 <?php
 require_once('controllers/cper.php');
-?>
 
+if($_SESSION['idpef']!=5){ ?>
     <div style="text-align: right;">
     <i class="fa fa-solid fa-file-import fa-2x imp" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod<?=$pg?>carper" title="Importar Personas"></i>
     <?php modalImp("mod", $pg, "Personas", "carper", ""); ?>
-        
     </div>
+<?php } ?>
 
 <form action="home.php?pg=<?= $pg; ?>" method="POST" id="frmins">
     <div class="row">
@@ -24,7 +24,7 @@ require_once('controllers/cper.php');
         </div>
         <div class="form-group col-md-4">
             <label for="area"><strong>Area:</strong></label>
-            <select name="area" id="area" class="form-control form-select" required>
+            <select name="area" id="area" class="form-control form-select" required <?php if($_SESSION['idpef']==5) echo " disabled "?>>
                     <?php foreach ($datarea as $dte) { ?>
                         <option value="<?= $dte['idval']; ?>" <?php if ($datOne && $dte['idval'] == $datOne[0]['area']) echo " selected "; ?>>
                             <?= $dte['nomval']; ?>
@@ -69,14 +69,16 @@ require_once('controllers/cper.php');
 
         <div class="form-group col-md-12" id="boxbtn">
             <br><br>
+            <?php if($_SESSION['idpef'] != 5){ ?>
             <input class="btn btn-primary" type="submit" value="Registrar">
             <input type="hidden" name="ope" value="save">
+            <?php } ?>
             <input type="hidden" name="idper" value="<?php if ($datOne) echo $datOne[0]['idper']; ?>">
         </div>
     </div>
 </form>
 
-
+<?php if($_SESSION['idpef']!=5){ ?>
 <table id="mytable" class="table table-striped">
     <thead>
         <tr>
@@ -136,7 +138,7 @@ require_once('controllers/cper.php');
                 <a href="home.php?pg=<?= $pg; ?>&idper=<?= $dta['idper']; ?>&ope=edi" title="Editar">
                         <i class="fa fa-solid fa-pen-to-square fa-2x iconi"></i>
                     </a>
-                    <?php
+                    <?php if ($_SESSION['idpef'] == 1) { 
                         $mper->setIdper($dta['idper']);
                         $i = $mper->getOne();
                         $dga = $mper->getOnePxF();
@@ -151,7 +153,7 @@ require_once('controllers/cper.php');
                             <a href="home.php?pg=<?= $pg; ?>&idper=<?= $dta['idper']; ?>&ope=eli" onclick="return eliminar('<?= $dta['nomper'].' '.$dta['apeper']; ?>');" title="Eliminar">
                                 <i class="fa fa-solid fa-trash-can fa-2x iconi"></i>
                             </a>
-                    
+                        <?php } ?>
                 </td>
     </tr>
     <?php }} ?>
@@ -159,13 +161,12 @@ require_once('controllers/cper.php');
     <tfoot>
         <tr>
             <th>Datos personales</th>
-            <?php if ($_SESSION['idpef'] != 5) { ?>
                 <th>Estado</th>
-            <?php } ?>
             <th></th>
         </tr>
     </tfoot>
 </table>
+<?php } ?>
 
 <div class="modal fade" id="pass<?=$_SESSION['idper']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -177,7 +178,7 @@ require_once('controllers/cper.php');
 				</div>
 				<div class="modal-body" style="text-align: left;">
                     <div class="contra">
-                        <label for="pasper" class="labcon"><small><strong>Nueva contraseña: </strong></small></label>
+                    <label for="pasper" class="labcon"><small><strong>Nueva contraseña: </strong></small></label>
                         <input class="form-control" style="margin-right: 10px;" type="password" id="pasper<?=$_SESSION['idper']?>" name="pasper" required oninput="comparar(<?=$_SESSION['idper']?>)">
 					    <i id="vpass<?=$_SESSION['idper']?>" class="fas fa-eye" onclick="verpass('pasper', 'vpass', <?=$_SESSION['idper']?>)"></i>
                     </div>

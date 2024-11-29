@@ -121,12 +121,16 @@ class Mper
     //------------Persona-----------
     function getAll()
     {
-        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.area, p.actper,  v.nomval FROM persona AS p INNER JOIN valor AS v ON p.area=v.idval";
+        $sql = "SELECT p.idper, p.nomper, p.apeper, p.ndper, p.emaper, p.area, p.actper, v.nomval FROM persona AS p INNER JOIN valor AS v ON p.area=v.idval";
         if($_SESSION['idpef']==5) $sql .= " WHERE p.idper=:idper ";
         $sql .= " GROUP BY p.idper";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
+        if($_SESSION['idpef']==5){
+            $idper = $_SESSION['idper'];
+            $result->bindParam(":idper", $idper);
+        }
         $result->execute();
         $res = $result->fetchall(PDO::FETCH_ASSOC);                                    
         return $res;

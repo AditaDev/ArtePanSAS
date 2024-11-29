@@ -218,7 +218,15 @@ function ocul(mos=0,est=0){
             document.getElementById("mas").style.display = "inherit";
             document.getElementById("menos").style.display = "none";
         }
-    }
+        }else if(mos==2){
+        document.getElementById("frmins").style.display = "inherit";
+        document.getElementById("mas").style.display = "none";
+        document.getElementById("menos").style.display = "none";
+        }else {
+        document.getElementById("frmins").style.display = "none";
+        document.getElementById("mas").style.display = "none";
+        document.getElementById("menos").style.display = "none";
+  }
 }
 
 function asig(mos=1,est=1){
@@ -252,6 +260,18 @@ function satf(mess=""){
   }else{
       document.getElementById("satf").innerHTML = "";
       document.getElementById("satf").style.display = "none";
+  }
+
+}
+
+function cpass(mess=""){
+  if(mess){
+      mess = "<strong>¡Bienvenido a nuestra app!</strong><br>"+mess;
+      document.getElementById("cpass").innerHTML = mess;
+      document.getElementById("cpass").style.display = "inline-block";
+  }else{
+      document.getElementById("cpass").innerHTML = "";
+      document.getElementById("cpass").style.display = "none";
   }
 
 }

@@ -3,10 +3,10 @@ include("models/seguridad.php");
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>TUMMY</title>
     <link rel="icon" href="img/Icono_TUMMY.png">
@@ -79,9 +79,14 @@ include("models/seguridad.php");
 		$est = 0;
 		$rut = validarpg($pg);
 		if ($rut) {
-			$mos = $rut[0]['mospag'];
+			if ($_SESSION['idpef']==5 && $pg==106) $mos = 2;
+			else $mos = $rut[0]['mospag'];
 			if ($ope == "edi") $est = 1;
-			titulo($rut[0]['icono'], $rut[0]['nompag'], $rut[0]['mospag'], $pg);
+			// if (!$_SESSION['new']){
+			// 	echo '<div id="cpass"></div>';
+			// 	echo "<script>cpass('Para empezar, por favor <a class=\"lcon\" href=\"pmod.php?ope=cg\">cambia tu contraseña');</script>";
+			// }
+			titulo($rut[0]['icono'], $rut[0]['nompag'], $mos, $pg);
 			echo '<div id="err"></div>';
 			echo "<script>err();</script>";
 			echo '<div id="satf"></div>';
@@ -99,6 +104,7 @@ include("models/seguridad.php");
 		?>
 	</footer>
 </body>
+<script type="text/javascript" src="js/time.js"></script>
 <script type="text/javascript">
 	ocul(<?= $mos; ?>, <?= $est; ?>);
 </script>

@@ -4,11 +4,16 @@
 			<?php if ($_SESSION["idpef"]) { ?>
 				<div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i></div>
 			<?php } ?>
-			<div><a href="pmod.php"><img class="logocabe" src="img/Logo_sin_fondo_TUMMY.png" alt=""></a></div>
+			<div>
+				<a href="pmod.php">
+					<img class="logocabe" src="img/Logo_sin_fondo_TUMMY.png" alt="">
+				</a>
+			</div>
 			<div class="imgnomper">
-				<a href="" style="display: grid; grid-template-columns: max-content max-content; color: #073663;">
+				<a href="pmod.php?ope=cg"style="display: grid; grid-template-columns: max-content max-content; color: #073663;">
 					<div class="headernom">
-						<?php echo (function($name) { return explode(" ", $name)[0]; })($_SESSION["nomper"]) . " " . (function($surname) { return explode(" ", $surname)[0]; })($_SESSION["apeper"]);?>
+						
+							<?php echo (function($name) { return explode(" ", $name)[0]; })($_SESSION["nomper"]) . " " . (function($surname) { return explode(" ", $surname)[0]; })($_SESSION["apeper"]);?>
 						<br>
 						<small><small><?= $_SESSION["nompef"]; ?></small></small>
 					</div>

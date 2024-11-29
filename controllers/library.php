@@ -4,6 +4,7 @@
 //------------Titulos-----------
 function titulo($ico, $tit, $mos, $pg)
 {
+	if($_SESSION['idpef']==5 && $pg==106) $tit = "Datos Personales";
 	$txt = '';
 	$txt .= '<div class="titu">';
 		$txt .= '<div class="titaju">';
@@ -16,7 +17,7 @@ function titulo($ico, $tit, $mos, $pg)
 			$txt .= '<div class="titaju" style="float: right; font-size: 20px">';
 			$txt .= '<style"text-align: right;">Registrar </class=style>';
 				$txt .= '<i class="fa-solid fa-circle-plus" id="mas" onclick="ocul(' . $mos . ',1);"></i>';
-				$txt .= '<i class="fa-solid fa-circle-minus" id="menos" onclick="ocul(' . $mos . ');"></i>';
+				$txt .= '<i class="fa-solid fa-circle-minus" id="menos" onclick="ocul(' . $mos . ',0);"></i>';
 			$txt .= '</div>';
 		}
 		
