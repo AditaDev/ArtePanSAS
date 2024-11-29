@@ -89,16 +89,24 @@ function validarHora(input) {
     const diffMs = fecfin - fecini; // Diferencia en milisegundos
     const diffHrs = Math.floor(diffMs / 3600000); // Horas
     const diffMins = Math.floor((diffMs % 3600000) / 60000); // Minutos
+    const diffMinutes = Math.floor(diffMs / 60000); // Convertir a minutos
 
     // Calcular duración ajustada
     let totalMinutes = (diffHrs * 60 + diffMins);
+
+
+    // Valida si la diferencia es menor a 60 minutos (1 hora)
+    if (diffMinutes < 60) {
+    mostrarError(input, errorMessage, "La duración debe ser de al menos 1 hora.");
+    return false;
+    }
     
     // Restar 1 hora si se aplica
     if (hora < 13 || hora > 14) {
         totalMinutes -= 60; // Restar 1 hora
     }
 
-    // Verificar si la duración total supera las 8 horas y 30 minutos
+    // Validar si la duración total supera las 8 horas y 30 minutos
     if (totalMinutes > (8 * 60 + 30)) { // 8 horas y 30 minutos en minutos
         input.style.borderColor = "red";
         errorMessage.textContent = "El permiso no puede ser mayor a la jornada laboral.";
