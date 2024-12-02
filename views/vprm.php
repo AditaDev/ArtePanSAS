@@ -14,9 +14,20 @@ if($_SESSION['idpef']==7){?>
                 <label for="fecfinb"><strong>Fecha final:</strong></label>
                 <input type="date" name="fecfin" id="fecfinb" value="<?= $fecfin; ?>" onchange="this.form.submit()" class="form-control">
             </div>
-            <div class="form-group col-md-2 ">
+            <div class="form-group col-md-2 col-sm-4">
                 <label for="ndper"><strong>Documento:</strong></label>
                 <input type="text" name="ndper" id="ndper" value="<?= $ndper; ?>" onkeydown="return enter(event);" onchange="this.form.submit();" onkeypress="return solonum(event);" class="form-control">
+            </div>
+            <div class="form-group col-md-2 col-sm-4">
+                <label for="idvtprm"><strong>T. Permiso:</strong></label>
+                <select name="idvtprm" id="idvtprsh" class="form-control form-select" onchange="this.form.submit();" >
+                    <option value="0">Seleccione...</option>
+                    <?php foreach ($datTprm AS $dtm) { ?>
+                        <option value="<?= $dtm['idval']; ?>" <?php if ($dtm['idval'] == $idvtprm) echo " selected "; ?>>
+                            <?= $dtm['nomval']; ?>
+                        </option>
+                    <?php } ?>
+                </select>
             </div>
             <div class="form-group col-md-2 col-sm-4">
                 <label for="estprm"><strong>Estado:</strong></label>
@@ -27,20 +38,23 @@ if($_SESSION['idpef']==7){?>
                 </select>
             </div>
             <input type="hidden" name="ope" value="busc">
-            <div class="form-group col-md-2 col-sm-4" id="btnprm">
+            <div class="form-group col-md-1 " id="btnprm">
                 <div>
                     <button type="submit" title="Limpiar" value="limp" name="ope" style="border: none;">
                         <i class="fa fa-solid fa-eraser fa-2x desact"></i>
                     </button>
                 </div>
-                <div>
-                    <a href="excel/xprm.php?<?php if($idvdpt)echo"d=".$idvdpt."&";if($fecini)echo"fi=".$fecini."&";if($ndper)echo"n=".$ndper."&";if($fecfin)echo"ff=".$fecfin; ?>" title="Exportar permisos">
-                        <i class="fa fa-solid fa-file-export fa-2x act"></i>
-                    </a>
+                 <div  class="form-group col-md-1 ">
+                    <?php 
+                        
+                    ?>
+                    <i class="fa fa-solid fa-file-export fa-2x act" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#export" title="Exportar"></i>                                
                 </div>
-                <div>
-                    <i class="fa fa-solid fa-chart-simple fa-2x iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#grafprm" title="Gráfica"></i>                                
-                </div>
+                <?php if($datGra){ ?>
+                    <div>
+                        <i class="fa fa-solid fa-chart-simple fa-2x iconi" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#grafprm" title="Gráfica"></i>                                
+                    </div>
+                <?php } ?> 
             </div>
         </div>
     </form>
@@ -50,7 +64,7 @@ if($_SESSION['idpef']==7){?>
     <div class="row">
         <div class="form-group col-md-4">
             <label for="idvtprm"><strong>Permiso por:</strong></label>
-            <select name="idvtprm" id="idvtprsh" class="form-control form-select" onchange="this.form.submit();" >
+            <select name="idvtprm" id="idvtprm" class="form-control form-select" required onchange="validarPermiso()">
             <?php if($datTprm){ foreach($datTprm AS $dtp){ ?>
                 <option value="<?=$dtp['idval']?>" <?php if($datOne && $datOne[0]['idvtprm']==$dtp['idval']) echo " selected "?>><?=$dtp['nomval']?></option>
             <?php }} ?>
@@ -123,15 +137,15 @@ if($_SESSION['idpef']==7){?>
                                     <?php } ?>
                                     <?php if ($dta['fini'] && $dta['hini']) { ?>
                                         <div class="form-group col-md-12">
-                                            <strong>F. de Inicio: </strong> <?= $dta['fini']." - ".$dta['hini']; ?>
+                                            <strong>F. Inicio: </strong> <?= $dta['fini']." - ".$dta['hini']; ?>
                                         </div>
                                     <?php } if ($dta['ffin'] && $dta['hfin']) { ?>
                                         <div class="form-group col-md-12">
-                                            <strong>F. de Fin: </strong> <?= $dta['ffin']." - ".$dta['hfin']; ?>
+                                            <strong>F. Fin: </strong> <?= $dta['ffin']." - ".$dta['hfin']; ?>
                                         </div>
                                     <?php } if ($dta['ddif'] OR $dta['hdif']) { ?>
                                         <div class="form-group col-md-12">
-                                            <strong>T. de Tiempo: </strong> 
+                                            <strong>Tiempo: </strong> 
                                             <?php if($dta['ddif']){ echo $dta['ddif']; if($dta['ddif']==1) echo " día "; else echo " días ";
                                             }else echo $dta['hdif']; ?>
                                         </div>
@@ -146,7 +160,7 @@ if($_SESSION['idpef']==7){?>
                                 $det = $mprm->getOne();
                                 modalInfPrm("mcbprm", $dta['idprm'], $det);
                             if($_SESSION['idpef']==5 && $dta['sptrut'] && file_exists($dta['sptrut'])) { ?>
-                               <i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?= $dta['idprm'] ?>', 'spt', '<?= basename($dta['sptrut']) ?>')"></i>
+                                <i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?= $dta['idprm'] ?>', 'spt', '<?= basename($dta['sptrut']) ?>')"></i>
                             <?php } elseif($_SESSION['idpef']==7 && $dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
                                 <i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?= $dta['idprm'] ?>', 'pdf', '<?= basename($dta['rutpdf']) ?>')"></i>
                             <?php } ?>
@@ -238,15 +252,15 @@ if($_SESSION['idpef']==7){?>
                                             </div>
                                         <?php } if ($slp['fini'] && $slp['hini']) { ?>
                                             <div class="form-group col-md-12">
-                                                <strong>F. de Inicio: </strong> <?= $slp['fini']." - ".$slp['hini']; ?>
+                                                <strong>F. Inicio: </strong> <?= $slp['fini']." - ".$slp['hini']; ?>
                                             </div>
                                         <?php } if ($slp['ffin'] && $slp['hfin']) { ?>
                                             <div class="form-group col-md-12">
-                                                <strong>F. de Fin: </strong> <?= $slp['ffin']." - ".$slp['hfin']; ?>
+                                                <strong>F. Fin: </strong> <?= $slp['ffin']." - ".$slp['hfin']; ?>
                                             </div>
                                         <?php } if ($slp['ddif'] OR $slp['hdif']) { ?>
                                             <div class="form-group col-md-12">
-                                                <strong>T. de Tiempo: </strong> 
+                                                <strong>Tiempo: </strong> 
                                                 <?php if($slp['ddif']){ echo $slp['ddif']; if($slp['ddif']==1) echo " día "; else echo " días ";
                                                 }else echo $slp['hdif']; ?>
                                             </div>
@@ -263,7 +277,7 @@ if($_SESSION['idpef']==7){?>
                                 if($slp['rutpdf'] && file_exists($slp['rutpdf'])) { ?>
                                     <i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?= $slp['idprm'] ?>', 'pdf', '<?= basename($slp['rutpdf']) ?>')"></i>
                                 <?php } ?>
-                            </div> 
+                            </div>
                         </div>
                     </td>
                     <td style="text-align: left;">
@@ -307,7 +321,6 @@ if($_SESSION['idpef']==7){?>
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Permisos por Dpto.</strong></h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body" style="text-align: left;">
@@ -415,6 +428,29 @@ if($_SESSION['idpef']==7){?>
     }
 </style>
 
+<?php
+$total = array_sum(array_column($datGra, 'cant')); // Suma total de permisos
+foreach ($datGra as &$data) {
+    $data['percent'] = round(($data['cant'] / $total) * 100, 2); // Calcula porcentaje
+}
+unset($data); // Elimina referencia
+?>
+
+<?php
+$categories = [];
+$data = [];
+
+foreach ($datGra as $row) {
+    $categories[] = "{$row['periodo']} ({$row['tipo']})"; // Combina periodo y tipo en una categoría
+    $data[] = [
+        'y' => $row['cant'], // Cantidad
+        'percentage' => $row['percent'], // Porcentaje
+        'name' => $row['tipo'], // Tipo de permiso
+        'periodo' => $row['periodo'] // Periodo
+    ];
+}
+?>
+
 <!-- JS Funcionamiento de la gráfica -->
 <script type="text/javascript">
     const chart = Highcharts.chart('container', {
@@ -436,52 +472,45 @@ if($_SESSION['idpef']==7){?>
         },
 
         title: {
-            text: 'Cantidad de solicitudes por departamento',
+            text: 'Cantidad de permisos por tipo y periodo',
             align: 'left'
-        },
-
-        colors: [
-            '#423f8c',
-            '#8237bc',
-            '#26b0bf',
-            '#a9bf04',
-            '#26b0bf',
-            '#8237bc',
-            '#423f8c'
-        ],
-
-        yAxis: {
-            title: {
-                text: 'Permisos',
-                style: {
-                    fontWeight: 'bold',
-                }
-            }
         },
 
         xAxis: {
             title: {
-                text: 'Departamento',
+                text: 'PERIODO Y TIPO',
                 style: {
                     fontWeight: 'bold',
                 }
             },
-            categories: [
-                <?php if ($datGra) { foreach ($datGra as $dtgn) { ?>
-                    '<?= $dtgn['dpto']; ?>',
-                <?php }} ?>
-            ]
+            categories: <?= json_encode($categories); ?> // Categorías combinadas de tipo y periodo
+        },
+
+        yAxis: {
+            title: {
+                text: 'CANTIDAD',
+                style: {
+                    fontWeight: 'bold',
+                }
+            },
+            tickInterval: 1
+        },
+
+        tooltip: {
+            pointFormatter: function () {
+                return `<b>${this.y}</b> permisos (${this.percentage}%)<br>Tipo: ${this.name}<br>Periodo: ${this.periodo}`;
+            }
         },
 
         series: [{
             type: 'column',
-            name: 'Permisos',
-            borderRadius: 5,
+            name: 'CANTIDAD',
             colorByPoint: true,
-            data: [<?php if ($datGra) { foreach ($datGra as $dtgc) { ?>
-                    <?= $dtgc['cn']; ?>,
-                <?php }} ?>
-            ],
+            data: <?= json_encode($data); ?>, // Datos con cantidad y porcentaje
+            dataLabels: {
+                enabled: true,
+                format: '{point.percentage}%' // Muestra porcentaje en la barra
+            },
             showInLegend: false
         }]
     });
@@ -495,16 +524,18 @@ if($_SESSION['idpef']==7){?>
 
             yAxis: {
                 title: {
-                    text: 'Permisos',
+                    text: 'CANTIDAD',
                     style: {
                         fontWeight: 'bold',
                     }
-                }
+                },
+                tickInterval: 1
             },
+            
 
             xAxis: {
                 title: {
-                    text: 'Departamento',
+                    text: 'PERIODO Y TIPO',
                     style: {
                         fontWeight: 'bold',
                     }
@@ -523,16 +554,17 @@ if($_SESSION['idpef']==7){?>
 
             yAxis: {
                 title: {
-                    text: 'Permisos',
+                    text: 'CANTIDAD',
                     style: {
                         fontWeight: 'bold',
                     }
-                }
+                },
+                tickInterval: 1
             },
 
             xAxis: {
                 title: {
-                    text: 'Departamento',
+                    text: 'PERIODO Y TIPO',
                     style: {
                         fontWeight: 'bold',
                     }
@@ -552,7 +584,8 @@ if($_SESSION['idpef']==7){?>
             yAxis: {
                 title: {
                     text: ''
-                }
+                },
+                tickInterval: 1
             },
 
             xAxis: {

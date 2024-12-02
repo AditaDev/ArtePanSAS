@@ -15,13 +15,13 @@
     $obsprm = isset($_POST['obsprm']) ? $_POST['obsprm']:NULL;
     $estprm = isset($_POST['estprm']) ? $_POST['estprm']:NULL;
     $arcspt = isset($_FILES['arcspt']) ? $_FILES['arcspt']:NULL;
+    
     $idper = $_SESSION['idper'];
     $sptrut = NULL;
     $arc = NULL;
     $ext = NULL;
 
     $ndper = isset($_POST['ndper']) ? $_POST['ndper']:NULL;
-    $idvdpt = isset($_POST['idvdpt']) ? $_POST['idvdpt']:NULL;
 
     $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
 
@@ -78,6 +78,7 @@
         $mprm->setNdper($ndper);
         $mprm->setFecini($fecini);
         $mprm->setFecfin($fecfin);
+        $mprm->setIdvtprm($idvtprm);
         $mprm->setEstprm($estprm);
         $datAll = $mprm->getAll("bus");
     } else if($_SESSION['idpef']==5) $datAll = $mprm->getAll("prop");
@@ -87,7 +88,7 @@
     
     $datTprm = $mprm->getAllDom(4);
     $datJef = $mprm->getAllPer();
-    // $datGra = $mprm->getAllGraf();
+    $datGra = $mprm->getAllGraf();
     
     if($_SESSION['idpef']==7) $solper = $mprm->getAll("rrhhp");
     else $solper = $mprm->getAll($_SESSION['idper']);

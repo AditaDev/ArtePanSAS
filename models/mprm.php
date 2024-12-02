@@ -1,4 +1,3 @@
-
 <?php
     class Mprm{
         private $idprm;
@@ -125,6 +124,7 @@
             $fecini = $this->getFecini();
             $fecfin = $this->getFecfin();
             $ndper = $this->getNdper();
+            $idvtprm = $this->getIdvtprm();
             $estprm = $this->getEstprm();
             $sql ="SELECT r.idprm, r.noprm, r.fecini, r.fecfin, r.idvtprm, r.rutpdf, DATE_FORMAT(r.fecini, '%e de %M de %Y') AS fini, DATE_FORMAT(r.fecini, '%h:%i %p') AS hini, DATE_FORMAT(r.fecfin, '%e de %M de %Y') AS ffin, DATE_FORMAT(r.fecfin, '%h:%i %p') AS hfin, r.sptrut, r.desprm, r.obsprm, r.estprm, r.fecsol, r.fecrev,
     -- Ajuste de duración con condiciones
@@ -137,16 +137,18 @@
     CASE 
         WHEN (HOUR(r.fecini) < 14 AND HOUR(r.fecfin) > 13) THEN TIME_TO_SEC('1:00:00') 
         ELSE 0 
-    END) % TIME_TO_SEC('8:30:00')) AS hdif, DATE_FORMAT(r.fecsol, '%e de %M de %Y') AS fsol, DATE_FORMAT(r.fecrev, '%e de %M de %Y') AS frev, vt.nomval AS tprm, pp.idper AS iper, pp.nomper AS nper, pp.apeper AS aper, pp.ndper AS dper, pp.emaper AS eper, pp.area, vc.nomval AS cper, pj.idper AS ijef, pj.nomper AS njef, pj.apeper AS ajef, pj.ndper AS djef, pj.emaper AS ejef, pj.area AS cjef, pr.idper AS irev, pr.nomper AS nrev, pr.apeper AS arev, pr.ndper AS drev, pr.emaper AS erev, pr.area AS crev FROM permiso AS r INNER JOIN persona AS pp ON r.idper = pp.idper INNER JOIN persona AS pj ON r.idjef = pj.idper LEFT JOIN persona AS pr ON r.idrev = pr.idper INNER JOIN valor AS vt ON r.idvtprm = vt.idval INNER JOIN valor AS vc ON pp.area = vc.idval";
+    END) % TIME_TO_SEC('8:30:00')) AS hdif, DATE_FORMAT(r.fecsol, '%e de %M de %Y') AS fsol, DATE_FORMAT(r.fecrev, '%e de %M de %Y') AS frev, vt.nomval AS tprm, pp.idper AS iper, pp.nomper AS nper, pp.apeper AS aper, pp.ndper AS dper, pp.emaper AS eper, vap.nomval AS cper, pj.idper AS ijef, pj.nomper AS njef, pj.apeper AS ajef, pj.ndper AS djef, pj.emaper AS ejef, vaj.nomval AS cjef, pr.idper AS irev, pr.nomper AS nrev, pr.apeper AS arev, pr.ndper AS drev, pr.emaper AS erev, var.nomval AS crev FROM permiso AS r INNER JOIN persona AS pp ON r.idper = pp.idper INNER JOIN persona AS pj ON r.idjef = pj.idper LEFT JOIN persona AS pr ON r.idrev = pr.idper INNER JOIN valor AS vt ON r.idvtprm = vt.idval INNER JOIN valor AS vap ON pp.area = vap.idval INNER JOIN valor AS vaj ON pp.area = vaj.idval INNER JOIN valor AS var ON pp.area = var.idval";
             if($id=="prop") $sql .= " WHERE r.idper=:id";
             if($id=="rrhhf") $sql .= " WHERE r.estprm=3 OR r.estprm=4";
             if($id=="rrhhp") $sql .= " WHERE r.estprm=2";
+            if($id=="rrhhx") $sql .= " WHERE r.estprm=3 AND (r.idvtprm=41 OR r.idvtprm=42 OR r.idvtprm=43 OR r.idvtprm=44 OR r.idvtprm=48)";
             if($id==$_SESSION['idper']) $sql .= " WHERE r.idjef=:id AND r.estprm!=1";
             if($id=="bus"){
                 $sql .= " WHERE (r.estprm=3 OR r.estprm=4)";
                 if($fecini) $sql .= " AND DATE(r.fecini)>=:fecini";
 		        if($fecfin) $sql .= " AND DATE(r.fecini)<=:fecfin";
 		        if($ndper) $sql .= " AND pp.ndper LIKE CONCAT('%', :ndper, '%')";
+		        if($idvtprm) $sql .= " AND r.idvtprm=:idvtprm";
 		        if($estprm) $sql .= " AND r.estprm=:estprm";
                 $sql .= " ORDER BY r.fecini ASC";
             }
@@ -160,6 +162,7 @@
                 if($fecini) $result->bindParam(":fecini", $fecini);
 		        if($fecfin) $result->bindParam(":fecfin", $fecfin);
 		        if($ndper) $result->bindParam(":ndper", $ndper);
+		        if($idvtprm) $result->bindParam(":idvtprm", $idvtprm);
 		        if($estprm) $result->bindParam(":estprm", $estprm);
             }
             $result->execute();
@@ -179,7 +182,7 @@
     CASE 
         WHEN (HOUR(r.fecini) < 14 AND HOUR(r.fecfin) > 13) THEN TIME_TO_SEC('1:00:00') 
         ELSE 0 
-    END) % TIME_TO_SEC('8:30:00')) AS hdif, DATE_FORMAT(r.fecsol, '%e de %M de %Y') AS fsol, DATE_FORMAT(r.fecrev, '%e de %M de %Y') AS frev, vt.nomval AS tprm, pp.idper AS iper, pp.nomper AS nper, pp.apeper AS aper, pp.ndper AS dper, pp.emaper AS eper, pp.area AS cper, pj.idper AS ijef, pj.nomper AS njef, pj.apeper AS ajef, pj.ndper AS djef, pj.emaper AS ejef, pj.area AS cjef, pr.idper AS irev, pr.nomper AS nrev, pr.apeper AS arev, pr.ndper AS drev, pr.emaper AS erev, pr.area AS crev FROM permiso AS r INNER JOIN persona AS pp ON r.idper = pp.idper INNER JOIN persona AS pj ON r.idjef = pj.idper LEFT JOIN persona AS pr ON r.idrev = pr.idper INNER JOIN valor AS vt ON r.idvtprm = vt.idval WHERE r.idprm=:idprm";
+    END) % TIME_TO_SEC('8:30:00')) AS hdif, DATE_FORMAT(r.fecsol, '%e de %M de %Y') AS fsol, DATE_FORMAT(r.fecrev, '%e de %M de %Y') AS frev, vt.nomval AS tprm, pp.idper AS iper, pp.nomper AS nper, pp.apeper AS aper, pp.ndper AS dper, pp.emaper AS eper, vap.nomval AS cper, pj.idper AS ijef, pj.nomper AS njef, pj.apeper AS ajef, pj.ndper AS djef, pj.emaper AS ejef, vaj.nomval AS cjef, pr.idper AS irev, pr.nomper AS nrev, pr.apeper AS arev, pr.ndper AS drev, pr.emaper AS erev, var.nomval AS crev FROM permiso AS r INNER JOIN persona AS pp ON r.idper = pp.idper INNER JOIN persona AS pj ON r.idjef = pj.idper LEFT JOIN persona AS pr ON r.idrev = pr.idper INNER JOIN valor AS vt ON r.idvtprm = vt.idval INNER JOIN valor AS vap ON pp.area = vap.idval INNER JOIN valor AS vaj ON pp.area = vaj.idval INNER JOIN valor AS var ON pp.area = var.idval WHERE r.idprm=:idprm";
             $modelo = new conexion();
             $conexion = $modelo->get_conexion();
             $conexion->query("SET lc_time_names = 'es_ES';");
@@ -192,7 +195,7 @@
         }
 
         function save(){
-            //try{
+            try{
                 $sptrut = $this->getSptrut();
                 $sql = "INSERT INTO permiso (fecini, fecfin, idjef, idvtprm,";
                 if($sptrut) $sql .= " sptrut,";
@@ -218,9 +221,9 @@
                 $idper = $this->getIdper();
                 $result->bindParam(":idper", $idper);
                 $result->execute();
-            // }catch(Exception $e){
-            //     ManejoError($e);
-            // }
+            }catch(Exception $e){
+                ManejoError($e);
+            }
         }
 
         function edit(){
@@ -256,7 +259,7 @@
         }
 
         function editAct(){
-            //try{
+            try{
                 $estprm = $this->getEstprm();
                 $sql = "UPDATE permiso SET estprm=:estprm";
                 if($estprm==2) $sql .= ", fecsol=:fecsol";
@@ -289,9 +292,9 @@
                         $result->bindParam(":obsprm", $obsprm);
                 }}
                 $result->execute();
-            // } catch (Exception $e) {
-            //     ManejoError($e);
-            // }
+            } catch (Exception $e) {
+                ManejoError($e);
+            }
         }
 
         function savePdf(){
@@ -363,24 +366,30 @@
             return $res;
         }
 
-        // function getAllGraf(){
-        //     $fecini = $this->getFecini();
-        //     $fecfin = $this->getFecfin();
-        //     $estprm = $this->getEstprm();
-        //     $sql = "SELECT d.nomval AS dpto, COUNT(p.idvdpt) AS cn FROM permiso AS r INNER JOIN persona AS p ON r.idper=p.idper INNER JOIN valor AS d ON p.idvdpt=d.idval WHERE (r.estprm=3 OR r.estprm=4)";
-        //     if($fecini) $sql .= " AND DATE(r.fecini)>=:fecini";
-		//     if($fecfin) $sql .= " AND DATE(r.fecini)<=:fecfin";
-		//     if($estprm) $sql .= " AND r.estprm=:estprm";
-        //     $sql .= " GROUP BY d.idval, d.nomval";
-        //     $modelo = new conexion();
-        //     $conexion = $modelo->get_conexion();
-        //     $result = $conexion->prepare($sql);
-        //     if($fecini) $result->bindParam(":fecini", $fecini);
-		//     if($fecfin) $result->bindParam(":fecfin", $fecfin);
-		//     if($estprm) $result->bindParam(":estprm", $estprm);
-        //     $result->execute();
-        //     $res = $result->fetchall(PDO::FETCH_ASSOC);
-        //     return $res;
-        // }
+        function getAllGraf(){
+            $fecini = $this->getFecini();
+            $fecfin = $this->getFecfin();
+            $idvtprm = $this->getIdvtprm();
+            $estprm = $this->getEstprm();
+            $sql = "SELECT t.nomval AS tipo, COUNT(r.idvtprm) AS cant, DATE_FORMAT(r.fecini, '%Y-%m') AS periodo FROM permiso AS r INNER JOIN valor AS t ON r.idvtprm=t.idval WHERE (r.estprm=3 OR r.estprm=4)";
+            // Filtros adicionales
+            if($fecini) $sql .= " AND DATE(r.fecini)>=:fecini";
+            if($fecfin) $sql .= " AND DATE(r.fecini)<=:fecfin";
+            if($idvtprm) $sql .= " AND r.idvtprm=:idvtprm";
+            if($estprm) $sql .= " AND r.estprm=:estprm";
+            $sql .= " GROUP BY t.idval, t.nomval, DATE_FORMAT(r.fecini, '%Y-%m') ORDER BY periodo, t.nomval";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            // Vincular parámetros
+            if($fecini) $result->bindParam(":fecini", $fecini);
+            if($fecfin) $result->bindParam(":fecfin", $fecfin);
+            if($idvtprm) $result->bindParam(":idvtprm", $idvtprm);
+            if($estprm) $result->bindParam(":estprm", $estprm);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+        }
+        
     }
 ?>

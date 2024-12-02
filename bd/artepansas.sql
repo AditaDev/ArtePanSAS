@@ -228,7 +228,6 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (107, 'fa fa-solid fa-boxes-stacked', 'Dominio', 'views/vdom.php', 7, 'home.php', 1, 1),
 (108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 1),
 (109, 'fa fa-solid fa-building', 'Proveedores', 'views/vemp.php', 11, 'home.php', 1, 2),
-(110, 'fa-solid fa-bullhorn', 'Novedades', 'views/vnov.php', 16, 'home.php', 1, 4),
 (111, 'fa fa-solid fa-solid fa-lightbulb', 'Dotación', 'views/vdot.php', 17, 'home.php', 1, 4),
 (112, 'fa fa-solid fa-file-circle-check', 'Permisos', 'views/vprm.php', 18, 'home.php', 1, 4);
 
@@ -274,9 +273,6 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (108, 1),
 (109, 1),
 (109, 4),
-(110, 1),
-(110, 7),
-(110, 4),
 (111, 7),
 (111, 1),
 (112, 7),
@@ -332,8 +328,8 @@ INSERT INTO `pefxmod` (`idmod`, `idpef`, `idpag`) VALUES
 (3, 1, 61),
 (3, 5, 62),
 (3, 6, 61),
-(4, 1, 110),
-(4, 7, 110),
+(4, 1, 112),
+(4, 7, 112),
 (4, 5, 112);
 
 -- --------------------------------------------------------

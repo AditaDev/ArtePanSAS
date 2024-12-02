@@ -94,26 +94,21 @@ if($idprm && ($comest[0]['estprm']!=3 || $comest[0]['estprm']!=4)){
         </style>
     </head>
     <body>
-    <table style="width: 100%; border-collapse: collapse;">
-    <tbody>
-        <tr>
-                <td class="tit td" style="width: 100px; height: auto;" colspan="2" rowspan="4"><img style="width: 70%; height: auto; height: auto;" src="'.$logob64.'" alt="Logo ARTEPAN SAS"></td>
-                 <td class="tit td" style="width: 50%; text-align: center;" colspan="2" rowspan="4">
-                <strong>FORMATO CONTROL DE PERMISOS</strong>
-            </td>
-            <!-- Código -->
-            <td class="td" style="width: 30%;"><strong>Código: THM-FOR04</strong></td>
-        </tr>
-        <tr>
-            <!-- Fecha -->
-            <td class="td" style="width: 30%;"><strong>Fecha: 26/01/2023</strong></td>
-        </tr>
-        <tr>
-            <!-- Versión -->
-            <td class="td" style="width: 30%;"><strong>Versión: 1</strong></td>
-        </tr>
-    </tbody>
-</table>
+    <table>
+        <tbody>
+            <tr>
+                <td class="tit td" style="width: 100px" colspan="2" rowspan="3"><img style="width: 80%;" src="'.$logob64.'" alt="Logo ARTEPAN SAS"></td>
+                <td class="tit td" colspan="2" rowspan="4"><strong>FORMATO CONTROL DE PERMISOS</strong></td>
+                <td class="td" colspan="1"><strong>Código: THM-FOR04</strong></td>
+            </tr>
+            <tr>
+                <td class="td" colspan="1"><strong>Fecha: 26/01/2023</strong></td>
+            </tr>
+            <tr>
+                <td class="td" colspan="1"><strong>Versión: 1</strong></td>
+            </tr>
+        </tbody>
+    </table>
     <span><br></span>
     <table>
         <tbody>
@@ -176,7 +171,7 @@ if($idprm && ($comest[0]['estprm']!=3 || $comest[0]['estprm']!=4)){
     <table>
         <tbody>
             <tr>
-                <td class="td datper">MOTIVO DEL PERMISO :<br><br>'.$det['desprm'].'</td>
+                <td class="td datper">DESCRIPCIÓN DEL PERMISO :<br><br>'.$det['desprm'].'</td>
             </tr>
             <tr>
                 <td class="td datper">OBSERVACIONES :<br><br>'.$det['obsprm'].'</td>
@@ -186,7 +181,7 @@ if($idprm && ($comest[0]['estprm']!=3 || $comest[0]['estprm']!=4)){
     <table>
         <tbody>
             <tr>
-                <td class="datper" style="width: 30%"><strong>APROBADA POR JEFE INMEDIATO :</strong></td>
+                <td class="datper" style="width: 55%"><strong>APROBADA POR:</strong> ' .($det['nrev']." ".$det['arev']). '</td>
                 <td class="datper" style="width: 8%">SI : </td> 
                 <td class="datper tit" style="width: 7%">'.(($det['estprm']==3) ? 'X' : '').'</td>
                 <td class="datper" style="width: 8%">NO : </td>
@@ -199,7 +194,7 @@ if($idprm && ($comest[0]['estprm']!=3 || $comest[0]['estprm']!=4)){
     <table>
         <tbody>
             <tr>
-                <td class="datper td"><span style="color: blue"><b>NOTA:</b></span> <b>TRABAJO EN CASA</b>SE PERMITE SOLO UNA VEZ AL MES EN LOS CARGOS EN LOS CUALES ES POSIBLE REALIZARLO Y AVISANDO CON 1 DÍA DE ANTICIPACIÓN. CUALQUIER OTRA AUSENCIA QUE NO CALIFIAQUE COMO <b>CALAMIDAD DOMESTICA</b> DEBE SER TRAMITADA COMO <b>INCAPACIDAD</b> EN EL CASO DE ESTAR ENFERMOS O LICENCIA NO REMUNERADA, LA CUAL DEBE SER ACEPTADA POR EL JEFE DIRECTO DE ACUERDO A LOS COMPROMISOS QUE SE TENGA EN CADA ÁREA.</td>
+                <td class="datper td"><span style="color: blue"><b>NOTA:</b></span><br> <b>TRABAJO EN CASA</b> Se permite solo una vez al mes en los cargos en los cuales es posible realizarlo y avisando con un (01) dia de anticipación. Cualquier otra ausencia que no califique como calamidad domestica debe ser tramitada como incapacidad en el caso de estar enfermos o licencia no remunerada, la cual debe ser aceptada por el jefe directo de acuerdo a los compromisos que se tengan en cada área.</td>
             </tr>
         </tbody>
     </table>
@@ -269,10 +264,11 @@ if($idprm && ($comest[0]['estprm']!=3 || $comest[0]['estprm']!=4)){
         $mail_asun = "Solicitud Permiso ".$nompp." - ".$fec;
         $link = $url."views/pdfprm.php?idprm=".$idprm."&estprm=3&idrev=".$det['ijef'];
         $txt_mess = "";
-        $txt_mess = "Te informamos que ".$nompp." está solicitando un permiso para el ".$fec.(($det['tprm']!=38) ? " por motivos de ".$det['tprm'] : "").".<br><br>
+        $txt_mess = "Te informamos que ".$nompp." está solicitando un permiso para el ".$fec.(($det['tprm']!=48) ? " por motivos de ".$det['tprm'] : "").".<br><br>
         Adjunto a este correo se encuentra el formato debidamente diligenciado.<br><br>
         En los siguientes enlaces podrá aceptar o rechazar la solicitud respectivamente";
         
+        $c = 0;
         $exito = sendemail($ema, $psem, $nom, $maild, $nompd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template, $link, $url, "../");
         while ($exito==2 && $c<$intentos){
             $exito = sendemail($ema, $psem, $nom, $maild, $nompd, $file_path, $txt_mess, $mail_asun, $fir_mail, $template, $link, $url, "../");
@@ -295,6 +291,7 @@ if($idprm && ($comest[0]['estprm']!=3 || $comest[0]['estprm']!=4)){
                 sleep(5);
                 $c++;
             }
+
             $c = 0;
             $exito = sendemail($ema, $psem, $nom, $diradm, $nomadm, $file_path, $txt_mess, $mail_asun, $fir_mail, $template, "", "", "../");
             while ($exito==2 && $c<$intentos){

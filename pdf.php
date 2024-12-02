@@ -1,7 +1,7 @@
 <?php
     require_once ("models/seguridad.php");
     require_once ('models/conexion.php');
-    require_once ('models/masg.php');
+    require_once ('models/mdot.php');
     require_once ('models/mprm.php');
 
     $mprm = new Mprm();
