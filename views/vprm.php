@@ -1,4 +1,5 @@
 <?php include('controllers/cprm.php');
+
 if ($datOne) {
     $fechai = (new DateTime($datOne[0]['fecini']))->format('Y-m-d\TH:i');
     $fechaf = (new DateTime($datOne[0]['fecfin']))->format('Y-m-d\TH:i');

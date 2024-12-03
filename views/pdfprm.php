@@ -30,7 +30,7 @@ $idprm = isset($_REQUEST['idprm']) ? $_REQUEST['idprm']:NULL;
 $estprm = isset($_REQUEST['estprm']) ? $_REQUEST['estprm']:NULL;
 $obsprm = isset($_POST['obsprm']) ? $_POST['obsprm']:NULL;
 $idrev = isset($_REQUEST['idrev']) ? $_REQUEST['idrev']:NULL;
-$numprm = array_reverse($mprm->getAll(3));
+$numprm = array_reverse($mprm->getAll("prop"));
 
 if ($numprm){
     foreach($numprm AS $np){
@@ -194,7 +194,7 @@ if($idprm && ($comest[0]['estprm']!=3 || $comest[0]['estprm']!=4)){
     <table>
         <tbody>
             <tr>
-                <td class="datper td"><span style="color: blue"><b>NOTA:</b></span><br> <b>TRABAJO EN CASA</b> Se permite solo una vez al mes en los cargos en los cuales es posible realizarlo y avisando con un (01) dia de anticipación. Cualquier otra ausencia que no califique como calamidad domestica debe ser tramitada como incapacidad en el caso de estar enfermos o licencia no remunerada, la cual debe ser aceptada por el jefe directo de acuerdo a los compromisos que se tengan en cada área.</td>
+                <td class="datper td"><span style="color: blue"><b>NOTA:</b></span><br> <b>TRABAJO EN CASA</b> Se permite solo una vez al mes en los cargos en los cuales es posible realizarlo y avisando con tres (03) dias de anticipación. Cualquier otra ausencia que no califique como calamidad domestica debe ser tramitada como incapacidad en el caso de estar enfermos o licencia no remunerada, la cual debe ser aceptada por el jefe directo de acuerdo a los compromisos que se tengan en cada área.</td>
             </tr>
         </tbody>
     </table>
