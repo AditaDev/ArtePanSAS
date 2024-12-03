@@ -45,11 +45,10 @@ if($_SESSION['idpef']==7){?>
                         <i class="fa fa-solid fa-eraser fa-2x desact"></i>
                     </button>
                 </div>
-                 <div  class="form-group col-md-1 ">
-                    <?php 
-                        
-                    ?>
-                    <i class="fa fa-solid fa-file-export fa-2x act" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#export" title="Exportar"></i>                                
+                <div  class="form-group col-md-1 ">
+                    <a href="excel/xprm.php?exl=prm" title="Exportar Permisos">
+                        <i class="fa fa-solid fa-file-export fa-2x exp"></i>
+                    </a>                             
                 </div>
                 <?php if($datGra){ ?>
                     <div>
