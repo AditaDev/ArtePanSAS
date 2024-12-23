@@ -274,6 +274,18 @@
             }
         }
 
+        function getPdf(){
+            $sql = "SELECT rutpdf AS rut FROM dotacion WHERE ident=:ident";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $ident = $this->getIdent();
+            $result->bindParam(":ident", $ident);
+            $result->execute();
+            $res = $result->fetchall(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
         function dev(){
             //try{
                 $sql = "UPDATE dotacion SET idperentd=:idperentd, idperrecd=:idperrecd, fecdev=:fecdev, observd=:observd, estent=:estent WHERE ident=:ident";

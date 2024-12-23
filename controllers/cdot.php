@@ -128,6 +128,7 @@
         $datTxD = $mdot->getAllTxD($ident);
         $datCxD = $mdot->getAllCxc($ident);
     }
+     
     // if($ope=="eli" && $ident) {
     //     $mdot->del();
     //     echo "<script>window.location='home.php?pg=".$pg."';</script>";

@@ -55,9 +55,7 @@ INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (12, 'Colores'),
 (13, 'Días'),
 (14, 'Bodega'),
-(15, 'Tipo de Novedad'),
-(16, 'Ubicación'),
-(17, 'Departamento');
+(15, 'Tipo de Novedad');
 
 -- --------------------------------------------------------
 
@@ -228,6 +226,7 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (107, 'fa fa-solid fa-boxes-stacked', 'Dominio', 'views/vdom.php', 7, 'home.php', 1, 1),
 (108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 1),
 (109, 'fa fa-solid fa-building', 'Proveedores', 'views/vemp.php', 11, 'home.php', 1, 2),
+(110, 'fa fa-solid fa-solid fa-lightbulb', 'Formatos Evaluación', 'views/vfor.php', 16, 'home.php', 1, 4),
 (111, 'fa fa-solid fa-solid fa-lightbulb', 'Dotación', 'views/vdot.php', 17, 'home.php', 1, 4),
 (112, 'fa fa-solid fa-file-circle-check', 'Permisos', 'views/vprm.php', 18, 'home.php', 1, 4);
 
@@ -273,11 +272,11 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (108, 1),
 (109, 1),
 (109, 4),
+(110, 1),
 (111, 7),
 (111, 1),
 (112, 7),
-(112, 5),
-(112, 1);
+(112, 5);
 
 -- --------------------------------------------------------
 

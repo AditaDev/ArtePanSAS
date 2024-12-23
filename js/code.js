@@ -132,13 +132,28 @@ function confirmar(nom, url) {
   }
 }
 
-function pdf(idpdf, arc, nom) {
+// function pdf(idpdf, arc, nom) {
+//   var w = window.innerWidth * 0.8;
+//   var h = window.innerHeight * 0.8;
+//   var l = (window.innerWidth - w) / 2;
+//   var t = (window.innerHeight - h) / 2;
+
+//   var pdfPath = 'pdf.php?id='+idpdf+'&arc='+arc+'';
+//   var windownom = window.open(pdfPath, nom, 'width=' + w + ',height=' + h + ',left=' + l + ',top=' + t);
+//   windownom.document.title = nom;
+// }
+
+
+function pdf(idpdf, arc, nom, pg) {
   var w = window.innerWidth * 0.8;
   var h = window.innerHeight * 0.8;
   var l = (window.innerWidth - w) / 2;
   var t = (window.innerHeight - h) / 2;
 
-  var pdfPath = 'pdf.php?id='+idpdf+'&arc='+arc+'';
+  // Agregamos el valor de 'pg' al pdfPath
+  var pdfPath = 'pdf.php?id=' + idpdf + '&arc=' + arc + '&pg=' + pg;
+
+  // Abrimos la ventana con el archivo PDF
   var windownom = window.open(pdfPath, nom, 'width=' + w + ',height=' + h + ',left=' + l + ',top=' + t);
   windownom.document.title = nom;
 }

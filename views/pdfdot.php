@@ -140,7 +140,7 @@ $html .= '
         </tr>
     </tbody>
 </table>
-<span><br></span>
+
 <div class="bloc">
     <div class="dot">
         <table>

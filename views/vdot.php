@@ -152,7 +152,7 @@ $mañana = date("Y-m-d", strtotime($hoy . ' +1 day'));
                                     <i class="fa fa-solid fa-envelopes-bulk iconi"></i>
                                 </a>
                                 <?php } if($dta['rutpdf'] && file_exists($dta['rutpdf'])) { ?>
-                                    <i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?= $dta['rutpdf'] ?>')"></i>
+                                    <i class="fa fa-solid fa-file-pdf iconi" onclick="pdf('<?= $dta['ident'] ?>', 'rut', '<?= basename($dta['rutpdf']) ?>', '<?= '111' ?>')"></i>
                                 <?php } ?>
                                 
                             </div>
