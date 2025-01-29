@@ -55,7 +55,8 @@ INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
 (12, 'Colores'),
 (13, 'Días'),
 (14, 'Bodega'),
-(15, 'Tipo de Novedad');
+(15, 'Tipo de Novedad'),
+(16, 'Calificaciones');
 
 -- --------------------------------------------------------
 
@@ -147,6 +148,30 @@ CREATE TABLE `jefxper` (
 
 -- --------------------------------------------------------
 
+CREATE TABLE `respuestas` (
+    `idres` bigint(11)  NOT NULL, 
+    `idpereval` bigint(11)  DEFAULT NULL,                   
+    `idperevald` bigint(11)  DEFAULT NULL, 
+    `tipeva` tinyint(1)  DEFAULT NULL,
+    `pre1` tinyint(1) DEFAULT NULL,                                         
+    `pre2` tinyint(1) DEFAULT NULL,                                         
+    `pre3` tinyint(1) DEFAULT NULL,                                         
+    `pre4` tinyint(1) DEFAULT NULL,                                         
+    `pre5` tinyint(1) DEFAULT NULL,                                         
+    `pre6` tinyint(1) DEFAULT NULL,                                         
+    `pre7` tinyint(1) DEFAULT NULL,                                         
+    `pre8` tinyint(1) DEFAULT NULL,                                         
+    `pre9` tinyint(1) DEFAULT NULL,                                         
+    `pre10` tinyint(1) DEFAULT NULL,                                         
+    `pre11` tinyint(1) DEFAULT NULL,                                         
+    `pre12` tinyint(1) DEFAULT NULL,                                         
+    `pre13` tinyint(1) DEFAULT NULL,                                         
+    `pre14` tinyint(1) DEFAULT NULL,                                         
+    `pre15` tinyint(1) DEFAULT NULL,                                         
+    `fecres` date DEFAULT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 --
 -- Estructura de tabla para la tabla `modulo`
 --
@@ -174,22 +199,22 @@ INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`) VALUES
 -- Estructura de tabla para la tabla `novedad`
 --
 
-CREATE TABLE `novedad` (
-  `idnov` bigint(11) NOT NULL,
-  `fecreg` date DEFAULT NULL,
-  `fecinov` date DEFAULT NULL,
-  `fecfnov` date DEFAULT NULL,
-  `fecrev` datetime DEFAULT NULL,
-  `tipnov` bigint(11) NOT NULL,
-  `obsnov` varchar(100) DEFAULT NULL,
-  `estnov` varchar(100) NOT NULL,
-  `idpercre` bigint(11) NOT NULL,
-  `idperrev` bigint(11) DEFAULT NULL,
-  `idperg` bigint(11) DEFAULT NULL,
-  `rutpdf` varchar(255) DEFAULT NULL,
-  `tini` time DEFAULT NULL,
-  `tfin` time DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- CREATE TABLE `novedad` (
+--   `idnov` bigint(11) NOT NULL,
+--   `fecreg` date DEFAULT NULL,
+--   `fecinov` date DEFAULT NULL,
+--   `fecfnov` date DEFAULT NULL,
+--   `fecrev` datetime DEFAULT NULL,
+--   `tipnov` bigint(11) NOT NULL,
+--   `obsnov` varchar(100) DEFAULT NULL,
+--   `estnov` varchar(100) NOT NULL,
+--   `idpercre` bigint(11) NOT NULL,
+--   `idperrev` bigint(11) DEFAULT NULL,
+--   `idperg` bigint(11) DEFAULT NULL,
+--   `rutpdf` varchar(255) DEFAULT NULL,
+--   `tini` time DEFAULT NULL,
+--   `tfin` time DEFAULT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -226,7 +251,7 @@ INSERT INTO `pagina` (`idpag`, `icono`, `nompag`, `arcpag`, `ordpag`, `menpag`, 
 (107, 'fa fa-solid fa-boxes-stacked', 'Dominio', 'views/vdom.php', 7, 'home.php', 1, 1),
 (108, 'fa fa-solid fa-dollar-sign', 'Valor', 'views/vval.php', 8, 'home.php', 1, 1),
 (109, 'fa fa-solid fa-building', 'Proveedores', 'views/vemp.php', 11, 'home.php', 1, 2),
-(110, 'fa fa-solid fa-solid fa-lightbulb', 'Formatos Evaluación', 'views/vfor.php', 16, 'home.php', 1, 4),
+(110, 'fa-solid fa-magnifying-glass-chart', 'Formatos', 'views/vfor.php', 16, 'home.php', 1, 4),
 (111, 'fa fa-solid fa-solid fa-lightbulb', 'Dotación', 'views/vdot.php', 17, 'home.php', 1, 4),
 (112, 'fa fa-solid fa-file-circle-check', 'Permisos', 'views/vprm.php', 18, 'home.php', 1, 4);
 
@@ -273,6 +298,7 @@ INSERT INTO `pagxpef` (`idpag`, `idpef`) VALUES
 (109, 1),
 (109, 4),
 (110, 1),
+(110, 7),
 (111, 7),
 (111, 1),
 (112, 7),
@@ -327,7 +353,7 @@ INSERT INTO `pefxmod` (`idmod`, `idpef`, `idpag`) VALUES
 (3, 1, 61),
 (3, 5, 62),
 (3, 6, 61),
-(4, 1, 112),
+(4, 1, 110),
 (4, 7, 112),
 (4, 5, 112);
 
@@ -1067,8 +1093,13 @@ INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `codval`, `actval`) VALUES
 (103, 'PMP', 14, 1402, 1),
 (104, 'Del llano', 14, 1403, 1),
 (105, 'Ingreso', 15, 1507, 1),
-(106, 'Liquidación vacaciones', 15, 1508, 1);
+(106, 'Liquidación vacaciones', 15, 1508, 1),
 
+(107, '1 - Deficiente', 16, 1601, 1),
+(108, '2 - Regular', 16, 1602, 1),
+(109, '3 - Bueno', 16, 1603, 1),
+(110, '4 - Muy bueno', 16, 1604, 1),
+(111, '5 - Excelente', 16, 1605, 1);
 --
 -- Índices para tablas volcadas
 --
@@ -1136,6 +1167,14 @@ ALTER TABLE `jefxper`
   ADD KEY `idper` (`idper`),
   ADD KEY `idjef` (`idjef`);
 
+  
+
+ALTER TABLE `respuestas`
+  ADD PRIMARY KEY (`idres`),
+  ADD KEY `idpereval` (`idpereval`),
+  ADD KEY `idperevald` (`idperevald`);
+
+
 --
 -- Indices de la tabla `modulo`
 --
@@ -1145,13 +1184,13 @@ ALTER TABLE `modulo`
 --
 -- Indices de la tabla `novedad`
 --
-ALTER TABLE `novedad`
-  ADD PRIMARY KEY (`idnov`),
-  ADD KEY `tipnov` (`tipnov`),
-  ADD KEY `estnov` (`estnov`),
-  ADD KEY `idperg` (`idperg`),
-  ADD KEY `idpercre` (`idpercre`),
-  ADD KEY `idperrev` (`idperrev`);
+-- ALTER TABLE `novedad`
+--   ADD PRIMARY KEY (`idnov`),
+--   ADD KEY `tipnov` (`tipnov`),
+--   ADD KEY `estnov` (`estnov`),
+--   ADD KEY `idperg` (`idperg`),
+--   ADD KEY `idpercre` (`idpercre`),
+--   ADD KEY `idperrev` (`idperrev`);
 
 --
 -- Indices de la tabla `pagina`
@@ -1262,8 +1301,8 @@ ALTER TABLE `modulo`
 --
 -- AUTO_INCREMENT de la tabla `novedad`
 --
-ALTER TABLE `novedad`
-  MODIFY `idnov` bigint(11) NOT NULL AUTO_INCREMENT;
+-- ALTER TABLE `novedad`
+--   MODIFY `idnov` bigint(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pagina`
@@ -1293,7 +1332,7 @@ ALTER TABLE `permiso`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idper` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `idper` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `provedores`
@@ -1306,6 +1345,11 @@ ALTER TABLE `provedores`
 --
 ALTER TABLE `valor`
   MODIFY `idval` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+
+
+ALTER TABLE `respuestas`
+  MODIFY `idres` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 
 --
 -- Restricciones para tablas volcadas
@@ -1351,13 +1395,19 @@ ALTER TABLE `jefxper`
   ADD CONSTRAINT `jefxper_ibfk_1` FOREIGN KEY (`idper`) REFERENCES `persona` (`idper`),
   ADD CONSTRAINT `jefxper_ibfk_2` FOREIGN KEY (`idjef`) REFERENCES `persona` (`idper`);
 
+ALTER TABLE `respuestas`
+  ADD CONSTRAINT `respuestas_ibfk_1` FOREIGN KEY (`idpereval`) REFERENCES `persona` (`idper`),
+  ADD CONSTRAINT `respuestas_ibfk_2` FOREIGN KEY (`idperevald`) REFERENCES `persona` (`idper`);
+
+
+
 --
 -- Filtros para la tabla `novedad`
 --
-ALTER TABLE `novedad`
-  ADD CONSTRAINT `novedad_ibfk_1` FOREIGN KEY (`idperg`) REFERENCES `persona` (`idper`),
-  ADD CONSTRAINT `novedad_ibfk_2` FOREIGN KEY (`idpercre`) REFERENCES `persona` (`idper`),
-  ADD CONSTRAINT `novedad_ibfk_3` FOREIGN KEY (`idperrev`) REFERENCES `persona` (`idper`);
+-- ALTER TABLE `novedad`
+--   ADD CONSTRAINT `novedad_ibfk_1` FOREIGN KEY (`idperg`) REFERENCES `persona` (`idper`),
+--   ADD CONSTRAINT `novedad_ibfk_2` FOREIGN KEY (`idpercre`) REFERENCES `persona` (`idper`),
+--   ADD CONSTRAINT `novedad_ibfk_3` FOREIGN KEY (`idperrev`) REFERENCES `persona` (`idper`);
 
 --
 -- Filtros para la tabla `pagina`

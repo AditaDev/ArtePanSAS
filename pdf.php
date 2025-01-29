@@ -8,22 +8,21 @@
     $mprm = new Mprm();
     $mdot = new Mdot();
 
-    // Obtener parámetros de la solicitud
     $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : NULL;
     $arc = isset($_REQUEST['arc']) ? $_REQUEST['arc'] : NULL;
-    $pg = isset($_REQUEST['pg']) ? $_REQUEST['pg'] : NULL; // Identificar la página
+    $pg = isset($_REQUEST['pg']) ? $_REQUEST['pg'] : NULL; 
 
     if ($pg == 111) {
-        $mdot->setIdent($id); // Usar el modelo mdot
+        $mdot->setIdent($id); 
         if ($arc) {
-            $dt = $mdot->getPdf(); // Supongo que existe un método getPdf() en Mdot
+            $dt = $mdot->getPdf(); 
             $rut = $dt[0]['rut'];
             header('Content-Type: application/pdf');
             header('Content-Disposition: inline; filename="' . basename($rut) . '"');
             readfile($rut);
         }
     }if ($pg == 112) {
-        $mprm->setIdprm($id); // Usar el modelo mprm
+        $mprm->setIdprm($id); 
         if ($arc) {
             $dt = $mprm->getPdf($arc);
             $rut = $dt[0]['rut'];
